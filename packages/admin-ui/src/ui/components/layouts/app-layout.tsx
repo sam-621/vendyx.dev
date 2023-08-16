@@ -13,7 +13,8 @@ export const AppLayout: FC<Props> = ({ children }) => {
         <div className="flex items-center gap-4">
           <Logo />
           <Input
-            type="email"
+            radius="sm"
+            type="text"
             placeholder="Search in vendyx"
             labelPlacement="outside"
             startContent={
