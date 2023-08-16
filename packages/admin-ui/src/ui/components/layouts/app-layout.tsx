@@ -27,7 +27,7 @@ export const AppLayout: FC<Props> = ({ children }) => {
         </div>
         <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
       </header>
-      <div className="grid grid-cols-10 m-8">
+      <div className="grid grid-cols-10 gap-8 m-8">
         <SidebarMenu />
         <main className="col-span-8">{children}</main>
       </div>

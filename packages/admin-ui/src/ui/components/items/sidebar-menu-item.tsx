@@ -14,7 +14,7 @@ export const SidebarMenuItem: FC<Props> = ({ text, href, outlineIcon, solidIcon 
       {isActive ? solidIcon : outlineIcon}
       <Link
         href={href}
-        className={`font-semibold ${isActive ? 'text-primary-500' : 'text-default-500'}`}
+        className={`font-semibold text-sm ${isActive ? 'text-primary-500' : 'text-default-500'}`}
       >
         {text}
       </Link>
@@ -22,4 +22,4 @@ export const SidebarMenuItem: FC<Props> = ({ text, href, outlineIcon, solidIcon 
   )
 }
 
-type Props = Menu
+type Props = Required<Pick<Menu, 'text' | 'href' | 'outlineIcon' | 'solidIcon'>>
