@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Manrope } from 'next/font/google'
 import { Providers } from './providers'
 import { AppLayout } from '@/components/layouts'
 
-const inter = Inter({ subsets: ['latin'] })
+const manrope = Manrope({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark text-foreground bg-background">
-      <body className={`${inter.className}`}>
+      <body className={`${manrope.className}`}>
         <Providers>
           <AppLayout>{children}</AppLayout>
         </Providers>

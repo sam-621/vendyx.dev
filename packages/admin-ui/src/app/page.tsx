@@ -6,8 +6,14 @@ import { Image } from '@nextui-org/image'
 import { Divider } from '@nextui-org/divider'
 import { Link } from '@nextui-org/link'
 import { Input } from '@nextui-org/input'
-import { ModalBody, ModalContent, ModalFooter, ModalHeader, Modal } from '@nextui-org/react'
-import { useDisclosure } from '@nextui-org/react'
+import {
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Modal,
+  useDisclosure
+} from '@nextui-org/react'
 // import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/table'
 
 export default function Home() {

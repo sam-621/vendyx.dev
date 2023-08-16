@@ -4,6 +4,7 @@ import { Avatar } from '@nextui-org/avatar'
 import { Logo } from '@/components/icons'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Kbd } from '@nextui-org/kbd'
+import { SidebarMenu } from '../lists'
 
 export const AppLayout: FC<Props> = ({ children }) => {
   return (
@@ -26,8 +27,8 @@ export const AppLayout: FC<Props> = ({ children }) => {
         </div>
         <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
       </header>
-      <div className="grid grid-cols-10">
-        <aside className="col-span-2"></aside>
+      <div className="grid grid-cols-10 m-8">
+        <SidebarMenu />
         <main className="col-span-8">{children}</main>
       </div>
     </div>
