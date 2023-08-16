@@ -21,7 +21,6 @@
     ],
     "paths": {
       "@/core/*": ["./src/core/*"],
-      "@/shared/*": ["./src/core/shared/*"],
 
       "@/components/*": ["./src/ui/components/*"],
       "@/pages/*": ["./src/ui/pages/*"],

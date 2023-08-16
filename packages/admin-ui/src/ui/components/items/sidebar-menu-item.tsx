@@ -1,8 +1,9 @@
 'use client'
 
+import type { Menu } from '@/core/shared/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { FC, ReactElement } from 'react'
+import type { FC } from 'react'
 
 export const SidebarMenuItem: FC<Props> = ({ text, href, outlineIcon, solidIcon }) => {
   const pathname = usePathname()
@@ -21,9 +22,4 @@ export const SidebarMenuItem: FC<Props> = ({ text, href, outlineIcon, solidIcon 
   )
 }
 
-type Props = {
-  text: string
-  href: string
-  solidIcon: ReactElement
-  outlineIcon: ReactElement
-}
+type Props = Menu
