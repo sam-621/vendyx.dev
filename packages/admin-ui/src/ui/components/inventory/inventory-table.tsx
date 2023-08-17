@@ -50,7 +50,7 @@ export const InventoryTable = () => {
         </div>
         <div className="flex justify-between">
           <div className="flex items-center">
-            <Tabs variant={'light'} aria-label="Tabs variants">
+            <Tabs selectedKey={'photos'} variant={'light'} aria-label="Tabs variants">
               <Tab className="font-semibold text-sm" key="photos" title="All" />
               <Tab className="font-semibold text-sm" key="music" title="Enabled" />
               <Tab className="font-semibold text-sm" key="videos" title="On Sale" />

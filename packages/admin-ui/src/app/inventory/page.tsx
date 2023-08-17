@@ -11,7 +11,11 @@ export default function InventoryPage() {
       <section>
         <InventoryTable />
         <Table
-          data={DATA}
+          views={[
+            { name: 'All', key: 'all' },
+            { name: 'Enabled', key: 'enabled' }
+          ]}
+          data={{ all: DATA, enabled: DATA2 }}
           getKey={d => d.id.toString()}
           columns={[
             {
@@ -69,6 +73,36 @@ const DATA = [
     id: 3,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
     product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  }
+]
+
+const DATA2 = [
+  {
+    id: 1,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey Feo',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 2,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey Feo',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 3,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey Feo',
     price: 188,
     stock: 22,
     variants: 2,
