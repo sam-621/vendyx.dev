@@ -19,8 +19,15 @@ import {
 export default function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
+  const handleSubmit = () => {
+    console.log('hola')
+  }
+
   return (
     <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" />
+      </form>
       <div className="flex gap-3">
         <Button color="primary" radius="sm">
           Click me
