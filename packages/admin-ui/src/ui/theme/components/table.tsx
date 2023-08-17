@@ -1,6 +1,7 @@
 'use client'
 
 import { isArray } from '@/core/shared/utils/arrays'
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
 import {
   Card,
   CardBody,
@@ -12,7 +13,8 @@ import {
   TableCell,
   type SelectionMode,
   Tabs,
-  Tab
+  Tab,
+  Button
 } from '@nextui-org/react'
 import { useState, type ReactElement, type Key } from 'react'
 
@@ -26,53 +28,74 @@ export const Table = <T extends unknown>({
   const [selectedTab, setSelectedTab] = useState<Key>(views[0].key)
   return (
     <Card>
-      <CardBody className="flex flex-col gap-5">
-        <Tabs
-          selectedKey={selectedTab}
-          onSelectionChange={k => {
-            setSelectedTab(k)
-          }}
-          variant="light"
-          aria-label="Tabs variants"
-          classNames={{
-            panel: 'p-0'
-          }}
-        >
-          {views.map(v => {
-            const currentData = (isArray(data) ? data : (data as Record<string, T[]>)[v.key]) as T[]
+      <CardBody className="flex">
+        <div className="w-full">
+          <Tabs
+            selectedKey={selectedTab}
+            onSelectionChange={k => {
+              setSelectedTab(k)
+            }}
+            variant="light"
+            aria-label="Tabs variants"
+            classNames={{
+              panel: 'pt-5'
+            }}
+          >
+            {views.map(v => {
+              const currentData = (
+                isArray(data) ? data : (data as Record<string, T[]>)[v.key]
+              ) as T[]
 
-            return (
-              <Tab key={v.key} title={v.name} className="font-semibold text-sm">
-                <NextUiTable
-                  removeWrapper
-                  selectionMode={selectionMode}
-                  aria-label="Example static collection table"
-                >
-                  <TableHeader columns={columns}>
-                    {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
-                  </TableHeader>
-                  <TableBody items={currentData}>
-                    {data => (
-                      <TableRow key={getKey(data)}>
-                        {columnKey => {
-                          const currentColumn = columns.find(c => c.field === columnKey)
+              return (
+                <Tab key={v.key} title={v.name} className="font-semibold text-sm">
+                  <NextUiTable
+                    removeWrapper
+                    selectionMode={selectionMode}
+                    aria-label="Example static collection table"
+                  >
+                    <TableHeader columns={columns}>
+                      {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
+                    </TableHeader>
+                    <TableBody items={currentData}>
+                      {data => (
+                        <TableRow key={getKey(data)}>
+                          {columnKey => {
+                            const currentColumn = columns.find(c => c.field === columnKey)
 
-                          return (
-                            <TableCell>
-                              {currentColumn?.render != null
-                                ? currentColumn.render(data)
-                                : data[columnKey as keyof T]}
-                            </TableCell>
-                          )
-                        }}
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </NextUiTable>
-              </Tab>
-            )
-          })}
-        </Tabs>
+                            return (
+                              <TableCell>
+                                {currentColumn?.render != null
+                                  ? currentColumn.render(data)
+                                  : data[columnKey as keyof T]}
+                              </TableCell>
+                            )
+                          }}
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </NextUiTable>
+                </Tab>
+              )
+            })}
+          </Tabs>
+        </div>
+        <div className="flex gap-4 items-center h-fit absolute right-5">
+          <label htmlFor="select" className="flex items-center text-default-500 text-small">
+            Rows per page:
+            <select
+              id="select"
+              className="bg-transparent outline-none text-default-500 text-small"
+              // onChange={onRowsPerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+          <Button isIconOnly size="md" variant="bordered" className="text-default-500">
+            <AdjustmentsHorizontalIcon width={24} />
+          </Button>
+        </div>
       </CardBody>
     </Card>
   )
