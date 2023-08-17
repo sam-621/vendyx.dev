@@ -163,18 +163,60 @@ export const Table = <T extends unknown>({
 }
 
 type Props<T = unknown> = {
+  /**
+   * Columns in your table
+   *
+   * @example
+   * const columns = [
+   *   {
+   *      name: 'Product',
+   *      field: 'product'
+   *      render: data => (
+   *        <User
+   *          avatarProps={{
+   *            radius: 'sm',
+   *            src: data.img
+   *            name={data.product}
+   *          }}
+   *        />
+   *      )
+   *   },
+   *   { name: 'Price', field: 'price', render: data => <span>{`$${data.price}`}</span> },
+   *   { name: 'Stock', field: 'stock' },
+   * ]
+   */
   columns: {
     name: string
     field: string
+    /**
+     * Add a custom element to render to your table cell
+     */
     render?: (data: T) => ReactElement | undefined
   }[]
   data: Record<string, T[]> | T[]
+  /**
+   * Function that determinate what property of your data use as a key prop
+   * @param data data received from the current iteration
+   * @returns the key to use in key prop
+   */
   getKey: (data: T) => string
+  /**
+   * Function that execute every time search query change
+   * @param query Search query written in the input
+   * @param data data in the table
+   * @returns filtered data
+   */
   searchFn?: (query: string, data: T[]) => T[]
+  /**
+   * Main action in the table
+   */
   action?: {
     text: string
     fn: () => void
   }
+  /**
+   * Tabs to manage different views in the table
+   */
   views?: { name: string; key: string }[]
   rowsPerPageOptions?: number[]
   filters?: boolean

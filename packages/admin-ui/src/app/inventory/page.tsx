@@ -9,20 +9,21 @@ export default function InventoryPage() {
       <h1 className="text-foreground font-semibold text-4xl">Inventory</h1>
       <section>
         <Table
-          // searchFn={(query, data) => {
-          //   return data.filter(d => d.product.toLowerCase().includes(query))
-          // }}
-          // action={{
-          //   text: 'Add Product',
-          //   fn() {
-          //     console.log('clicked')
-          //   }
-          // }}
-          // rowsPerPageOptions={[3, 6, 9, 12]}
-          // views={[
-          //   { name: 'All', key: 'all' },
-          //   { name: 'Enabled', key: 'enabled' }
-          // ]}
+          searchFn={(query, data) => {
+            return data.filter(d => d.product.toLowerCase().includes(query))
+          }}
+          action={{
+            text: 'Add Product',
+            fn() {
+              console.log('clicked')
+            }
+          }}
+          rowsPerPageOptions={[3, 6, 9, 12]}
+          views={[
+            { name: 'All', key: 'all' },
+            { name: 'Enabled', key: 'enabled' }
+          ]}
+          filters
           data={{ all: DATA, enabled: DATA2 }}
           getKey={d => d.id.toString()}
           columns={[
