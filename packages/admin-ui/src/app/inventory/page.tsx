@@ -9,6 +9,9 @@ export default function InventoryPage() {
       <h1 className="text-foreground font-semibold text-4xl">Inventory</h1>
       <section>
         <Table
+          searchFn={(query, data) => {
+            return data.filter(d => d.product.toLowerCase().includes(query))
+          }}
           rowsPerPageOptions={[3, 6, 9, 12]}
           views={[
             { name: 'All', key: 'all' },
@@ -62,7 +65,7 @@ const DATA = [
   {
     id: 2,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'Blue label',
     price: 188,
     stock: 22,
     variants: 2,
@@ -71,7 +74,7 @@ const DATA = [
   {
     id: 3,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'Chair',
     price: 188,
     stock: 22,
     variants: 2,
@@ -80,7 +83,7 @@ const DATA = [
   {
     id: 4,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'Vendure',
     price: 188,
     stock: 22,
     variants: 2,
@@ -89,7 +92,7 @@ const DATA = [
   {
     id: 5,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'Vendyx',
     price: 188,
     stock: 22,
     variants: 2,
@@ -98,7 +101,7 @@ const DATA = [
   {
     id: 6,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'Leaving room',
     price: 188,
     stock: 22,
     variants: 2,
@@ -107,7 +110,7 @@ const DATA = [
   {
     id: 7,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'Stupid pice of dogsheet',
     price: 188,
     stock: 22,
     variants: 2,
@@ -116,7 +119,7 @@ const DATA = [
   {
     id: 8,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'idk',
     price: 188,
     stock: 22,
     variants: 2,
@@ -125,7 +128,7 @@ const DATA = [
   {
     id: 9,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'help',
     price: 188,
     stock: 22,
     variants: 2,
@@ -134,7 +137,7 @@ const DATA = [
   {
     id: 10,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
+    product: 'create',
     price: 188,
     stock: 22,
     variants: 2,

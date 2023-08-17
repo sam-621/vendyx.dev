@@ -21,18 +21,32 @@ import {
   Button,
   Input
 } from '@nextui-org/react'
-import { useState, type ReactElement, type Key } from 'react'
+import { type ReactElement, type Key, useState, useMemo } from 'react'
 
 export const Table = <T extends unknown>({
   columns,
   data,
   getKey,
   views = [{ name: 'All', key: 'all' }],
+  searchFn,
   rowsPerPageOptions = [5, 10, 15],
   selectionMode = 'multiple'
 }: Props<T>) => {
   const [selectedTab, setSelectedTab] = useState<Key>(views[0].key)
   const [rowsPerPage, setRowsPerPage] = useState<number>(rowsPerPageOptions[0])
+  const [query, setQuery] = useState<string>('')
+
+  const initialData = (isArray(data) ? data : (data as Record<string, T[]>)[selectedTab]) as T[]
+
+  const filteredDataByQuery = useMemo(() => {
+    if (searchFn == null) return initialData
+
+    if (query.length === 0) {
+      return initialData
+    }
+
+    return searchFn(query, initialData)
+  }, [query, initialData])
 
   return (
     <Card>
@@ -40,6 +54,10 @@ export const Table = <T extends unknown>({
         <div className="flex gap-4">
           <Input
             type="text"
+            value={query}
+            onChange={e => {
+              setQuery(e.target.value)
+            }}
             radius="sm"
             placeholder="Search Product"
             labelPlacement="outside"
@@ -73,10 +91,6 @@ export const Table = <T extends unknown>({
               }}
             >
               {views.map(v => {
-                const currentData = (
-                  isArray(data) ? data : (data as Record<string, T[]>)[v.key]
-                ) as T[]
-
                 return (
                   <Tab key={v.key} title={v.name} className="font-semibold text-sm">
                     <NextUiTable
@@ -87,7 +101,7 @@ export const Table = <T extends unknown>({
                       <TableHeader columns={columns}>
                         {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
                       </TableHeader>
-                      <TableBody items={currentData.slice(0, rowsPerPage)}>
+                      <TableBody items={filteredDataByQuery.slice(0, rowsPerPage)}>
                         {data => (
                           <TableRow key={getKey(data)}>
                             {columnKey => {
@@ -145,7 +159,8 @@ type Props<T = unknown> = {
   }[]
   data: Record<string, T[]> | T[]
   getKey: (data: T) => string
-  rowsPerPageOptions?: number[]
   views?: { name: string; key: string }[]
+  rowsPerPageOptions?: number[]
+  searchFn?: (query: string, data: T[]) => T[]
   selectionMode?: SelectionMode
 }
