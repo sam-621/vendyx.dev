@@ -1,6 +1,5 @@
 'use client'
 
-import { InventoryTable } from '@/components/inventory'
 import { Table } from '@/theme/components/table'
 import { Chip, User } from '@nextui-org/react'
 
@@ -9,8 +8,8 @@ export default function InventoryPage() {
     <div className="flex flex-col gap-8">
       <h1 className="text-foreground font-semibold text-4xl">Inventory</h1>
       <section>
-        <InventoryTable />
         <Table
+          rowsPerPageOptions={[3, 6, 9, 12]}
           views={[
             { name: 'All', key: 'all' },
             { name: 'Enabled', key: 'enabled' }
@@ -71,6 +70,69 @@ const DATA = [
   },
   {
     id: 3,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 4,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 5,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 6,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 7,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 8,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 9,
+    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
+    product: 'Grey fabric sofa',
+    price: 188,
+    stock: 22,
+    variants: 2,
+    status: 'enabled'
+  },
+  {
+    id: 10,
     img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
     product: 'Grey fabric sofa',
     price: 188,

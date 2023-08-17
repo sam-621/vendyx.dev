@@ -26,11 +26,14 @@ import { useState, type ReactElement, type Key } from 'react'
 export const Table = <T extends unknown>({
   columns,
   data,
-  views = [{ name: 'All', key: 'all' }],
   getKey,
+  views = [{ name: 'All', key: 'all' }],
+  rowsPerPageOptions = [5, 10, 15],
   selectionMode = 'multiple'
 }: Props<T>) => {
   const [selectedTab, setSelectedTab] = useState<Key>(views[0].key)
+  const [rowsPerPage, setRowsPerPage] = useState<number>(rowsPerPageOptions[0])
+
   return (
     <Card>
       <CardBody className="flex flex-col gap-5">
@@ -84,7 +87,7 @@ export const Table = <T extends unknown>({
                       <TableHeader columns={columns}>
                         {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
                       </TableHeader>
-                      <TableBody items={currentData}>
+                      <TableBody items={currentData.slice(0, rowsPerPage)}>
                         {data => (
                           <TableRow key={getKey(data)}>
                             {columnKey => {
@@ -113,11 +116,15 @@ export const Table = <T extends unknown>({
               <select
                 id="select"
                 className="bg-transparent outline-none text-default-500 text-small"
-                // onChange={onRowsPerPageChange}
+                onChange={e => {
+                  setRowsPerPage(Number(e.target.value))
+                }}
               >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
+                {rowsPerPageOptions.map(opt => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
               </select>
             </label>
             <Button isIconOnly size="md" variant="bordered" className="text-default-500">
@@ -136,8 +143,9 @@ type Props<T = unknown> = {
     field: string
     render?: (data: T) => ReactElement | undefined
   }[]
-  views?: { name: string; key: string }[]
   data: Record<string, T[]> | T[]
   getKey: (data: T) => string
+  rowsPerPageOptions?: number[]
+  views?: { name: string; key: string }[]
   selectionMode?: SelectionMode
 }
