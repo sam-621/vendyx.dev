@@ -27,8 +27,9 @@ export const Table = <T extends unknown>({
   columns,
   data,
   getKey,
-  views = [{ name: 'All', key: 'all' }],
   searchFn,
+  action,
+  views = [{ name: 'All', key: 'all' }],
   rowsPerPageOptions = [5, 10, 15],
   selectionMode = 'multiple'
 }: Props<T>) => {
@@ -68,14 +69,17 @@ export const Table = <T extends unknown>({
               />
             }
           />
-          <Button
-            startContent={<PlusIcon width={'full'} />}
-            color="primary"
-            radius="sm"
-            className="w-fit"
-          >
-            Add Product
-          </Button>
+          {action != null && (
+            <Button
+              onClick={action?.fn}
+              className="w-fit"
+              color="primary"
+              radius="sm"
+              startContent={<PlusIcon width={'full'} />}
+            >
+              {action?.text}
+            </Button>
+          )}
         </div>
         <div className="flex">
           <div className="w-full">
@@ -159,8 +163,12 @@ type Props<T = unknown> = {
   }[]
   data: Record<string, T[]> | T[]
   getKey: (data: T) => string
+  searchFn?: (query: string, data: T[]) => T[]
+  action?: {
+    text: string
+    fn: () => void
+  }
   views?: { name: string; key: string }[]
   rowsPerPageOptions?: number[]
-  searchFn?: (query: string, data: T[]) => T[]
   selectionMode?: SelectionMode
 }

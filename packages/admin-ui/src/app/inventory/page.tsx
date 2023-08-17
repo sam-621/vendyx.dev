@@ -12,6 +12,12 @@ export default function InventoryPage() {
           searchFn={(query, data) => {
             return data.filter(d => d.product.toLowerCase().includes(query))
           }}
+          action={{
+            text: 'Add Product',
+            fn() {
+              console.log('clicked')
+            }
+          }}
           rowsPerPageOptions={[3, 6, 9, 12]}
           views={[
             { name: 'All', key: 'all' },
