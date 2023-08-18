@@ -20,13 +20,18 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:migrate": "yarn prisma migrate dev",
     "db:push": "yarn prisma db push",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "gen:types": "ts-node generate-typings"
   },
   "dependencies": {
+    "@apollo/server": "^4.9.1",
+    "@nestjs/apollo": "^12.0.7",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^12.0.8",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "5.1.1",
+    "graphql": "^16.8.0",
     "prisma": "^5.1.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
