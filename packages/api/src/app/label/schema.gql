@@ -1,0 +1,19 @@
+type Label {
+  id: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  labels: [Label]
+}
+
+type LabelValues {
+  id: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  value: String
+}
+
+type Query {
+  label(id: ID!): Label
+  labels: [Label]
+}

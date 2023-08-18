@@ -68,19 +68,19 @@ model Asset {
   @@map("asset")
 }
 
-model LabelGroup {
+model Label {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
 
   // Relations - one to many
-  lables Label[]
+  lables LabelValues[]
 
-  @@map("label_group")
+  @@map("label")
 }
 
-model Label {
+model LabelValues {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -92,10 +92,10 @@ model Label {
   assets      LabelOnAsset[]
 
   // Relations - many to one
-  label_group   LabelGroup @relation(fields: [label_GroupId], references: [id])
+  label_group   Label  @relation(fields: [label_GroupId], references: [id])
   label_GroupId String
 
-  @@map("label")
+  @@map("label_values")
 }
 
 model ProductVariant {
@@ -161,9 +161,9 @@ model OptionOnProductVariant {
 }
 
 model LabelOnProduct {
-  Product   Product @relation(fields: [productId], references: [id])
+  Product   Product     @relation(fields: [productId], references: [id])
   productId String
-  Label     Label   @relation(fields: [labelId], references: [id])
+  Label     LabelValues @relation(fields: [labelId], references: [id])
   labelId   String
 
   @@id([productId, labelId])
@@ -171,9 +171,9 @@ model LabelOnProduct {
 }
 
 model LabelOnCollection {
-  Collection   Collection @relation(fields: [collectionId], references: [id])
+  Collection   Collection  @relation(fields: [collectionId], references: [id])
   collectionId String
-  Label        Label      @relation(fields: [labelId], references: [id])
+  Label        LabelValues @relation(fields: [labelId], references: [id])
   labelId      String
 
   @@id([collectionId, labelId])
@@ -181,9 +181,9 @@ model LabelOnCollection {
 }
 
 model LabelOnAsset {
-  Asset   Asset  @relation(fields: [assetId], references: [id])
+  Asset   Asset       @relation(fields: [assetId], references: [id])
   assetId String
-  Label   Label  @relation(fields: [labelId], references: [id])
+  Label   LabelValues @relation(fields: [labelId], references: [id])
   labelId String
 
   @@id([assetId, labelId])
