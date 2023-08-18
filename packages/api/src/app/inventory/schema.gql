@@ -8,7 +8,35 @@ type Product {
   enabled: Boolean
 }
 
+type ProductVariant {
+  id: String
+  createdAt: String
+  updatedAt: String
+  price: Int
+  stock: Int
+  sku: String
+  enabled: Boolean
+}
+
+type Option {
+  id: String
+  createdAt: String
+  updatedAt: String
+  name: String
+}
+
+type OptionValues {
+  id: String
+  createdAt: String
+  updatedAt: String
+  value: String
+}
+
 type Query {
   product(id: ID!): Product
   products: [Product]
+  productVariant(id: ID!): ProductVariant
+  productVariants: [ProductVariant]
+  option(id: ID!): Option
+  options: [Option]
 }

@@ -29,7 +29,7 @@ model Product {
   assets          AssetOnProduct[]
   collections     ProductOnCollection[]
   labels          LabelOnProduct[]
-  optionsGroup    OptionGroup[]
+  optionsGroup    Option[]
 
   @@map("product")
 }
@@ -119,23 +119,23 @@ model ProductVariant {
   @@map("product_variant")
 }
 
-model OptionGroup {
+model Option {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
 
   // Relations - one to many
-  options Option[]
+  options OptionValues[]
 
   // Relations - many to one
   Product   Product @relation(fields: [productId], references: [id])
   productId String
 
-  @@map("option_group")
+  @@map("option")
 }
 
-model Option {
+model OptionValues {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -145,16 +145,16 @@ model Option {
   productVariant OptionOnProductVariant[]
 
   // Relations - many to one
-  OptionGroup   OptionGroup @relation(fields: [optionGroupId], references: [id])
+  OptionGroup   Option @relation(fields: [optionGroupId], references: [id])
   optionGroupId String
 
-  @@map("option")
+  @@map("option_values")
 }
 
 model OptionOnProductVariant {
   ProductVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
   productVariantId String
-  Option           Option         @relation(fields: [optionId], references: [id])
+  Option           OptionValues   @relation(fields: [optionId], references: [id])
   optionId         String
 
   @@id([productVariantId, optionId])
