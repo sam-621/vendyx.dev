@@ -1,0 +1,14 @@
+type Product {
+  id: ID!
+  createdAt: String!
+  updatedAt: String!
+  name: String
+  description: String
+  slug: String
+  enabled: Boolean
+}
+
+type Query {
+  product(id: ID!): Product
+  products: [Product]
+}

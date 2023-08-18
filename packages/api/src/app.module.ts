@@ -12,7 +12,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      typePaths: ['../gql/schema.graphql'],
+      typePaths: ['./**/*.gql'],
       definitions: {
         path: join(process.cwd(), 'src/common/types/graphql.ts'),
         outputAs: 'class'
