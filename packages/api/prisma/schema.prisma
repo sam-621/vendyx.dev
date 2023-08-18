@@ -1,0 +1,232 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AssetType {
+  IMAGE
+  FILE
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  description String
+  slug        String
+  enabled     Boolean
+
+  // Relations - one to many
+  productVariants ProductVariant[]
+  assets          AssetOnProduct[]
+  collections     ProductOnCollection[]
+  labels          LabelOnProduct[]
+  optionsGroup    OptionGroup[]
+
+  @@map("product")
+}
+
+model Collection {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  description String
+  slug        String
+  enabled     Boolean
+
+  // Relations - one to many
+  assets   AssetOnCollection[]
+  products ProductOnCollection[]
+  labels   LabelOnCollection[]
+
+  @@map("collection")
+}
+
+model Asset {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  source    String
+  type      AssetType
+
+  // Relations - one to many
+  products        AssetOnProduct[]
+  collections     AssetOnCollection[]
+  productVariants ProductVariant[]
+  labels          LabelOnAsset[]
+
+  @@map("asset")
+}
+
+model LabelGroup {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+
+  // Relations - one to many
+  lables Label[]
+
+  @@map("label_group")
+}
+
+model Label {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  value     String
+
+  // Relations - one to many
+  products    LabelOnProduct[]
+  collections LabelOnCollection[]
+  assets      LabelOnAsset[]
+
+  // Relations - many to one
+  label_group   LabelGroup @relation(fields: [label_GroupId], references: [id])
+  label_GroupId String
+
+  @@map("label")
+}
+
+model ProductVariant {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  price     Int
+  stock     Int
+  sku       String
+  enabled   Boolean
+
+  // Relations - one to many
+  options OptionOnProductVariant[]
+
+  // Relations - many to one
+  image     Asset   @relation(fields: [assetId], references: [id])
+  assetId   String
+  Product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@map("product_variant")
+}
+
+model OptionGroup {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+
+  // Relations - one to many
+  options Option[]
+
+  // Relations - many to one
+  Product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@map("option_group")
+}
+
+model Option {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  value     String
+
+  // Relations - one to many
+  productVariant OptionOnProductVariant[]
+
+  // Relations - many to one
+  OptionGroup   OptionGroup @relation(fields: [optionGroupId], references: [id])
+  optionGroupId String
+
+  @@map("option")
+}
+
+model OptionOnProductVariant {
+  ProductVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariantId String
+  Option           Option         @relation(fields: [optionId], references: [id])
+  optionId         String
+
+  @@id([productVariantId, optionId])
+}
+
+model LabelOnProduct {
+  Product   Product @relation(fields: [productId], references: [id])
+  productId String
+  Label     Label   @relation(fields: [labelId], references: [id])
+  labelId   String
+
+  @@id([productId, labelId])
+  @@map("label_on_product")
+}
+
+model LabelOnCollection {
+  Collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String
+  Label        Label      @relation(fields: [labelId], references: [id])
+  labelId      String
+
+  @@id([collectionId, labelId])
+  @@map("label_on_collection")
+}
+
+model LabelOnAsset {
+  Asset   Asset  @relation(fields: [assetId], references: [id])
+  assetId String
+  Label   Label  @relation(fields: [labelId], references: [id])
+  labelId String
+
+  @@id([assetId, labelId])
+  @@map("label_on_asset")
+}
+
+model ProductOnCollection {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product      Product    @relation(fields: [productId], references: [id])
+  productId    String
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String
+
+  @@id([productId, collectionId])
+  @@map("product_on_collection")
+}
+
+model AssetOnProduct {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  position  Int
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  asset     Asset   @relation(fields: [assetId], references: [id])
+  assetId   String
+
+  @@id([productId, assetId])
+  @@map("asset_on_product")
+}
+
+model AssetOnCollection {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  position  Int
+
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String
+  asset        Asset      @relation(fields: [assetId], references: [id])
+  assetId      String
+
+  @@id([collectionId, assetId])
+  @@map("asset_on_collection")
+}
