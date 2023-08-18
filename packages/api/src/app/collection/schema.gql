@@ -1,0 +1,14 @@
+type Collection {
+  id: String
+  createdAt: String
+  updatedAt: String
+  name: String
+  description: String
+  slug: String
+  enabled: Boolean
+}
+
+type Query {
+  collection(id: ID!): Collection
+  collections: [Collection]
+}
