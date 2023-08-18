@@ -1,0 +1,18 @@
+enum AssetType {
+  IMAGE
+  FILE
+}
+
+type Asset {
+  id: String
+  createdAt: String
+  updatedAt: String
+  name: String
+  source: String
+  type: AssetType
+}
+
+type Query {
+  asset(id: ID!): Asset
+  assets: [Asset]
+}
