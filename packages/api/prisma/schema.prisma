@@ -29,7 +29,7 @@ model Product {
   assets          AssetOnProduct[]
   collections     ProductOnCollection[]
   labels          LabelOnProduct[]
-  optionsGroup    Option[]
+  options         Option[]
 
   @@map("product")
 }
@@ -75,7 +75,7 @@ model Label {
   name      String
 
   // Relations - one to many
-  lables LabelValues[]
+  values LabelValues[]
 
   @@map("label")
 }
@@ -92,8 +92,8 @@ model LabelValues {
   assets      LabelOnAsset[]
 
   // Relations - many to one
-  label_group   Label  @relation(fields: [label_GroupId], references: [id])
-  label_GroupId String
+  label   Label  @relation(fields: [labelId], references: [id])
+  labelId String
 
   @@map("label_values")
 }
@@ -108,10 +108,10 @@ model ProductVariant {
   enabled   Boolean
 
   // Relations - one to many
-  options OptionOnProductVariant[]
+  optionValues OptionValuesOnProductVariant[]
 
   // Relations - many to one
-  image     Asset   @relation(fields: [assetId], references: [id])
+  asset     Asset   @relation(fields: [assetId], references: [id])
   assetId   String
   Product   Product @relation(fields: [productId], references: [id])
   productId String
@@ -126,7 +126,7 @@ model Option {
   name      String
 
   // Relations - one to many
-  options OptionValues[]
+  values OptionValues[]
 
   // Relations - many to one
   Product   Product @relation(fields: [productId], references: [id])
@@ -142,22 +142,23 @@ model OptionValues {
   value     String
 
   // Relations - one to many
-  productVariant OptionOnProductVariant[]
+  productVariant OptionValuesOnProductVariant[]
 
   // Relations - many to one
-  OptionGroup   Option @relation(fields: [optionGroupId], references: [id])
-  optionGroupId String
+  option   Option @relation(fields: [optionId], references: [id])
+  optionId String
 
   @@map("option_values")
 }
 
-model OptionOnProductVariant {
+model OptionValuesOnProductVariant {
   ProductVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
   productVariantId String
   Option           OptionValues   @relation(fields: [optionId], references: [id])
   optionId         String
 
   @@id([productVariantId, optionId])
+  @@map("option_values_on_product_variant")
 }
 
 model LabelOnProduct {

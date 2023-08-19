@@ -4,12 +4,12 @@ enum AssetType {
 }
 
 type Asset {
-  id: String
-  createdAt: String
-  updatedAt: String
-  name: String
-  source: String
-  type: AssetType
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  name: String!
+  source: String!
+  type: AssetType!
 }
 
 type Query {

@@ -1,11 +1,15 @@
 type Collection {
-  id: String
-  createdAt: String
-  updatedAt: String
-  name: String
-  description: String
-  slug: String
-  enabled: Boolean
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  name: String!
+  description: String!
+  slug: String!
+  enabled: Boolean!
+
+  products: [Product]!
+  assets: [Asset]!
+  labels: [Label]!
 }
 
 type Query {

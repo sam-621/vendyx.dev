@@ -6,30 +6,44 @@ type Product {
   description: String
   slug: String
   enabled: Boolean
+
+  variants: [ProductVariant]
+  collections: [Collection]
+  assets: [Asset]
+  labels: [Label]
+  options: [Option]
 }
 
 type ProductVariant {
-  id: String
-  createdAt: String
-  updatedAt: String
-  price: Int
-  stock: Int
-  sku: String
-  enabled: Boolean
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  price: Int!
+  stock: Int!
+  sku: String!
+  enabled: Boolean!
+
+  optionValues: [OptionValues]!
+  asset: Asset!
+  product: Product!
 }
 
 type Option {
-  id: String
-  createdAt: String
-  updatedAt: String
-  name: String
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  name: String!
+
+  values: [OptionValues]!
 }
 
 type OptionValues {
-  id: String
-  createdAt: String
-  updatedAt: String
-  value: String
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  value: String!
+
+  option: Option!
 }
 
 type Query {

@@ -1,16 +1,19 @@
 type Label {
-  id: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  name: String
-  labels: [Label]
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  name: String!
+
+  values: [LabelValues]!
 }
 
 type LabelValues {
-  id: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  value: String
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  value: String!
+
+  label: Label!
 }
 
 type Query {
