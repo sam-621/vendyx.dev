@@ -72,7 +72,7 @@ export class Product {
     variants?: Nullable<Nullable<ProductVariant>[]>;
     collections?: Nullable<Nullable<Collection>[]>;
     assets?: Nullable<Nullable<Asset>[]>;
-    labels?: Nullable<Nullable<Label>[]>;
+    labelValues?: Nullable<Nullable<LabelValues>[]>;
     options?: Nullable<Nullable<Option>[]>;
 }
 

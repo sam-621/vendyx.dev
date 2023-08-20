@@ -28,7 +28,7 @@ model Product {
   productVariants ProductVariant[]
   assets          AssetOnProduct[]
   collections     ProductOnCollection[]
-  labels          LabelOnProduct[]
+  labelValues     LabelValueOnProduct[]
   options         Option[]
 
   @@map("product")
@@ -44,9 +44,9 @@ model Collection {
   enabled     Boolean
 
   // Relations - one to many
-  assets   AssetOnCollection[]
-  products ProductOnCollection[]
-  labels   LabelOnCollection[]
+  assets      AssetOnCollection[]
+  products    ProductOnCollection[]
+  labelValues LabelValueOnCollection[]
 
   @@map("collection")
 }
@@ -63,7 +63,7 @@ model Asset {
   products        AssetOnProduct[]
   collections     AssetOnCollection[]
   productVariants ProductVariant[]
-  labels          LabelOnAsset[]
+  labelValues     LabelValueOnAsset[]
 
   @@map("asset")
 }
@@ -87,9 +87,9 @@ model LabelValues {
   value     String
 
   // Relations - one to many
-  products    LabelOnProduct[]
-  collections LabelOnCollection[]
-  assets      LabelOnAsset[]
+  products    LabelValueOnProduct[]
+  collections LabelValueOnCollection[]
+  assets      LabelValueOnAsset[]
 
   // Relations - many to one
   label   Label  @relation(fields: [labelId], references: [id])
@@ -161,17 +161,17 @@ model OptionValuesOnProductVariant {
   @@map("option_values_on_product_variant")
 }
 
-model LabelOnProduct {
-  Product   Product     @relation(fields: [productId], references: [id])
-  productId String
-  Label     LabelValues @relation(fields: [labelId], references: [id])
-  labelId   String
+model LabelValueOnProduct {
+  Product      Product     @relation(fields: [productId], references: [id])
+  productId    String
+  labelValue   LabelValues @relation(fields: [labelValueId], references: [id])
+  labelValueId String
 
-  @@id([productId, labelId])
+  @@id([productId, labelValueId])
   @@map("label_on_product")
 }
 
-model LabelOnCollection {
+model LabelValueOnCollection {
   Collection   Collection  @relation(fields: [collectionId], references: [id])
   collectionId String
   Label        LabelValues @relation(fields: [labelId], references: [id])
@@ -181,7 +181,7 @@ model LabelOnCollection {
   @@map("label_on_collection")
 }
 
-model LabelOnAsset {
+model LabelValueOnAsset {
   Asset   Asset       @relation(fields: [assetId], references: [id])
   assetId String
   Label   LabelValues @relation(fields: [labelId], references: [id])

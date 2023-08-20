@@ -10,7 +10,7 @@ type Product {
   variants: [ProductVariant]
   collections: [Collection]
   assets: [Asset]
-  labels: [Label]
+  labelValues: [LabelValues]
   options: [Option]
 }
 

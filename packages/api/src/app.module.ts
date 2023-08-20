@@ -5,6 +5,8 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { join } from 'path'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
+import { ProductsResolver } from './app.resolver'
+import { PrismaModule } from './app/shared/persistance/prisma.module'
 
 @Module({
   imports: [
@@ -17,9 +19,10 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
         path: join(process.cwd(), 'src/common/types/graphql.ts'),
         outputAs: 'class'
       }
-    })
+    }),
+    PrismaModule
   ],
   controllers: [AppController],
-  providers: [AppService]
+  providers: [AppService, ProductsResolver]
 })
 export class AppModule {}
