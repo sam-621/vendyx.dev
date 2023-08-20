@@ -6,8 +6,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { join } from 'path'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { ProductsResolver } from './app.resolver'
-import { PrismaModule } from './app/shared/repositories/prisma.module'
 import { CollectionResolver } from './common/collection.resolver'
+import { SharedModule } from './app/shared'
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { CollectionResolver } from './common/collection.resolver'
         outputAs: 'class'
       }
     }),
-    PrismaModule
+    SharedModule
   ],
   controllers: [AppController],
   providers: [AppService, ProductsResolver, CollectionResolver]

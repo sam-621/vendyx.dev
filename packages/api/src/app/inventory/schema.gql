@@ -1,7 +1,7 @@
 type Product {
   id: ID!
-  createdAt: String!
-  updatedAt: String!
+  createdAt: Date!
+  updatedAt: Date!
   name: String
   description: String
   slug: String
@@ -16,8 +16,8 @@ type Product {
 
 type ProductVariant {
   id: String!
-  createdAt: String!
-  updatedAt: String!
+  createdAt: Date!
+  updatedAt: Date!
   price: Int!
   stock: Int!
   sku: String!
@@ -30,8 +30,8 @@ type ProductVariant {
 
 type Option {
   id: String!
-  createdAt: String!
-  updatedAt: String!
+  createdAt: Date!
+  updatedAt: Date!
   name: String!
 
   values: [OptionValues]!
@@ -39,8 +39,8 @@ type Option {
 
 type OptionValues {
   id: String!
-  createdAt: String!
-  updatedAt: String!
+  createdAt: Date!
+  updatedAt: Date!
   value: String!
 
   option: Option!

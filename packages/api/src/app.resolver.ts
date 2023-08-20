@@ -1,5 +1,5 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { PrismaService } from './app/shared/repositories/prisma.service'
+import { PrismaService } from './app/shared/services/prisma.service'
 import { Product } from './common/types/graphql'
 
 @Resolver('Product')

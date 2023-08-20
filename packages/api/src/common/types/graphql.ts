@@ -63,8 +63,8 @@ export class Collection {
 
 export class Product {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     name?: Nullable<string>;
     description?: Nullable<string>;
     slug?: Nullable<string>;
@@ -78,8 +78,8 @@ export class Product {
 
 export class ProductVariant {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     price: number;
     stock: number;
     sku: string;
@@ -91,16 +91,16 @@ export class ProductVariant {
 
 export class Option {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     name: string;
     values: Nullable<OptionValues>[];
 }
 
 export class OptionValues {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     value: string;
     option: Option;
 }
