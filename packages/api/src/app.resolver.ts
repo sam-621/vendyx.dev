@@ -43,4 +43,14 @@ export class ProductsResolver {
 
     return result.map(r => r.labelValue)
   }
+
+  @ResolveField('options')
+  async options(@Parent() product: Product) {
+    const { id } = product
+    const result = await this.prismaService.option.findMany({
+      where: { productId: id }
+    })
+
+    return result
+  }
 }

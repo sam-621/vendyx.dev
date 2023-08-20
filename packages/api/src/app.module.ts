@@ -7,6 +7,7 @@ import { join } from 'path'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { ProductsResolver } from './app.resolver'
 import { PrismaModule } from './app/shared/persistance/prisma.module'
+import { CollectionResolver } from './common/collection.resolver'
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { PrismaModule } from './app/shared/persistance/prisma.module'
     PrismaModule
   ],
   controllers: [AppController],
-  providers: [AppService, ProductsResolver]
+  providers: [AppService, ProductsResolver, CollectionResolver]
 })
 export class AppModule {}

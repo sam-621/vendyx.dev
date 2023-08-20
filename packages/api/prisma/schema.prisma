@@ -129,7 +129,7 @@ model Option {
   values OptionValues[]
 
   // Relations - many to one
-  Product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   productId String
 
   @@map("option")
