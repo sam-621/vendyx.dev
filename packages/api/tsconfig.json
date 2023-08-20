@@ -16,6 +16,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/utilities/*": ["./tests/utilities/*"],
+
+      "@/common/*": ["./src/common/*"],
+      "@/app/*": ["./src/app/*"]
+    }
   }
 }
