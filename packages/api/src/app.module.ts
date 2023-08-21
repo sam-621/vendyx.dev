@@ -8,6 +8,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { ProductsResolver } from './app.resolver'
 import { CollectionResolver } from './common/collection.resolver'
 import { SharedModule } from './app/shared'
+import { InventoryModule } from './app/inventory'
 
 @Module({
   imports: [
@@ -21,9 +22,10 @@ import { SharedModule } from './app/shared'
         outputAs: 'class'
       }
     }),
-    SharedModule
+    SharedModule,
+    InventoryModule
   ],
   controllers: [AppController],
-  providers: [AppService, ProductsResolver, CollectionResolver]
+  providers: [AppService]
 })
 export class AppModule {}
