@@ -5,8 +5,8 @@ enum AssetType {
 
 type Asset {
   id: String!
-  createdAt: String!
-  updatedAt: String!
+  createdAt: Date!
+  updatedAt: Date!
   name: String!
   source: String!
   type: AssetType!

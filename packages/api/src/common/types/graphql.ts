@@ -15,8 +15,8 @@ export enum AssetType {
 
 export class Asset {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     name: string;
     source: string;
     type: AssetType;
