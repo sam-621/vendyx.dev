@@ -21,7 +21,7 @@
     "db:migrate": "yarn prisma migrate dev",
     "db:push": "yarn prisma db push",
     "db:seed": "prisma db seed",
-    "gen:types": "ts-node generate-typings"
+    "db:types": "prisma generate"
   },
   "dependencies": {
     "@apollo/server": "^4.9.1",

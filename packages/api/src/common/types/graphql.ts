@@ -29,29 +29,29 @@ export abstract class IQuery {
 
     abstract collection(id: string): Nullable<Collection> | Promise<Nullable<Collection>>;
 
-    abstract collections(): Nullable<Nullable<Collection>[]> | Promise<Nullable<Nullable<Collection>[]>>;
+    abstract collections(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
 
     abstract product(id: string): Nullable<Product> | Promise<Nullable<Product>>;
 
-    abstract products(): Nullable<Nullable<Product>[]> | Promise<Nullable<Nullable<Product>[]>>;
+    abstract products(): Nullable<Product>[] | Promise<Nullable<Product>[]>;
 
     abstract productVariant(id: string): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 
-    abstract productVariants(): Nullable<Nullable<ProductVariant>[]> | Promise<Nullable<Nullable<ProductVariant>[]>>;
+    abstract productVariants(): Nullable<ProductVariant>[] | Promise<Nullable<ProductVariant>[]>;
 
     abstract option(id: string): Nullable<Option> | Promise<Nullable<Option>>;
 
-    abstract options(): Nullable<Nullable<Option>[]> | Promise<Nullable<Nullable<Option>[]>>;
+    abstract options(): Nullable<Option>[] | Promise<Nullable<Option>[]>;
 
     abstract label(id: string): Nullable<Label> | Promise<Nullable<Label>>;
 
-    abstract labels(): Nullable<Nullable<Label>[]> | Promise<Nullable<Nullable<Label>[]>>;
+    abstract labels(): Nullable<Label>[] | Promise<Nullable<Label>[]>;
 }
 
 export class Collection {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     name: string;
     description: string;
     slug: string;
@@ -65,15 +65,15 @@ export class Product {
     id: string;
     createdAt: Date;
     updatedAt: Date;
-    name?: Nullable<string>;
-    description?: Nullable<string>;
-    slug?: Nullable<string>;
-    enabled?: Nullable<boolean>;
-    variants?: Nullable<Nullable<ProductVariant>[]>;
-    collections?: Nullable<Nullable<Collection>[]>;
-    assets?: Nullable<Nullable<Asset>[]>;
-    labelValues?: Nullable<Nullable<LabelValues>[]>;
-    options?: Nullable<Nullable<Option>[]>;
+    name: string;
+    description: string;
+    slug: string;
+    enabled: boolean;
+    variants: Nullable<ProductVariant>[];
+    collections: Nullable<Collection>[];
+    assets: Nullable<Asset>[];
+    labelValues: Nullable<LabelValues>[];
+    options: Nullable<Option>[];
 }
 
 export class ProductVariant {
@@ -107,16 +107,16 @@ export class OptionValues {
 
 export class Label {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     name: string;
     values: Nullable<LabelValues>[];
 }
 
 export class LabelValues {
     id: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     value: string;
     label: Label;
 }

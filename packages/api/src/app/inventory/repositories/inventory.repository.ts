@@ -6,11 +6,16 @@ import { Injectable } from '@nestjs/common'
 export class InventoryRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async findMany(): Promise<Product[]> {
+  async findMany(): Promise<ProductWithNoRelations[]> {
     return this.prismaService.product.findMany()
   }
 
-  async findOne(id: string): Promise<Product> {
+  async findOne(id: string): Promise<ProductWithNoRelations> {
     return this.prismaService.product.findUnique({ where: { id } })
   }
 }
+
+type ProductWithNoRelations = Omit<
+  Product,
+  'variants' | 'collections' | 'assets' | 'labelValues' | 'options'
+>

@@ -20,9 +20,9 @@ model Product {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String
-  description String
+  description String   @default("")
   slug        String
-  enabled     Boolean
+  enabled     Boolean  @default(false)
 
   // Relations - one to many
   productVariants ProductVariant[]
@@ -39,9 +39,9 @@ model Collection {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String
-  description String
+  description String   @default("")
   slug        String
-  enabled     Boolean
+  enabled     Boolean  @default(false)
 
   // Relations - one to many
   assets      AssetOnCollection[]
@@ -57,7 +57,7 @@ model Asset {
   updatedAt DateTime  @updatedAt
   name      String
   source    String
-  type      AssetType
+  type      AssetType @default(IMAGE)
 
   // Relations - one to many
   products        AssetOnProduct[]
@@ -102,10 +102,10 @@ model ProductVariant {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  price     Int
-  stock     Int
+  price     Int      @default(0)
+  stock     Int      @default(0)
   sku       String
-  enabled   Boolean
+  enabled   Boolean  @default(false)
 
   // Relations - one to many
   optionValues OptionValuesOnProductVariant[]
