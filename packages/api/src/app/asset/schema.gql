@@ -10,9 +10,14 @@ type Asset {
   name: String!
   source: String!
   type: AssetType!
+
+  products: [Product]!
+  collections: [Collection]!
+  productVariants: [ProductVariant]
+  labelValues: [LabelValues]!
 }
 
 type Query {
   asset(id: ID!): Asset
-  assets: [Asset]
+  assets: [Asset]!
 }

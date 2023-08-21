@@ -20,12 +20,16 @@ export class Asset {
     name: string;
     source: string;
     type: AssetType;
+    products: Nullable<Product>[];
+    collections: Nullable<Collection>[];
+    productVariants?: Nullable<Nullable<ProductVariant>[]>;
+    labelValues: Nullable<LabelValues>[];
 }
 
 export abstract class IQuery {
     abstract asset(id: string): Nullable<Asset> | Promise<Nullable<Asset>>;
 
-    abstract assets(): Nullable<Nullable<Asset>[]> | Promise<Nullable<Nullable<Asset>[]>>;
+    abstract assets(): Nullable<Asset>[] | Promise<Nullable<Asset>[]>;
 
     abstract collection(id: string): Nullable<Collection> | Promise<Nullable<Collection>>;
 
@@ -58,7 +62,7 @@ export class Collection {
     enabled: boolean;
     products: Nullable<Product>[];
     assets: Nullable<Asset>[];
-    labels: Nullable<Label>[];
+    labelValues: Nullable<LabelValues>[];
 }
 
 export class Product {
@@ -85,8 +89,8 @@ export class ProductVariant {
     sku: string;
     enabled: boolean;
     optionValues: Nullable<OptionValues>[];
-    asset: Asset;
-    product: Product;
+    asset?: Nullable<Asset>;
+    product?: Nullable<Product>;
 }
 
 export class Option {

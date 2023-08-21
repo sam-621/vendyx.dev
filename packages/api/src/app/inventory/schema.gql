@@ -24,8 +24,8 @@ type ProductVariant {
   enabled: Boolean!
 
   optionValues: [OptionValues]!
-  asset: Asset!
-  product: Product!
+  asset: Asset
+  product: Product
 }
 
 type Option {
