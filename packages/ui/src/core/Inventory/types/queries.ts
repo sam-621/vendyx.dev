@@ -1,8 +1,11 @@
 import type { Product } from './product'
 
-export type GetProductsResult = Pick<Product, 'id' | 'name' | 'slug' | 'enabled'> & {
+// TODO: Add asset type
+export type CommonProduct = Pick<Product, 'id' | 'name' | 'slug' | 'enabled'> & {
   asset: {
     id: string
     name: string
   }
 }
+
+export type GetProductsResult = CommonProduct
