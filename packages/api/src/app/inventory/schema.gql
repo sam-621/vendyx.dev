@@ -25,7 +25,7 @@ type ProductVariant {
 
   optionValues: [OptionValues]!
   asset: Asset
-  product: Product
+  product: Product!
 }
 
 type Option {

@@ -12,6 +12,11 @@ export class InventoryResolver {
     return this.repository.findMany()
   }
 
+  @ResolveField('variants')
+  async variants(@Parent() product: Product) {
+    return this.prismaService.productVariant.findMany({ where: { productId: product.id } })
+  }
+
   @ResolveField('collections')
   async collections(@Parent() product: Product) {
     return this.repository.getCollectionsOnProduct(product.id)
