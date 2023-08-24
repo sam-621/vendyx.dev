@@ -1,6 +1,6 @@
 import type { Product } from './product'
 
-export type GetProductsQueryResult = Pick<Product, 'id' | 'name' | 'slug' | 'enabled'> & {
+export type GetProductsResult = Pick<Product, 'id' | 'name' | 'slug' | 'enabled'> & {
   asset: {
     id: string
     name: string
