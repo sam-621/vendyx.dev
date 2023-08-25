@@ -90,7 +90,7 @@ export class ProductVariant {
     enabled: boolean;
     optionValues: Nullable<OptionValues>[];
     asset?: Nullable<Asset>;
-    product?: Nullable<Product>;
+    product: Product;
 }
 
 export class Option {

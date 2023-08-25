@@ -1,5 +1,13 @@
 import { PrismaService } from '@/app/shared/services'
-import { Asset, AssetType, Collection, LabelValues, Option, Product } from '@/common/types/graphql'
+import {
+  Asset,
+  AssetType,
+  Collection,
+  LabelValues,
+  Option,
+  Product,
+  ProductVariant
+} from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
 
 @Injectable()
@@ -48,6 +56,12 @@ export class InventoryRepository {
 
     return result
   }
+
+  async getVariantsOnProduct(id: string): Promise<ProductVariantWithNoRelations[]> {
+    const result = await this.prismaService.productVariant.findMany({ where: { productId: id } })
+
+    return result
+  }
 }
 
 type ProductWithNoRelations = Omit<
@@ -65,3 +79,5 @@ type AssetWithNoRelations = Omit<
 type LabelValuesWithNoRelations = Omit<LabelValues, 'label'>
 
 type OptionWithNoRelations = Omit<Option, 'values'>
+
+type ProductVariantWithNoRelations = Omit<ProductVariant, 'optionValues' | 'asset' | 'product'>
