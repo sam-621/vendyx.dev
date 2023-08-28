@@ -6,7 +6,7 @@ export type CommonProduct = Pick<Product, 'id' | 'name' | 'slug' | 'enabled' | '
     id: string
     name: string
     source: string
-  }
+  }[]
   variants: {
     id: string
     price: number
