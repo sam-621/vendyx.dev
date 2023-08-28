@@ -6,8 +6,11 @@ import { usePathname } from 'next/navigation'
 import type { FC } from 'react'
 
 export const SidebarMenuItem: FC<Props> = ({ text, href, outlineIcon, solidIcon }) => {
-  const pathname = usePathname()
-  const isActive = pathname === href
+  const pathnames = usePathname()
+    .split('/')
+    .filter(path => path.length > 0)
+
+  const isActive = pathnames.includes(href.replace('/', ''))
 
   return (
     <li className="flex gap-3">
