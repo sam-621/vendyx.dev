@@ -1,13 +1,15 @@
 'use client'
 
+import type { CommonProduct } from '@/core/Inventory'
 import { Table } from '@/theme/components'
 import { Chip, User } from '@nextui-org/react'
+import type { FC } from 'react'
 
-export const InventoryTable = () => {
+export const InventoryTable: FC<Props> = ({ products }) => {
   return (
     <Table
       searchFn={(query, data) => {
-        return data.filter(d => d.product.toLowerCase().includes(query))
+        return data.filter(d => d.name.toLowerCase().includes(query))
       }}
       action={{
         text: 'Add Product',
@@ -16,36 +18,44 @@ export const InventoryTable = () => {
         }
       }}
       rowsPerPageOptions={[3, 6, 9, 12]}
-      views={[
-        { name: 'All', key: 'all' },
-        { name: 'Enabled', key: 'enabled' }
-      ]}
       filters
-      data={{ all: DATA, enabled: DATA2 }}
+      data={products}
       getKey={d => d.id.toString()}
       columns={[
         {
           name: 'Product',
-          field: 'product',
+          field: 'name',
           render: data => (
             <User
               avatarProps={{
                 radius: 'sm',
-                src: data.img
+                src: data.assets.source
               }}
-              name={data.product}
+              name={data.name}
             />
           )
         },
-        { name: 'Price', field: 'price', render: data => <span>{`$${data.price}`}</span> },
-        { name: 'Stock', field: 'stock' },
-        { name: 'Variants', field: 'variants' },
+        {
+          name: 'Price',
+          field: 'price',
+          render: data => <span>{`$${data.variants[0].price}`}</span>
+        },
+        {
+          name: 'Stock',
+          field: 'variants.stock',
+          render: data => <span>{data.variants[0].stock}</span>
+        },
+        {
+          name: 'Variants',
+          field: 'variants',
+          render: data => <span>{data.variants.length}</span>
+        },
         {
           name: 'Status',
-          field: 'status',
+          field: 'enabled',
           render: data => (
             <Chip className="capitalize" color="success" variant="flat">
-              {data.status}
+              {data.enabled ? 'Enabled' : 'Disabled'}
             </Chip>
           )
         }
@@ -54,125 +64,6 @@ export const InventoryTable = () => {
   )
 }
 
-const DATA = [
-  {
-    id: 1,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey fabric sofa',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 2,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Blue label',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 3,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Chair',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 4,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Vendure',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 5,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Vendyx',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 6,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Leaving room',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 7,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Stupid pice of dogsheet',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 8,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'idk',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 9,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'help',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 10,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'create',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  }
-]
-
-const DATA2 = [
-  {
-    id: 1,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey Feo',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 2,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey Feo',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  },
-  {
-    id: 3,
-    img: 'https://demo.vendure.io/assets/preview/69/nathan-fertig-249917-unsplash__preview.jpg?preset=small',
-    product: 'Grey Feo',
-    price: 188,
-    stock: 22,
-    variants: 2,
-    status: 'enabled'
-  }
-]
+type Props = {
+  products: CommonProduct[]
+}

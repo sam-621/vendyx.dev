@@ -1,23 +1,14 @@
-'use client'
 import { InventoryTable } from '@/components/inventory'
 import { getProducts } from '@/core/Inventory/services/products'
-import { useEffect } from 'react'
 
-export default function InventoryPage() {
-  useEffect(() => {
-    ;(async () => {
-      const result = await getProducts()
-      console.log({
-        result
-      })
-    })()
-  }, [])
+export default async function InventoryPage() {
+  const products = await getProducts()
 
   return (
     <div className="flex flex-col gap-8">
       <h1 className="text-foreground font-semibold text-4xl">Inventory</h1>
       <section>
-        <InventoryTable />
+        <InventoryTable products={products ?? []} />
       </section>
     </div>
   )

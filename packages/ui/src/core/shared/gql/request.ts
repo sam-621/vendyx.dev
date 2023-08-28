@@ -19,11 +19,11 @@ export const gqlRequest: GqlRequest = async ({
     ...((tags?.length ?? 0) > 0 && { next: { tags } })
   })
 
-  if (!result.ok) {
-    throw new Error('Something went wrong')
-  }
-
   const body = await result.json()
+
+  if (body.errors?.length > 0) {
+    throw body.errors[0]
+  }
 
   return body.data
 }
