@@ -1,23 +1,23 @@
 'use client'
 
-import { Select as NextUiSelect, SelectItem } from '@nextui-org/select'
+import { Select as NextUiSelect, SelectItem, type SelectProps } from '@nextui-org/select'
+import type { FC } from 'react'
 
-export const Select = () => {
+export const Select: FC<Props> = ({ options, ...rest }) => {
   return (
-    <NextUiSelect
-      defaultSelectedKeys={['Enabled']}
-      labelPlacement="outside"
-      placeholder="Select an state"
-      radius="sm"
-      label="State"
-      className="max-w-xs"
-    >
-      <SelectItem key="Enabled" value={'Enabled'}>
-        Enabled
-      </SelectItem>
-      <SelectItem key="Disabled" value={'Disabled'}>
-        Disabled
-      </SelectItem>
+    <NextUiSelect labelPlacement="outside" placeholder="-" radius="sm" {...rest}>
+      {options.map(opt => (
+        <SelectItem key={opt.value} value={opt.value}>
+          {opt.label}
+        </SelectItem>
+      ))}
     </NextUiSelect>
   )
+}
+
+type Props = Omit<SelectProps, 'children'> & {
+  options: {
+    value: string
+    label: string
+  }[]
 }

@@ -84,17 +84,27 @@ export const ProductDetails = () => {
       <div className="flex flex-col gap-6">
         <Card>
           <CardBody className="flex flex-col gap-4">
-            <Select />
+            <Select
+              defaultSelectedKeys={['enabled']}
+              label="State"
+              options={[
+                { label: 'Enabled', value: 'enabled' },
+                { label: 'Disabled', value: 'disabled' }
+              ]}
+            />
           </CardBody>
         </Card>
 
         <Card>
           <CardBody className="flex flex-col gap-4">
-            <Input
+            <Select
               label="Collections"
-              labelPlacement="outside"
-              placeholder="Search collection"
-              radius="sm"
+              placeholder="Select collections"
+              selectionMode="multiple"
+              options={[
+                { label: 'Clothes', value: 'clothes' },
+                { label: 'Electronics', value: 'electronics' }
+              ]}
             />
             <ul className="flex flex-col gap-4">
               <li className="text-sm font-normal">• Clothes</li>
@@ -105,7 +115,15 @@ export const ProductDetails = () => {
 
         <Card>
           <CardBody className="flex flex-col gap-4">
-            <Input label="Labels" labelPlacement="outside" placeholder="Search label" radius="sm" />
+            <Select
+              label="Labels"
+              placeholder="Select labels"
+              selectionMode="multiple"
+              options={[
+                { label: 'Plants', value: 'plants' },
+                { label: 'Electronics', value: 'electronics' }
+              ]}
+            />
             <ul className="flex flex-col gap-4">
               <li className="text-sm font-normal">
                 <Chip color="success" variant="flat">
