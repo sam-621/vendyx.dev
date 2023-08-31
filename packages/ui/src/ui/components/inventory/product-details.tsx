@@ -4,6 +4,8 @@ import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Checkbox } from '@nextui-org/checkbox'
 import { Chip } from '@nextui-org/chip'
+import { Divider } from '@nextui-org/divider'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 export const ProductDetails = () => {
   return (
@@ -56,18 +58,48 @@ export const ProductDetails = () => {
           <CardBody className="flex flex-col gap-4">
             <Checkbox>This product requires shipping</Checkbox>
             <div className="flex gap-4">
-              <Input label="Hight" placeholder="0 cm" labelPlacement="outside" radius="sm" />
               <Input label="Width" placeholder="0 cm" labelPlacement="outside" radius="sm" />
               <Input label="Weight" placeholder="0 kg" labelPlacement="outside" radius="sm" />
             </div>
           </CardBody>
         </Card>
 
-        <Card>
+        {/* <Card>
           <CardBody className="flex flex-row items-center justify-between">
             <span className="text-xl">Variants</span>
             <Button variant="light" color="primary" className="font-semibold">
               Add Variant
+            </Button>
+          </CardBody>
+        </Card> */}
+        <Card>
+          <CardBody className="flex flex-col gap-4">
+            <span className="text-xl">Variants</span>
+            <div className="flex flex-col gap-4">
+              <Input
+                label="Property name"
+                placeholder="eg. Size"
+                labelPlacement="outside"
+                radius="sm"
+              />
+
+              <Input label="Values" placeholder="eg. L" labelPlacement="outside" radius="sm" />
+              <div className="flex justify-end">
+                <Button color="primary" className="w-fit">
+                  Save
+                </Button>
+              </div>
+            </div>
+            <Divider />
+
+            <Button
+              startContent={<PlusIcon width={20} />}
+              variant="light"
+              color="primary"
+              className="w-fit font-semibold"
+              radius="sm"
+            >
+              Add another option
             </Button>
           </CardBody>
         </Card>
