@@ -1,4 +1,4 @@
-import { Select } from '@/theme/components'
+import { Dropzone, Select } from '@/theme/components'
 import { Card, CardBody } from '@nextui-org/card'
 import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
@@ -15,6 +15,7 @@ export const ProductDetails = () => {
           <CardBody className="flex flex-col gap-4">
             <Input label="Name" placeholder="Black T-shirt" labelPlacement="outside" radius="sm" />
             <Textarea label="Description" labelPlacement="outside" radius="sm" />
+            <Dropzone />
           </CardBody>
         </Card>
 
