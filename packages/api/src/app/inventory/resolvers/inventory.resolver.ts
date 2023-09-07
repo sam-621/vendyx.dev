@@ -1,15 +1,19 @@
-import { PrismaService } from '@/app/shared/services'
 import { Product } from '@/common/types/graphql'
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { InventoryRepository } from '../repositories'
 
 @Resolver('Product')
 export class InventoryResolver {
-  constructor(private prismaService: PrismaService, private repository: InventoryRepository) {}
+  constructor(private repository: InventoryRepository) {}
 
   @Query('products')
   async products() {
     return this.repository.findMany()
+  }
+
+  @Query('product')
+  async product(@Args('id') id: string) {
+    return this.repository.findOne(id)
   }
 
   @ResolveField('variants')
