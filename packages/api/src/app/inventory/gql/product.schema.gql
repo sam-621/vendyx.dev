@@ -19,4 +19,9 @@ input CreateProductInput {
   slug: String!
   description: String
   enabled: Boolean!
+
+  collectionsIds: [ID!]
+  assetsIds: [ID!]
+  labelValuesIds: [ID!]
+  variants: [CreateProductVariantInput!]
 }

@@ -13,11 +13,19 @@ export enum AssetType {
     FILE = "FILE"
 }
 
+export class CreateOptionInput {
+    name: string;
+    values: string[];
+}
+
 export class CreateProductVariantInput {
     price: number;
     sku: string;
-    enabled: boolean;
+    enabled?: Nullable<boolean>;
     stock?: Nullable<number>;
+    product: string;
+    asset?: Nullable<string>;
+    optionValues?: Nullable<CreateOptionInput[]>;
 }
 
 export class CreateProductInput {
@@ -25,6 +33,10 @@ export class CreateProductInput {
     slug: string;
     description?: Nullable<string>;
     enabled: boolean;
+    collectionsIds?: Nullable<string[]>;
+    assetsIds?: Nullable<string[]>;
+    labelValuesIds?: Nullable<string[]>;
+    variants?: Nullable<CreateProductVariantInput[]>;
 }
 
 export class Asset {
@@ -75,19 +87,6 @@ export class Collection {
     labelValues: Nullable<LabelValues>[];
 }
 
-export class ProductVariant {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    price: number;
-    stock: number;
-    sku: string;
-    enabled: boolean;
-    optionValues: Nullable<OptionValues>[];
-    asset?: Nullable<Asset>;
-    product: Product;
-}
-
 export class Option {
     id: string;
     createdAt: Date;
@@ -102,6 +101,19 @@ export class OptionValues {
     updatedAt: Date;
     value: string;
     option: Option;
+}
+
+export class ProductVariant {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    price: number;
+    stock: number;
+    sku: string;
+    enabled: boolean;
+    optionValues: Nullable<OptionValues>[];
+    asset?: Nullable<Asset>;
+    product: Product;
 }
 
 export class Product {

@@ -1,0 +1,22 @@
+type Option {
+  id: String!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+
+  values: [OptionValues]!
+}
+
+type OptionValues {
+  id: String!
+  createdAt: Date!
+  updatedAt: Date!
+  value: String!
+
+  option: Option!
+}
+
+input CreateOptionInput {
+  name: String!
+  values: [String!]!
+}

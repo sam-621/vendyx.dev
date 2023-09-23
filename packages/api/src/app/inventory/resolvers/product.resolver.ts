@@ -1,10 +1,54 @@
-import { Product } from '@/common/types/graphql'
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { CreateProductInput, Product } from '@/common/types/graphql'
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductRepository } from '../repositories'
 
 @Resolver('Product')
 export class ProductResolver {
   constructor(private repository: ProductRepository) {}
+
+  @Mutation('createProduct')
+  async create(@Args('input') input: CreateProductInput) {
+    return this.repository.create({
+      name: input.name,
+      slug: input.slug,
+      description: input.description,
+      enabled: input.enabled
+    })
+    // return this.repository.create({
+    //   name: input.name,
+    //   slug: input.slug,
+    //   description: input.description,
+    //   enabled: input.enabled,
+    //   assets: { create: input.assetsIds.map(id => ({ assetId: id, position: 0 })) },
+    //   collections: { create: input.collectionsIds.map(id => ({ collectionId: id })) },
+    //   labelValues: { create: input.labelValuesIds.map(id => ({ labelValueId: id })) },
+    //   variants: {
+    //     create: input.variants.map(variant => ({
+    //       sku: variant.sku,
+    //       enabled: variant.enabled,
+    //       price: variant.price,
+    //       stock: variant.stock,
+    //       optionValues: {
+    //         create: [
+    //           {
+    //             optionValue: {
+    //               create: {
+    //                 value: '',
+    //                 option: {
+    //                   create: {
+    //                     name: '',
+    //                     product: {}
+    //                   }
+    //                 }
+    //               }
+    //             }
+    //           }
+    //         ]
+    //       }
+    //     }))
+    //   }
+    // })
+  }
 
   @Query('products')
   async products() {

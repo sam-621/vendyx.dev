@@ -152,12 +152,12 @@ model OptionValue {
 }
 
 model OptionValueOnProductVariant {
-  variant     ProductVariant @relation(fields: [variantId], references: [id])
-  variantId   String
-  optionValue OptionValue    @relation(fields: [optionId], references: [id])
-  optionId    String
+  variant       ProductVariant @relation(fields: [variantId], references: [id])
+  variantId     String
+  optionValue   OptionValue    @relation(fields: [optionValueId], references: [id])
+  optionValueId String
 
-  @@id([variantId, optionId])
+  @@id([variantId, optionValueId])
   @@map("option_value_on_product_variant")
 }
 
