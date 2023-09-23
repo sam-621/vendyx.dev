@@ -126,7 +126,7 @@ model Option {
   name      String
 
   // Relations - one to many
-  values OptionValues[]
+  values OptionValue[]
 
   // Relations - many to one
   product   Product @relation(fields: [productId], references: [id])
@@ -135,7 +135,7 @@ model Option {
   @@map("option")
 }
 
-model OptionValues {
+model OptionValue {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -148,13 +148,13 @@ model OptionValues {
   option   Option @relation(fields: [optionId], references: [id])
   optionId String
 
-  @@map("option_values")
+  @@map("option_value")
 }
 
 model OptionValuesOnProductVariant {
   productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
   productVariantId String
-  Option           OptionValues   @relation(fields: [optionId], references: [id])
+  option           OptionValue    @relation(fields: [optionId], references: [id])
   optionId         String
 
   @@id([productVariantId, optionId])
