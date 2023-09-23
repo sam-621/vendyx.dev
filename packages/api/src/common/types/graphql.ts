@@ -13,6 +13,20 @@ export enum AssetType {
     FILE = "FILE"
 }
 
+export class CreateProductInput {
+    name: string;
+    slug: string;
+    description?: Nullable<string>;
+    enabled: boolean;
+}
+
+export class CreateProductVariantInput {
+    price: number;
+    sku: string;
+    enabled: boolean;
+    stock?: Nullable<number>;
+}
+
 export class Asset {
     id: string;
     createdAt: Date;
@@ -107,6 +121,12 @@ export class OptionValues {
     updatedAt: Date;
     value: string;
     option: Option;
+}
+
+export abstract class IMutation {
+    abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
+
+    abstract createProductVariant(input: CreateProductVariantInput): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 }
 
 export class Label {

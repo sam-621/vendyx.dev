@@ -54,3 +54,22 @@ type Query {
   option(id: ID!): Option
   options: [Option]!
 }
+
+input CreateProductInput {
+  name: String!
+  slug: String!
+  description: String
+  enabled: Boolean!
+}
+
+input CreateProductVariantInput {
+  price: Int!
+  sku: String!
+  enabled: Boolean!
+  stock: Int
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product
+  createProductVariant(input: CreateProductVariantInput!): ProductVariant
+}
