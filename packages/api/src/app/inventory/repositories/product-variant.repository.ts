@@ -3,10 +3,15 @@ import { Injectable } from '@nestjs/common'
 import { OptionValue, Product, ProductVariant } from '../inventory'
 import { Asset } from '@/app/asset'
 import { AssetType } from '@/common/types/graphql'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ProductVariantRepository {
   constructor(private prismaService: PrismaService) {}
+
+  async create(input: Prisma.ProductVariantCreateInput): Promise<ProductVariant> {
+    return this.prismaService.productVariant.create({ data: input })
+  }
 
   async findMany(): Promise<ProductVariant[]> {
     return this.prismaService.productVariant.findMany()

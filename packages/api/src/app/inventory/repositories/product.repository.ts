@@ -4,10 +4,15 @@ import { PrismaService } from '@/app/shared/services'
 import { AssetType } from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
 import { LabelValues, Option, Product, ProductVariant } from '../inventory'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ProductRepository {
   constructor(private prismaService: PrismaService) {}
+
+  async create(input: Prisma.ProductCreateInput): Promise<Product> {
+    return this.prismaService.product.create({ data: input })
+  }
 
   async findMany(): Promise<Product[]> {
     return this.prismaService.product.findMany()
