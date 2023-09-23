@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common'
-import { InventoryResolver } from './resolvers'
-import { InventoryRepository } from './repositories'
+import { InventoryResolver, ProductVariantResolver } from './resolvers'
+import { InventoryRepository, ProductVariantRepository } from './repositories'
 
 @Module({
-  providers: [InventoryResolver, InventoryRepository]
+  providers: [
+    InventoryResolver,
+    ProductVariantResolver,
+    InventoryRepository,
+    ProductVariantRepository
+  ]
 })
 export class InventoryModule {}

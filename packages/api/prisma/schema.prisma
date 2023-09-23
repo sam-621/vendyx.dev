@@ -113,7 +113,7 @@ model ProductVariant {
   // Relations - many to one
   asset     Asset?  @relation(fields: [assetId], references: [id])
   assetId   String?
-  Product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   productId String
 
   @@map("product_variant")
@@ -152,7 +152,7 @@ model OptionValues {
 }
 
 model OptionValuesOnProductVariant {
-  ProductVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
   productVariantId String
   Option           OptionValues   @relation(fields: [optionId], references: [id])
   optionId         String
@@ -162,7 +162,7 @@ model OptionValuesOnProductVariant {
 }
 
 model LabelValueOnProduct {
-  Product      Product     @relation(fields: [productId], references: [id])
+  product      Product     @relation(fields: [productId], references: [id])
   productId    String
   labelValue   LabelValues @relation(fields: [labelValueId], references: [id])
   labelValueId String
@@ -172,7 +172,7 @@ model LabelValueOnProduct {
 }
 
 model LabelValueOnCollection {
-  Collection   Collection  @relation(fields: [collectionId], references: [id])
+  collection   Collection  @relation(fields: [collectionId], references: [id])
   collectionId String
   Label        LabelValues @relation(fields: [labelId], references: [id])
   labelId      String
@@ -182,7 +182,7 @@ model LabelValueOnCollection {
 }
 
 model LabelValueOnAsset {
-  Asset   Asset       @relation(fields: [assetId], references: [id])
+  asset   Asset       @relation(fields: [assetId], references: [id])
   assetId String
   Label   LabelValues @relation(fields: [labelId], references: [id])
   labelId String
