@@ -1,17 +1,3 @@
-type Collection {
-  id: String!
-  createdAt: Date!
-  updatedAt: Date!
-  name: String!
-  description: String!
-  slug: String!
-  enabled: Boolean!
-
-  products: [Product]!
-  assets: [Asset]!
-  labelValues: [LabelValues]!
-}
-
 type Query {
   collection(id: ID!): Collection
   collections: [Collection]!

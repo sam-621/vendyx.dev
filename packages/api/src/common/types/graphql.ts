@@ -13,18 +13,18 @@ export enum AssetType {
     FILE = "FILE"
 }
 
-export class CreateProductInput {
-    name: string;
-    slug: string;
-    description?: Nullable<string>;
-    enabled: boolean;
-}
-
 export class CreateProductVariantInput {
     price: number;
     sku: string;
     enabled: boolean;
     stock?: Nullable<number>;
+}
+
+export class CreateProductInput {
+    name: string;
+    slug: string;
+    description?: Nullable<string>;
+    enabled: boolean;
 }
 
 export class Asset {
@@ -79,21 +79,6 @@ export class Collection {
     labelValues: Nullable<LabelValues>[];
 }
 
-export class Product {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    name: string;
-    description: string;
-    slug: string;
-    enabled: boolean;
-    variants: Nullable<ProductVariant>[];
-    collections: Nullable<Collection>[];
-    assets: Nullable<Asset>[];
-    labelValues: Nullable<LabelValues>[];
-    options: Nullable<Option>[];
-}
-
 export class ProductVariant {
     id: string;
     createdAt: Date;
@@ -121,6 +106,21 @@ export class OptionValues {
     updatedAt: Date;
     value: string;
     option: Option;
+}
+
+export class Product {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    description: string;
+    slug: string;
+    enabled: boolean;
+    variants: Nullable<ProductVariant>[];
+    collections: Nullable<Collection>[];
+    assets: Nullable<Asset>[];
+    labelValues: Nullable<LabelValues>[];
+    options: Nullable<Option>[];
 }
 
 export abstract class IMutation {

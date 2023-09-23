@@ -1,0 +1,18 @@
+enum AssetType {
+  IMAGE
+  FILE
+}
+
+type Asset {
+  id: String!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+  source: String!
+  type: AssetType!
+
+  products: [Product]!
+  collections: [Collection]!
+  productVariants: [ProductVariant]
+  labelValues: [LabelValues]!
+}

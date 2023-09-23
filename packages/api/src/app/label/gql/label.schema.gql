@@ -1,0 +1,17 @@
+type Label {
+  id: String!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+
+  values: [LabelValues]!
+}
+
+type LabelValues {
+  id: String!
+  createdAt: Date!
+  updatedAt: Date!
+  value: String!
+
+  label: Label!
+}

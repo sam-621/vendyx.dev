@@ -1,0 +1,22 @@
+type Product {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+  description: String!
+  slug: String!
+  enabled: Boolean!
+
+  variants: [ProductVariant]!
+  collections: [Collection]!
+  assets: [Asset]!
+  labelValues: [LabelValues]!
+  options: [Option]!
+}
+
+input CreateProductInput {
+  name: String!
+  slug: String!
+  description: String
+  enabled: Boolean!
+}

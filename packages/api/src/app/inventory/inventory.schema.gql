@@ -1,0 +1,13 @@
+type Query {
+  product(id: ID!): Product
+  products: [Product]!
+  productVariant(id: ID!): ProductVariant
+  productVariants: [ProductVariant]!
+  option(id: ID!): Option
+  options: [Option]!
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product
+  createProductVariant(input: CreateProductVariantInput!): ProductVariant
+}
