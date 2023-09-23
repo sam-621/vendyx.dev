@@ -1,18 +1,19 @@
 import { PrismaService } from '@/app/shared/services'
-import { Asset, AssetType } from '@/common/types/graphql'
+import { AssetType } from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
+import { Asset } from '../asset'
 
 @Injectable()
 export class AssetRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async findMany(): Promise<AssetWithNoRelations[]> {
+  async findMany(): Promise<Asset[]> {
     const result = await this.prismaService.asset.findMany()
 
     return result.map(r => ({ ...r, type: r.type as AssetType }))
   }
 
-  async findOne(id: string): Promise<AssetWithNoRelations> {
+  async findOne(id: string): Promise<Asset> {
     const result = await this.prismaService.asset.findUnique({ where: { id } })
 
     return {
@@ -21,8 +22,3 @@ export class AssetRepository {
     }
   }
 }
-
-type AssetWithNoRelations = Omit<
-  Asset,
-  'products' | 'collections' | 'productVariants' | 'labelValues'
->

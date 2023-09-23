@@ -1,3 +1,3 @@
 export * from './inventory.repository'
-export * from './options.repository'
+export * from './option.repository'
 export * from './product-variant.repository'
