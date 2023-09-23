@@ -1,10 +1,9 @@
 import { Global, Module } from '@nestjs/common'
-import { PrismaService } from './services'
-import { DateScalar } from './services/date-scalar.service'
+import { DateScalar, IDScalar, PrismaService } from './services'
 
 @Global()
 @Module({
-  providers: [PrismaService, DateScalar],
+  providers: [PrismaService, DateScalar, IDScalar],
   exports: [PrismaService]
 })
 export class SharedModule {}
