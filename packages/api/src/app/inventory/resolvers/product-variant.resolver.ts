@@ -6,7 +6,7 @@ import { ProductVariant } from '../inventory'
 export class ProductVariantResolver {
   constructor(private repository: ProductVariantRepository) {}
 
-  @Query('productVariants')
+  @Query('variants')
   async variants() {
     return this.repository.findMany()
   }
@@ -21,18 +21,8 @@ export class ProductVariantResolver {
     return this.repository.findAssetsOnVariant(variant.id)
   }
 
-  // @ResolveField('assets')
-  // async assets(@Parent() product: Product) {
-  //   return this.repository.getAssetsOnProduct(product.id)
-  // }
-
-  // @ResolveField('labelValues')
-  // async labelValues(@Parent() product: Product) {
-  //   return this.repository.getLabelValuesOnProduct(product.id)
-  // }
-
-  // @ResolveField('options')
-  // async options(@Parent() product: Product) {
-  //   return this.repository.getOptionsOnProduct(product.id)
-  // }
+  @ResolveField('optionValues')
+  async optionValues(@Parent() variant: ProductVariant) {
+    return this.repository.findOptionValuesOnVariant(variant.id)
+  }
 }

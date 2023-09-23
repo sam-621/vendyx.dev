@@ -1,8 +1,8 @@
 type Query {
   product(id: ID!): Product
   products: [Product]!
-  productVariant(id: ID!): ProductVariant
-  productVariants: [ProductVariant]!
+  variant(id: ID!): ProductVariant
+  variants: [ProductVariant]!
   option(id: ID!): Option
   options: [Option]!
 }

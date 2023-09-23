@@ -1,6 +1,6 @@
 import { PrismaService } from '@/app/shared/services'
 import { Injectable } from '@nestjs/common'
-import { Product, ProductVariant } from '../inventory'
+import { OptionValue, Product, ProductVariant } from '../inventory'
 import { Asset } from '@/app/asset'
 import { AssetType } from '@/common/types/graphql'
 
@@ -35,5 +35,14 @@ export class ProductVariantRepository {
       ...result.asset,
       type: result.asset.type as AssetType
     }
+  }
+
+  async findOptionValuesOnVariant(variantId: string): Promise<OptionValue[]> {
+    const result = await this.prismaService.optionValueOnProductVariant.findMany({
+      where: { variantId: variantId },
+      include: { optionValue: true }
+    })
+
+    return result.map(r => r.optionValue)
   }
 }

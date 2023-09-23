@@ -2,7 +2,8 @@ import {
   LabelValues as ApiLabelValues,
   Option as ApiOption,
   Product as ApiProduct,
-  ProductVariant as ApiProductVariant
+  ProductVariant as ApiProductVariant,
+  OptionValues as ApiOptionValues
 } from '@/common/types/graphql'
 
 export type Product = Omit<
@@ -13,5 +14,7 @@ export type Product = Omit<
 export type LabelValues = Omit<ApiLabelValues, 'label'>
 
 export type Option = Omit<ApiOption, 'values'>
+
+export type OptionValue = Omit<ApiOptionValues, 'option'>
 
 export type ProductVariant = Omit<ApiProductVariant, 'optionValues' | 'asset' | 'product'>
