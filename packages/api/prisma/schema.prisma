@@ -25,11 +25,11 @@ model Product {
   enabled     Boolean  @default(false)
 
   // Relations - one to many
-  productVariants ProductVariant[]
-  assets          AssetOnProduct[]
-  collections     ProductOnCollection[]
-  labelValues     LabelValueOnProduct[]
-  options         Option[]
+  variants    ProductVariant[]
+  assets      AssetOnProduct[]
+  collections ProductOnCollection[]
+  labelValues LabelValueOnProduct[]
+  options     Option[]
 
   @@map("product")
 }
@@ -60,10 +60,10 @@ model Asset {
   type      AssetType @default(IMAGE)
 
   // Relations - one to many
-  products        AssetOnProduct[]
-  collections     AssetOnCollection[]
-  productVariants ProductVariant[]
-  labelValues     LabelValueOnAsset[]
+  products    AssetOnProduct[]
+  collections AssetOnCollection[]
+  variants    ProductVariant[]
+  labelValues LabelValueOnAsset[]
 
   @@map("asset")
 }
@@ -142,7 +142,7 @@ model OptionValue {
   value     String
 
   // Relations - one to many
-  productVariants OptionValueOnProductVariant[]
+  variants OptionValueOnProductVariant[]
 
   // Relations - many to one
   option   Option @relation(fields: [optionId], references: [id])
@@ -152,12 +152,12 @@ model OptionValue {
 }
 
 model OptionValueOnProductVariant {
-  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
-  productVariantId String
-  option           OptionValue    @relation(fields: [optionId], references: [id])
-  optionId         String
+  variant   ProductVariant @relation(fields: [variantId], references: [id])
+  variantId String
+  option    OptionValue    @relation(fields: [optionId], references: [id])
+  optionId  String
 
-  @@id([productVariantId, optionId])
+  @@id([variantId, optionId])
   @@map("option_value_on_product_variant")
 }
 
