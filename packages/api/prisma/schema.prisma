@@ -75,12 +75,12 @@ model Label {
   name      String
 
   // Relations - one to many
-  values LabelValues[]
+  values LabelValue[]
 
   @@map("label")
 }
 
-model LabelValues {
+model LabelValue {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -95,7 +95,7 @@ model LabelValues {
   label   Label  @relation(fields: [labelId], references: [id])
   labelId String
 
-  @@map("label_values")
+  @@map("label_value")
 }
 
 model ProductVariant {
@@ -108,7 +108,7 @@ model ProductVariant {
   enabled   Boolean  @default(false)
 
   // Relations - one to many
-  optionValues OptionValuesOnProductVariant[]
+  optionValues OptionValueOnProductVariant[]
 
   // Relations - many to one
   asset     Asset?  @relation(fields: [assetId], references: [id])
@@ -142,7 +142,7 @@ model OptionValue {
   value     String
 
   // Relations - one to many
-  productVariant OptionValuesOnProductVariant[]
+  productVariants OptionValueOnProductVariant[]
 
   // Relations - many to one
   option   Option @relation(fields: [optionId], references: [id])
@@ -151,44 +151,44 @@ model OptionValue {
   @@map("option_value")
 }
 
-model OptionValuesOnProductVariant {
+model OptionValueOnProductVariant {
   productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
   productVariantId String
   option           OptionValue    @relation(fields: [optionId], references: [id])
   optionId         String
 
   @@id([productVariantId, optionId])
-  @@map("option_values_on_product_variant")
+  @@map("option_value_on_product_variant")
 }
 
 model LabelValueOnProduct {
-  product      Product     @relation(fields: [productId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
   productId    String
-  labelValue   LabelValues @relation(fields: [labelValueId], references: [id])
+  labelValue   LabelValue @relation(fields: [labelValueId], references: [id])
   labelValueId String
 
   @@id([productId, labelValueId])
-  @@map("label_on_product")
+  @@map("label_value_on_product")
 }
 
 model LabelValueOnCollection {
-  collection   Collection  @relation(fields: [collectionId], references: [id])
+  collection   Collection @relation(fields: [collectionId], references: [id])
   collectionId String
-  Label        LabelValues @relation(fields: [labelId], references: [id])
+  Label        LabelValue @relation(fields: [labelId], references: [id])
   labelId      String
 
   @@id([collectionId, labelId])
-  @@map("label_on_collection")
+  @@map("label_value_on_collection")
 }
 
 model LabelValueOnAsset {
-  asset   Asset       @relation(fields: [assetId], references: [id])
+  asset   Asset      @relation(fields: [assetId], references: [id])
   assetId String
-  Label   LabelValues @relation(fields: [labelId], references: [id])
+  Label   LabelValue @relation(fields: [labelId], references: [id])
   labelId String
 
   @@id([assetId, labelId])
-  @@map("label_on_asset")
+  @@map("label_value_on_asset")
 }
 
 model ProductOnCollection {
