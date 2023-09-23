@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common'
 import { LabelValues, Option, Product, ProductVariant } from '../inventory'
 
 @Injectable()
-export class InventoryRepository {
+export class ProductRepository {
   constructor(private prismaService: PrismaService) {}
 
   async findMany(): Promise<Product[]> {

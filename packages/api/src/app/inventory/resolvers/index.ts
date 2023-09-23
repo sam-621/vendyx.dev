@@ -1,2 +1,2 @@
-export * from './inventory.resolver'
+export * from './product.resolver'
 export * from './product-variant.resolver'

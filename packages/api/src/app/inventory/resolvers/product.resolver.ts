@@ -1,10 +1,10 @@
 import { Product } from '@/common/types/graphql'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { InventoryRepository } from '../repositories'
+import { ProductRepository } from '../repositories'
 
 @Resolver('Product')
-export class InventoryResolver {
-  constructor(private repository: InventoryRepository) {}
+export class ProductResolver {
+  constructor(private repository: ProductRepository) {}
 
   @Query('products')
   async products() {
