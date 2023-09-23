@@ -3,8 +3,6 @@ type Query {
   products: [Product]!
   variant(id: ID!): ProductVariant
   variants: [ProductVariant]!
-  option(id: ID!): Option
-  options: [Option]!
 }
 
 type Mutation {

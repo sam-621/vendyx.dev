@@ -57,10 +57,6 @@ export abstract class IQuery {
 
     abstract variants(): Nullable<ProductVariant>[] | Promise<Nullable<ProductVariant>[]>;
 
-    abstract option(id: string): Nullable<Option> | Promise<Nullable<Option>>;
-
-    abstract options(): Nullable<Option>[] | Promise<Nullable<Option>[]>;
-
     abstract label(id: string): Nullable<Label> | Promise<Nullable<Label>>;
 
     abstract labels(): Nullable<Label>[] | Promise<Nullable<Label>[]>;
