@@ -10,7 +10,7 @@ export class LabelRepository {
     return this.prismaService.label.findMany()
   }
 
-  async findOne(id: string): Promise<LabelWithNoRelations> {
+  async findOne(id: string): Promise<LabelWithNoRelations | null> {
     return this.prismaService.label.findUnique({ where: { id } })
   }
 }

@@ -14,11 +14,15 @@ export class ProductRepository {
     return this.prismaService.product.create({ data: input })
   }
 
+  async update(id: string, input: Prisma.ProductUpdateInput): Promise<Product> {
+    return this.prismaService.product.update({ data: input, where: { id: id } })
+  }
+
   async findMany(): Promise<Product[]> {
     return this.prismaService.product.findMany()
   }
 
-  async findOne(id: string): Promise<Product> {
+  async findOne(id: string): Promise<Product | null> {
     return this.prismaService.product.findUnique({ where: { id } })
   }
 

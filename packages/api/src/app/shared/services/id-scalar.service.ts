@@ -17,6 +17,6 @@ export class IDScalar implements CustomScalar<string, string> {
     if (ast.kind === Kind.INT) {
       return String(ast.value)
     }
-    return null
+    return ''
   }
 }

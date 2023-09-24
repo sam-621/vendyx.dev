@@ -10,7 +10,7 @@ export class CollectionRepository {
     return this.prismaService.collection.findMany()
   }
 
-  async findOne(id: string): Promise<Collection> {
+  async findOne(id: string): Promise<Collection | null> {
     return this.prismaService.collection.findUnique({ where: { id } })
   }
 }

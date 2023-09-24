@@ -25,14 +25,14 @@ export class CreateProductVariantInput {
     stock?: Nullable<number>;
     product: string;
     asset?: Nullable<string>;
-    optionValues?: Nullable<CreateOptionInput[]>;
+    optionValues?: Nullable<CreateOptionInput>;
 }
 
 export class CreateProductInput {
     name: string;
     slug: string;
     description?: Nullable<string>;
-    enabled: boolean;
+    enabled?: Nullable<boolean>;
     collectionsIds?: Nullable<string[]>;
     assetsIds?: Nullable<string[]>;
     labelValuesIds?: Nullable<string[]>;
@@ -68,6 +68,12 @@ export abstract class IQuery {
     abstract variant(id: string): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 
     abstract variants(): Nullable<ProductVariant>[] | Promise<Nullable<ProductVariant>[]>;
+
+    abstract option(id: string): Nullable<Option> | Promise<Nullable<Option>>;
+
+    abstract options(): Nullable<Option>[] | Promise<Nullable<Option>[]>;
+
+    abstract optionValues(): Nullable<OptionValues>[] | Promise<Nullable<OptionValues>[]>;
 
     abstract label(id: string): Nullable<Label> | Promise<Nullable<Label>>;
 

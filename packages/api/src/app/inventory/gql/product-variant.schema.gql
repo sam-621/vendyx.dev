@@ -20,5 +20,5 @@ input CreateProductVariantInput {
 
   product: ID!
   asset: ID
-  optionValues: [CreateOptionInput!]
+  optionValues: CreateOptionInput
 }

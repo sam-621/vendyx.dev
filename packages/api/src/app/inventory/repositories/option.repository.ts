@@ -1,6 +1,6 @@
 import { PrismaService } from '@/app/shared/services'
 import { Injectable } from '@nestjs/common'
-import { Option } from '../inventory'
+import { Option, OptionValue } from '../inventory'
 
 @Injectable()
 export class OptionRepository {
@@ -10,7 +10,19 @@ export class OptionRepository {
     return this.prismaService.option.findMany()
   }
 
-  async findOne(id: string): Promise<Option> {
+  async findOne(id: string): Promise<Option | null> {
     return this.prismaService.option.findUnique({ where: { id } })
+  }
+
+  async findOptionValuesOnOption(optionId: string): Promise<OptionValue[]> {
+    const r = await this.prismaService.optionValue.findMany({
+      where: { optionId }
+    })
+
+    console.log({
+      r
+    })
+
+    return r
   }
 }

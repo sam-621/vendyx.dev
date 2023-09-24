@@ -18,7 +18,7 @@ input CreateProductInput {
   name: String!
   slug: String!
   description: String
-  enabled: Boolean!
+  enabled: Boolean
 
   collectionsIds: [ID!]
   assetsIds: [ID!]

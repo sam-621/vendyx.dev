@@ -13,8 +13,10 @@ export class AssetRepository {
     return result.map(r => ({ ...r, type: r.type as AssetType }))
   }
 
-  async findOne(id: string): Promise<Asset> {
+  async findOne(id: string): Promise<Asset | null> {
     const result = await this.prismaService.asset.findUnique({ where: { id } })
+
+    if (!result) return null
 
     return {
       ...result,
