@@ -120,10 +120,11 @@ model ProductVariant {
 }
 
 model Option {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  name           String
+  name_productId String   @unique()
 
   // Relations - one to many
   values OptionValue[]

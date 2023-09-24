@@ -20,7 +20,7 @@ export class OptionRepository {
     })
 
     console.log({
-      r
+      valueoptions: r
     })
 
     return r

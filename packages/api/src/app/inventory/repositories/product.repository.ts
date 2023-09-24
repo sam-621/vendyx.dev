@@ -58,6 +58,10 @@ export class ProductRepository {
       where: { productId: id }
     })
 
+    console.log({
+      options: await this.prismaService.option.findMany({})
+    })
+
     return result
   }
 
