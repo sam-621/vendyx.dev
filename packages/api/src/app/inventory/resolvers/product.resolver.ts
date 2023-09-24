@@ -12,42 +12,11 @@ export class ProductResolver {
       name: input.name,
       slug: input.slug,
       description: input.description,
-      enabled: input.enabled
+      enabled: input.enabled,
+      assets: { create: input.assetsIds.map(id => ({ assetId: id, position: 0 })) },
+      collections: { create: input.collectionsIds.map(id => ({ collectionId: id })) },
+      labelValues: { create: input.labelValuesIds.map(id => ({ labelValueId: id })) }
     })
-    // return this.repository.create({
-    //   name: input.name,
-    //   slug: input.slug,
-    //   description: input.description,
-    //   enabled: input.enabled,
-    //   assets: { create: input.assetsIds.map(id => ({ assetId: id, position: 0 })) },
-    //   collections: { create: input.collectionsIds.map(id => ({ collectionId: id })) },
-    //   labelValues: { create: input.labelValuesIds.map(id => ({ labelValueId: id })) },
-    //   variants: {
-    //     create: input.variants.map(variant => ({
-    //       sku: variant.sku,
-    //       enabled: variant.enabled,
-    //       price: variant.price,
-    //       stock: variant.stock,
-    //       optionValues: {
-    //         create: [
-    //           {
-    //             optionValue: {
-    //               create: {
-    //                 value: '',
-    //                 option: {
-    //                   create: {
-    //                     name: '',
-    //                     product: {}
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         ]
-    //       }
-    //     }))
-    //   }
-    // })
   }
 
   @Query('products')
