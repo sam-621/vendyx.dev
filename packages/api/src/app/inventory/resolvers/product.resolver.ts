@@ -1,71 +1,15 @@
 import { CreateProductInput, Product } from '@/common/types/graphql'
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductRepository } from '../repositories'
+import { ProductService } from '../services/product.service'
 
 @Resolver('Product')
 export class ProductResolver {
-  constructor(private repository: ProductRepository) {}
+  constructor(private repository: ProductRepository, private productService: ProductService) {}
 
   @Mutation('createProduct')
   async create(@Args('input') input: CreateProductInput) {
-    const variantsHasOptions = input.variants?.find(v => v.optionValues)
-
-    const product = await this.repository.create({
-      name: input.name,
-      slug: input.slug,
-      description: input.description ?? undefined,
-      enabled: input.enabled ?? undefined,
-      assets: { create: input.assetsIds?.map(id => ({ assetId: id, position: 0 })) },
-      collections: { create: input.collectionsIds?.map(id => ({ collectionId: id })) },
-      labelValues: { create: input.labelValuesIds?.map(id => ({ labelValueId: id })) },
-      ...(!variantsHasOptions && {
-        variants: {
-          create:
-            input.variants?.map(v => ({
-              sku: v.sku,
-              price: v.price,
-              enabled: v.enabled ?? undefined,
-              stock: v.stock ?? undefined
-            })) ?? []
-        }
-      })
-    })
-
-    if (!variantsHasOptions) return product
-
-    return await this.repository.update(product.id, {
-      variants: {
-        create: input.variants?.map(v => {
-          return {
-            sku: v.sku,
-            price: v.price,
-            stock: v.stock ?? undefined,
-            enabled: v.enabled ?? undefined,
-            optionValues: {
-              create: v.optionValues.map(opt => ({
-                optionValue: {
-                  create: {
-                    value: opt.value,
-                    option: {
-                      connectOrCreate: {
-                        where: {
-                          name_productId: opt.name + product.id
-                        },
-                        create: {
-                          name_productId: opt.name + product.id,
-                          name: opt.name,
-                          productId: product.id
-                        }
-                      }
-                    }
-                  }
-                }
-              }))
-            }
-          }
-        })
-      }
-    })
+    return this.productService.createProduct(input)
   }
 
   @Query('products')
