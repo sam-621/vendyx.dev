@@ -2,37 +2,34 @@ import {
   ChartBarIcon as ChartBarIconOutline,
   RectangleStackIcon as RectangleStackIconOutline,
   RectangleGroupIcon as RectangleGroupIconOutline,
-  PhotoIcon as PhotoIconOutline,
-  TagIcon as TagIconOutline,
   InboxIcon as InboxIconOutline,
   UserIcon as UserIconOutline,
   CheckBadgeIcon as CheckBadgeIconOutline,
   TruckIcon as TruckIconOutline,
-  CreditCardIcon as CreditCardIconOutline,
-  ReceiptPercentIcon as ReceiptPercentIconOutline
+  CreditCardIcon as CreditCardIconOutline
 } from '@heroicons/react/24/outline'
 import {
   ChartBarIcon as ChartBarIconSolid,
   RectangleStackIcon as RectangleStackIconSolid,
   RectangleGroupIcon as RectangleGroupIconSolid,
-  PhotoIcon as PhotoIconSolid,
-  TagIcon as TagIconSolid,
   InboxIcon as InboxIconSolid,
   UserIcon as UserIconSolid,
   CheckBadgeIcon as CheckBadgeIconSolid,
   TruckIcon as TruckIconSolid,
-  CreditCardIcon as CreditCardIconSolid,
-  ReceiptPercentIcon as ReceiptPercentIconSolid
+  CreditCardIcon as CreditCardIconSolid
 } from '@heroicons/react/24/solid'
 import { SidebarMenuItem } from '../items'
 import type { Menu } from '@/core/shared/types'
 import { Divider } from '@nextui-org/divider'
+import { type Dictionary, getDictionary } from '@/core/shared/lang'
 
-export const SidebarMenu = () => {
+export const SidebarMenu = async () => {
+  const d = await getDictionary('es') // en
+
   return (
     <aside className="col-span-2">
       <ul className="flex flex-col gap-6">
-        {MENU.map(m => (
+        {MENU(d).map(m => (
           <>
             {m.isDivision ? (
               <Divider />
@@ -52,54 +49,54 @@ export const SidebarMenu = () => {
   )
 }
 
-const MENU: Menu[] = [
+const MENU = (d: Dictionary): Menu[] => [
   {
-    text: 'Dashboard',
+    text: d.modules.dashboard,
     href: '/',
     outlineIcon: <ChartBarIconOutline width={24} className="text-default-500" />,
     solidIcon: <ChartBarIconSolid width={24} className="text-primary-500" />
   },
   {
-    text: 'Inventory',
+    text: d.modules.inventory,
     href: '/inventory',
     outlineIcon: <RectangleStackIconOutline width={24} className="text-default-500" />,
     solidIcon: <RectangleStackIconSolid width={24} className="text-primary-500" />
   },
   {
-    text: 'Collections',
+    text: d.modules.collections,
     href: '/collections',
     outlineIcon: <RectangleGroupIconOutline width={24} className="text-default-500" />,
     solidIcon: <RectangleGroupIconSolid width={24} className="text-primary-500" />
   },
-  {
-    text: 'Assets',
-    href: '/assets',
-    outlineIcon: <PhotoIconOutline width={24} className="text-default-500" />,
-    solidIcon: <PhotoIconSolid width={24} className="text-primary-500" />
-  },
-  {
-    text: 'Labels',
-    href: '/labels',
-    outlineIcon: <TagIconOutline width={24} className="text-default-500" />,
-    solidIcon: <TagIconSolid width={24} className="text-primary-500" />
-  },
+  // {
+  //   text: d.modules.,
+  //   href: '/assets',
+  //   outlineIcon: <PhotoIconOutline width={24} className="text-default-500" />,
+  //   solidIcon: <PhotoIconSolid width={24} className="text-primary-500" />
+  // },
+  // {
+  //   text: d.modules.,
+  //   href: '/labels',
+  //   outlineIcon: <TagIconOutline width={24} className="text-default-500" />,
+  //   solidIcon: <TagIconSolid width={24} className="text-primary-500" />
+  // },
   {
     isDivision: true
   },
   {
-    text: 'Orders',
+    text: d.modules.orders,
     href: '/orders',
     outlineIcon: <InboxIconOutline width={24} className="text-default-500" />,
     solidIcon: <InboxIconSolid width={24} className="text-primary-500" />
   },
   {
-    text: 'Customers',
+    text: d.modules.customers,
     href: '/customers',
     outlineIcon: <UserIconOutline width={24} className="text-default-500" />,
     solidIcon: <UserIconSolid width={24} className="text-primary-500" />
   },
   {
-    text: 'Promotions',
+    text: d.modules.promotions,
     href: '/promotions',
     outlineIcon: <CheckBadgeIconOutline width={24} className="text-default-500" />,
     solidIcon: <CheckBadgeIconSolid width={24} className="text-primary-500" />
@@ -108,21 +105,21 @@ const MENU: Menu[] = [
     isDivision: true
   },
   {
-    text: 'Shipments',
+    text: d.modules.shipments,
     href: '/shipments',
     outlineIcon: <TruckIconOutline width={24} className="text-default-500" />,
     solidIcon: <TruckIconSolid width={24} className="text-primary-500" />
   },
   {
-    text: 'Payments',
+    text: d.modules.payments,
     href: '/payments',
     outlineIcon: <CreditCardIconOutline width={24} className="text-default-500" />,
     solidIcon: <CreditCardIconSolid width={24} className="text-primary-500" />
-  },
-  {
-    text: 'Taxes',
-    href: '/taxes',
-    outlineIcon: <ReceiptPercentIconOutline width={24} className="text-default-500" />,
-    solidIcon: <ReceiptPercentIconSolid width={24} className="text-primary-500" />
   }
+  // {
+  //   text: d.modules.,
+  //   href: '/taxes',
+  //   outlineIcon: <ReceiptPercentIconOutline width={24} className="text-default-500" />,
+  //   solidIcon: <ReceiptPercentIconSolid width={24} className="text-primary-500" />
+  // }
 ]

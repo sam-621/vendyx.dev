@@ -1,0 +1,12 @@
+{
+  "modules": {
+    "dashboard": "Panel",
+    "inventory": "Inventario",
+    "collections": "Colecciones",
+    "orders": "Ordenes",
+    "customers": "Clientes",
+    "promotions": "Promociones",
+    "shipments": "Envíos",
+    "payments": "Pagos"
+  }
+}

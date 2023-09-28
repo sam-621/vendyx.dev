@@ -1,0 +1,31 @@
+{
+  "modules": {
+    "dashboard": "Panel",
+    "inventory": "Inventario",
+    "collections": "Colecciones",
+    "orders": "Ordenes",
+    "customers": "Clientes",
+    "promotions": "Promociones",
+    "shipments": "Envíos",
+    "payments": "Pagos"
+  },
+  "collections": {
+    "select-collections": "Selecciona colecciones"
+  },
+  "common": {
+    "state": "Estado"
+  },
+  "form": {
+    "name": "Nombre",
+    "description": "Descripción",
+    "price": "Precio",
+    "offer-price": "Precio de oferta",
+    "cost-per-product": "Costo por producto",
+    "revenue": "Ganancia",
+    "weight": "Peso",
+
+
+    "margin": "Margen",
+    "requires-shipping": "Este producto requiere envío"
+  }
+}
