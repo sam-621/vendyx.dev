@@ -11,5 +11,5 @@ type Query {
 
 type Mutation {
   createProduct(input: CreateProductInput!): Product
-  createProductVariant(productId: ID!, input: CreateProductVariantInput!): ProductVariant
+  createProductVariant(productId: ID!, input: [CreateProductVariantInput!]): ProductVariant
 }

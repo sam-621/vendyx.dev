@@ -144,7 +144,7 @@ export class Product {
 export abstract class IMutation {
     abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
 
-    abstract createProductVariant(productId: string, input: CreateProductVariantInput): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
+    abstract createProductVariant(productId: string, input?: Nullable<CreateProductVariantInput[]>): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 }
 
 export class Label {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { ProductRepository } from '../repositories'
-import { CreateProductInput } from '@/common/types/graphql'
+import { CreateProductInput, CreateProductVariantInput } from '@/common/types/graphql'
 
 @Injectable()
 export class ProductService {
@@ -32,9 +32,13 @@ export class ProductService {
 
     if (!variantsHasOptions) return product
 
-    return await this.repository.update(product.id, {
+    return await this.createVariant(product.id, input.variants ?? [])
+  }
+
+  async createVariant(productId: string, input: CreateProductVariantInput[]) {
+    return await this.repository.update(productId, {
       variants: {
-        create: input.variants?.map(v => {
+        create: input?.map(v => {
           return {
             sku: v.sku,
             price: v.price,
@@ -48,12 +52,12 @@ export class ProductService {
                     option: {
                       connectOrCreate: {
                         where: {
-                          name_productId: (opt?.name ?? '') + product.id
+                          name_productId: (opt?.name ?? '') + productId
                         },
                         create: {
-                          name_productId: (opt?.name ?? '') + product.id,
+                          name_productId: (opt?.name ?? '') + productId,
                           name: opt?.name ?? '',
-                          productId: product.id
+                          productId: productId
                         }
                       }
                     }
