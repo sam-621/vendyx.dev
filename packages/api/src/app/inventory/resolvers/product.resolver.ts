@@ -9,7 +9,9 @@ export class ProductResolver {
 
   @Mutation('createProduct')
   async create(@Args('input') input: CreateProductInput) {
-    return this.productService.createProduct(input)
+    const { data } = await this.productService.createProduct(input)
+
+    return data
   }
 
   @Query('products')
