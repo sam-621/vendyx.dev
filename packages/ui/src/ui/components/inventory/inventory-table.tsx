@@ -32,7 +32,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
                 <User
                   avatarProps={{
                     radius: 'sm',
-                    src: data.assets[0].source
+                    src: data.assets[0]?.source
                   }}
                   name={data.name}
                 />
@@ -43,12 +43,12 @@ export const InventoryTable: FC<Props> = ({ products }) => {
         {
           name: 'Price',
           field: 'price',
-          render: data => <span>{`$ ${data.variants[0].price}`}</span>
+          render: data => <span>{`$ ${data.variants[0]?.price ?? 0}`}</span>
         },
         {
           name: 'Stock',
           field: 'variants.stock',
-          render: data => <span>{data.variants[0].stock}</span>
+          render: data => <span>{data.variants[0]?.stock}</span>
         },
         {
           name: 'Variants',
@@ -59,7 +59,11 @@ export const InventoryTable: FC<Props> = ({ products }) => {
           name: 'Status',
           field: 'enabled',
           render: data => (
-            <Chip className="capitalize" color="success" variant="flat">
+            <Chip
+              className="capitalize"
+              color={data.enabled ? 'success' : 'default'}
+              variant="flat"
+            >
               {data.enabled ? 'Enabled' : 'Disabled'}
             </Chip>
           )

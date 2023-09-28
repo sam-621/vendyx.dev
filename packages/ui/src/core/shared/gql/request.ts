@@ -1,9 +1,10 @@
+const IS_DEV = process.env.NODE_ENV === 'development'
 export const gqlRequest: GqlRequest = async ({
   query,
   variables,
   tags,
   headers,
-  cache = 'force-cache'
+  cache = IS_DEV ? 'no-cache' : 'force-cache'
 }) => {
   const result = await fetch('http://localhost:5000/graphql', {
     method: 'POST',
