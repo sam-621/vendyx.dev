@@ -3,9 +3,6 @@ import { Card, CardBody } from '@nextui-org/card'
 import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Checkbox } from '@nextui-org/checkbox'
-import { Chip } from '@nextui-org/chip'
-import { Divider } from '@nextui-org/divider'
-import { PlusIcon } from '@heroicons/react/24/outline'
 
 export const ProductDetails = () => {
   return (
@@ -65,6 +62,8 @@ export const ProductDetails = () => {
           </CardBody>
         </Card>
 
+        {/* Variants */}
+
         {/* <Card>
           <CardBody className="flex flex-row items-center justify-between">
             <span className="text-xl">Variants</span>
@@ -73,9 +72,10 @@ export const ProductDetails = () => {
             </Button>
           </CardBody>
         </Card> */}
-        <Card>
+
+        {/* <Card>
           <CardBody className="flex flex-col gap-4">
-            <span className="text-xl">Variants</span>
+            <h3 className="text-xl">Variants</h3>
             <div className="flex flex-col gap-4">
               <Input
                 label="Property name"
@@ -103,7 +103,7 @@ export const ProductDetails = () => {
               Add another option
             </Button>
           </CardBody>
-        </Card>
+        </Card> */}
 
         <Card>
           <CardBody className="flex flex-col gap-4">
@@ -146,7 +146,8 @@ export const ProductDetails = () => {
           </CardBody>
         </Card>
 
-        <Card>
+        {/* Labels */}
+        {/* <Card>
           <CardBody className="flex flex-col gap-4">
             <Select
               label="Labels"
@@ -170,7 +171,7 @@ export const ProductDetails = () => {
               </li>
             </ul>
           </CardBody>
-        </Card>
+        </Card> */}
       </div>
     </section>
   )
