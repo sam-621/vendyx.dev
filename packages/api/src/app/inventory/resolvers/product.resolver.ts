@@ -1,7 +1,6 @@
-import { CreateProductInput, OptionValues, Product } from '@/common/types/graphql'
+import { CreateProductInput, Product } from '@/common/types/graphql'
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductRepository } from '../repositories'
-import { randomUUID } from 'crypto'
 
 @Resolver('Product')
 export class ProductResolver {
@@ -34,42 +33,6 @@ export class ProductResolver {
 
     if (!variantsHasOptions) return product
 
-    // return await this.repository.update(product.id, {
-    //   variants: {
-    //     create: input.variants?.map(v => {
-    //       return {
-    //         sku: v.sku,
-    //         price: v.price,
-    //         stock: v.stock ?? undefined,
-    //         enabled: v.enabled ?? undefined,
-    //         optionValues: {
-    //           create: [
-    //             {
-    //               optionValue: {
-    //                 create: {
-    //                   value: 'value',
-    //                   option: {
-    //                     connectOrCreate: {
-    //                       where: {
-    //                         name_productId: v.optionValues?.name ?? '' + product.id
-    //                       },
-    //                       create: {
-    //                         name_productId: v.optionValues?.name ?? '' + product.id,
-    //                         name: v.optionValues?.name ?? '',
-    //                         productId: product.id
-    //                       }
-    //                     }
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           ]
-    //         }
-    //       }
-    //     })
-    //   }
-    // })
-
     return await this.repository.update(product.id, {
       variants: {
         create: input.variants?.map(v => {
@@ -79,18 +42,18 @@ export class ProductResolver {
             stock: v.stock ?? undefined,
             enabled: v.enabled ?? undefined,
             optionValues: {
-              create: v.optionValues?.values.map(value => ({
+              create: v.optionValues.map(opt => ({
                 optionValue: {
                   create: {
-                    value: value,
+                    value: opt.value,
                     option: {
                       connectOrCreate: {
                         where: {
-                          name_productId: (v.optionValues?.name ?? '') + product.id
+                          name_productId: opt.name + product.id
                         },
                         create: {
-                          name_productId: (v.optionValues?.name ?? '') + product.id,
-                          name: v.optionValues?.name ?? '',
+                          name_productId: opt.name + product.id,
+                          name: opt.name,
                           productId: product.id
                         }
                       }

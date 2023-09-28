@@ -28,6 +28,21 @@ export class CreateProductVariantInput {
     optionValues?: Nullable<CreateOptionInput>;
 }
 
+export class CreateOptionInVariantInput {
+    name: string;
+    value: string;
+}
+
+export class CreateVariantInProductInput {
+    price: number;
+    sku: string;
+    enabled?: Nullable<boolean>;
+    stock?: Nullable<number>;
+    product: string;
+    asset?: Nullable<string>;
+    optionValues: CreateOptionInVariantInput[];
+}
+
 export class CreateProductInput {
     name: string;
     slug: string;
@@ -36,7 +51,7 @@ export class CreateProductInput {
     collectionsIds?: Nullable<string[]>;
     assetsIds?: Nullable<string[]>;
     labelValuesIds?: Nullable<string[]>;
-    variants?: Nullable<CreateProductVariantInput[]>;
+    variants?: Nullable<CreateVariantInProductInput[]>;
 }
 
 export class Asset {
