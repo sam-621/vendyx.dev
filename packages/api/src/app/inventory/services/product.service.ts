@@ -41,18 +41,18 @@ export class ProductService {
             stock: v.stock ?? undefined,
             enabled: v.enabled ?? undefined,
             optionValues: {
-              create: v.optionValues.map(opt => ({
+              create: v.optionValues?.map(opt => ({
                 optionValue: {
                   create: {
-                    value: opt.value,
+                    value: opt?.value ?? '',
                     option: {
                       connectOrCreate: {
                         where: {
-                          name_productId: opt.name + product.id
+                          name_productId: (opt?.name ?? '') + product.id
                         },
                         create: {
-                          name_productId: opt.name + product.id,
-                          name: opt.name,
+                          name_productId: (opt?.name ?? '') + product.id,
+                          name: opt?.name ?? '',
                           productId: product.id
                         }
                       }

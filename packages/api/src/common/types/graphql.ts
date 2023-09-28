@@ -18,29 +18,18 @@ export class CreateOptionInput {
     values: string[];
 }
 
+export class CreateOptionValuesInput {
+    name: string;
+    value: string;
+}
+
 export class CreateProductVariantInput {
     price: number;
     sku: string;
     enabled?: Nullable<boolean>;
     stock?: Nullable<number>;
-    product: string;
     asset?: Nullable<string>;
-    optionValues?: Nullable<CreateOptionInput>;
-}
-
-export class CreateOptionInVariantInput {
-    name: string;
-    value: string;
-}
-
-export class CreateVariantInProductInput {
-    price: number;
-    sku: string;
-    enabled?: Nullable<boolean>;
-    stock?: Nullable<number>;
-    product: string;
-    asset?: Nullable<string>;
-    optionValues: CreateOptionInVariantInput[];
+    optionValues?: Nullable<Nullable<CreateOptionValuesInput>[]>;
 }
 
 export class CreateProductInput {
@@ -51,7 +40,7 @@ export class CreateProductInput {
     collectionsIds?: Nullable<string[]>;
     assetsIds?: Nullable<string[]>;
     labelValuesIds?: Nullable<string[]>;
-    variants?: Nullable<CreateVariantInProductInput[]>;
+    variants?: Nullable<CreateProductVariantInput[]>;
 }
 
 export class Asset {
@@ -155,7 +144,7 @@ export class Product {
 export abstract class IMutation {
     abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
 
-    abstract createProductVariant(input: CreateProductVariantInput): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
+    abstract createProductVariant(productId: string, input: CreateProductVariantInput): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 }
 
 export class Label {

@@ -1,6 +1,6 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { OptionRepository } from '../repositories'
-import { Option, OptionValue } from '../inventory'
+import { Option } from '../inventory'
 
 @Resolver('Option')
 export class OptionResolver {

@@ -12,13 +12,17 @@ type ProductVariant {
   product: Product!
 }
 
+input CreateOptionValuesInput {
+  name: String!
+  value: String!
+}
+
 input CreateProductVariantInput {
   price: Int!
   sku: String!
   enabled: Boolean
   stock: Int
 
-  product: ID!
   asset: ID
-  optionValues: CreateOptionInput
+  optionValues: [CreateOptionValuesInput]
 }

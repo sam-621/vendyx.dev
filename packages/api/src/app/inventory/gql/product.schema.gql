@@ -14,22 +14,6 @@ type Product {
   options: [Option]!
 }
 
-input CreateOptionInVariantInput {
-  name: String!
-  value: String!
-}
-
-input CreateVariantInProductInput {
-  price: Int!
-  sku: String!
-  enabled: Boolean
-  stock: Int
-
-  product: ID!
-  asset: ID
-  optionValues: [CreateOptionInVariantInput!]!
-}
-
 input CreateProductInput {
   name: String!
   slug: String!
@@ -39,5 +23,5 @@ input CreateProductInput {
   collectionsIds: [ID!]
   assetsIds: [ID!]
   labelValuesIds: [ID!]
-  variants: [CreateVariantInProductInput!]
+  variants: [CreateProductVariantInput!]
 }
