@@ -14,6 +14,9 @@ export interface Variant {
   updatedAt: Date
   enabled: boolean
   price: number
+  offerPrice: number
+  costPerProduct: number
   stock: number
   sku: string
+  weight?: number
 }

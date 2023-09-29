@@ -1,6 +1,6 @@
 'use client'
 
-import type { CommonProduct } from '@/core/Inventory'
+import type { GetInventoryProductsQueryResult } from '@/core/Inventory'
 import { Table } from '@/theme/components'
 import { Chip, User } from '@nextui-org/react'
 import Link from 'next/link'
@@ -74,5 +74,5 @@ export const InventoryTable: FC<Props> = ({ products }) => {
 }
 
 type Props = {
-  products: CommonProduct[]
+  products: GetInventoryProductsQueryResult
 }

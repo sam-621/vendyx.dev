@@ -18,3 +18,34 @@ export const GetInventoryProductsQuery = /* GraphQL */ `
     }
   }
 `
+
+export const GetProductDetailsQuery = /* GraphQL */ `
+  query GetInventoryProducts($productId: ID!) {
+    product(id: $productId) {
+      id
+      name
+      description
+      slug
+      enabled
+      createdAt
+      variants {
+        id
+        price
+        costPerProduct
+        offerPrice
+        stock
+        sku
+        weight
+      }
+      assets {
+        id
+        source
+      }
+      collections {
+        id
+        name
+        slug
+      }
+    }
+  }
+`
