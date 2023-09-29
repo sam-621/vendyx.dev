@@ -1,12 +1,12 @@
 import { gqlRequest } from '@/core/shared/gql'
-import { GetProductsQuery } from '../gql/queries'
-import type { GetProductsResult } from '../types/queries'
+import { GetInventoryProductsQuery } from '../gql/queries'
+import type { GetInventoryProductsQueryResult } from '../types/queries'
 
-type GetProductsResponse = { products: GetProductsResult }
+type GetProductsResponse = { products: GetInventoryProductsQueryResult }
 
-export const getProducts = async (): Promise<GetProductsResult | null> => {
+export const getProducts = async (): Promise<GetInventoryProductsQueryResult | null> => {
   const { products } = await gqlRequest<GetProductsResponse>({
-    query: GetProductsQuery
+    query: GetInventoryProductsQuery
   })
 
   return products

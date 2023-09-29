@@ -1,24 +1,10 @@
-import type { Product } from './product'
+import type { Asset } from '@/core/asset/types'
+import type { Product, Variant } from './product'
 
-// TODO: Add asset type
-export type CommonProduct = Pick<Product, 'id' | 'name' | 'slug' | 'enabled' | 'createdAt'> & {
-  assets: (
-    | {
-        id: string
-        source: string
-      }
-    | undefined
-  )[]
-  variants: (
-    | {
-        id: string
-        price: number
-        stock: number
-      }
-    | undefined
-  )[]
+export type GetInventoryProductsQueryResult = Pick<
+  Product,
+  'id' | 'name' | 'slug' | 'enabled' | 'createdAt'
+> & {
+  assets: (Pick<Asset, 'id' | 'source'> | undefined)[]
+  variants: (Pick<Variant, 'id' | 'price' | 'stock'> | undefined)[]
 }
-
-export type GetProductsResult = CommonProduct[]
-
-// PIDE LOS PRODUCTOS PERO DEBES DECIR Q COSAS COMO LOS ASSETS A VECES NO VIENEN

@@ -1,5 +1,5 @@
-export const GetProductsQuery = /* GraphQL */ `
-  query GetInventoryTableProducts {
+export const GetInventoryProductsQuery = /* GraphQL */ `
+  query GetInventoryProducts {
     products {
       id
       createdAt

@@ -7,3 +7,13 @@ export interface Product {
   slug: string
   enabled: boolean
 }
+
+export interface Variant {
+  id: string
+  createdAt: Date
+  updatedAt: Date
+  enabled: boolean
+  price: number
+  stock: number
+  sku: string
+}
