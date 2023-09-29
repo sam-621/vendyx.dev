@@ -66,7 +66,9 @@ export class ProductRepository {
   }
 
   async getVariantsOnProduct(id: string): Promise<ProductVariant[]> {
-    const result = await this.prismaService.productVariant.findMany({ where: { productId: id } })
+    const result = (await this.prismaService.productVariant.findMany({
+      where: { productId: id }
+    })) as unknown as ProductVariant[]
 
     return result
   }

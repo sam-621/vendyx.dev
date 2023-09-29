@@ -99,13 +99,16 @@ model LabelValue {
 }
 
 model ProductVariant {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  price     Int      @default(0)
-  stock     Int      @default(0)
-  sku       String
-  enabled   Boolean  @default(false)
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  price          Decimal  @default(0) @db.Decimal(10, 2)
+  offerPrice     Decimal  @default(0) @map("offer_price") @db.Decimal(10, 2)
+  costPerProduct Decimal  @default(0) @map("cost_per_product") @db.Decimal(10, 2)
+  stock          Int      @default(0)
+  sku            String
+  weight         Decimal? @db.Decimal(8, 2)
+  enabled        Boolean  @default(false)
 
   // Relations - one to many
   optionValues OptionValueOnProductVariant[]

@@ -10,15 +10,17 @@ export class ProductVariantRepository {
   constructor(private prismaService: PrismaService) {}
 
   async create(input: Prisma.ProductVariantCreateInput): Promise<ProductVariant> {
-    return this.prismaService.productVariant.create({ data: input })
+    return this.prismaService.productVariant.create({ data: input }) as unknown as ProductVariant
   }
 
   async findMany(): Promise<ProductVariant[]> {
-    return this.prismaService.productVariant.findMany()
+    return this.prismaService.productVariant.findMany() as unknown as ProductVariant[]
   }
 
   async findOne(id: string): Promise<ProductVariant | null> {
-    return this.prismaService.productVariant.findUnique({ where: { id } })
+    return this.prismaService.productVariant.findUnique({
+      where: { id }
+    }) as unknown as ProductVariant | null
   }
 
   async findProductOnVariant(variantId: string): Promise<Product | undefined | null> {

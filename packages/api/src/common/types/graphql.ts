@@ -28,6 +28,9 @@ export class CreateProductVariantInput {
     sku: string;
     enabled?: Nullable<boolean>;
     stock?: Nullable<number>;
+    offerPrice?: Nullable<number>;
+    costPerProduct?: Nullable<number>;
+    weight?: Nullable<number>;
     asset?: Nullable<string>;
     optionValues?: Nullable<Nullable<CreateOptionValuesInput>[]>;
 }
@@ -118,9 +121,12 @@ export class ProductVariant {
     createdAt: Date;
     updatedAt: Date;
     price: number;
+    offerPrice: number;
+    costPerProduct: number;
     stock: number;
     sku: string;
     enabled: boolean;
+    weight?: Nullable<number>;
     optionValues: Nullable<OptionValues>[];
     asset?: Nullable<Asset>;
     product: Product;
