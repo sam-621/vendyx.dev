@@ -1,11 +1,20 @@
-import { CommonProductFragment } from './fragments'
-
 export const GetProductsQuery = /* GraphQL */ `
-  ${CommonProductFragment}
-
-  query Products {
+  query GetInventoryTableProducts {
     products {
-      ...CommonProduct
+      id
+      createdAt
+      name
+      slug
+      enabled
+      variants {
+        id
+        price
+        stock
+      }
+      assets {
+        id
+        source
+      }
     }
   }
 `

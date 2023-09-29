@@ -5,7 +5,6 @@ export type CommonProduct = Pick<Product, 'id' | 'name' | 'slug' | 'enabled' | '
   assets: (
     | {
         id: string
-        name: string
         source: string
       }
     | undefined
