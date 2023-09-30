@@ -22,9 +22,11 @@ export class ProductResolver {
 
   @Query('product')
   async product(@Args('id') id: string, @Args('slug') slug: string) {
-    if (!id || !slug) throw new BusinessError('No ID or Slug provided', ErrorCode.USER_INPUT_ERROR)
+    if (!id && !slug) throw new BusinessError('No ID or Slug provided', ErrorCode.USER_INPUT_ERROR)
 
-    return this.repository.findOneById(id)
+    if (id) return this.repository.findOneById(id)
+
+    return this.repository.findOneBySlug(slug)
   }
 
   @ResolveField('variants')

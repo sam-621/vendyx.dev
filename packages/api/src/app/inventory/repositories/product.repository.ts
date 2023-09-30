@@ -26,6 +26,10 @@ export class ProductRepository {
     return this.prismaService.product.findUnique({ where: { id } })
   }
 
+  async findOneBySlug(slug: string): Promise<Product | null> {
+    return this.prismaService.product.findUnique({ where: { slug } })
+  }
+
   async getCollectionsOnProduct(id: string): Promise<Collection[]> {
     const result = await this.prismaService.productOnCollection.findMany({
       where: { productId: id },
