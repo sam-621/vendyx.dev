@@ -68,7 +68,7 @@ export abstract class IQuery {
 
     abstract collections(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
 
-    abstract product(id: string): Nullable<Product> | Promise<Nullable<Product>>;
+    abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 
     abstract products(): Nullable<Product>[] | Promise<Nullable<Product>[]>;
 

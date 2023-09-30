@@ -1,5 +1,5 @@
 type Query {
-  product(id: ID!): Product
+  product(id: ID, slug: String): Product
   products: [Product]!
   variant(id: ID!): ProductVariant
   variants: [ProductVariant]!

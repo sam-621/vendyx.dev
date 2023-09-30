@@ -22,7 +22,7 @@ export class ProductRepository {
     return this.prismaService.product.findMany()
   }
 
-  async findOne(id: string): Promise<Product | null> {
+  async findOneById(id: string): Promise<Product | null> {
     return this.prismaService.product.findUnique({ where: { id } })
   }
 
