@@ -1,1 +1,1 @@
-export * from './service-result.util'
+export * from './results.util'
