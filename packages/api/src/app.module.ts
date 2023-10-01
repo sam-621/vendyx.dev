@@ -7,6 +7,7 @@ import { join } from 'path'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { SharedModule } from './app/shared'
 import { InventoryModule } from './app/inventory'
+import { LoggerModule } from './app/shared/logger'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { InventoryModule } from './app/inventory'
         outputAs: 'class'
       }
     }),
+    LoggerModule,
     SharedModule,
     InventoryModule
   ],
