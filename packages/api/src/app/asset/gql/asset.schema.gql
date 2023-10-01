@@ -3,8 +3,8 @@ enum AssetType {
   FILE
 }
 
-type Asset {
-  id: String!
+type Asset implements Node {
+  id: ID!
   createdAt: Date!
   updatedAt: Date!
   name: String!

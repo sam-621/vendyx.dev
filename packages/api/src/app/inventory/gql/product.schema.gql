@@ -1,4 +1,4 @@
-type Product {
+type Product implements Node {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
@@ -12,6 +12,11 @@ type Product {
   assets: [Asset]!
   labelValues: [LabelValues]!
   options: [Option]!
+}
+
+type ProductList implements List {
+  items: [Product!]!
+  totalItems: Int!
 }
 
 input CreateProductInput {

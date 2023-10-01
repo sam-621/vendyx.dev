@@ -1,5 +1,5 @@
-type Option {
-  id: String!
+type Option implements Node {
+  id: ID!
   createdAt: Date!
   updatedAt: Date!
   name: String!
@@ -7,8 +7,8 @@ type Option {
   values: [OptionValues]!
 }
 
-type OptionValues {
-  id: String!
+type OptionValues implements Node {
+  id: ID!
   createdAt: Date!
   updatedAt: Date!
   value: String!

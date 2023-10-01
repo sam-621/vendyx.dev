@@ -1,5 +1,5 @@
-type ProductVariant {
-  id: String!
+type ProductVariant implements Node {
+  id: ID!
   createdAt: Date!
   updatedAt: Date!
   price: Float!

@@ -1,5 +1,5 @@
 import { ConsoleLogger, Injectable, Scope } from '@nestjs/common'
-import { ErrorCode } from '../errors'
+import { ErrorCode } from '../../../common/errors'
 
 @Injectable({ scope: Scope.TRANSIENT })
 export class LoggerService extends ConsoleLogger {

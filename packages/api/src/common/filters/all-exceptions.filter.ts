@@ -1,4 +1,4 @@
-import { BusinessError, ErrorCode } from '@/app/shared/errors'
+import { BusinessError, ErrorCode } from '@/common/errors'
 import { LoggerService } from '@/app/shared/logger'
 import { Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
 import { GraphQLError } from 'graphql'

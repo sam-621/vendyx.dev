@@ -1,6 +1,6 @@
 type Query {
   product(id: ID, slug: String): Product
-  products: [Product]!
+  products: ProductList
   variant(id: ID!): ProductVariant
   variants: [ProductVariant]!
   option(id: ID!): Option

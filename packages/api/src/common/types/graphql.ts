@@ -46,7 +46,18 @@ export class CreateProductInput {
     variants?: Nullable<CreateProductVariantInput[]>;
 }
 
-export class Asset {
+export interface Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface List {
+    items: Node[];
+    totalItems: number;
+}
+
+export class Asset implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -70,7 +81,7 @@ export abstract class IQuery {
 
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 
-    abstract products(): Nullable<Product>[] | Promise<Nullable<Product>[]>;
+    abstract products(): Nullable<ProductList> | Promise<Nullable<ProductList>>;
 
     abstract variant(id: string): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 
@@ -87,7 +98,7 @@ export abstract class IQuery {
     abstract labels(): Nullable<Label>[] | Promise<Nullable<Label>[]>;
 }
 
-export class Collection {
+export class Collection implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -100,7 +111,7 @@ export class Collection {
     labelValues: Nullable<LabelValues>[];
 }
 
-export class Option {
+export class Option implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -108,7 +119,7 @@ export class Option {
     values: Nullable<OptionValues>[];
 }
 
-export class OptionValues {
+export class OptionValues implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -116,7 +127,7 @@ export class OptionValues {
     option: Option;
 }
 
-export class ProductVariant {
+export class ProductVariant implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -132,7 +143,7 @@ export class ProductVariant {
     product: Product;
 }
 
-export class Product {
+export class Product implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -147,13 +158,18 @@ export class Product {
     options: Nullable<Option>[];
 }
 
+export class ProductList implements List {
+    items: Product[];
+    totalItems: number;
+}
+
 export abstract class IMutation {
     abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
 
     abstract createProductVariant(productId: string, input?: Nullable<CreateProductVariantInput[]>): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 }
 
-export class Label {
+export class Label implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;

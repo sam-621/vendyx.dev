@@ -1,5 +1,5 @@
-type Label {
-  id: String!
+type Label implements Node {
+  id: ID!
   createdAt: Date!
   updatedAt: Date!
   name: String!
@@ -8,7 +8,7 @@ type Label {
 }
 
 type LabelValues {
-  id: String!
+  id: ID!
   createdAt: Date!
   updatedAt: Date!
   value: String!
