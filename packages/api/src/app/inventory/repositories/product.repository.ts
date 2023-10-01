@@ -5,24 +5,27 @@ import { AssetType } from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
 import { LabelValues, Option, Product, ProductVariant } from '../inventory'
 import { Prisma } from '@prisma/client'
-import { RepositoryError, UserInputError } from '@/app/shared/errors'
+import { InternalServerError, UserInputError } from '@/app/shared/errors'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { LoggerService } from '@/app/shared/logger'
 
 @Injectable()
 export class ProductRepository {
-  constructor(private prismaService: PrismaService) {}
+  constructor(private prismaService: PrismaService, private logger: LoggerService) {}
 
   async create(input: Prisma.ProductCreateInput): Promise<Product> {
     try {
       return await this.prismaService.product.create({ data: input })
     } catch (error) {
+      this.logger.prismaLog(error)
+
       if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
         throw new UserInputError(
           'These fields already exist in database: ' + (error.meta?.target as string[]).join(', ')
         )
       }
 
-      throw new RepositoryError('Error ocurred while creating the product')
+      throw new InternalServerError('Error ocurred while creating the product')
     }
   }
 

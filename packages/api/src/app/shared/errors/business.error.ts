@@ -1,12 +1,7 @@
-import { GraphQLError } from 'graphql'
-
-export class BusinessError extends GraphQLError {
-  constructor(message: string, code: ErrorCode) {
-    super(message, {
-      extensions: {
-        code: code
-      }
-    })
+export class BusinessError extends Error {
+  constructor(message: string, readonly code: ErrorCode) {
+    super(message)
+    this.name = code
   }
 }
 

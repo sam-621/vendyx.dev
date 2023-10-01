@@ -1,6 +1,7 @@
 import { BusinessError, ErrorCode } from '@/app/shared/errors'
 import { LoggerService } from '@/app/shared/logger'
 import { Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
+import { GraphQLError } from 'graphql'
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -9,14 +10,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: Error): void {
     // Errors throw by our domain
     if (exception instanceof BusinessError) {
-      const {
-        extensions: { code },
-        message
-      } = exception
+      const { code, message } = exception
 
-      this.logger.businessLog(exception, code as ErrorCode, [message])
-
-      return
+      this.logger.businessLog(exception, code as ErrorCode, message)
+      throw new GraphQLError(message, { extensions: { code } })
     }
 
     // Errors throw by the framework
@@ -24,20 +21,18 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const errorMessage = (exception.getResponse() as HttpGenericError).message
       const errorCode = (exception.getResponse() as HttpGenericError).error
 
-      const formattedErrorMessage = Array.isArray(errorMessage) ? errorMessage : [errorMessage]
       const formattedErrorCode = errorCode.toUpperCase().replace(' ', '_') as ErrorCode
 
-      this.logger.businessLog(exception, formattedErrorCode, formattedErrorMessage)
-
-      return
+      this.logger.businessLog(exception, formattedErrorCode, errorMessage)
+      throw new GraphQLError(errorMessage, { extensions: { code: formattedErrorCode } })
     }
 
     // Unexpected errors
     const errorMessage = exception.message
     const errorCode = exception.name.toUpperCase().replace(' ', '_') as ErrorCode
-    const formattedErrorMessage = Array.isArray(errorMessage) ? errorMessage : [errorMessage]
 
-    this.logger.businessLog(exception, errorCode, formattedErrorMessage)
+    this.logger.businessLog(exception, errorCode, errorMessage)
+    throw new GraphQLError(errorMessage, { extensions: { code: errorCode } })
   }
 }
 
