@@ -8,27 +8,14 @@ export class ProductService {
   constructor(private repository: ProductRepository) {}
 
   async createProduct(input: CreateProductInput): Promise<Product | undefined> {
-    const variantsHasOptions = input.variants?.find(v => v.optionValues)
+    const variantsHasOptions = input.variants?.some(v => v.optionValues) ?? false
+
+    const defaultVariant = input.variants && !variantsHasOptions ? input.variants[0] : undefined
 
     const product = await this.repository.create({
-      name: input.name,
-      slug: input.slug,
-      description: input.description ?? undefined,
-      enabled: input.enabled ?? undefined,
-      assets: { create: input.assetsIds?.map(id => ({ assetId: id, position: 0 })) },
-      collections: { create: input.collectionsIds?.map(id => ({ collectionId: id })) },
-      labelValues: { create: input.labelValuesIds?.map(id => ({ labelValueId: id })) },
-      ...(!variantsHasOptions && {
-        variants: {
-          create:
-            input.variants?.map(v => ({
-              sku: v.sku,
-              price: v.price,
-              enabled: v.enabled ?? undefined,
-              stock: v.stock ?? undefined
-            })) ?? []
-        }
-      })
+      ...input,
+      slug: input.slug.toLowerCase(),
+      variant: defaultVariant
     })
 
     if (!variantsHasOptions) return product
@@ -39,6 +26,7 @@ export class ProductService {
   }
 
   async createVariant(productId: string, input: CreateProductVariantInput[]): Promise<Product> {
+    // TODO: repeats option values
     return this.repository.update(productId, {
       variants: {
         create: input?.map(v => {

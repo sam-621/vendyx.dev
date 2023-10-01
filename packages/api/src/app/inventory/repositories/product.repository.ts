@@ -1,6 +1,6 @@
 import { Asset } from '@/app/asset/asset'
 import { Collection } from '@/app/collection/collection'
-import { AssetType } from '@/common/types/graphql'
+import { AssetType, CreateProductInput, CreateProductVariantInput } from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
 import { LabelValues, Option, Product, ProductVariant } from '../inventory'
 import { Prisma } from '@prisma/client'
@@ -12,9 +12,30 @@ import { PrismaService } from '@/app/shared/persistance'
 export class ProductRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async create(input: Prisma.ProductCreateInput): Promise<Product> {
+  async create(input: CreateProductRepository): Promise<Product> {
     try {
-      return await this.prismaService.product.create({ data: input })
+      return await this.prismaService.product.create({
+        data: {
+          name: input.name,
+          slug: input.slug,
+          description: input.description ?? undefined,
+          enabled: input.enabled ?? undefined,
+          assets: { create: input.assetsIds?.map(id => ({ assetId: id, position: 0 })) },
+          collections: { create: input.collectionsIds?.map(id => ({ collectionId: id })) },
+          labelValues: { create: input.labelValuesIds?.map(id => ({ labelValueId: id })) },
+          variants: input.variant && {
+            create: {
+              sku: input.variant?.sku,
+              enabled: input.variant?.enabled ?? undefined,
+              stock: input.variant?.stock ?? 0,
+              price: input.variant?.price ?? 0,
+              costPerProduct: input.variant?.costPerProduct ?? 0,
+              offerPrice: input.variant?.offerPrice ?? 0,
+              weight: input.variant?.weight ?? 0
+            }
+          }
+        }
+      })
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
         throw new UserInputError(
@@ -84,4 +105,8 @@ export class ProductRepository {
 
     return result
   }
+}
+
+type CreateProductRepository = Omit<CreateProductInput, 'variants'> & {
+  variant?: Omit<CreateProductVariantInput, 'optionValues' | 'asset'>
 }
