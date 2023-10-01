@@ -2,7 +2,7 @@ import { CreateProductInput, Product } from '@/common/types/graphql'
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductRepository } from '../repositories'
 import { ProductService } from '../services/product.service'
-import { BusinessError, ErrorCode } from '@/app/shared/errors'
+import { UserInputError } from '@/app/shared/errors'
 
 @Resolver('Product')
 export class ProductResolver {
@@ -10,9 +10,7 @@ export class ProductResolver {
 
   @Mutation('createProduct')
   async create(@Args('input') input: CreateProductInput) {
-    const { data } = await this.productService.createProduct(input)
-
-    return data
+    return this.productService.createProduct(input)
   }
 
   @Query('products')
@@ -22,7 +20,7 @@ export class ProductResolver {
 
   @Query('product')
   async product(@Args('id') id: string, @Args('slug') slug: string) {
-    if (!id && !slug) throw new BusinessError('No ID or Slug provided', ErrorCode.USER_INPUT_ERROR)
+    if (!id && !slug) throw new UserInputError('No ID or Slug provided')
 
     if (id) return this.repository.findOneById(id)
 

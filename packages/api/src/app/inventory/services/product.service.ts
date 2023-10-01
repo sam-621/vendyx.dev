@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { ProductRepository } from '../repositories'
 import { CreateProductInput, CreateProductVariantInput } from '@/common/types/graphql'
-import { ServiceResult } from '@/app/shared/utils'
 import { Product } from '../inventory'
 
 @Injectable()
 export class ProductService {
   constructor(private repository: ProductRepository) {}
 
-  async createProduct(input: CreateProductInput): Promise<ServiceResult<Product>> {
+  async createProduct(input: CreateProductInput): Promise<Product | undefined> {
     const variantsHasOptions = input.variants?.find(v => v.optionValues)
 
     const product = await this.repository.create({
@@ -32,18 +31,15 @@ export class ProductService {
       })
     })
 
-    if (!variantsHasOptions) return new ServiceResult(product)
+    if (!variantsHasOptions) return product
 
-    const { data: productWitVariants } = await this.createVariant(product.id, input.variants ?? [])
+    const productWitVariants = await this.createVariant(product.id, input.variants ?? [])
 
-    return new ServiceResult(productWitVariants)
+    return productWitVariants
   }
 
-  async createVariant(
-    productId: string,
-    input: CreateProductVariantInput[]
-  ): Promise<ServiceResult<Product>> {
-    const productWithVariants = await this.repository.update(productId, {
+  async createVariant(productId: string, input: CreateProductVariantInput[]): Promise<Product> {
+    return this.repository.update(productId, {
       variants: {
         create: input?.map(v => {
           return {
@@ -76,7 +72,5 @@ export class ProductService {
         })
       }
     })
-
-    return new ServiceResult(productWithVariants)
   }
 }
