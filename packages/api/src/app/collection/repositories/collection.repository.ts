@@ -1,6 +1,6 @@
-import { PrismaService } from '@/app/shared/services'
 import { Injectable } from '@nestjs/common'
 import { Collection } from '../collection'
+import { PrismaService } from '@/app/shared/persistance'
 
 @Injectable()
 export class CollectionRepository {
