@@ -52,10 +52,6 @@ export class ProductVariantRepository {
       include: { optionValue: true }
     })
 
-    console.log({
-      result
-    })
-
     return result.map(r => r.optionValue)
   }
 
@@ -63,10 +59,6 @@ export class ProductVariantRepository {
     const result = await this.prismaService.optionValueOnProductVariant.findMany({
       where: { variantId: variantId },
       include: { optionValue: { include: { option: true } } }
-    })
-
-    console.log({
-      result
     })
 
     return result.map(r => r.optionValue.option)

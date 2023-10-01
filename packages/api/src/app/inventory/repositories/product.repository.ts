@@ -1,25 +1,21 @@
 import { Asset } from '@/app/asset/asset'
 import { Collection } from '@/app/collection/collection'
-
 import { AssetType } from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
 import { LabelValues, Option, Product, ProductVariant } from '../inventory'
 import { Prisma } from '@prisma/client'
 import { InternalServerError, UserInputError } from '@/common/errors'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { LoggerService } from '@/app/shared/logger'
 import { PrismaService } from '@/app/shared/persistance'
 
 @Injectable()
 export class ProductRepository {
-  constructor(private prismaService: PrismaService, private logger: LoggerService) {}
+  constructor(private prismaService: PrismaService) {}
 
   async create(input: Prisma.ProductCreateInput): Promise<Product> {
     try {
       return await this.prismaService.product.create({ data: input })
     } catch (error) {
-      this.logger.prismaLog(error)
-
       if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
         throw new UserInputError(
           'These fields already exist in database: ' + (error.meta?.target as string[]).join(', ')
@@ -76,10 +72,6 @@ export class ProductRepository {
   async getOptionsOnProduct(id: string): Promise<Option[]> {
     const result = await this.prismaService.option.findMany({
       where: { productId: id }
-    })
-
-    console.log({
-      options: await this.prismaService.option.findMany({})
     })
 
     return result
