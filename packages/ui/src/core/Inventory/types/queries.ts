@@ -1,14 +1,14 @@
 import type { Asset } from '@/core/asset/types'
 import type { Product, Variant } from './product'
 import type { Collection } from '@/core/collection/types/collection'
+import type { List } from '@/core/shared/types'
 
-export type GetInventoryProductsQueryResult = (Pick<
-  Product,
-  'id' | 'name' | 'slug' | 'enabled' | 'createdAt'
-> & {
-  variants: (Pick<Variant, 'id' | 'price' | 'stock'> | undefined)[]
-  assets: (Pick<Asset, 'id' | 'source'> | undefined)[]
-})[]
+export type GetInventoryProductsQueryResult = List<
+  Pick<Product, 'id' | 'name' | 'slug' | 'enabled' | 'createdAt'> & {
+    variants: (Pick<Variant, 'id' | 'price' | 'stock'> | undefined)[]
+    assets: (Pick<Asset, 'id' | 'source'> | undefined)[]
+  }
+>
 
 export type GetProductDetailsQueryResult = Pick<
   Product,

@@ -20,7 +20,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
       }}
       rowsPerPageOptions={[3, 6, 9, 12]}
       filters
-      data={products}
+      data={products.items}
       getKey={d => d.id.toString()}
       columns={[
         {

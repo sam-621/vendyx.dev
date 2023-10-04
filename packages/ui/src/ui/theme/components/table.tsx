@@ -116,9 +116,11 @@ export const Table = <T extends unknown>({
 
                               return (
                                 <TableCell>
-                                  {currentColumn?.render != null
-                                    ? currentColumn.render(data)
-                                    : data[columnKey as keyof T]}
+                                  <>
+                                    {currentColumn?.render != null
+                                      ? currentColumn.render(data)
+                                      : data[columnKey as keyof T]}
+                                  </>
                                 </TableCell>
                               )
                             }}
