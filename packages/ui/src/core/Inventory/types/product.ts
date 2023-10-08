@@ -8,7 +8,7 @@ export interface Product {
   enabled: boolean
 }
 
-export interface Variant {
+export interface ProductVariant {
   id: string
   createdAt: Date
   updatedAt: Date
