@@ -2,7 +2,7 @@
 import { PageLayout } from '@/components/layouts'
 import { CreateProductPage } from '@/pages/inventory'
 
-export default function CreateProductView() {
+export default function CreateProductRoute() {
   return (
     <PageLayout>
       <CreateProductPage />

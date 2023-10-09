@@ -1,21 +1,22 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
+'use client'
 import { ProductDetails } from '@/components/inventory'
-import { DetailsLayout } from '@/components/layouts'
 import { CreateProductFormContext } from '@/core/inventory/contexts'
 import { Button } from '@nextui-org/react'
 
 export const CreateProductPage = () => {
   return (
     <CreateProductFormContext>
-      <DetailsLayout
-        actions={
-          <Button color="primary" type="submit">
-            Guardar producto
-          </Button>
-        }
-      >
+      <>
+        <div className="flex items-center justify-between">
+          <h1 className="text-foreground font-semibold text-4xl">Crear producto</h1>
+          <div className="flex gap-4">
+            <Button color="primary" type="submit">
+              Guardar producto
+            </Button>
+          </div>
+        </div>
         <ProductDetails />
-      </DetailsLayout>
+      </>
     </CreateProductFormContext>
   )
 }

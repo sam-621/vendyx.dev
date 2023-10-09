@@ -1,16 +1,16 @@
 'use client'
+
 import { Dropzone, Select } from '@/theme/components'
 import { Card, CardBody } from '@nextui-org/card'
 import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Checkbox } from '@nextui-org/checkbox'
+import type { FC } from 'react'
+import type { GetProductDetailsQueryResult } from '@/core/inventory/types'
 import { useFormContext } from 'react-hook-form'
 
-export const ProductDetails = () => {
-  const { register, formState } = useFormContext()
-  console.log({
-    formState: formState.errors
-  })
+export const ProductDetails: FC<Props> = ({ product }) => {
+  const { register } = useFormContext()
 
   return (
     <section className="grid grid-cols-[2fr,1fr] gap-6">
@@ -19,14 +19,14 @@ export const ProductDetails = () => {
           <CardBody className="flex flex-col gap-4">
             <div className="flex gap-4">
               <Input
-                {...register('name')}
+                {...register('name', { value: product?.name })}
                 label="Name"
                 placeholder="Black T-shirt"
                 labelPlacement="outside"
                 radius="sm"
               />
               <Input
-                {...register('slug')}
+                {...register('slug', { value: product?.slug })}
                 label="Slug"
                 placeholder="Black T-shirt"
                 labelPlacement="outside"
@@ -34,7 +34,7 @@ export const ProductDetails = () => {
               />
             </div>
             <Textarea
-              {...register('description')}
+              {...register('description', { value: product?.description })}
               label="Description"
               labelPlacement="outside"
               radius="sm"
@@ -202,4 +202,8 @@ export const ProductDetails = () => {
       </div>
     </section>
   )
+}
+
+type Props = {
+  product?: GetProductDetailsQueryResult
 }
