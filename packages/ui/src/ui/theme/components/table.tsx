@@ -81,23 +81,23 @@ export const Table = <T extends unknown>({
             </Button>
           )}
         </div>
-        <div className="flex">
-          <div className="w-full">
-            <Tabs
-              selectedKey={selectedTab}
-              onSelectionChange={k => {
-                setSelectedTab(k)
-              }}
-              variant="light"
-              aria-label="Tabs variants"
-              classNames={{
-                panel: 'pt-5'
-              }}
-            >
-              {views.map(v => {
-                return (
-                  <Tab key={v.key} title={v.name} className="font-semibold text-sm">
-                    {initialData.length > 0 ? (
+        {initialData.length > 0 ? (
+          <div className="flex">
+            <div className="w-full">
+              <Tabs
+                selectedKey={selectedTab}
+                onSelectionChange={k => {
+                  setSelectedTab(k)
+                }}
+                variant="light"
+                aria-label="Tabs variants"
+                classNames={{
+                  panel: 'pt-5'
+                }}
+              >
+                {views.map(v => {
+                  return (
+                    <Tab key={v.key} title={v.name} className="font-semibold text-sm">
                       <NextUiTable removeWrapper selectionMode={selectionMode} aria-label="Table">
                         <TableHeader columns={columns}>
                           {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
@@ -122,40 +122,40 @@ export const Table = <T extends unknown>({
                           )}
                         </TableBody>
                       </NextUiTable>
-                    ) : (
-                      <>{emptyState}</>
-                    )}
-                  </Tab>
-                )
-              })}
-            </Tabs>
+                    </Tab>
+                  )
+                })}
+              </Tabs>
+            </div>
+            <div className="flex gap-4 items-center h-fit absolute right-5">
+              {rowsPerPageOptions.length !== 0 && (
+                <label htmlFor="select" className="flex items-center text-default-500 text-small">
+                  Filas por pagina:
+                  <select
+                    id="select"
+                    className="bg-transparent outline-none text-default-500 text-small"
+                    onChange={e => {
+                      setRowsPerPage(Number(e.target.value))
+                    }}
+                  >
+                    {rowsPerPageOptions.map(opt => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {filters != null && (
+                <Button isIconOnly size="md" variant="bordered" className="text-default-500">
+                  <AdjustmentsHorizontalIcon width={24} />
+                </Button>
+              )}
+            </div>
           </div>
-          <div className="flex gap-4 items-center h-fit absolute right-5">
-            {rowsPerPageOptions.length !== 0 && (
-              <label htmlFor="select" className="flex items-center text-default-500 text-small">
-                Filas por pagina:
-                <select
-                  id="select"
-                  className="bg-transparent outline-none text-default-500 text-small"
-                  onChange={e => {
-                    setRowsPerPage(Number(e.target.value))
-                  }}
-                >
-                  {rowsPerPageOptions.map(opt => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
-            {filters != null && (
-              <Button isIconOnly size="md" variant="bordered" className="text-default-500">
-                <AdjustmentsHorizontalIcon width={24} />
-              </Button>
-            )}
-          </div>
-        </div>
+        ) : (
+          <>{emptyState}</>
+        )}
       </CardBody>
     </Card>
   )
