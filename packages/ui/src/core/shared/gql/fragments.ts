@@ -30,11 +30,5 @@ export const CommonProductFragment = /* GraphQL */ `
     name
     slug
     enabled
-    variants {
-      ...CommonVariant
-    }
-    assets {
-      ...CommonAsset
-    }
   }
 `
