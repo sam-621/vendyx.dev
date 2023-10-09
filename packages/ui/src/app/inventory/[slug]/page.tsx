@@ -1,8 +1,10 @@
 import { ProductDetails } from '@/components/inventory'
+// import { getProductDetails } from '@/core/inventory/services'
 import { Breadcrumb } from '@/theme/components'
 import { Button } from '@nextui-org/button'
 
-export default async function CreateProductPage() {
+export default async function CreateProductPage({ params: { slug } }: Props) {
+  // const productDetails = await getProductDetails({ slug })
   return (
     <div className="flex flex-col gap-4">
       <Breadcrumb items={[{ label: 'Invetario', href: '/inventory' }, { label: 'Silloncito' }]} />
@@ -15,4 +17,10 @@ export default async function CreateProductPage() {
       </div>
     </div>
   )
+}
+
+type Props = {
+  params: {
+    slug: string
+  }
 }

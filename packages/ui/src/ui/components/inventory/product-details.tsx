@@ -3,14 +3,8 @@ import { Card, CardBody } from '@nextui-org/card'
 import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Checkbox } from '@nextui-org/checkbox'
-import { getProductDetails } from '@/core/inventory/services'
 
 export const ProductDetails = async () => {
-  const productDetails = await getProductDetails({ slug: '' })
-  console.log({
-    productDetails
-  })
-
   return (
     <section className="grid grid-cols-[2fr,1fr] gap-6">
       <div className="flex flex-col gap-6">

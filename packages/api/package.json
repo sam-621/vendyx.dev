@@ -21,7 +21,8 @@
     "db:migrate": "yarn prisma migrate dev",
     "db:push": "yarn prisma db push",
     "db:seed": "prisma db seed",
-    "db:types": "prisma generate"
+    "db:types": "prisma generate",
+    "db:cleanup": "node ./scripts/cleanup-db.mjs"
   },
   "dependencies": {
     "@apollo/server": "^4.9.1",
