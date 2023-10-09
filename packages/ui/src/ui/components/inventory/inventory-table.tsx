@@ -5,6 +5,7 @@ import { Table } from '@/theme/components'
 import { Chip, User } from '@nextui-org/react'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { EmptyStateInventoryTable } from './empty-state-inventory-table'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
   return (
@@ -12,16 +13,21 @@ export const InventoryTable: FC<Props> = ({ products }) => {
       searchFn={(query, data) => {
         return data.filter(d => d?.name.toLowerCase().includes(query))
       }}
-      action={{
-        text: 'Add Product',
-        fn() {
-          console.log('clicked')
-        }
-      }}
+      action={
+        products.items.length > 0
+          ? {
+              text: 'Agregar producto',
+              fn() {
+                console.log('clicked')
+              }
+            }
+          : undefined
+      }
       rowsPerPageOptions={[3, 6, 9, 12]}
       filters
       data={products.items}
       getKey={d => d?.id.toString() ?? ''}
+      emptyState={<EmptyStateInventoryTable />}
       columns={[
         {
           name: 'Product',

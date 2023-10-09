@@ -10,7 +10,7 @@ export default async function CreateProductPage({ params: { slug } }: Props) {
       <Breadcrumb items={[{ label: 'Invetario', href: '/inventory' }, { label: 'Silloncito' }]} />
       <div className="flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-foreground font-semibold text-4xl">Create product</h1>
+          <h1 className="text-foreground font-semibold text-4xl">Silloncito</h1>
           <Button color="primary">Guardar producto</Button>
         </div>
         <ProductDetails />

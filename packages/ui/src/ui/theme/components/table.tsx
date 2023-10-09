@@ -1,11 +1,7 @@
 'use client'
 
 import { isArray } from '@/core/shared/utils/arrays'
-import {
-  AdjustmentsHorizontalIcon,
-  MagnifyingGlassIcon,
-  PlusIcon
-} from '@heroicons/react/24/outline'
+import { AdjustmentsHorizontalIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import {
   Card,
   CardBody,
@@ -21,15 +17,16 @@ import {
   Button,
   Input
 } from '@nextui-org/react'
-import { type ReactElement, type Key, useState, useMemo } from 'react'
+import { type ReactElement, type Key, useState, useMemo, type ReactNode } from 'react'
 
 export const Table = <T extends unknown>({
   columns,
   data,
+  emptyState,
   getKey,
   searchFn,
   action,
-  views = [{ name: 'All', key: 'all' }],
+  views = [{ name: 'Todos', key: 'all' }],
   rowsPerPageOptions = [],
   filters,
   selectionMode = 'multiple'
@@ -44,19 +41,11 @@ export const Table = <T extends unknown>({
     if (searchFn == null) return initialData
 
     if (query.length === 0) {
-      console.log('in')
-      console.log({
-        initialData,
-        isArray: isArray(data)
-      })
-
       return initialData
     }
 
     return searchFn(query, initialData)
   }, [query, initialData])
-
-  console.log(filteredDataByQuery)
 
   return (
     <Card>
@@ -70,7 +59,7 @@ export const Table = <T extends unknown>({
                 setQuery(e.target.value)
               }}
               radius="sm"
-              placeholder="Search Product"
+              placeholder="Buscar producto"
               labelPlacement="outside"
               startContent={
                 <MagnifyingGlassIcon
@@ -86,7 +75,7 @@ export const Table = <T extends unknown>({
               className="w-fit"
               color="primary"
               radius="sm"
-              startContent={<PlusIcon width={'full'} />}
+              startContent={action.icon}
             >
               {action?.text}
             </Button>
@@ -108,34 +97,34 @@ export const Table = <T extends unknown>({
               {views.map(v => {
                 return (
                   <Tab key={v.key} title={v.name} className="font-semibold text-sm">
-                    <NextUiTable
-                      removeWrapper
-                      selectionMode={selectionMode}
-                      aria-label="Example static collection table"
-                    >
-                      <TableHeader columns={columns}>
-                        {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
-                      </TableHeader>
-                      <TableBody items={filteredDataByQuery.slice(0, rowsPerPage)}>
-                        {data => (
-                          <TableRow key={getKey(data)}>
-                            {columnKey => {
-                              const currentColumn = columns.find(c => c.field === columnKey)
+                    {initialData.length > 0 ? (
+                      <NextUiTable removeWrapper selectionMode={selectionMode} aria-label="Table">
+                        <TableHeader columns={columns}>
+                          {c => <TableColumn key={c.field}>{c.name}</TableColumn>}
+                        </TableHeader>
+                        <TableBody items={filteredDataByQuery.slice(0, rowsPerPage)}>
+                          {data => (
+                            <TableRow key={getKey(data)}>
+                              {columnKey => {
+                                const currentColumn = columns.find(c => c.field === columnKey)
 
-                              return (
-                                <TableCell>
-                                  <>
-                                    {currentColumn?.render != null
-                                      ? currentColumn.render(data)
-                                      : data[columnKey as keyof T]}
-                                  </>
-                                </TableCell>
-                              )
-                            }}
-                          </TableRow>
-                        )}
-                      </TableBody>
-                    </NextUiTable>
+                                return (
+                                  <TableCell>
+                                    <>
+                                      {currentColumn?.render != null
+                                        ? currentColumn.render(data)
+                                        : data[columnKey as keyof T]}
+                                    </>
+                                  </TableCell>
+                                )
+                              }}
+                            </TableRow>
+                          )}
+                        </TableBody>
+                      </NextUiTable>
+                    ) : (
+                      <>{emptyState}</>
+                    )}
                   </Tab>
                 )
               })}
@@ -144,7 +133,7 @@ export const Table = <T extends unknown>({
           <div className="flex gap-4 items-center h-fit absolute right-5">
             {rowsPerPageOptions.length !== 0 && (
               <label htmlFor="select" className="flex items-center text-default-500 text-small">
-                Rows per page:
+                Filas por pagina:
                 <select
                   id="select"
                   className="bg-transparent outline-none text-default-500 text-small"
@@ -205,6 +194,10 @@ type Props<T = unknown> = {
   }[]
   data: Record<string, T[]> | T[]
   /**
+   * A component that is showed when there is no initial data
+   */
+  emptyState: ReactElement
+  /**
    * Function that determinate what property of your data use as a key prop
    * @param data data received from the current iteration
    * @returns the key to use in key prop
@@ -221,6 +214,7 @@ type Props<T = unknown> = {
    * Main action in the table
    */
   action?: {
+    icon?: ReactNode
     text: string
     fn: () => void
   }

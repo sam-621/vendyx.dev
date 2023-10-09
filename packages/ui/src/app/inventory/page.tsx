@@ -6,7 +6,7 @@ export default async function InventoryPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-foreground font-semibold text-4xl">Inventory</h1>
+      <h1 className="text-foreground font-semibold text-4xl">Inventario</h1>
       <section>
         <InventoryTable products={products} />
       </section>
