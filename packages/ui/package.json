@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@hookform/resolvers": "^3.3.1",
     "@nextui-org/react": "^2.0.19",
     "@types/node": "20.4.8",
     "@types/react": "18.2.19",
@@ -23,7 +24,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
     "tailwindcss": "3.3.3",
-    "typescript": "*"
+    "typescript": "*",
+    "yup": "^1.3.2"
   },
   "gacp": {
     "push": false
