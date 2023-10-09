@@ -1,4 +1,4 @@
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Parent, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductVariantRepository } from '../repositories'
 import { ProductVariant } from '../inventory'
 
@@ -6,15 +6,15 @@ import { ProductVariant } from '../inventory'
 export class ProductVariantResolver {
   constructor(private repository: ProductVariantRepository) {}
 
-  @Query('variants')
-  async variants() {
-    return this.repository.findMany()
-  }
+  // @Query('variants')
+  // async variants() {
+  //   return this.repository.findMany()
+  // }
 
-  @Query('variant')
-  async variant(@Args('id') id: string) {
-    return this.repository.findOne(id)
-  }
+  // @Query('variant')
+  // async variant(@Args('id') id: string) {
+  //   return this.repository.findOne(id)
+  // }
 
   @ResolveField('product')
   async product(@Parent() variant: ProductVariant) {

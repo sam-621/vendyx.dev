@@ -8,6 +8,6 @@ interface Node {
 }
 
 interface List {
-  items: [Node!]!
+  items: [Node]!
   totalItems: Int!
 }

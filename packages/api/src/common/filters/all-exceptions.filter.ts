@@ -24,6 +24,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const formattedErrorCode = errorCode.toUpperCase().replace(' ', '_') as ErrorCode
 
       this.logger.businessLog(exception, formattedErrorCode, errorMessage)
+
+      if (errorMessage == 'Cannot GET /favicon.ico') return
+
       throw new GraphQLError(errorMessage, { extensions: { code: formattedErrorCode } })
     }
 

@@ -53,7 +53,7 @@ export interface Node {
 }
 
 export interface List {
-    items: Node[];
+    items: Nullable<Node>[];
     totalItems: number;
 }
 
@@ -82,16 +82,6 @@ export abstract class IQuery {
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 
     abstract products(): Nullable<ProductList> | Promise<Nullable<ProductList>>;
-
-    abstract variant(id: string): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
-
-    abstract variants(): Nullable<ProductVariant>[] | Promise<Nullable<ProductVariant>[]>;
-
-    abstract option(id: string): Nullable<Option> | Promise<Nullable<Option>>;
-
-    abstract options(): Nullable<Option>[] | Promise<Nullable<Option>[]>;
-
-    abstract optionValues(): Nullable<OptionValues>[] | Promise<Nullable<OptionValues>[]>;
 
     abstract label(id: string): Nullable<Label> | Promise<Nullable<Label>>;
 
@@ -159,14 +149,12 @@ export class Product implements Node {
 }
 
 export class ProductList implements List {
-    items: Product[];
+    items: Nullable<Product>[];
     totalItems: number;
 }
 
 export abstract class IMutation {
     abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
-
-    abstract createProductVariant(productId: string, input?: Nullable<CreateProductVariantInput[]>): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 }
 
 export class Label implements Node {

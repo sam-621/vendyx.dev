@@ -1,15 +1,8 @@
 type Query {
   product(id: ID, slug: String): Product
   products: ProductList
-  variant(id: ID!): ProductVariant
-  variants: [ProductVariant]!
-  option(id: ID!): Option
-  options: [Option]!
-  # option(id: ID!): Option
-  optionValues: [OptionValues]!
 }
 
 type Mutation {
   createProduct(input: CreateProductInput!): Product
-  createProductVariant(productId: ID!, input: [CreateProductVariantInput!]): ProductVariant
 }
