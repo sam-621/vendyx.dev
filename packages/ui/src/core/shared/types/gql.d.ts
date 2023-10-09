@@ -1,5 +1,5 @@
 export type List<T> = {
-  items: T[]
+  items: (T | undefined)[]
   totalItems: number
 }
 

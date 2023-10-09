@@ -1,6 +1,6 @@
 'use client'
 
-import type { GetInventoryProductsQueryResult } from '@/core/Inventory'
+import type { GetInventoryProductsQueryResult } from '@/core/inventory/types'
 import { Table } from '@/theme/components'
 import { Chip, User } from '@nextui-org/react'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
   return (
     <Table
       searchFn={(query, data) => {
-        return data.filter(d => d.name.toLowerCase().includes(query))
+        return data.filter(d => d?.name.toLowerCase().includes(query))
       }}
       action={{
         text: 'Add Product',
@@ -21,20 +21,20 @@ export const InventoryTable: FC<Props> = ({ products }) => {
       rowsPerPageOptions={[3, 6, 9, 12]}
       filters
       data={products.items}
-      getKey={d => d.id.toString()}
+      getKey={d => d?.id.toString() ?? ''}
       columns={[
         {
           name: 'Product',
           field: 'name',
           render: data => {
             return (
-              <Link href={`/inventory/${data.slug}`}>
+              <Link href={`/inventory/${data?.slug ?? ''}`}>
                 <User
                   avatarProps={{
                     radius: 'sm',
-                    src: data.assets[0]?.source
+                    src: data?.assets[0]?.source
                   }}
-                  name={data.name}
+                  name={data?.name}
                 />
               </Link>
             )
@@ -43,17 +43,17 @@ export const InventoryTable: FC<Props> = ({ products }) => {
         {
           name: 'Price',
           field: 'price',
-          render: data => <span>{`$ ${data.variants[0]?.price ?? 0}`}</span>
+          render: data => <span>{`$ ${data?.variants[0]?.price ?? 0}`}</span>
         },
         {
           name: 'Stock',
           field: 'variants.stock',
-          render: data => <span>{data.variants[0]?.stock}</span>
+          render: data => <span>{data?.variants[0]?.stock}</span>
         },
         {
           name: 'Variants',
           field: 'variants',
-          render: data => <span>{data.variants.length}</span>
+          render: data => <span>{data?.variants.length}</span>
         },
         {
           name: 'Status',
@@ -61,10 +61,10 @@ export const InventoryTable: FC<Props> = ({ products }) => {
           render: data => (
             <Chip
               className="capitalize"
-              color={data.enabled ? 'success' : 'default'}
+              color={data?.enabled ?? false ? 'success' : 'default'}
               variant="flat"
             >
-              {data.enabled ? 'Enabled' : 'Disabled'}
+              {data?.enabled ?? false ? 'Enabled' : 'Disabled'}
             </Chip>
           )
         }

@@ -21,9 +21,6 @@ export const CommonCollectionFragment = /* GraphQL */ `
   }
 `
 export const CommonProductFragment = /* GraphQL */ `
-  ${CommonAssetFragment}
-  ${CommonVariantFragment}
-
   fragment CommonProduct on Product {
     id
     createdAt

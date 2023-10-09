@@ -44,11 +44,19 @@ export const Table = <T extends unknown>({
     if (searchFn == null) return initialData
 
     if (query.length === 0) {
+      console.log('in')
+      console.log({
+        initialData,
+        isArray: isArray(data)
+      })
+
       return initialData
     }
 
     return searchFn(query, initialData)
   }, [query, initialData])
+
+  console.log(filteredDataByQuery)
 
   return (
     <Card>

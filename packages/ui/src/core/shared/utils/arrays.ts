@@ -1,1 +1,1 @@
-export const isArray = (arr: any): boolean => Boolean(arr?.length)
+export const isArray = (arr: any): boolean => arr?.length !== undefined
