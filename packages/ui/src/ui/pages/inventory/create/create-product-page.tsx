@@ -1,11 +1,21 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { ProductDetails } from '@/components/inventory'
 import { DetailsLayout } from '@/components/layouts'
-import { Button } from '@nextui-org/button'
+import { CreateProductFormContext } from '@/core/inventory/contexts'
+import { Button } from '@nextui-org/react'
 
 export const CreateProductPage = () => {
   return (
-    <DetailsLayout actions={<Button color="primary">Guardar producto</Button>}>
-      <ProductDetails />
-    </DetailsLayout>
+    <CreateProductFormContext>
+      <DetailsLayout
+        actions={
+          <Button color="primary" type="submit">
+            Guardar producto
+          </Button>
+        }
+      >
+        <ProductDetails />
+      </DetailsLayout>
+    </CreateProductFormContext>
   )
 }

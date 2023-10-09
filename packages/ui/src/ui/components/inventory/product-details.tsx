@@ -1,17 +1,44 @@
+'use client'
 import { Dropzone, Select } from '@/theme/components'
 import { Card, CardBody } from '@nextui-org/card'
 import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Checkbox } from '@nextui-org/checkbox'
+import { useFormContext } from 'react-hook-form'
 
-export const ProductDetails = async () => {
+export const ProductDetails = () => {
+  const { register, formState } = useFormContext()
+  console.log({
+    formState: formState.errors
+  })
+
   return (
     <section className="grid grid-cols-[2fr,1fr] gap-6">
       <div className="flex flex-col gap-6">
         <Card>
           <CardBody className="flex flex-col gap-4">
-            <Input label="Name" placeholder="Black T-shirt" labelPlacement="outside" radius="sm" />
-            <Textarea label="Description" labelPlacement="outside" radius="sm" />
+            <div className="flex gap-4">
+              <Input
+                {...register('name')}
+                label="Name"
+                placeholder="Black T-shirt"
+                labelPlacement="outside"
+                radius="sm"
+              />
+              <Input
+                {...register('slug')}
+                label="Slug"
+                placeholder="Black T-shirt"
+                labelPlacement="outside"
+                radius="sm"
+              />
+            </div>
+            <Textarea
+              {...register('description')}
+              label="Description"
+              labelPlacement="outside"
+              radius="sm"
+            />
             <Dropzone />
           </CardBody>
         </Card>

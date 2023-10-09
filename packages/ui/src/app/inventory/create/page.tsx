@@ -1,5 +1,11 @@
+'use client'
+import { PageLayout } from '@/components/layouts'
 import { CreateProductPage } from '@/pages/inventory'
 
-export default async function CreateProductView() {
-  return <CreateProductPage />
+export default function CreateProductView() {
+  return (
+    <PageLayout>
+      <CreateProductPage />
+    </PageLayout>
+  )
 }
