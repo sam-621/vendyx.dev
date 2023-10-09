@@ -1,7 +1,10 @@
-import type { Asset } from '@/core/asset/types'
-import type { ProductVariant } from './product'
-import type { Collection } from '@/core/collection/types/collection'
-import type { CommonAsset, CommonProduct, CommonVariant, List } from '@/core/shared/types'
+import type {
+  CommonAsset,
+  CommonCollection,
+  CommonProduct,
+  CommonVariant,
+  List
+} from '@/core/shared/types'
 
 export type GetInventoryProductsQueryResult = List<
   CommonProduct & {
@@ -12,11 +15,16 @@ export type GetInventoryProductsQueryResult = List<
 
 export type GetProductDetailsQueryResult = CommonProduct & {
   description: string
-  variants: (Omit<ProductVariant, 'createdAt' | 'updatedAt' | 'enable'> | undefined)[]
-  assets: (Pick<Asset, 'id' | 'source'> | undefined)[]
-  collections: Pick<Collection, 'id' | 'name' | 'slug'>
+  variants: CommonVariant & {
+    costPerProduct: number
+    offerPrice: null
+    sku: string
+    weight: number
+  }
+  assets: CommonAsset[]
+  collections: CommonCollection[]
 }
 
 export type GetProductDetailsArgs = {
-  productId: string
+  slug: string
 }

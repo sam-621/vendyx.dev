@@ -16,7 +16,7 @@ export const getProducts = async (): Promise<GetInventoryProductsQueryResult> =>
   return products
 }
 
-type GetProductDetailsResponse = { product: GetProductDetailsQueryResult }
+type GetProductDetailsResponse = { product: GetProductDetailsQueryResult | null }
 
 export const getProductDetails = async (
   args: GetProductDetailsArgs

@@ -1,15 +1,16 @@
 import {
   CommonAssetFragment,
+  CommonCollectionFragment,
   CommonProductFragment,
   CommonVariantFragment
-} from '@/core/shared/gql/fragments'
+} from '@/core/shared/gql'
 
 export const GetInventoryProductsQuery = /* GraphQL */ `
+  ${CommonProductFragment}
+  ${CommonAssetFragment}
+  ${CommonVariantFragment}
+
   query GetInventoryProducts {
-    ${CommonProductFragment}
-    ${CommonAssetFragment}
-    ${CommonVariantFragment}
-    
     products {
       items {
         ...CommonProduct
@@ -25,31 +26,27 @@ export const GetInventoryProductsQuery = /* GraphQL */ `
 `
 
 export const GetProductDetailsQuery = /* GraphQL */ `
-  query GetInventoryProducts($productId: ID!) {
-    product(id: $productId) {
-      id
-      name
+  ${CommonProductFragment}
+  ${CommonAssetFragment}
+  ${CommonVariantFragment}
+  ${CommonCollectionFragment}
+
+  query GetProductDetails($slug: String!) {
+    product(slug: $slug) {
+      ...CommonProduct
       description
-      slug
-      enabled
-      createdAt
       variants {
-        id
-        price
+        ...CommonVariant
         costPerProduct
         offerPrice
-        stock
         sku
         weight
       }
       assets {
-        id
-        source
+        ...CommonAsset
       }
       collections {
-        id
-        name
-        slug
+        ...CommonCollection
       }
     }
   }
