@@ -12,7 +12,7 @@ export const useCreateProduct = (): Return => {
   }
 }
 
-export const createProductSchema = z.object({
+export const createProductValidator = z.object({
   name: z.string().min(3),
   slug: z.string().min(3),
   description: z.string()
