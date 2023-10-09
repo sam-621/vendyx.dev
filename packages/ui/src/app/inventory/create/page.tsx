@@ -3,7 +3,7 @@ import { ProductDetails } from '@/components/inventory'
 import { Breadcrumb } from '@/theme/components'
 import { Button } from '@nextui-org/button'
 
-export default async function ProductDetailsPage({ params: { slug } }: Props) {
+export default async function CreateProductPage() {
   // const productDetails = await getProductDetails({ slug })
   return (
     <div className="flex flex-col gap-4">
@@ -17,10 +17,4 @@ export default async function ProductDetailsPage({ params: { slug } }: Props) {
       </div>
     </div>
   )
-}
-
-type Props = {
-  params: {
-    slug: string
-  }
 }
