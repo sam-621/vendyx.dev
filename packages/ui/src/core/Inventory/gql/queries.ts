@@ -1,20 +1,23 @@
+import {
+  CommonAssetFragment,
+  CommonProductFragment,
+  CommonVariantFragment
+} from '@/core/shared/gql/fragments'
+
 export const GetInventoryProductsQuery = /* GraphQL */ `
   query GetInventoryProducts {
+    ${CommonProductFragment}
+    ${CommonAssetFragment}
+    ${CommonVariantFragment}
+    
     products {
       items {
-        id
-        createdAt
-        name
-        slug
-        enabled
+        ...CommonProduct
         variants {
-          id
-          price
-          stock
+          ...CommonVariant
         }
         assets {
-          id
-          source
+          ...CommonAsset
         }
       }
     }
