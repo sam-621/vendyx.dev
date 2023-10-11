@@ -15,12 +15,12 @@ export type GetInventoryProductsQueryResult = List<
 
 export type GetProductDetailsQueryResult = CommonProduct & {
   description: string
-  variants: CommonVariant & {
+  variants: (CommonVariant & {
     costPerProduct: number
     offerPrice: null
     sku: string
     weight: number
-  }
+  })[]
   assets: CommonAsset[]
   collections: CommonCollection[]
 }

@@ -15,7 +15,12 @@ export const useCreateProduct = (): Return => {
 export const createProductValidator = z.object({
   name: z.string().min(3),
   slug: z.string().min(3),
-  description: z.string()
+  description: z.string(),
+  images: z.any(),
+  price: z.preprocess(val => Number(val), z.number()),
+  offerPrice: z.preprocess(val => Number(val), z.number()),
+  costPerProduct: z.preprocess(val => Number(val), z.number()),
+  weight: z.preprocess(val => Number(val), z.number())
 })
 
 type Return = {

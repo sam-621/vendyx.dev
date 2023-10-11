@@ -1,6 +1,7 @@
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
+import { forwardRef, type DetailedHTMLProps, type InputHTMLAttributes } from 'react'
 
-export const Dropzone = () => {
+export const Dropzone = forwardRef<HTMLInputElement, Props>(function Dropzone({ ...rest }, ref) {
   return (
     <div className="flex items-center justify-center w-full">
       <label
@@ -11,8 +12,10 @@ export const Dropzone = () => {
           <ArrowUpTrayIcon width={24} />
           <p className="text-sm text-gray-500 dark:text-gray-400">Accepts .jpg and .png</p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" />
+        <input ref={ref} {...rest} id="dropzone-file" type="file" className="hidden" />
       </label>
     </div>
   )
-}
+})
+
+type Props = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
