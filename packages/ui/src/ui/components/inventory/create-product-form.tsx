@@ -1,3 +1,4 @@
+'use client'
 import { Form } from '@/components/wrappers'
 import { createProductValidator, useCreateProduct } from '@/core/inventory/hooks'
 import { Button } from '@nextui-org/button'

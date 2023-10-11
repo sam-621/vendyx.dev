@@ -8,7 +8,7 @@ import type { GetProductDetailsQueryResult } from '@/core/inventory/types'
 import { ConnectForm } from '../wrappers'
 import { isArray } from '@/core/shared/utils/arrays'
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
-import { Tooltip } from '@nextui-org/react'
+import { Tooltip } from '@nextui-org/tooltip'
 
 export const ProductDetails: FC<Props> = ({ product }) => {
   const variant = isArray(product?.variants) ? product?.variants[0] : null
