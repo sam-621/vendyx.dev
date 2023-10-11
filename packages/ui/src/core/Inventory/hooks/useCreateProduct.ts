@@ -17,10 +17,12 @@ export const createProductValidator = z.object({
   slug: z.string().min(3),
   description: z.string(),
   images: z.any(),
-  price: z.preprocess(val => Number(val), z.number()),
-  offerPrice: z.preprocess(val => Number(val), z.number()),
-  costPerProduct: z.preprocess(val => Number(val), z.number()),
-  weight: z.preprocess(val => Number(val), z.number())
+  price: z.preprocess(value => Number(value), z.number()),
+  offerPrice: z.preprocess(value => Number(value), z.number()),
+  costPerProduct: z.preprocess(value => Number(value), z.number()),
+  weight: z.preprocess(value => Number(value), z.number()),
+  state: z.enum(['enabled', 'disabled']),
+  collections: z.preprocess(value => String(value === undefined ? '' : value), z.string())
 })
 
 type Return = {

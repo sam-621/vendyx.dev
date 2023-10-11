@@ -10,6 +10,7 @@ import { isArray } from '@/core/shared/utils/arrays'
 
 export const ProductDetails: FC<Props> = ({ product }) => {
   const variant = isArray(product?.variants) ? product?.variants[0] : null
+  const productState = product?.enabled === undefined || product?.enabled ? 'enabled' : 'disabled'
 
   return (
     <section className="grid grid-cols-[2fr,1fr] gap-6">
@@ -152,8 +153,10 @@ export const ProductDetails: FC<Props> = ({ product }) => {
             <ConnectForm>
               {({ register }) => (
                 <Select
-                  {...register('state')}
-                  defaultSelectedKeys={['enabled']}
+                  {...register('state', {
+                    value: productState
+                  })}
+                  defaultSelectedKeys={[productState]}
                   label="State"
                   options={[
                     { label: 'Enabled', value: 'enabled' },
