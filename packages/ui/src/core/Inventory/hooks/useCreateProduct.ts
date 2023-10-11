@@ -13,8 +13,7 @@ export const useCreateProduct = (): Return => {
 }
 
 export const createProductValidator = z.object({
-  name: z.string().min(3),
-  slug: z.string().min(3),
+  name: z.string().min(3, 'El nombre debe de ser mayor a 3 caracteres'),
   description: z.string(),
   images: z.any(),
   price: z.preprocess(value => Number(value), z.number()),

@@ -7,6 +7,8 @@ import type { FC } from 'react'
 import type { GetProductDetailsQueryResult } from '@/core/inventory/types'
 import { ConnectForm } from '../wrappers'
 import { isArray } from '@/core/shared/utils/arrays'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
+import { Tooltip } from '@nextui-org/react'
 
 export const ProductDetails: FC<Props> = ({ product }) => {
   const variant = isArray(product?.variants) ? product?.variants[0] : null
@@ -19,29 +21,14 @@ export const ProductDetails: FC<Props> = ({ product }) => {
           <CardBody className="flex flex-col gap-4">
             <div className="flex gap-4">
               <ConnectForm>
-                {({ register, formState: { errors } }) => {
-                  console.log({
-                    errors
-                  })
-                  return (
-                    <Input
-                      {...register('name', { value: product?.name })}
-                      label="Name"
-                      placeholder="Black T-shirt"
-                      labelPlacement="outside"
-                      radius="sm"
-                    />
-                  )
-                }}
-              </ConnectForm>
-              <ConnectForm>
-                {({ register }) => (
+                {({ register, formState: { errors } }) => (
                   <Input
-                    {...register('slug', { value: product?.slug })}
-                    label="Slug"
+                    {...register('name', { value: product?.name })}
+                    label="Nombre"
                     placeholder="Black T-shirt"
                     labelPlacement="outside"
                     radius="sm"
+                    errorMessage={String(errors.name?.message ?? '')}
                   />
                 )}
               </ConnectForm>
@@ -50,7 +37,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
               {({ register }) => (
                 <Textarea
                   {...register('description', { value: product?.description })}
-                  label="Description"
+                  label="Descripción"
                   labelPlacement="outside"
                   radius="sm"
                 />
@@ -68,7 +55,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                   <Input
                     {...register('price', { value: variant?.price })}
                     type="number"
-                    label="Price"
+                    label="Precio"
                     placeholder="$ 0,00"
                     labelPlacement="outside"
                     radius="sm"
@@ -80,10 +67,24 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                   <Input
                     {...register('offerPrice', { value: variant?.offerPrice })}
                     type="number"
-                    label="Offer price"
+                    label="Precio comparado"
                     placeholder="$ 0,00"
                     labelPlacement="outside"
                     radius="sm"
+                    endContent={
+                      <Tooltip
+                        content={
+                          <p>
+                            Introduce un valor mayor a tu precio,
+                            <br /> usualmente mostrado con una tacha
+                          </p>
+                        }
+                        showArrow
+                        placement="bottom"
+                      >
+                        <QuestionMarkCircleIcon width={24} />
+                      </Tooltip>
+                    }
                   />
                 )}
               </ConnectForm>
@@ -94,7 +95,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                   <Input
                     {...register('costPerProduct', { value: variant?.costPerProduct })}
                     type="number"
-                    label="Cost per product"
+                    label="Costo por producto"
                     placeholder="$ 0,00"
                     labelPlacement="outside"
                     radius="sm"
@@ -102,14 +103,14 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                 )}
               </ConnectForm>
               <Input
-                label="Revenue"
+                label="Ganancia"
                 placeholder="- -"
                 labelPlacement="outside"
                 radius="sm"
                 isDisabled
               />
               <Input
-                label="Margin"
+                label="Margen"
                 placeholder="- -"
                 labelPlacement="outside"
                 radius="sm"
@@ -121,13 +122,13 @@ export const ProductDetails: FC<Props> = ({ product }) => {
 
         <Card>
           <CardBody className="flex flex-col gap-4">
-            <Checkbox>This product requires shipping</Checkbox>
+            <Checkbox>Este producto requiere envío</Checkbox>
             <div className="flex gap-4">
               <ConnectForm>
                 {({ register }) => (
                   <Input
                     {...register('weight', { value: variant?.weight })}
-                    label="Weight"
+                    label="Peso"
                     placeholder="0 kg"
                     labelPlacement="outside"
                     radius="sm"
@@ -140,9 +141,9 @@ export const ProductDetails: FC<Props> = ({ product }) => {
 
         <Card>
           <CardBody className="flex flex-col gap-4">
-            <span className="text-xl">Danger zone</span>
+            <span className="text-xl">Zona de peligro</span>
             <Button color="danger" className="w-fit">
-              Delete product
+              Eliminar producto
             </Button>
           </CardBody>
         </Card>
@@ -157,10 +158,10 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     value: productState
                   })}
                   defaultSelectedKeys={[productState]}
-                  label="State"
+                  label="Estado"
                   options={[
-                    { label: 'Enabled', value: 'enabled' },
-                    { label: 'Disabled', value: 'disabled' }
+                    { label: 'Habilitado', value: 'enabled' },
+                    { label: 'Desabilitado', value: 'disabled' }
                   ]}
                 />
               )}
@@ -174,8 +175,8 @@ export const ProductDetails: FC<Props> = ({ product }) => {
               {({ register }) => (
                 <Select
                   {...register('collection')}
-                  label="Collections"
-                  placeholder="Select collections"
+                  label="Colecciones"
+                  placeholder="Selecciona colleciones"
                   selectionMode="multiple"
                   options={[
                     { label: 'Clothes', value: 'clothes' },
