@@ -1,0 +1,4 @@
+export * from './create-product-form'
+export * from './empty-state-inventory-table'
+export * from './inventory-table'
+export * from './product-details'

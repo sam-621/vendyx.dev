@@ -1,7 +1,7 @@
-import { InventoryTable } from '@/components/inventory'
 import { getProducts } from '@/core/inventory/services/products'
+import { InventoryTable } from '@/pages/inventory/components'
 
-export default async function InventoryPage() {
+export default async function InventoryRoute() {
   const products = await getProducts()
 
   return (

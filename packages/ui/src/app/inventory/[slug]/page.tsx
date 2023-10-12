@@ -1,5 +1,4 @@
-import { ProductDetails } from '@/components/inventory'
-// import { getProductDetails } from '@/core/inventory/services'
+import { ProductDetails } from '@/pages/inventory/components'
 import { Breadcrumb } from '@/theme/components'
 import { Button } from '@nextui-org/button'
 

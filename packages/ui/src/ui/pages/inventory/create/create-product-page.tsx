@@ -1,4 +1,4 @@
-import { CreateProductForm } from '@/components/inventory'
+import { CreateProductForm } from '../components'
 
 export const CreateProductPage = () => {
   return <CreateProductForm />
