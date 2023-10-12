@@ -4,7 +4,7 @@ import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Checkbox } from '@nextui-org/checkbox'
 import type { FC } from 'react'
-import type { GetProductDetailsQueryResult } from '@/core/inventory/types'
+import type { DetailedProduct } from '@/core/inventory/types'
 import { ConnectForm } from '../../../components/wrappers'
 import { isArray } from '@/core/shared/utils/arrays'
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
@@ -197,5 +197,5 @@ export const ProductDetails: FC<Props> = ({ product }) => {
 }
 
 type Props = {
-  product?: GetProductDetailsQueryResult
+  product?: DetailedProduct
 }

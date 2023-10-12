@@ -1,6 +1,6 @@
 'use client'
 
-import type { GetInventoryProductsQueryResult } from '@/core/inventory/types'
+import type { BasicProduct } from '@/core/inventory/types'
 import { Table } from '@/theme/components'
 import { Chip, User } from '@nextui-org/react'
 import Link from 'next/link'
@@ -14,7 +14,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
         return data.filter(d => d?.name.toLowerCase().includes(query))
       }}
       action={
-        products.items.length > 0
+        products.length > 0
           ? {
               text: 'Agregar producto',
               fn() {
@@ -25,7 +25,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
       }
       rowsPerPageOptions={[3, 6, 9, 12]}
       filters
-      data={products.items}
+      data={products}
       getKey={d => d?.id.toString() ?? ''}
       emptyState={<EmptyStateInventoryTable />}
       columns={[
@@ -80,5 +80,5 @@ export const InventoryTable: FC<Props> = ({ products }) => {
 }
 
 type Props = {
-  products: GetInventoryProductsQueryResult
+  products: BasicProduct[]
 }

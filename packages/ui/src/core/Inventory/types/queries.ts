@@ -1,29 +1,11 @@
-import type {
-  CommonAsset,
-  CommonCollection,
-  CommonProduct,
-  CommonVariant,
-  List
-} from '@/core/shared/types'
+import type { List } from '@/core/shared/types'
+import type { BasicProduct, DetailedProduct } from './product'
 
-export type GetInventoryProductsQueryResult = List<
-  CommonProduct & {
-    variants: CommonVariant[]
-    assets: CommonAsset[]
-  }
->
+// Get inventory products
+export type GetInventoryProductsQueryResult = List<BasicProduct>
 
-export type GetProductDetailsQueryResult = CommonProduct & {
-  description: string
-  variants: (CommonVariant & {
-    costPerProduct: number
-    offerPrice: null
-    sku: string
-    weight: number
-  })[]
-  assets: CommonAsset[]
-  collections: CommonCollection[]
-}
+// Get product details
+export type GetProductDetailsQueryResult = DetailedProduct
 
 export type GetProductDetailsArgs = {
   slug: string
