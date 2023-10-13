@@ -18,9 +18,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
         products.length > 0
           ? {
               text: 'Agregar producto',
-              fn() {
-                console.log('clicked')
-              },
+              href: '/inventory/create',
               icon: <PlusIcon width={20} className="flex-shrink-0" />
             }
           : undefined

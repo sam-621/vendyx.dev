@@ -17,6 +17,7 @@ import {
   Button,
   Input
 } from '@nextui-org/react'
+import Link from 'next/link'
 import { type ReactElement, type Key, useState, useMemo, type ReactNode } from 'react'
 
 export const Table = <T extends unknown>({
@@ -72,6 +73,8 @@ export const Table = <T extends unknown>({
           {action != null && (
             <Button
               onClick={action?.fn}
+              as={action.href !== null ? Link : Button}
+              href={action.href}
               className="flex-shrink-0"
               color="primary"
               radius="sm"
@@ -214,9 +217,10 @@ type Props<T = unknown> = {
    * Main action in the table
    */
   action?: {
+    href?: string
     icon?: ReactNode
     text: string
-    fn: () => void
+    fn?: () => void
   }
   /**
    * Tabs to manage different views in the table
