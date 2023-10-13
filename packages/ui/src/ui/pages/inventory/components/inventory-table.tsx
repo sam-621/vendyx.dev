@@ -6,6 +6,7 @@ import { Chip, User } from '@nextui-org/react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { EmptyStateInventoryTable } from './empty-state-inventory-table'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
   return (
@@ -19,7 +20,8 @@ export const InventoryTable: FC<Props> = ({ products }) => {
               text: 'Agregar producto',
               fn() {
                 console.log('clicked')
-              }
+              },
+              icon: <PlusIcon width={20} className="flex-shrink-0" />
             }
           : undefined
       }

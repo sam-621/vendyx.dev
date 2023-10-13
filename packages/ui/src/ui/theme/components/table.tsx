@@ -72,7 +72,7 @@ export const Table = <T extends unknown>({
           {action != null && (
             <Button
               onClick={action?.fn}
-              className="w-fit"
+              className="flex-shrink-0"
               color="primary"
               radius="sm"
               startContent={action.icon}
