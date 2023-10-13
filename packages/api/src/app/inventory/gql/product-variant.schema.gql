@@ -29,6 +29,6 @@ input CreateProductVariantInput {
   costPerProduct: Float
   weight: Float
 
-  asset: ID
+  assetId: ID
   optionValues: [CreateOptionValuesInput]
 }

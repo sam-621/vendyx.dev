@@ -31,7 +31,7 @@ export class CreateProductVariantInput {
     offerPrice?: Nullable<number>;
     costPerProduct?: Nullable<number>;
     weight?: Nullable<number>;
-    asset?: Nullable<string>;
+    assetId?: Nullable<string>;
     optionValues?: Nullable<Nullable<CreateOptionValuesInput>[]>;
 }
 
