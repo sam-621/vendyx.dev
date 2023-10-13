@@ -43,7 +43,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                 />
               )}
             </ConnectForm>
-            <ConnectForm>{({ register }) => <Dropzone {...register('images')} />}</ConnectForm>
+            <ConnectForm>{({ register }) => <Dropzone {...register('assets')} />}</ConnectForm>
           </CardBody>
         </Card>
 

@@ -1,6 +1,7 @@
 import { gqlRequest } from '@/core/shared/gql'
 import { GetInventoryProductsQuery, GetProductDetailsQuery } from '../gql/queries'
 import type {
+  CreateProductInput,
   CreateProductMutationArgs,
   CreateProductMutationResult,
   GetInventoryProductsQueryResult,
@@ -35,11 +36,13 @@ export const getProductDetails = async (
 type CreateProductResponse = { createProduct: CreateProductMutationResult | null }
 
 export const createProduct = async (
-  args: CreateProductMutationArgs
+  args: CreateProductInput
 ): Promise<CreateProductMutationResult | null> => {
   const { createProduct } = await gqlRequest<CreateProductResponse, CreateProductMutationArgs>({
     query: CreateProductMutation,
-    variables: args
+    variables: {
+      input: args
+    }
   })
 
   return createProduct

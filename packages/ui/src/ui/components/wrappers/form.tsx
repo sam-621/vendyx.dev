@@ -26,7 +26,7 @@ export const Form: FC<Props> = ({ onSubmit, validator, className, children }) =>
 }
 
 type Props = PropsWithChildren & {
-  onSubmit: (input: any) => void
+  onSubmit: (input: any) => Promise<void>
   validator?: any
   className?: string
 }

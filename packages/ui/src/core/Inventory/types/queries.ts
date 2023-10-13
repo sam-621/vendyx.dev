@@ -15,6 +15,10 @@ export type GetProductDetailsArgs = {
 export type CreateProductMutationResult = DetailedProduct
 
 export type CreateProductMutationArgs = {
+  input: CreateProductInput
+}
+
+export type CreateProductInput = {
   name: string
   slug: string
   description?: string
