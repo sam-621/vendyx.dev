@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import { ThemeProvider } from '@/theme/theme-provider'
+import { AppLayout } from '@/components/layouts'
 
 const manrope = Manrope({ subsets: ['latin'] })
 
@@ -15,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="" suppressHydrationWarning>
       <body className={`${manrope.className} `}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
+          <AppLayout>{children}</AppLayout>
         </ThemeProvider>
       </body>
     </html>
