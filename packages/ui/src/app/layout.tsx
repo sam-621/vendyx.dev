@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="" suppressHydrationWarning>
-      <body className={`${manrope.className} `}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${manrope.className} h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AppLayout>{children}</AppLayout>
         </ThemeProvider>
