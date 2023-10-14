@@ -1,7 +1,15 @@
 'use client'
 
 import type { BasicProduct } from '@/core/inventory/types'
-import { Table } from '@/theme/components'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/theme/components'
 import { Chip, User } from '@nextui-org/react'
 import Link from 'next/link'
 import type { FC } from 'react'
@@ -10,72 +18,46 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
   return (
-    <Table
-      searchFn={(query, data) => {
-        return data.filter(d => d?.name.toLowerCase().includes(query))
-      }}
-      action={
-        products.length > 0
-          ? {
-              text: 'Agregar producto',
-              href: '/inventory/create',
-              icon: <PlusIcon width={20} className="flex-shrink-0" />
-            }
-          : undefined
-      }
-      rowsPerPageOptions={[3, 6, 9, 12]}
-      filters
-      data={products}
-      getKey={d => d?.id.toString() ?? ''}
-      emptyState={<EmptyStateInventoryTable />}
-      columns={[
-        {
-          name: 'Product',
-          field: 'name',
-          render: data => {
-            return (
-              <Link href={`/inventory/${data?.slug ?? ''}`}>
-                <User
-                  avatarProps={{
-                    radius: 'sm',
-                    src: data?.assets[0]?.source
-                  }}
-                  name={data?.name}
-                />
-              </Link>
-            )
-          }
-        },
-        {
-          name: 'Price',
-          field: 'price',
-          render: data => <span>{`$ ${data?.variants[0]?.price ?? 0}`}</span>
-        },
-        {
-          name: 'Stock',
-          field: 'variants.stock',
-          render: data => <span>{data?.variants[0]?.stock}</span>
-        },
-        {
-          name: 'Variants',
-          field: 'variants',
-          render: data => <span>{data?.variants.length}</span>
-        },
-        {
-          name: 'Status',
-          field: 'enabled',
-          render: data => (
-            <Chip
-              className="capitalize"
-              color={data?.enabled ?? false ? 'success' : 'default'}
-              variant="flat"
-            >
-              {data?.enabled ?? false ? 'Enabled' : 'Disabled'}
-            </Chip>
-          )
-        }
-      ]}
-    />
+    <Table>
+      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[100px]">Invoice</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Method</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell className="font-medium">INV001</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell className="text-right">$250.00</TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell className="font-medium">INV001</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell className="text-right">$250.00</TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell className="font-medium">INV001</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell className="text-right">$250.00</TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell className="font-medium">INV001</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell className="text-right">$250.00</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   )
 }
 

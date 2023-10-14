@@ -25,7 +25,7 @@ export const AppLayout: FC<Props> = ({ children }) => {
       </header>
       <div className={`grid grid-cols-10 gap-8 mr-8 h-[calc(100vh-${HEADER_HEIGHT})]`}>
         <AppSidebar />
-        <main className="col-span-7">{children}</main>
+        <main className="col-span-8 py-8 px-4">{children}</main>
       </div>
     </div>
   )
