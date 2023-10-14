@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pac": "mv src/ui/theme/ui/input.tsx src/ui/theme/components && rmdir src/ui/theme/ui && echo \"export * from './\"$NAME\"'\" >> src/ui/theme/components/index.ts && prettier src/ui/theme/components/${NAME}.tsx --write"
+    "pac": "mv src/ui/theme/ui/${NAME}.tsx src/ui/theme/components && rmdir src/ui/theme/ui && echo \"export * from './\"$NAME\"'\" >> src/ui/theme/components/index.ts && prettier src/ui/theme/components/${NAME}.tsx --write"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
