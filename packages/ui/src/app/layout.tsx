@@ -1,8 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
-import { Providers } from './providers'
-import { AppLayout } from '@/components/layouts'
+import { ThemeProvider } from '@/theme/theme-provider'
 
 const manrope = Manrope({ subsets: ['latin'] })
 
@@ -13,11 +12,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark text-foreground bg-background">
-      <body className={`${manrope.className}`}>
-        <Providers>
-          <AppLayout>{children}</AppLayout>
-        </Providers>
+    <html lang="en" className="" suppressHydrationWarning>
+      <body className={`${manrope.className} `}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
