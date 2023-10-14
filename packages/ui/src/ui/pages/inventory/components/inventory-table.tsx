@@ -1,38 +1,30 @@
 'use client'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { BasicProduct } from '@/core/inventory/types'
-import {
-  DataTable,
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  Checkbox
-} from '@/theme/components'
+import { DataTable, Checkbox, DataTableColumnHeader, Badge } from '@/theme/components'
 import type { FC } from 'react'
-import { ArrowUpDownIcon, MoreHorizontal } from 'lucide-react'
+import Link from 'next/link'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
-  return <DataTable data={MOCK_DATA} columns={columns} />
+  const input: TableProduct[] = products.map(p => ({
+    id: p.id,
+    enabled: p.enabled,
+    name: p.name,
+    slug: p.slug,
+    assets: p.assets,
+    price: p.variants[0]?.price ?? 0,
+    stock: p.variants[0]?.stock ?? 0
+  }))
+
+  return <DataTable data={input} columns={columns} />
 }
 
-type Props = {
-  products: BasicProduct[]
+type TableProduct = Pick<BasicProduct, 'id' | 'name' | 'slug' | 'enabled' | 'assets'> & {
+  price: number
+  stock: number
 }
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string
-  amount: number
-  status: 'pending' | 'processing' | 'success' | 'failed'
-  email: string
-}
-
-export const columns: ColumnDef<Payment>[] = [
+const columns: ColumnDef<TableProduct>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -53,74 +45,52 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false
   },
   {
-    accessorKey: 'status',
-    header: 'Status'
-  },
-  {
-    accessorKey: 'email',
+    accessorKey: 'name',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Email
-          <ArrowUpDownIcon className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    }
+      return <DataTableColumnHeader column={column} title="Producto" />
+    },
+    cell: ({ row }) => (
+      <Link href={`/inventory/${row.original.slug ?? ''}`}>
+        <span>{row.original.name}</span>
+      </Link>
+    )
   },
   {
-    accessorKey: 'amount',
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: 'price',
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="Precio" />
+    },
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('amount'))
+      const amount = parseFloat(row.getValue('price'))
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD'
       }).format(amount)
 
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="font-medium">{formatted}</div>
     }
   },
   {
-    id: 'actions',
+    accessorKey: 'stock',
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="Stock" />
+    }
+  },
+  {
+    accessorKey: 'Status',
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="Status" />
+    },
     cell: ({ row }) => {
-      // access to value in cell
-      // const payment = row.original
-
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Copy payment ID</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Badge variant={row.original.enabled ? 'default' : 'secondary'}>
+          {row.original.enabled ? 'Enabled' : 'Disabled'}
+        </Badge>
       )
     }
   }
 ]
 
-const MOCK_DATA: Payment[] = [
-  {
-    id: '728ed52f',
-    amount: 100,
-    status: 'pending',
-    email: 'm@example.com'
-  },
-  {
-    id: '489e1d42',
-    amount: 125,
-    status: 'processing',
-    email: 'example@gmail.com'
-  }
-]
+type Props = {
+  products: BasicProduct[]
+}
