@@ -1,5 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/24/outline'
-import { ChartBarIcon } from '@heroicons/react/24/solid'
+import { BarChart2Icon, ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 
@@ -10,7 +9,7 @@ export const Breadcrumb: FC<Props> = ({ items }) => {
         href="/"
         className="flex items-center gap-1 text-sm text-default-500 font-medium hover:text-default-900 transition-colors"
       >
-        <ChartBarIcon width={16} />
+        <BarChart2Icon size={16} />
         Panel
       </Link>
       <ChevronRightIcon width={16} className="text-default-500" />

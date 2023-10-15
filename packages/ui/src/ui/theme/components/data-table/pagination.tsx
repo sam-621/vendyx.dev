@@ -1,7 +1,7 @@
 import type { Table } from '@tanstack/react-table'
 
 import { Button } from '../button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../select'
+import { Select, SelectItem } from '../select'
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -28,17 +28,15 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             onValueChange={value => {
               table.setPageSize(Number(value))
             }}
+            placeholder={String(table.getState().pagination.pageSize)}
+            itemClasses={{ trigger: 'h-8 w-[70px]' }}
+            contentSide="top"
           >
-            <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 30, 40, 50].map(pageSize => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
+            {[10, 20, 30, 40, 50].map(pageSize => (
+              <SelectItem key={pageSize} value={`${pageSize}`}>
+                {pageSize}
+              </SelectItem>
+            ))}
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">

@@ -6,7 +6,7 @@ import { Check, ChevronDown } from 'lucide-react'
 
 import { cn } from '../utils'
 
-const Select = SelectPrimitive.Root
+const SelectRoot = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -109,13 +109,33 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
-export {
-  Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectLabel,
-  SelectItem,
-  SelectSeparator
+export { SelectItem }
+
+export const Select: React.FC<Props> = ({
+  placeholder,
+  itemClasses,
+  contentSide,
+  children,
+  ...rest
+}) => {
+  return (
+    <SelectRoot {...rest}>
+      <SelectTrigger className={itemClasses?.trigger}>
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent side={contentSide} className={itemClasses?.content}>
+        <SelectGroup>{children}</SelectGroup>
+      </SelectContent>
+    </SelectRoot>
+  )
+}
+
+type Props = SelectPrimitive.SelectProps & {
+  placeholder: string
+  children: React.ReactNode
+  contentSide?: 'top' | 'right' | 'bottom' | 'left'
+  itemClasses?: {
+    trigger?: string
+    content?: string
+  }
 }

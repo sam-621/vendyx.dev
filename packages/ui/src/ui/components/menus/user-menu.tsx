@@ -33,7 +33,7 @@ export const UserMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-2" align="end">
-        <DropdownMenuLabel className="font-normal flex flex-col gap-2">
+        <DropdownMenuLabel className="font-normal flex flex-col gap-2 p-2">
           <p className="text-sm font-medium leading-none">Admin</p>
           <p className="text-xs leading-none text-muted-foreground">sam_621@gmail.com</p>
         </DropdownMenuLabel>

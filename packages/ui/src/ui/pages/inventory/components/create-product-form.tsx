@@ -1,8 +1,8 @@
 'use client'
 import { Form } from '@/components/wrappers'
-import { Button } from '@nextui-org/button'
 import { ProductDetails } from './product-details'
 import { createProductValidator, useCreateProduct } from '@/core/inventory/hooks'
+import { Button } from '@/theme/components'
 
 export const CreateProductForm = () => {
   const { createProduct } = useCreateProduct()

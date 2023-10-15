@@ -1,14 +1,6 @@
 import type { FC, PropsWithChildren } from 'react'
 import { Logo } from '@/components/icons'
-import {
-  Button,
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/theme/components'
+import { Button, Select, SelectItem } from '@/theme/components'
 import { AppSidebar } from '../lists'
 import { UserMenu } from '../menus'
 import { StoreIcon } from 'lucide-react'
@@ -28,20 +20,17 @@ export const AppLayout: FC<Props> = ({ children }) => {
           <span>/</span>
           <div className="flex items-center gap-4">
             <StoreIcon />
-            <Select defaultValue="main">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Seleccione una tienda" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem className="text-left" value="main">
-                    Tienda principal
-                  </SelectItem>
-                  <SelectItem className="text-left" value="ext">
-                    Extrangero
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
+            <Select
+              defaultValue="main"
+              placeholder="Seleccione una tienda"
+              itemClasses={{ trigger: 'w-[180px]' }}
+            >
+              <SelectItem className="text-left" value="main">
+                Tienda principal
+              </SelectItem>
+              <SelectItem className="text-left" value="ext">
+                Extrangero
+              </SelectItem>
             </Select>
           </div>
         </div>
