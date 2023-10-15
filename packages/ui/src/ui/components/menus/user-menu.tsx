@@ -1,3 +1,4 @@
+'use client'
 import {
   Avatar,
   AvatarFallback,
@@ -16,8 +17,11 @@ import {
   DropdownMenuTrigger
 } from '@/theme/components'
 import { Laptop, Moon, Sun, SunMoon, User } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 export const UserMenu = () => {
+  const { setTheme } = useTheme()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -48,15 +52,15 @@ export const UserMenu = () => {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('light')}>
                   <Sun className="mr-2 h-4 w-4  scale-100 transition-all" />
                   <span>Claro</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('system')}>
                   <Laptop className="mr-2 h-4 w-4 transition-all " />
                   <span>Sistema</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('dark')}>
                   <Moon className="mr-2 h-4 w-4 transition-all " />
                   <span>Obscuro</span>
                 </DropdownMenuItem>

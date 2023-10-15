@@ -45,7 +45,7 @@ export const DataTable = <TData, TValue>({ columns, data, action }: Props<TData,
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Buscar..."
           value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
           onChange={event => table.getColumn('email')?.setFilterValue(event.target.value)}
           className="max-w-sm"
