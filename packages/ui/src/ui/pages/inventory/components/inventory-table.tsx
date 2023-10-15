@@ -4,6 +4,7 @@ import type { BasicProduct } from '@/core/inventory/types'
 import { DataTable, Checkbox, DataTableColumnHeader, Badge } from '@/theme/components'
 import type { FC } from 'react'
 import Link from 'next/link'
+import { PlusCircleIcon } from 'lucide-react'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
   const input: TableProduct[] = products.map(p => ({
@@ -16,7 +17,17 @@ export const InventoryTable: FC<Props> = ({ products }) => {
     stock: p.variants[0]?.stock ?? 0
   }))
 
-  return <DataTable data={input} columns={columns} />
+  return (
+    <DataTable
+      data={input}
+      columns={columns}
+      action={{
+        text: 'Agregar producto',
+        icon: <PlusCircleIcon size={16} />,
+        href: '/inventory/create'
+      }}
+    />
+  )
 }
 
 type TableProduct = Pick<BasicProduct, 'id' | 'name' | 'slug' | 'enabled' | 'assets'> & {

@@ -14,17 +14,12 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table'
 import { Button } from '../button'
-import { PlusIcon } from 'lucide-react'
-import { useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import { Input } from '../input'
 import { DataTablePagination } from './pagination'
+import { ButtonLink } from '../button-link'
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-}
-
-export const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
+export const DataTable = <TData, TValue>({ columns, data, action }: Props<TData, TValue>) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [rowSelection, setRowSelection] = useState({})
@@ -55,9 +50,18 @@ export const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData
           onChange={event => table.getColumn('email')?.setFilterValue(event.target.value)}
           className="max-w-sm"
         />
-        <Button className="flex gap-2">
-          <PlusIcon size={20} /> Agregar producto
-        </Button>
+
+        {action?.href !== undefined ? (
+          <ButtonLink className="flex gap-2" href={action.href}>
+            {action.icon}
+            {action.text}
+          </ButtonLink>
+        ) : action !== undefined ? (
+          <Button className="flex gap-2" onClick={action.fn}>
+            {action.icon}
+            {action.text}
+          </Button>
+        ) : null}
       </div>
       <div className="rounded-md border">
         <Table>
@@ -101,4 +105,18 @@ export const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData
       <DataTablePagination table={table} />
     </div>
   )
+}
+
+type Props<TData, TValue> = {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+  /**
+   * Main action in the table
+   */
+  action?: {
+    href?: string
+    icon?: ReactNode
+    text: string
+    fn?: () => void
+  }
 }
