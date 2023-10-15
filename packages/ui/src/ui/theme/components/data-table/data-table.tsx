@@ -52,12 +52,12 @@ export const DataTable = <TData, TValue>({ columns, data, action }: Props<TData,
         />
 
         {action?.href !== undefined ? (
-          <ButtonLink className="flex gap-2" href={action.href}>
+          <ButtonLink className="flex gap-2 flex-shrink-0" href={action.href}>
             {action.icon}
             {action.text}
           </ButtonLink>
         ) : action !== undefined ? (
-          <Button className="flex gap-2" onClick={action.fn}>
+          <Button className="flex gap-2 flex-shrink-0" onClick={action.fn}>
             {action.icon}
             {action.text}
           </Button>
