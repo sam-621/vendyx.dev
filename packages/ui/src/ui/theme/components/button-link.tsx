@@ -47,4 +47,4 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, Props>(
 )
 ButtonLink.displayName = 'ButtonLink'
 
-export { ButtonLink, buttonLinkVariants as buttonVariants }
+export { ButtonLink, buttonLinkVariants }

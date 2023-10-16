@@ -10,9 +10,7 @@
     "pac": "mv src/ui/theme/ui/${NAME}.tsx src/ui/theme/components && rmdir src/ui/theme/ui && echo \"export * from './\"$NAME\"'\" >> src/ui/theme/components/index.ts && prettier src/ui/theme/components/${NAME}.tsx --write"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.1",
-    "@nextui-org/react": "^2.0.19",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
@@ -26,7 +24,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "eslint-config-next": "13.4.13",
-    "framer-motion": "^10.15.2",
     "lucide-react": "0.263.1",
     "next": "13.4.13",
     "next-themes": "^0.2.1",
