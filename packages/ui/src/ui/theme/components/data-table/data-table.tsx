@@ -57,9 +57,9 @@ export const DataTable = <TData, TValue>({
             onChange={event =>
               table.getColumn(String(search.filterKey))?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-sm h-8"
           />
-          <Button variant="outline" className=" border-dashed">
+          <Button variant="outline" size={'sm'} className=" border-dashed">
             <PlusCircleIcon className="mr-2 h-4 w-4" />
             Status
           </Button>
@@ -71,9 +71,9 @@ export const DataTable = <TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map(header => {
+                {headerGroup.headers.map((header, i) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className={i === 0 ? 'pl-3' : ''} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
@@ -87,8 +87,8 @@ export const DataTable = <TData, TValue>({
             {table.getRowModel().rows?.length > 0 ? (
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                  {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
+                  {row.getVisibleCells().map((cell, i) => (
+                    <TableCell className={i === 0 ? 'pl-3' : ''} key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
