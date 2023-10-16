@@ -19,7 +19,12 @@ import { Input } from '../input'
 import { DataTablePagination } from './pagination'
 import { ButtonLink } from '../button-link'
 
-export const DataTable = <TData, TValue>({ columns, data, action }: Props<TData, TValue>) => {
+export const DataTable = <TData, TValue>({
+  columns,
+  data,
+  action,
+  search
+}: Props<TData, TValue>) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [rowSelection, setRowSelection] = useState({})
@@ -45,9 +50,11 @@ export const DataTable = <TData, TValue>({ columns, data, action }: Props<TData,
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <Input
-          placeholder="Buscar..."
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-          onChange={event => table.getColumn('email')?.setFilterValue(event.target.value)}
+          placeholder={search?.placeholder !== undefined ? search?.placeholder : 'Buscar...'}
+          value={(table.getColumn(String(search.filterKey))?.getFilterValue() as string) ?? ''}
+          onChange={event =>
+            table.getColumn(String(search.filterKey))?.setFilterValue(event.target.value)
+          }
           className="max-w-sm"
         />
 
@@ -118,5 +125,12 @@ type Props<TData, TValue> = {
     icon?: ReactNode
     text: string
     fn?: () => void
+  }
+  /**
+   * Search input options
+   */
+  search: {
+    placeholder?: string
+    filterKey: keyof TData
   }
 }

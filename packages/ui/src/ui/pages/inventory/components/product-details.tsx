@@ -1,14 +1,22 @@
-import { Dropzone, Select } from '@/theme/components'
-import { Card, CardBody } from '@nextui-org/card'
-import { Input, Textarea } from '@nextui-org/input'
-import { Button } from '@nextui-org/button'
-import { Checkbox } from '@nextui-org/checkbox'
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Checkbox,
+  Dropzone,
+  Input,
+  Select,
+  SelectItem,
+  Textarea
+} from '@/theme/components'
 import type { FC } from 'react'
 import type { DetailedProduct } from '@/core/inventory/types'
 import { ConnectForm } from '../../../components/wrappers'
 import { isArray } from '@/core/shared/utils/arrays'
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 import { Tooltip } from '@nextui-org/tooltip'
+import { CardBody } from '@nextui-org/react'
 
 export const ProductDetails: FC<Props> = ({ product }) => {
   const variant = isArray(product?.variants) ? product?.variants[0] : null
@@ -18,7 +26,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
     <section className="grid grid-cols-[2fr,1fr] gap-6">
       <div className="flex flex-col gap-6">
         <Card>
-          <CardBody className="flex flex-col gap-4">
+          <CardContent className="flex flex-col gap-4 p-4">
             <div className="flex gap-4">
               <ConnectForm>
                 {({ register, formState: { errors } }) => (
@@ -26,8 +34,6 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     {...register('name', { value: product?.name })}
                     label="Nombre"
                     placeholder="Black T-shirt"
-                    labelPlacement="outside"
-                    radius="sm"
                     errorMessage={String(errors.name?.message ?? '')}
                   />
                 )}
@@ -38,17 +44,15 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                 <Textarea
                   {...register('description', { value: product?.description })}
                   label="Descripción"
-                  labelPlacement="outside"
-                  radius="sm"
                 />
               )}
             </ConnectForm>
             <ConnectForm>{({ register }) => <Dropzone {...register('assets')} />}</ConnectForm>
-          </CardBody>
+          </CardContent>
         </Card>
 
         <Card>
-          <CardBody className="flex flex-col gap-4">
+          <CardContent className="flex flex-col gap-4 p-4">
             <div className="flex gap-4">
               <ConnectForm>
                 {({ register }) => (
@@ -57,8 +61,6 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     type="number"
                     label="Precio"
                     placeholder="$ 0,00"
-                    labelPlacement="outside"
-                    radius="sm"
                   />
                 )}
               </ConnectForm>
@@ -69,22 +71,20 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     type="number"
                     label="Precio comparado"
                     placeholder="$ 0,00"
-                    labelPlacement="outside"
-                    radius="sm"
-                    endContent={
-                      <Tooltip
-                        content={
-                          <p>
-                            Introduce un valor mayor a tu precio,
-                            <br /> usualmente mostrado con una tacha
-                          </p>
-                        }
-                        showArrow
-                        placement="bottom"
-                      >
-                        <QuestionMarkCircleIcon width={24} />
-                      </Tooltip>
-                    }
+                    // endContent={
+                    //   <Tooltip
+                    //     content={
+                    //       <p>
+                    //         Introduce un valor mayor a tu precio,
+                    //         <br /> usualmente mostrado con una tacha
+                    //       </p>
+                    //     }
+                    //     showArrow
+                    //     placement="bottom"
+                    //   >
+                    //     <QuestionMarkCircleIcon width={24} />
+                    //   </Tooltip>
+                    // }
                   />
                 )}
               </ConnectForm>
@@ -97,32 +97,18 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     type="number"
                     label="Costo por producto"
                     placeholder="$ 0,00"
-                    labelPlacement="outside"
-                    radius="sm"
                   />
                 )}
               </ConnectForm>
-              <Input
-                label="Ganancia"
-                placeholder="- -"
-                labelPlacement="outside"
-                radius="sm"
-                isDisabled
-              />
-              <Input
-                label="Margen"
-                placeholder="- -"
-                labelPlacement="outside"
-                radius="sm"
-                isDisabled
-              />
+              <Input label="Ganancia" placeholder="- -" disabled />
+              <Input label="Margen" placeholder="- -" disabled />
             </div>
-          </CardBody>
+          </CardContent>
         </Card>
 
         <Card>
-          <CardBody className="flex flex-col gap-4">
-            <Checkbox>Este producto requiere envío</Checkbox>
+          <CardContent className="flex flex-col gap-4 p-4">
+            <Checkbox label="Este producto requiere envío" />
             <div className="flex gap-4">
               <ConnectForm>
                 {({ register }) => (
@@ -130,47 +116,51 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     {...register('weight', { value: variant?.weight })}
                     label="Peso"
                     placeholder="0 kg"
-                    labelPlacement="outside"
-                    radius="sm"
                   />
                 )}
               </ConnectForm>
             </div>
-          </CardBody>
+          </CardContent>
         </Card>
 
         <Card>
-          <CardBody className="flex flex-col gap-4">
+          <CardContent className="flex flex-col gap-4 p-4">
             <span className="text-xl">Zona de peligro</span>
-            <Button color="danger" className="w-fit">
+            <Button variant="destructive" className="w-fit">
               Eliminar producto
             </Button>
-          </CardBody>
+          </CardContent>
         </Card>
       </div>
       <div className="flex flex-col gap-6">
         <Card>
-          <CardBody className="flex flex-col gap-4">
+          <CardContent className="p-4">
             <ConnectForm>
               {({ register }) => (
                 <Select
                   {...register('state', {
                     value: productState
                   })}
-                  defaultSelectedKeys={[productState]}
+                  placeholder="Estado"
                   label="Estado"
-                  options={[
-                    { label: 'Habilitado', value: 'enabled' },
-                    { label: 'Desabilitado', value: 'disabled' }
-                  ]}
-                />
+                  defaultValue={productState}
+                  // defaultSelectedKeys={[productState]}
+                  // label="Estado"
+                  // options={[
+                  //   { label: 'Habilitado', value: 'enabled' },
+                  //   { label: 'Desabilitado', value: 'disabled' }
+                  // ]}
+                >
+                  <SelectItem value="enabled">Habilitado</SelectItem>
+                  <SelectItem value="disabled">Desabilitado</SelectItem>
+                </Select>
               )}
             </ConnectForm>
-          </CardBody>
+          </CardContent>
         </Card>
 
         <Card>
-          <CardBody className="flex flex-col gap-4">
+          <CardContent className="flex flex-col gap-4 p-4">
             <ConnectForm>
               {({ register }) => (
                 <Select
@@ -189,7 +179,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
               <li className="text-sm font-normal">• Clothes</li>
               <li className="text-sm font-normal">• Electronics</li>
             </ul>
-          </CardBody>
+          </CardContent>
         </Card>
       </div>
     </section>

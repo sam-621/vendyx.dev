@@ -31,7 +31,7 @@ const buttonLinkVariants = cva(
   }
 )
 
-export type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   VariantProps<typeof buttonLinkVariants> & {
     asChild?: boolean
     href: string

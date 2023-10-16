@@ -5,6 +5,7 @@ import { DataTable, Checkbox, DataTableColumnHeader, Badge } from '@/theme/compo
 import type { FC } from 'react'
 import Link from 'next/link'
 import { PlusCircleIcon } from 'lucide-react'
+import { InventoryTableActions } from './inventory-table-acitons'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
   const input: TableProduct[] = products.map(p => ({
@@ -13,6 +14,7 @@ export const InventoryTable: FC<Props> = ({ products }) => {
     name: p.name,
     slug: p.slug,
     assets: p.assets,
+    sku: p.variants[0]?.sku ?? '',
     price: p.variants[0]?.price ?? 0,
     stock: p.variants[0]?.stock ?? 0
   }))
@@ -26,13 +28,18 @@ export const InventoryTable: FC<Props> = ({ products }) => {
         icon: <PlusCircleIcon size={16} />,
         href: '/inventory/create'
       }}
+      search={{
+        placeholder: 'Buscar productos...',
+        filterKey: 'name'
+      }}
     />
   )
 }
 
-type TableProduct = Pick<BasicProduct, 'id' | 'name' | 'slug' | 'enabled' | 'assets'> & {
+export type TableProduct = Pick<BasicProduct, 'id' | 'name' | 'slug' | 'enabled' | 'assets'> & {
   price: number
   stock: number
+  sku: string
 }
 
 const columns: ColumnDef<TableProduct>[] = [
@@ -56,12 +63,29 @@ const columns: ColumnDef<TableProduct>[] = [
     enableHiding: false
   },
   {
+    accessorKey: 'sku',
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title="SKU" />
+    },
+    cell: ({ row }) => {
+      return <span className="w-20">{row.original.sku}</span>
+    },
+    enableSorting: false
+  },
+  {
     accessorKey: 'name',
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Producto" />
     },
     cell: ({ row }) => (
-      <Link href={`/inventory/${row.original.slug ?? ''}`}>
+      <Link href={`/inventory/${row.original.slug ?? ''}`} className="flex items-center gap-2">
+        {row.original.assets.length > 0 && (
+          <img
+            src={row.original.assets[0]?.source ?? ''}
+            alt={row.getValue('name')}
+            className="h-12 w-12 object-cover rounded-md"
+          />
+        )}
         <span>{row.original.name}</span>
       </Link>
     )
@@ -95,10 +119,15 @@ const columns: ColumnDef<TableProduct>[] = [
     cell: ({ row }) => {
       return (
         <Badge variant={row.original.enabled ? 'default' : 'secondary'}>
-          {row.original.enabled ? 'Enabled' : 'Disabled'}
+          {row.original.enabled ? 'Habilitado' : 'Desabilitado'}
         </Badge>
       )
     }
+  },
+  {
+    id: 'actions',
+    header: () => <div></div>,
+    cell: ({ row }) => <InventoryTableActions row={row} />
   }
 ]
 

@@ -31,20 +31,19 @@ export interface ProductVariant {
 /* Abstractions */
 
 export type BasicProduct = CommonProduct & {
-  variants: CommonVariant[]
-  assets: CommonAsset[]
+  variants: (CommonVariant | null)[]
+  assets: (CommonAsset | null)[]
 }
 
 export type DetailedProduct = CommonProduct & {
   description: string
-  variants: DetailedProductVariant[]
-  assets: CommonAsset[]
-  collections: CommonCollection[]
+  variants: (DetailedProductVariant | null)[]
+  assets: (CommonAsset | null)[]
+  collections: (CommonCollection | null)[]
 }
 
 export type DetailedProductVariant = CommonVariant & {
   costPerProduct: number
   offerPrice: null
-  sku: string
   weight: number
 }

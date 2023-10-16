@@ -10,6 +10,7 @@ export const CommonVariantFragment = /* GraphQL */ `
     id
     price
     stock
+    sku
   }
 `
 

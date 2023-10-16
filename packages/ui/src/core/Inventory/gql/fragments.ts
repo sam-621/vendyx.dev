@@ -34,7 +34,6 @@ export const DetailedProductFragment = /* GraphQL */ `
       ...CommonVariant
       costPerProduct
       offerPrice
-      sku
       weight
     }
     assets {

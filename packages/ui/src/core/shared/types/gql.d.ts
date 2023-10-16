@@ -12,6 +12,7 @@ export type CommonVariant = {
   id: string
   price: number
   stock: number
+  sku: string
 }
 
 export type CommonCollection = {

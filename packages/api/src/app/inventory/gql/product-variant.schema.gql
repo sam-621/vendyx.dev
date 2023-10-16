@@ -21,7 +21,7 @@ input CreateOptionValuesInput {
 }
 
 input CreateProductVariantInput {
-  price: Int!
+  price: Float!
   sku: String!
   enabled: Boolean
   stock: Int

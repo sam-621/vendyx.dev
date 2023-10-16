@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Manrope } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/theme/theme-provider'
 import { AppLayout } from '@/components/layouts'
 
-const manrope = Manrope({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${manrope.className} h-screen`}>
+      <body className={`${inter.className} h-screen`}>
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <AppLayout>{children}</AppLayout>
         </ThemeProvider>

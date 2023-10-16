@@ -7,27 +7,29 @@ export const Breadcrumb: FC<Props> = ({ items }) => {
     <nav className="flex gap-3 items-center">
       <Link
         href="/"
-        className="flex items-center gap-1 text-sm text-default-500 font-medium hover:text-default-900 transition-colors"
+        className="flex items-center gap-1 text-sm text-muted-foreground font-medium hover:text-foreground transition-colors"
       >
         <BarChart2Icon size={16} />
         Panel
       </Link>
-      <ChevronRightIcon width={16} className="text-default-500" />
-      {items.map(item => (
+      <ChevronRightIcon width={16} className="text-muted-foreground" />
+      {items.map((item, i) => (
         <>
           {item.href !== undefined ? (
             <>
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm text-default-500 font-medium hover:text-default-900 transition-colors"
+                className={`text-sm text-muted-foreground hover:text-foreground font-medium transition-colors`}
               >
                 {item.label}
               </Link>
-              <ChevronRightIcon width={16} className="text-default-500" />
+              <ChevronRightIcon width={16} className={`text-muted-foreground `} />
             </>
           ) : (
-            <span className="text-sm text-default-500 font-medium hover:text-default-900 transition-colors">
+            <span
+              className={`text-sm ${'text-muted-foreground'} hover:text-foreground font-medium transition-colors`}
+            >
               {item.label}
             </span>
           )}

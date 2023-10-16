@@ -6,7 +6,7 @@ export default async function InventoryRoute() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-foreground font-semibold text-4xl">Inventario</h1>
+      <h1 className="text-foreground font-bold text-3xl">Inventario</h1>
       <section>
         <InventoryTable products={products.items} />
       </section>

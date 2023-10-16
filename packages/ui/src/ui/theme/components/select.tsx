@@ -19,7 +19,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+      'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50',
       className
     )}
     {...props}
@@ -111,27 +111,47 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
 export { SelectItem }
 
-export const Select: React.FC<Props> = ({
-  placeholder,
-  itemClasses,
-  contentSide,
-  children,
-  ...rest
-}) => {
+export const Select = React.forwardRef<HTMLSelectElement, Props>(function Select(
+  { placeholder, label, contentSide, itemClasses, children, ...rest },
+  ref
+) {
   return (
-    <SelectRoot {...rest}>
-      <SelectTrigger className={itemClasses?.trigger}>
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent side={contentSide} className={itemClasses?.content}>
-        <SelectGroup>{children}</SelectGroup>
-      </SelectContent>
-    </SelectRoot>
+    <div className="flex flex-col gap-2">
+      {label !== undefined && <label htmlFor={rest.name}>{label}</label>}
+      <SelectRoot {...rest}>
+        <SelectTrigger className={itemClasses?.trigger}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent side={contentSide} className={itemClasses?.content}>
+          <SelectGroup>{children}</SelectGroup>
+        </SelectContent>
+      </SelectRoot>
+    </div>
   )
-}
+})
+
+// export const Select: React.FC<Props> = ({
+//   placeholder,
+//   itemClasses,
+//   contentSide,
+//   children,
+//   ...rest
+// }) => {
+//   return (
+//     <SelectRoot {...rest}>
+//       <SelectTrigger className={itemClasses?.trigger}>
+//         <SelectValue placeholder={placeholder} />
+//       </SelectTrigger>
+//       <SelectContent side={contentSide} className={itemClasses?.content}>
+//         <SelectGroup>{children}</SelectGroup>
+//       </SelectContent>
+//     </SelectRoot>
+//   )
+// }
 
 type Props = SelectPrimitive.SelectProps & {
   placeholder: string
+  label?: string
   children: React.ReactNode
   contentSide?: 'top' | 'right' | 'bottom' | 'left'
   itemClasses?: {
