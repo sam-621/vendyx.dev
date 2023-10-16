@@ -13,11 +13,12 @@ import {
 } from '@tanstack/react-table'
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table'
-import { Button } from '../button'
 import { type ReactNode, useState } from 'react'
 import { Input } from '../input'
 import { DataTablePagination } from './pagination'
-import { ButtonLink } from '../button-link'
+import { DataTableViewOptions } from './data-table-view-options'
+import { Button } from '../button'
+import { PlusCircleIcon } from 'lucide-react'
 
 export const DataTable = <TData, TValue>({
   columns,
@@ -49,26 +50,21 @@ export const DataTable = <TData, TValue>({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <Input
-          placeholder={search?.placeholder !== undefined ? search?.placeholder : 'Buscar...'}
-          value={(table.getColumn(String(search.filterKey))?.getFilterValue() as string) ?? ''}
-          onChange={event =>
-            table.getColumn(String(search.filterKey))?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-
-        {action?.href !== undefined ? (
-          <ButtonLink className="flex gap-2 flex-shrink-0" href={action.href}>
-            {action.icon}
-            {action.text}
-          </ButtonLink>
-        ) : action !== undefined ? (
-          <Button className="flex gap-2 flex-shrink-0" onClick={action.fn}>
-            {action.icon}
-            {action.text}
+        <div className="flex items-center gap-4">
+          <Input
+            placeholder={search?.placeholder !== undefined ? search?.placeholder : 'Buscar...'}
+            value={(table.getColumn(String(search.filterKey))?.getFilterValue() as string) ?? ''}
+            onChange={event =>
+              table.getColumn(String(search.filterKey))?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <Button variant="outline" className=" border-dashed">
+            <PlusCircleIcon className="mr-2 h-4 w-4" />
+            Status
           </Button>
-        ) : null}
+        </div>
+        <DataTableViewOptions table={table} />
       </div>
       <div className="rounded-md border">
         <Table>

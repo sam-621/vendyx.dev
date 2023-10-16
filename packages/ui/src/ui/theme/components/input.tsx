@@ -6,7 +6,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
   ({ className, type, label, errorMessage, ...props }, ref) => {
     return (
       <div className={cn('flex flex-col gap-2 w-full')}>
-        <label htmlFor={props.id}>{label}</label>
+        {label !== undefined && <label htmlFor={props.id}>{label}</label>}
         <input
           type={type}
           className={cn(

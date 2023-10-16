@@ -4,7 +4,6 @@ import type { BasicProduct } from '@/core/inventory/types'
 import { DataTable, Checkbox, DataTableColumnHeader, Badge } from '@/theme/components'
 import type { FC } from 'react'
 import Link from 'next/link'
-import { PlusCircleIcon } from 'lucide-react'
 import { InventoryTableActions } from './inventory-table-acitons'
 
 export const InventoryTable: FC<Props> = ({ products }) => {
@@ -23,11 +22,6 @@ export const InventoryTable: FC<Props> = ({ products }) => {
     <DataTable
       data={input}
       columns={columns}
-      action={{
-        text: 'Agregar producto',
-        icon: <PlusCircleIcon size={16} />,
-        href: '/inventory/create'
-      }}
       search={{
         placeholder: 'Buscar productos...',
         filterKey: 'name'
