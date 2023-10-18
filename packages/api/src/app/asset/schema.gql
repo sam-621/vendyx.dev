@@ -2,3 +2,7 @@ type Query {
   asset(id: ID!): Asset
   assets: [Asset]!
 }
+
+type Mutations {
+  createAsset(input: CreateAssetInput!): Asset
+}
