@@ -46,9 +46,9 @@ AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
 export { AvatarRoot, AvatarImage, AvatarFallback }
 
-export const Avatar: React.FC<Props> = ({ src, alt, fallBack }) => {
+export const Avatar: React.FC<Props> = ({ src, alt, fallBack, className }) => {
   return (
-    <AvatarRoot>
+    <AvatarRoot className={className}>
       <AvatarImage src={src} alt={alt} />
       {fallBack !== undefined && <AvatarFallback>{fallBack}</AvatarFallback>}
     </AvatarRoot>
@@ -63,4 +63,5 @@ type Props = {
    * Usually are initials like RS
    */
   fallBack?: React.ReactNode
+  className?: string
 }
