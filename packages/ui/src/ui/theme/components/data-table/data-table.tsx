@@ -57,7 +57,7 @@ export const DataTable = <TData, TValue>({
             onChange={event =>
               table.getColumn(String(search.filterKey))?.setFilterValue(event.target.value)
             }
-            className="max-w-sm h-8"
+            className="max-w-sm h-9"
           />
           <Button variant="outline" size={'sm'} className=" border-dashed">
             <PlusCircleIcon className="mr-2 h-4 w-4" />
@@ -73,7 +73,7 @@ export const DataTable = <TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header, i) => {
                   return (
-                    <TableHead className={i === 0 ? 'pl-3' : ''} key={header.id}>
+                    <TableHead className={`${i === 0 ? 'pl-3' : ''}`} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
