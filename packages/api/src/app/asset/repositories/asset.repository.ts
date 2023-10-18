@@ -1,4 +1,4 @@
-import { AssetType } from '@/common/types/graphql'
+import { AssetType, CreateAssetInput } from '@/common/types/graphql'
 import { Injectable } from '@nestjs/common'
 import { Asset } from '../asset'
 import { PrismaService } from '@/app/shared/persistance'
@@ -22,5 +22,11 @@ export class AssetRepository {
       ...result,
       type: result.type as AssetType
     }
+  }
+
+  async create(input: CreateAssetInput) {
+    const result = await this.prismaService.asset.create({ data: input })
+
+    return result
   }
 }
