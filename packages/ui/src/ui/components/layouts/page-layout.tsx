@@ -5,8 +5,8 @@ export const PageLayout: FC<Props> = ({ title, actions, children, className }) =
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between">
-        <h1 className="text-foreground font-bold text-3xl">{title}</h1>
-        <div className="flex gap-4">{actions}</div>
+        {title !== undefined && <h1 className="text-foreground font-bold text-3xl">{title}</h1>}
+        {actions !== undefined && <div className="flex gap-4">{actions}</div>}
       </div>
       <section className={cn('', className)}>{children}</section>
     </div>
@@ -14,7 +14,7 @@ export const PageLayout: FC<Props> = ({ title, actions, children, className }) =
 }
 
 type Props = PropsWithChildren & {
-  title: string
+  title?: string
   actions?: ReactElement
   className?: string
 }
