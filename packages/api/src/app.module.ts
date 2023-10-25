@@ -8,9 +8,11 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { SharedModule } from './app/shared'
 import { InventoryModule } from './app/inventory'
 import { LoggerModule } from './app/shared/logger'
+import { ConfigModule } from './app/shared/config'
 
 @Module({
   imports: [
+    ConfigModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: false,
