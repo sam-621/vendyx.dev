@@ -10,9 +10,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: Error): void {
     // Errors throw by our domain
     if (exception instanceof BusinessError) {
-      const { code, message } = exception
+      const { code, message, metadata } = exception
 
-      this.logger.businessLog(exception, code as ErrorCode, message)
+      this.logger.businessLog(exception, code as ErrorCode, message, metadata)
+
       throw new GraphQLError(message, { extensions: { code } })
     }
 
@@ -25,6 +26,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
       this.logger.businessLog(exception, formattedErrorCode, errorMessage)
 
+      // for some reason sometimes the graphql playground does not find the favicon.ico and throws an error
       if (errorMessage == 'Cannot GET /favicon.ico') return
 
       throw new GraphQLError(errorMessage, { extensions: { code: formattedErrorCode } })
