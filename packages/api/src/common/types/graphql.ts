@@ -13,12 +13,6 @@ export enum AssetType {
     FILE = "FILE"
 }
 
-export class CreateAssetInput {
-    name: string;
-    source: string;
-    type: AssetType;
-}
-
 export class CreateCollectionInput {
     name: string;
     slug: string;
@@ -99,10 +93,6 @@ export abstract class IQuery {
     abstract label(id: string): Nullable<Label> | Promise<Nullable<Label>>;
 
     abstract labels(): Nullable<Label>[] | Promise<Nullable<Label>[]>;
-}
-
-export class Mutations {
-    createAsset?: Nullable<Asset>;
 }
 
 export class Collection implements Node {

@@ -5,7 +5,7 @@ import { AssetService } from '../services'
 @Controller('assets')
 export class AssetController {
   constructor(private readonly assetService: AssetService) {}
-  @Post('upload')
+  @Post('create')
   @UseInterceptors(FileInterceptor('file'))
   async upload(
     @UploadedFile()

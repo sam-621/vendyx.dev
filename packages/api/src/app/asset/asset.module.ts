@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
-import { AssetController } from './controllers/asset.controller'
-import { AssetRepository } from './repositories/asset.repository'
+import { AssetController } from './controllers'
+import { AssetRepository } from './repositories'
 import { UploadModule } from '../shared/upload'
 import { AssetService } from './services'
 

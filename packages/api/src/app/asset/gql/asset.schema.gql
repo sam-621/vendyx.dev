@@ -16,9 +16,3 @@ type Asset implements Node {
   productVariants: [ProductVariant]
   labelValues: [LabelValues]!
 }
-
-input CreateAssetInput {
-  name: String!
-  source: String!
-  type: AssetType!
-}

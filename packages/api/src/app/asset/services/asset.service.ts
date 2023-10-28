@@ -1,13 +1,21 @@
 import { UploadsService } from '@/app/shared/upload'
 import { Injectable } from '@nestjs/common'
+import { AssetRepository } from '../repositories'
+import { AssetType } from '../asset'
 
 @Injectable()
 export class AssetService {
-  constructor(private readonly uploadService: UploadsService) {}
+  constructor(private repository: AssetRepository, private uploadService: UploadsService) {}
 
-  create(file: Express.Multer.File) {
-    const id = this.uploadService.upload(file)
+  async create(file: Express.Multer.File) {
+    const id = await this.uploadService.upload(file)
 
-    return id
+    const assetCreated = this.repository.create({
+      name: 'asset',
+      source: id,
+      type: AssetType.IMAGE
+    })
+
+    return assetCreated
   }
 }
