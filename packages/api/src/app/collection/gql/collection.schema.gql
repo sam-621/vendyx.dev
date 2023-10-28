@@ -11,3 +11,10 @@ type Collection implements Node {
   assets: [Asset]!
   labelValues: [LabelValues]!
 }
+
+input CreateCollectionInput {
+  name: String!
+  description: String!
+  slug: String!
+  enabled: Boolean!
+}

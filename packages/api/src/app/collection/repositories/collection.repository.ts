@@ -19,4 +19,4 @@ export class CollectionRepository {
   }
 }
 
-type CreateCollectionInput = Omit<Collection, 'id' | 'updateAt' | 'createdAt'>
+type CreateCollectionInput = Omit<Collection, 'id' | 'updatedAt' | 'createdAt'>

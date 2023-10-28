@@ -19,6 +19,13 @@ export class CreateAssetInput {
     type: AssetType;
 }
 
+export class CreateCollectionInput {
+    name: string;
+    description: string;
+    slug: string;
+    enabled: boolean;
+}
+
 export class CreateOptionInput {
     name: string;
     values: string[];
