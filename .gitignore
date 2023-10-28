@@ -75,4 +75,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # Uploads
-./uploads/*
+./api/uploads/*
