@@ -20,8 +20,6 @@ export class CollectionRepository {
   }
 
   async create(input: CreateCollectionInput): Promise<Collection | null> {
-    console.log('ayuda')
-
     return this.prismaService.collection.create({
       data: {
         ...input,

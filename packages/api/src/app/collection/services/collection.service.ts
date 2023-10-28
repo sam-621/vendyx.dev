@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { CollectionRepository } from '../repositories'
 import { UserInputError } from '@/common/errors'
-import { List } from '@/common/utils'
+import { CreateCollectionInput } from '@/common/types/graphql'
 
 @Injectable()
 export class CollectionService {
@@ -19,5 +19,11 @@ export class CollectionService {
     const collections = await this.repository.findMany()
 
     return collections
+  }
+
+  async create(input: CreateCollectionInput) {
+    const collectionCreated = this.repository.create(input)
+
+    return collectionCreated
   }
 }

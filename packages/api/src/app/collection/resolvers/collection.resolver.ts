@@ -1,16 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { CollectionRepository } from '../repositories'
 import { CollectionService } from '../services'
-import { UserInputError } from '@/common/errors'
 import { CreateCollectionInput } from '@/common/types/graphql'
 import { List } from '@/common/utils'
 
 @Resolver('Collection')
 export class CollectionResolver {
-  constructor(
-    private repository: CollectionRepository,
-    private collectionService: CollectionService
-  ) {}
+  constructor(private collectionService: CollectionService) {}
 
   @Query('collection')
   async collection(@Args('id') id: string, @Args('slug') slug: string) {
@@ -24,10 +19,10 @@ export class CollectionResolver {
     return new List(collections, collections.length)
   }
 
-  // @Mutation('createCollection')
-  // async createCollection(input: CreateCollectionInput) {
-  //   const collectionCreated = await this.collectionService.create(input)
+  @Mutation('createCollection')
+  async createCollection(@Args('input') input: CreateCollectionInput) {
+    const collectionCreated = await this.collectionService.create(input)
 
-  //   return collectionCreated
-  // }
+    return collectionCreated
+  }
 }

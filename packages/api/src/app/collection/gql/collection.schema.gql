@@ -19,7 +19,7 @@ type CollectionList implements List {
 
 input CreateCollectionInput {
   name: String!
-  description: String
   slug: String!
+  description: String
   enabled: Boolean
 }

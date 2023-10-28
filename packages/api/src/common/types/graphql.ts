@@ -21,8 +21,8 @@ export class CreateAssetInput {
 
 export class CreateCollectionInput {
     name: string;
-    description?: Nullable<string>;
     slug: string;
+    description?: Nullable<string>;
     enabled?: Nullable<boolean>;
 }
 
