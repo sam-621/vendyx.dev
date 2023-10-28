@@ -13,4 +13,10 @@ export class CollectionRepository {
   async findOne(id: string): Promise<Collection | null> {
     return this.prismaService.collection.findUnique({ where: { id } })
   }
+
+  async create(input: CreateCollectionInput) {
+    return this.prismaService.collection.create({ data: input })
+  }
 }
+
+type CreateCollectionInput = Omit<Collection, 'id' | 'updateAt' | 'createdAt'>
