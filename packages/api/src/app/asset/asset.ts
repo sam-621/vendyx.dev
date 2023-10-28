@@ -1,4 +1,4 @@
-import { Asset as ApiAsset, AssetType as ApiAssetType } from '@/common/types/graphql'
+import { Asset as ApiAsset, AssetType as ApiAssetType } from '@/shared/types'
 
 export const AssetType = { ...ApiAssetType }
 

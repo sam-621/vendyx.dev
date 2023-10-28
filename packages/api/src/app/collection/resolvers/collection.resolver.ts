@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { CollectionService } from '../services'
-import { CreateCollectionInput } from '@/common/types/graphql'
-import { List } from '@/common/utils'
+import { CreateCollectionInput } from '@/shared/types'
+import { List } from '@/shared/utils'
 
 @Resolver('Collection')
 export class CollectionResolver {

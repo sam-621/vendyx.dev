@@ -1,9 +1,9 @@
-import { CreateProductInput, Product as ApiProduct } from '@/common/types/graphql'
+import { CreateProductInput, Product as ApiProduct } from '@/shared/types'
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductRepository } from '../repositories'
 import { ProductService } from '../services/product.service'
-import { UserInputError } from '@/common/errors'
-import { List } from '@/common/utils'
+import { UserInputError } from '@/shared/errors'
+import { List } from '@/shared/utils'
 import { Product } from '../inventory'
 
 @Resolver('Product')

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { ProductRepository } from '../repositories'
-import { CreateProductInput, CreateProductVariantInput } from '@/common/types/graphql'
+import { CreateProductInput, CreateProductVariantInput } from '@/shared/types'
 import { Product } from '../inventory'
 
 @Injectable()

@@ -1,12 +1,12 @@
 import { Asset } from '@/app/asset/asset'
 import { Collection } from '@/app/collection/collection'
-import { AssetType, CreateProductInput, CreateProductVariantInput } from '@/common/types/graphql'
+import { AssetType, CreateProductInput, CreateProductVariantInput } from '@/shared/types'
 import { Injectable } from '@nestjs/common'
 import { LabelValues, Option, Product, ProductVariant } from '../inventory'
 import { Prisma } from '@prisma/client'
-import { InternalServerError, UserInputError } from '@/common/errors'
+import { InternalServerError, UserInputError } from '@/shared/errors'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { PrismaService } from '@/app/shared/persistance'
+import { PrismaService } from '@/shared/persistance'
 
 @Injectable()
 export class ProductRepository {

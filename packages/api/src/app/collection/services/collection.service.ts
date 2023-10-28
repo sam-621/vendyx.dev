@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { CollectionRepository } from '../repositories'
-import { UserInputError } from '@/common/errors'
-import { CreateCollectionInput } from '@/common/types/graphql'
+import { UserInputError } from '@/shared/errors'
+import { CreateCollectionInput } from '@/shared/types'
 
 @Injectable()
 export class CollectionService {

@@ -4,7 +4,7 @@ import {
   Product as ApiProduct,
   ProductVariant as ApiProductVariant,
   OptionValues as ApiOptionValues
-} from '@/common/types/graphql'
+} from '@/shared/types'
 
 export type Product = Omit<
   ApiProduct,

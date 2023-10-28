@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorMetadata } from '@/common/errors'
+import { ErrorCode, ErrorMetadata } from '@/shared/errors'
 import { ConsoleLogger, Injectable, Scope } from '@nestjs/common'
 
 @Injectable({ scope: Scope.TRANSIENT })

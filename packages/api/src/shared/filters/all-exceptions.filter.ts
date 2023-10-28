@@ -1,5 +1,5 @@
-import { BusinessError, ErrorCode } from '@/common/errors'
-import { LoggerService } from '@/app/shared/logger'
+import { BusinessError, ErrorCode } from '@/shared/errors'
+import { LoggerService } from 'src/shared/logger'
 import { Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
 import { GraphQLError } from 'graphql'
 

@@ -12,7 +12,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       typePaths: ['./**/*.gql'],
       definitions: {
-        path: join(process.cwd(), 'src/common/types/graphql.ts'),
+        path: join(process.cwd(), 'src/shared/types/graphql.ts'),
         outputAs: 'class'
       }
     })

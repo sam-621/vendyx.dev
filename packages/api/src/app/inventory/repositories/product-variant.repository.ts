@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { Option, OptionValue, Product, ProductVariant } from '../inventory'
 import { Asset } from '@/app/asset'
-import { AssetType } from '@/common/types/graphql'
+import { AssetType } from '@/shared/types'
 import { Prisma } from '@prisma/client'
-import { PrismaService } from '@/app/shared/persistance'
+import { PrismaService } from '@/shared/persistance'
 
 @Injectable()
 export class ProductVariantRepository {

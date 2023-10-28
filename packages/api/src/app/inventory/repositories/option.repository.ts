@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { Option, OptionValue } from '../inventory'
-import { PrismaService } from '@/app/shared/persistance'
+import { PrismaService } from '@/shared/persistance'
 
 @Injectable()
 export class OptionRepository {

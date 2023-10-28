@@ -18,9 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/utilities/*": ["./tests/utilities/*"],
-
-      "@/common/*": ["./src/common/*"],
+      "@/shared/*": ["./src/shared/*"],
       "@/app/*": ["./src/app/*"]
     }
   }

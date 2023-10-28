@@ -1,5 +1,5 @@
-import { PrismaService } from '@/app/shared/persistance'
-import { Label } from '@/common/types/graphql'
+import { PrismaService } from '@/shared/persistance'
+import { Label } from '@/shared/types'
 import { Injectable } from '@nestjs/common'
 
 @Injectable()

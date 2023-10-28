@@ -1,7 +1,7 @@
-import { AssetType } from '@/common/types/graphql'
+import { AssetType } from '@/shared/types'
 import { Injectable } from '@nestjs/common'
 import { Asset } from '../asset'
-import { PrismaService } from '@/app/shared/persistance'
+import { PrismaService } from '@/shared/persistance'
 
 @Injectable()
 export class AssetRepository {

@@ -1,4 +1,4 @@
-import { UploadsService } from '@/app/shared/upload'
+import { UploadsService } from 'src/shared/upload'
 import { Injectable } from '@nestjs/common'
 import { AssetRepository } from '../repositories'
 import { AssetType } from '../asset'

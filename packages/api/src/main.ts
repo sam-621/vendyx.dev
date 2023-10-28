@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { AllExceptionsFilter } from './common/filters'
-import { LoggerService } from './app/shared/logger'
+import { AllExceptionsFilter } from '@/shared/filters'
+import { LoggerService } from '@/shared/logger'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
