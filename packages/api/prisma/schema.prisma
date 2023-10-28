@@ -40,7 +40,7 @@ model Collection {
   updatedAt   DateTime @updatedAt
   name        String
   description String   @default("")
-  slug        String
+  slug        String   @unique()
   enabled     Boolean  @default(false)
 
   // Relations - one to many

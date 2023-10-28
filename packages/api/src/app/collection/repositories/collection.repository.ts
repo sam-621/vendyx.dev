@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { Collection } from '../collection'
 import { PrismaService } from '@/app/shared/persistance'
+import { CreateCollectionInput } from '@/common/types/graphql'
 
 @Injectable()
 export class CollectionRepository {
@@ -10,13 +11,23 @@ export class CollectionRepository {
     return this.prismaService.collection.findMany()
   }
 
-  async findOne(id: string): Promise<Collection | null> {
+  async findOneById(id: string): Promise<Collection | null> {
     return this.prismaService.collection.findUnique({ where: { id } })
   }
 
-  async create(input: CreateCollectionInput) {
-    return this.prismaService.collection.create({ data: input })
+  async findOneBySlug(slug: string): Promise<Collection | null> {
+    return this.prismaService.collection.findUnique({ where: { slug } })
+  }
+
+  async create(input: CreateCollectionInput): Promise<Collection | null> {
+    console.log('ayuda')
+
+    return this.prismaService.collection.create({
+      data: {
+        ...input,
+        description: input.description ?? undefined,
+        enabled: input.enabled ?? undefined
+      }
+    })
   }
 }
-
-type CreateCollectionInput = Omit<Collection, 'id' | 'updatedAt' | 'createdAt'>

@@ -12,9 +12,14 @@ type Collection implements Node {
   labelValues: [LabelValues]!
 }
 
+type CollectionList implements List {
+  items: [Collection]!
+  totalItems: Int!
+}
+
 input CreateCollectionInput {
   name: String!
-  description: String!
+  description: String
   slug: String!
-  enabled: Boolean!
+  enabled: Boolean
 }

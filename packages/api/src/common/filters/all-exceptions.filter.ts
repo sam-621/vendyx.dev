@@ -8,6 +8,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
   constructor(readonly logger: LoggerService) {}
 
   catch(exception: Error): void {
+    console.log({ exception })
+
     // Errors throw by our domain
     if (exception instanceof BusinessError) {
       const { code, message, metadata } = exception

@@ -21,9 +21,9 @@ export class CreateAssetInput {
 
 export class CreateCollectionInput {
     name: string;
-    description: string;
+    description?: Nullable<string>;
     slug: string;
-    enabled: boolean;
+    enabled?: Nullable<boolean>;
 }
 
 export class CreateOptionInput {
@@ -88,9 +88,9 @@ export abstract class IQuery {
 
     abstract assets(): Nullable<Asset>[] | Promise<Nullable<Asset>[]>;
 
-    abstract collection(id: string): Nullable<Collection> | Promise<Nullable<Collection>>;
+    abstract collection(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Collection> | Promise<Nullable<Collection>>;
 
-    abstract collections(): Nullable<Collection>[] | Promise<Nullable<Collection>[]>;
+    abstract collections(): CollectionList | Promise<CollectionList>;
 
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 
@@ -116,6 +116,17 @@ export class Collection implements Node {
     products: Nullable<Product>[];
     assets: Nullable<Asset>[];
     labelValues: Nullable<LabelValues>[];
+}
+
+export class CollectionList implements List {
+    items: Nullable<Collection>[];
+    totalItems: number;
+}
+
+export abstract class IMutation {
+    abstract createCollection(input: CreateCollectionInput): Nullable<Collection> | Promise<Nullable<Collection>>;
+
+    abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
 export class Option implements Node {
@@ -168,10 +179,6 @@ export class Product implements Node {
 export class ProductList implements List {
     items: Nullable<Product>[];
     totalItems: number;
-}
-
-export abstract class IMutation {
-    abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
 export class Label implements Node {
