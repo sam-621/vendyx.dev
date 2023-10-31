@@ -8,6 +8,7 @@ type Category implements Node {
   enable: Boolean!
 
   products: [ProductList]!
+  assets: [AssetList]!
 }
 
 type CategoryList implements List {

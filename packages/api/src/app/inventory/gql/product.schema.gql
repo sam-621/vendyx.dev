@@ -9,6 +9,7 @@ type Product implements Node {
 
   variants: [ProductVariantList]!
   categories: [CategoryList]!
+  assets: [AssetList]!
 }
 
 type ProductList implements List {

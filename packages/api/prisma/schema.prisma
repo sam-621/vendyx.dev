@@ -112,7 +112,7 @@ model Asset {
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   name      String    @db.VarChar(255)
-  source    String    @db.VarChar(255)
+  source    String    @unique @db.VarChar(255)
   type      AssetType @default(IMAGE)
   enable    Boolean   @default(true)
 
