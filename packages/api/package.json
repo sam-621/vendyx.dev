@@ -22,7 +22,8 @@
     "db:push": "yarn prisma db push",
     "db:seed": "prisma db seed",
     "db:types": "prisma generate",
-    "db:cleanup": "node ./scripts/cleanup-db.mjs"
+    "db:cleanup": "node ./scripts/cleanup-db.mjs",
+    "api:types": "node ./scripts/generate-typings.mjs"
   },
   "dependencies": {
     "@apollo/server": "^4.9.1",
