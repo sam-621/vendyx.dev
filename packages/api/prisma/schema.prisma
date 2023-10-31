@@ -34,6 +34,11 @@ model Product {
   description String?
   enable      Boolean  @default(true)
 
+  // relations
+  productVariants ProductVariant[]
+  categories      ProductOnCategory[]
+  assets          AssetOnProduct[]
+
   @@map("product")
 }
 
@@ -49,7 +54,21 @@ model ProductVariant {
   stock           Int
   enable          Boolean  @default(true)
 
+  // relations
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+
   @@map("product_variant")
+}
+
+model ProductOnCategory {
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String   @map("product_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @map("category_id")
+
+  @@id([productId, categoryId])
+  @@map("product_on_category")
 }
 
 model Category {
@@ -61,7 +80,31 @@ model Category {
   description String?
   enable      Boolean  @default(true)
 
+  // relations
+  products ProductOnCategory[]
+  assets   AssetOnCategory[]
+
   @@map("category")
+}
+
+model AssetOnProduct {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+  asset     Asset   @relation(fields: [assetId], references: [id])
+  assetId   String  @map("asset_id")
+
+  @@id([productId, assetId])
+  @@map("asset_on_product")
+}
+
+model AssetOnCategory {
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @map("category_id")
+  asset      Asset    @relation(fields: [assetId], references: [id])
+  assetId    String   @map("asset_id")
+
+  @@id([categoryId, assetId])
+  @@map("asset_on_category")
 }
 
 model Asset {
@@ -72,6 +115,10 @@ model Asset {
   source    String    @db.VarChar(255)
   type      AssetType @default(IMAGE)
   enable    Boolean   @default(true)
+
+  // relations
+  products   AssetOnProduct[]
+  categories AssetOnCategory[]
 
   @@map("asset")
 }
@@ -87,6 +134,13 @@ model Order {
   colocatedAt   DateTime    @map("colocated_at")
   totalQuantity Int         @map("total_quantity")
 
+  // relations
+  lines OrderLine[]
+
+  // relations
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId String?   @map("customer_id")
+
   @@map("order")
 }
 
@@ -97,6 +151,10 @@ model OrderLine {
   unitPrice Decimal  @map("unit_price") @db.Decimal(10, 2)
   quantity  Int
   linePrice Decimal  @map("line_price") @db.Decimal(10, 2)
+
+  // relations
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String @map("order_id")
 
   @@map("order_line")
 }
@@ -111,6 +169,10 @@ model Customer {
   phoneNumber      String?  @map("phone_number") @db.VarChar(255)
   phoneCountryCode String?  @map("phone_country_code") @db.Char(2)
   enable           Boolean  @default(true)
+
+  // relations
+  orders  Order[]
+  address Address[]
 
   @@map("cusotmer")
 }
@@ -130,6 +192,10 @@ model Address {
   postalCode       String   @map("postal_code") @db.Char(20)
   references       String
 
+  // relations
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String   @map("customer_id")
+
   @@map("address")
 }
 
@@ -139,6 +205,10 @@ model Shipment {
   updatedAt    DateTime @updatedAt @map("updated_at")
   trackingCode String   @map("tracking_code") @db.VarChar(255)
   amount       Decimal  @db.Decimal(10, 2)
+
+  // relations
+  shipmentMethod   ShipmentMethod @relation(fields: [shipmentMethodId], references: [id])
+  shipmentMethodId String
 
   @@map("shipment")
 }
@@ -153,6 +223,9 @@ model ShipmentMethod {
   carrier     String   @db.VarChar(255)
   enable      Boolean  @default(true)
 
+  // relations
+  shipments Shipment[]
+
   @@map("shipment_method")
 }
 
@@ -162,6 +235,10 @@ model Payment {
   updatedAt     DateTime @updatedAt @map("updated_at")
   transactionId String   @map("transaction_id") @db.VarChar(255)
   amount        Decimal  @db.Decimal(10, 2)
+
+  // relations
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId String
 
   @@map("payment")
 }
@@ -173,6 +250,13 @@ model PaymentMethod {
   name        String   @db.VarChar(255)
   description String?
 
+  // relations
+  payments Payment[]
+
+  // relations
+  paymentProvider   PaymentProvider @relation(fields: [paymentProviderId], references: [id])
+  paymentProviderId String
+
   @@map("payment_method")
 }
 
@@ -182,6 +266,13 @@ model PaymentProvider {
   description String?
   image       String  @db.VarChar(255)
 
+  // relations
+  paymentMethods PaymentMethod[]
+
+  // relations
+  integrationKey   IntegrationKey @relation(fields: [integrationKeyId], references: [id])
+  integrationKeyId String
+
   @@map("payment_provider")
 }
 
@@ -189,6 +280,9 @@ model IntegrationKey {
   id    String @id @default(uuid())
   key   String @db.VarChar(255)
   value String
+
+  // relations
+  paymentProvider PaymentProvider[]
 
   @@map("integration_key")
 }
