@@ -49,7 +49,7 @@ model ProductVariant {
   sku             String   @db.VarChar(255)
   price           Decimal  @default(0) @db.Decimal(10, 2)
   comparisonPrice Decimal? @map("comparison_price") @db.Decimal(10, 2)
-  cost_per_unit   Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
+  costPerUnit     Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
   weight          Decimal? @db.Decimal(8, 2)
   stock           Int
   enable          Boolean  @default(true)

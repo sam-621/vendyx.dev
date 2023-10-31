@@ -11,3 +11,9 @@ interface List {
   items: [Node]!
   totalItems: Int!
 }
+
+type PaginatedListInput {
+  skip: Int
+  first: Int
+  last: Int
+}

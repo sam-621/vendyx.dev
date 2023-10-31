@@ -1,0 +1,16 @@
+type Product implements Node {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+  slug: String!
+  description: String
+  enable: Boolean!
+
+  variants: [ProductVariantList]!
+}
+
+type ProductList implements List {
+  items: [Product]!
+  totalItems: Int!
+}

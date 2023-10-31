@@ -1,0 +1,17 @@
+type ProductVariant implements Node {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  sku: String
+  price: Float!
+  comparisonPrice: Float
+  costPerUnit: Float!
+  weight: Float
+  stock: Int!
+  enable: Boolean!
+}
+
+type ProductVariantList implements List {
+  items: [ProductVariant]!
+  totalItems: Int!
+}
