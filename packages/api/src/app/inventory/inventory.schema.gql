@@ -1,8 +1,0 @@
-type Query {
-  product(id: ID, slug: String): Product
-  products: ProductList
-}
-
-type Mutation {
-  createProduct(input: CreateProductInput!): Product
-}

@@ -1,4 +1,0 @@
-type Query {
-  asset(id: ID!): Asset
-  assets: [Asset]!
-}

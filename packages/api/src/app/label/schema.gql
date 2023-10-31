@@ -1,4 +1,0 @@
-type Query {
-  label(id: ID!): Label
-  labels: [Label]!
-}

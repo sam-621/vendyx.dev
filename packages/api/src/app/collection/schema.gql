@@ -1,8 +1,0 @@
-type Query {
-  collection(id: ID, slug: String): Collection
-  collections: CollectionList!
-}
-
-type Mutation {
-  createCollection(input: CreateCollectionInput!): Collection
-}
