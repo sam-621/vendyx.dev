@@ -1,6 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// String = Text
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +10,195 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DB_URL")
+}
+
+enum AssetType {
+  IMAGE
+  FILE
+}
+
+enum OrderStates {
+  MODIFYING
+  PAYMENT_ADDED
+  PAYMENT_AUTHORIZED
+  SHIPPED
+  DELIVERED
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  name        String   @db.VarChar(255)
+  slug        String   @unique @db.VarChar(255)
+  description String?
+  enable      Boolean  @default(true)
+
+  @@map("product")
+}
+
+model ProductVariant {
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  sku             String   @db.VarChar(255)
+  price           Decimal  @default(0) @db.Decimal(10, 2)
+  comparisonPrice Decimal? @map("comparison_price") @db.Decimal(10, 2)
+  cost_per_unit   Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
+  weight          Decimal? @db.Decimal(8, 2)
+  stock           Int
+  enable          Boolean  @default(true)
+
+  @@map("product_variant")
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  name        String   @db.VarChar(255)
+  slug        String   @unique @db.VarChar(255)
+  description String?
+  enable      Boolean  @default(true)
+
+  @@map("category")
+}
+
+model Asset {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  name      String    @db.VarChar(255)
+  source    String    @db.VarChar(255)
+  type      AssetType @default(IMAGE)
+  enable    Boolean   @default(true)
+
+  @@map("asset")
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+  code          String      @db.Char(16)
+  state         OrderStates @default(MODIFYING)
+  total         Decimal     @db.Decimal(10, 2)
+  subtotal      Decimal     @db.Decimal(10, 2)
+  colocatedAt   DateTime    @map("colocated_at")
+  totalQuantity Int         @map("total_quantity")
+
+  @@map("order")
+}
+
+model OrderLine {
+  id        String   @id @default(uuid())
+  ceatedAt  DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  unitPrice Decimal  @map("unit_price") @db.Decimal(10, 2)
+  quantity  Int
+  linePrice Decimal  @map("line_price") @db.Decimal(10, 2)
+
+  @@map("order_line")
+}
+
+model Customer {
+  id               String   @id @default(uuid())
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  firstName        String?  @map("first_name") @db.VarChar(255)
+  lastName         String   @map("last_name") @db.VarChar(255)
+  email            String   @db.VarChar(255)
+  phoneNumber      String?  @map("phone_number") @db.VarChar(255)
+  phoneCountryCode String?  @map("phone_country_code") @db.Char(2)
+  enable           Boolean  @default(true)
+
+  @@map("cusotmer")
+}
+
+model Address {
+  id               String   @id @default(uuid())
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  streetLine1      String   @map("street_line_1") @db.VarChar(255)
+  streetLine2      String?  @map("street_line_2") @db.VarChar(255)
+  suburb           String   @db.VarChar(255)
+  city             String   @db.VarChar(255)
+  province         String   @db.VarChar(255)
+  country          String   @db.VarChar(255)
+  phoneNumber      String?  @map("phone_number") @db.VarChar(255)
+  phoneCountryCode String?  @map("phone_country_code") @db.Char(2)
+  postalCode       String   @map("postal_code") @db.Char(20)
+  references       String
+
+  @@map("address")
+}
+
+model Shipment {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  trackingCode String   @map("tracking_code") @db.VarChar(255)
+  amount       Decimal  @db.Decimal(10, 2)
+
+  @@map("shipment")
+}
+
+model ShipmentMethod {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  name        String   @db.VarChar(255)
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  carrier     String   @db.VarChar(255)
+  enable      Boolean  @default(true)
+
+  @@map("shipment_method")
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  transactionId String   @map("transaction_id") @db.VarChar(255)
+  amount        Decimal  @db.Decimal(10, 2)
+
+  @@map("payment")
+}
+
+model PaymentMethod {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  name        String   @db.VarChar(255)
+  description String?
+
+  @@map("payment_method")
+}
+
+model PaymentProvider {
+  id          String  @id @default(uuid())
+  name        String  @db.VarChar(255)
+  description String?
+  image       String  @db.VarChar(255)
+
+  @@map("payment_provider")
+}
+
+model IntegrationKey {
+  id    String @id @default(uuid())
+  key   String @db.VarChar(255)
+  value String
+
+  @@map("integration_key")
+}
+
+model Administrator {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  username  String   @db.VarChar(255)
+  password  String   @db.VarChar(255)
+
+  @@map("administrator")
 }
