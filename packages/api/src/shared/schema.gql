@@ -1,0 +1,13 @@
+scalar Date
+scalar ID
+
+interface Node {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+interface List {
+  items: [Node]!
+  totalItems: Int!
+}
