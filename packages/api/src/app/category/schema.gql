@@ -1,0 +1,4 @@
+type Query {
+  categories: CategoryList!
+  category(id: ID, slug: String): Category
+}

@@ -8,6 +8,7 @@ type Product implements Node {
   enable: Boolean!
 
   variants: [ProductVariantList]!
+  categories: [CategoryList]!
 }
 
 type ProductList implements List {

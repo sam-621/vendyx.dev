@@ -1,0 +1,16 @@
+type Category implements Node {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+  slug: String!
+  description: String
+  enable: Boolean!
+
+  products: [ProductList]!
+}
+
+type CategoryList implements List {
+  items: [Category]!
+  totalItems: Int!
+}
