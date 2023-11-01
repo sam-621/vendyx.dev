@@ -12,7 +12,7 @@ interface List {
   totalItems: Int!
 }
 
-type PaginatedListInput {
+input PaginatedListInput {
   """
   Skip the first n results
   """

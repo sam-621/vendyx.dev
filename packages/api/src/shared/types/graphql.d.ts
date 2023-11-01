@@ -13,6 +13,12 @@ export enum AssetType {
     FILE = "FILE"
 }
 
+export class PaginatedListInput {
+    skip?: Nullable<number>;
+    first?: Nullable<number>;
+    last?: Nullable<number>;
+}
+
 export interface Node {
     id: string;
     createdAt: Date;
@@ -43,15 +49,10 @@ export class AssetList implements List {
 
 export abstract class IQuery {
     abstract assets(): AssetList | Promise<AssetList>;
-
     abstract asset(id?: Nullable<string>): Nullable<Asset> | Promise<Nullable<Asset>>;
-
     abstract categories(): CategoryList | Promise<CategoryList>;
-
     abstract category(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Category> | Promise<Nullable<Category>>;
-
-    abstract products(): ProductList | Promise<ProductList>;
-
+    abstract products(input?: Nullable<PaginatedListInput>): ProductList | Promise<ProductList>;
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
@@ -72,6 +73,32 @@ export class CategoryList implements List {
     totalItems: number;
 }
 
+export class OptionGroup implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    options?: Nullable<OptionList>;
+}
+
+export class Option implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    value: string;
+    optionGroups?: Nullable<OptionGroupList>;
+}
+
+export class OptionGroupList implements List {
+    items: Nullable<OptionGroup>[];
+    totalItems: number;
+}
+
+export class OptionList implements List {
+    items: Nullable<Option>[];
+    totalItems: number;
+}
+
 export class ProductVariant implements Node {
     id: string;
     createdAt: Date;
@@ -83,6 +110,7 @@ export class ProductVariant implements Node {
     weight?: Nullable<number>;
     stock: number;
     enable: boolean;
+    options?: Nullable<OptionList>;
 }
 
 export class ProductVariantList implements List {
@@ -106,12 +134,6 @@ export class Product implements Node {
 export class ProductList implements List {
     items: Nullable<Product>[];
     totalItems: number;
-}
-
-export class PaginatedListInput {
-    skip?: Nullable<number>;
-    first?: Nullable<number>;
-    last?: Nullable<number>;
 }
 
 type Nullable<T> = T | null;
