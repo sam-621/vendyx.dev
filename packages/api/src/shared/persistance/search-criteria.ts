@@ -1,16 +1,12 @@
 import { PaginatedListInput } from '../types/graphql'
 
-export type SearchCriteria = PaginatedListInput & {
+export type SearchCriteriaInMany = PaginatedListInput & {
   /**
    * Skip the first n results
    */
   skip: number
   /**
-   * take the first n results
+   * Take n result where the cursor is (skip end position)
    */
-  first: number
-  /**
-   * take the last n results
-   */
-  last: number
+  take: number
 }

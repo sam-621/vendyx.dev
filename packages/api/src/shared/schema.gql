@@ -19,12 +19,7 @@ input PaginatedListInput {
   skip: Int
 
   """
-  take the first n results
+  Take n result where the cursor is (skip end position)
   """
-  first: Int
-
-  """
-  take the last n results
-  """
-  last: Int
+  take: Int
 }

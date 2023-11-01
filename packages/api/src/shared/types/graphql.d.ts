@@ -15,8 +15,7 @@ export enum AssetType {
 
 export class PaginatedListInput {
     skip?: Nullable<number>;
-    first?: Nullable<number>;
-    last?: Nullable<number>;
+    take?: Nullable<number>;
 }
 
 export interface Node {
