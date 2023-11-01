@@ -8,7 +8,7 @@ type Product implements Node {
   enable: Boolean!
 
   variants: [ProductVariantList]!
-  categories: [CategoryList]!
+  collections: [CollectionList]!
   assets: [AssetList]!
 }
 

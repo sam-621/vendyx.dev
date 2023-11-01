@@ -1,4 +1,4 @@
-type Category implements Node {
+type Collection implements Node {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
@@ -11,7 +11,7 @@ type Category implements Node {
   assets: [AssetList]!
 }
 
-type CategoryList implements List {
-  items: [Category]!
+type CollectionList implements List {
+  items: [Collection]!
   totalItems: Int!
 }

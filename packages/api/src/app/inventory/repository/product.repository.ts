@@ -1,4 +1,4 @@
-import { PrismaService, SearchCriteriaInMany } from '@/shared/persistance'
+import { PrismaService } from '@/shared/persistance'
 import { Injectable } from '@nestjs/common'
 
 @Injectable()
@@ -13,10 +13,7 @@ export class ProductRepository {
     return this.prismaService.product.findUnique({ where: { slug } })
   }
 
-  findMany(searchCriteria: SearchCriteriaInMany) {
-    return this.prismaService.product.findMany({
-      skip: searchCriteria.skip,
-      take: searchCriteria.take
-    })
+  findMany() {
+    return this.prismaService.product.findMany()
   }
 }

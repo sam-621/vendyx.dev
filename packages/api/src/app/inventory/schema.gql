@@ -1,4 +1,4 @@
 type Query {
-  products(input: PaginatedListInput): ProductList!
+  products: ProductList!
   product(id: ID, slug: String): Product
 }

@@ -38,7 +38,7 @@ export class Asset implements Node {
     type: AssetType;
     enable: boolean;
     products: Nullable<ProductList>[];
-    categories: Nullable<CategoryList>[];
+    collections: Nullable<CollectionList>[];
 }
 
 export class AssetList implements List {
@@ -49,13 +49,13 @@ export class AssetList implements List {
 export abstract class IQuery {
     abstract assets(): AssetList | Promise<AssetList>;
     abstract asset(id?: Nullable<string>): Nullable<Asset> | Promise<Nullable<Asset>>;
-    abstract categories(): CategoryList | Promise<CategoryList>;
-    abstract category(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Category> | Promise<Nullable<Category>>;
+    abstract collections(): CollectionList | Promise<CollectionList>;
+    abstract collection(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Collection> | Promise<Nullable<Collection>>;
     abstract products(input?: Nullable<PaginatedListInput>): ProductList | Promise<ProductList>;
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
-export class Category implements Node {
+export class Collection implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -67,8 +67,8 @@ export class Category implements Node {
     assets: Nullable<AssetList>[];
 }
 
-export class CategoryList implements List {
-    items: Nullable<Category>[];
+export class CollectionList implements List {
+    items: Nullable<Collection>[];
     totalItems: number;
 }
 
@@ -126,7 +126,7 @@ export class Product implements Node {
     description?: Nullable<string>;
     enable: boolean;
     variants: Nullable<ProductVariantList>[];
-    categories: Nullable<CategoryList>[];
+    collections: Nullable<CollectionList>[];
     assets: Nullable<AssetList>[];
 }
 
