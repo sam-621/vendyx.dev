@@ -36,7 +36,7 @@ model Product {
 
   // relations
   productVariants ProductVariant[]
-  categories      ProductOnCategory[]
+  collections     ProductOnCollection[]
   assets          AssetOnProduct[]
 
   @@map("product")
@@ -61,17 +61,17 @@ model ProductVariant {
   @@map("product_variant")
 }
 
-model ProductOnCategory {
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  String   @map("product_id")
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String   @map("category_id")
+model ProductOnCollection {
+  product      Product    @relation(fields: [productId], references: [id])
+  productId    String     @map("product_id")
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String     @map("collection_id")
 
-  @@id([productId, categoryId])
-  @@map("product_on_category")
+  @@id([productId, collectionId])
+  @@map("product_on_collection")
 }
 
-model Category {
+model Collection {
   id          String   @id @default(uuid())
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
@@ -81,10 +81,10 @@ model Category {
   enable      Boolean  @default(true)
 
   // relations
-  products ProductOnCategory[]
-  assets   AssetOnCategory[]
+  products ProductOnCollection[]
+  assets   AssetOnCollection[]
 
-  @@map("category")
+  @@map("collection")
 }
 
 model AssetOnProduct {
@@ -97,14 +97,14 @@ model AssetOnProduct {
   @@map("asset_on_product")
 }
 
-model AssetOnCategory {
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String   @map("category_id")
-  asset      Asset    @relation(fields: [assetId], references: [id])
-  assetId    String   @map("asset_id")
+model AssetOnCollection {
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String     @map("collection_id")
+  asset        Asset      @relation(fields: [assetId], references: [id])
+  assetId      String     @map("asset_id")
 
-  @@id([categoryId, assetId])
-  @@map("asset_on_category")
+  @@id([collectionId, assetId])
+  @@map("asset_on_collection")
 }
 
 model Asset {
@@ -117,8 +117,8 @@ model Asset {
   enable    Boolean   @default(true)
 
   // relations
-  products   AssetOnProduct[]
-  categories AssetOnCategory[]
+  products    AssetOnProduct[]
+  collections AssetOnCollection[]
 
   @@map("asset")
 }
