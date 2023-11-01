@@ -13,7 +13,18 @@ interface List {
 }
 
 type PaginatedListInput {
+  """
+  Skip the first n results
+  """
   skip: Int
+
+  """
+  take the first n results
+  """
   first: Int
+
+  """
+  take the last n results
+  """
   last: Int
 }
