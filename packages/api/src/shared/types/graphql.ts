@@ -48,10 +48,15 @@ export class AssetList implements List {
 
 export abstract class IQuery {
     abstract assets(): AssetList | Promise<AssetList>;
+
     abstract asset(id?: Nullable<string>): Nullable<Asset> | Promise<Nullable<Asset>>;
+
     abstract collections(): CollectionList | Promise<CollectionList>;
+
     abstract collection(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Collection> | Promise<Nullable<Collection>>;
-    abstract products(input?: Nullable<PaginatedListInput>): ProductList | Promise<ProductList>;
+
+    abstract products(): ProductList | Promise<ProductList>;
+
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
