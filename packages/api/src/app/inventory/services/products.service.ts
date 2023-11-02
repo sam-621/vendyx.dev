@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common'
-import { ProductRepository } from '../repositories'
+import { ProductRepository, ProductVariantRepository } from '../repositories'
 import { Product, ProductVariant } from '../inventory'
 import { UserInputError } from '@/shared/errors'
 import { ID } from '@/shared/types/models'
 
 @Injectable()
 export class ProductService {
-  constructor(private readonly productRepository: ProductRepository) {}
+  constructor(
+    private readonly productRepository: ProductRepository,
+    private readonly variantRepository: ProductVariantRepository
+  ) {}
 
   async findUnique(id: ID, slug: string): Promise<Product | null> {
     if (id) {
@@ -25,6 +28,6 @@ export class ProductService {
   }
 
   async findVariants(productId: ID): Promise<ProductVariant[]> {
-    return this.productRepository.findVariants(productId)
+    return this.variantRepository.findVariantsOnProduct(productId)
   }
 }

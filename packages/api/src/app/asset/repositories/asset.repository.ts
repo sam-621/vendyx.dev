@@ -14,4 +14,14 @@ export class AssetRepository {
   async findMany(): Promise<Asset[]> {
     return this.prismaService.asset.findMany()
   }
+
+  async findAssetsOnProducts(productId: ID): Promise<Asset[]> {
+    return this.prismaService.asset.findMany({ where: { products: { every: { productId } } } })
+  }
+
+  async findAssetsOnCollections(collectionId: ID): Promise<Asset[]> {
+    return this.prismaService.asset.findMany({
+      where: { collections: { every: { collectionId } } }
+    })
+  }
 }
