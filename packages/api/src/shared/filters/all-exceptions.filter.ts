@@ -30,9 +30,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       this.logger.businessLog(exception, formattedErrorCode, errorMessage)
 
       // for some reason sometimes the graphql playground does not find the favicon.ico and throws an error
-      if (errorMessage == 'Cannot GET /favicon.ico') return
+      // if (errorMessage == 'Cannot GET /favicon.ico') return
 
-      throw new GraphQLError(errorMessage, { extensions: { code: formattedErrorCode } })
+      // throw new GraphQLError(errorMessage, { extensions: { code: formattedErrorCode } })
     }
 
     // Unexpected errors
