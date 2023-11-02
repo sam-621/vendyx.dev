@@ -199,7 +199,7 @@ model OrderLine {
   updatedAt DateTime @updatedAt @map("updated_at")
   /// Unit price of the product of the current line
   unitPrice Decimal  @map("unit_price") @db.Decimal(10, 2)
-  quantity  Int
+  quantity  Int      @db.SmallInt
   /// Unit price muliplied by quantity
   linePrice Decimal  @map("line_price") @db.Decimal(10, 2)
 
