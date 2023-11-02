@@ -1,7 +1,7 @@
 import { PrismaService } from '@/shared/persistance'
 import { ID } from '@/shared/types/models'
 import { Injectable } from '@nestjs/common'
-import { Product } from '../inventory'
+import { Product, ProductVariant } from '../inventory'
 
 @Injectable()
 export class ProductRepository {
@@ -17,5 +17,9 @@ export class ProductRepository {
 
   findMany(): Promise<Product[]> {
     return this.prismaService.product.findMany()
+  }
+
+  async findVariants(productId: ID): Promise<ProductVariant[]> {
+    return this.prismaService.productVariant.findMany({ where: { productId } })
   }
 }

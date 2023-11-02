@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { ProductRepository } from '../repository'
-import { Product } from '../inventory'
+import { ProductRepository } from '../repositories'
+import { Product, ProductVariant } from '../inventory'
 import { UserInputError } from '@/shared/errors'
 import { ID } from '@/shared/types/models'
 
@@ -22,5 +22,9 @@ export class ProductService {
 
   async findMany(): Promise<Product[]> {
     return this.productRepository.findMany()
+  }
+
+  async findVariants(productId: ID): Promise<ProductVariant[]> {
+    return this.productRepository.findVariants(productId)
   }
 }

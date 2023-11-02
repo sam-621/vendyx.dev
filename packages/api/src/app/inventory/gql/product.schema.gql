@@ -7,9 +7,9 @@ type Product implements Node {
   description: String
   enable: Boolean!
 
-  variants: [ProductVariantList]!
-  collections: [CollectionList]!
-  assets: [AssetList]!
+  variants: ProductVariantList!
+  collections: CollectionList!
+  assets: AssetList!
 }
 
 type ProductList implements List {

@@ -130,9 +130,9 @@ export class Product implements Node {
     slug: string;
     description?: Nullable<string>;
     enable: boolean;
-    variants: Nullable<ProductVariantList>[];
-    collections: Nullable<CollectionList>[];
-    assets: Nullable<AssetList>[];
+    variants: ProductVariantList;
+    collections: CollectionList;
+    assets: AssetList;
 }
 
 export class ProductList implements List {

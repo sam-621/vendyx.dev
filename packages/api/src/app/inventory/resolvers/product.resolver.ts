@@ -1,8 +1,9 @@
-import { Args, Query, Resolver } from '@nestjs/graphql'
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductService } from '../services/products.service'
 import { List } from '@/shared/utils/responses'
-import { Product } from '../inventory'
+import { Product, ProductVariant } from '../inventory'
 import { ID } from '@/shared/types/models'
+import { Product as ApiProduct } from '@/shared/types/graphql'
 
 @Resolver('Product')
 export class ProductResolver {
@@ -18,5 +19,12 @@ export class ProductResolver {
   @Query('product')
   async product(@Args('id') id: ID, @Args('slug') slug: string) {
     return this.productService.findUnique(id, slug)
+  }
+
+  @ResolveField('variants')
+  async variants(@Parent() product: ApiProduct) {
+    const variants = await this.productService.findVariants(product.id)
+
+    return new List<ProductVariant>(variants, variants.length)
   }
 }
