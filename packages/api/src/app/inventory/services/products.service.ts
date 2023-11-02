@@ -3,6 +3,7 @@ import { ProductRepository, ProductVariantRepository } from '../repositories'
 import { Product, ProductVariant } from '../inventory'
 import { UserInputError } from '@/shared/errors'
 import { ID } from '@/shared/types/models'
+import { Asset } from '@/app/asset'
 
 @Injectable()
 export class ProductService {
@@ -29,5 +30,9 @@ export class ProductService {
 
   async findVariants(productId: ID): Promise<ProductVariant[]> {
     return this.variantRepository.findVariantsOnProduct(productId)
+  }
+
+  async findAssets(productId: ID): Promise<Asset[]> {
+    return this.productRepository.findAssetsOnProduct(productId)
   }
 }
