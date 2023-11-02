@@ -7,15 +7,15 @@ import { Product, ProductVariant } from '../inventory'
 export class ProductRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  findById(id: ID): Promise<Product | null> {
+  async findById(id: ID): Promise<Product | null> {
     return this.prismaService.product.findUnique({ where: { id } })
   }
 
-  findBySlug(slug: string): Promise<Product | null> {
+  async findBySlug(slug: string): Promise<Product | null> {
     return this.prismaService.product.findUnique({ where: { slug } })
   }
 
-  findMany(): Promise<Product[]> {
+  async findMany(): Promise<Product[]> {
     return this.prismaService.product.findMany()
   }
 
