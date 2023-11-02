@@ -20,9 +20,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:migrate": "yarn prisma migrate dev",
     "db:push": "yarn prisma db push",
-    "db:seed": "prisma db seed",
     "db:types": "prisma generate",
-    "db:cleanup": "node ./scripts/cleanup-db.mjs",
+    "db:cleanup": "ts-node ./scripts/cleanup-db.ts",
+    "db:seed": "yarn db:cleanup && ts-node ./prisma/seed/seed.ts",
     "api:types": "node ./scripts/generate-typings.mjs"
   },
   "dependencies": {
