@@ -9,8 +9,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
   constructor(readonly logger: LoggerService) {}
 
   catch(exception: Error): void {
-    console.log({ exception })
-
     // Errors throw by our domain
     if (exception instanceof BusinessError) {
       const { code, message, metadata } = exception
@@ -27,7 +25,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
       const formattedErrorCode = errorCode.toUpperCase().replace(' ', '_') as ErrorCode
 
-      this.logger.businessLog(exception, formattedErrorCode, errorMessage)
+      this.logger.businessLog(exception, formattedErrorCode, errorMessage, { exception })
 
       // for some reason sometimes the graphql playground does not find the favicon.ico and throws an error
       // if (errorMessage == 'Cannot GET /favicon.ico') return
@@ -39,7 +37,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const errorMessage = exception.message
     const errorCode = exception.name.toUpperCase().replace(' ', '_') as ErrorCode
 
-    this.logger.businessLog(exception, errorCode, errorMessage)
+    this.logger.businessLog(exception, errorCode, errorMessage, { exception })
     throw new GraphQLError(errorMessage, { extensions: { code: errorCode } })
   }
 }

@@ -5,6 +5,7 @@ import { Product, ProductVariant } from '../inventory'
 import { ID } from '@/shared/types/models'
 import { Product as ApiProduct } from '@/shared/types/graphql'
 import { Asset } from '@/app/asset'
+import { Collection } from '@/app/collection'
 
 @Resolver('Product')
 export class ProductResolver {
@@ -34,5 +35,12 @@ export class ProductResolver {
     const assets = await this.productService.findAssets(product.id)
 
     return new List<Asset>(assets, assets.length)
+  }
+
+  @ResolveField('collections')
+  async collections(@Parent() product: ApiProduct) {
+    const collections = await this.productService.findCollections(product.id)
+
+    return new List<Collection>(collections, collections.length)
   }
 }

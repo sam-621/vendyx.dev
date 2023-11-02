@@ -3,6 +3,7 @@ import { ID } from '@/shared/types/models'
 import { Injectable } from '@nestjs/common'
 import { Product } from '../inventory'
 import { Asset } from '@/app/asset'
+import { Collection } from '@/app/collection'
 
 @Injectable()
 export class ProductRepository {
@@ -20,7 +21,25 @@ export class ProductRepository {
     return this.prismaService.product.findMany()
   }
 
-  async findAssetsOnProduct(productId: ID): Promise<Asset[]> {
-    return this.prismaService.asset.findMany({ where: { products: { every: { productId } } } })
+  async findVariants(productId: ID) {
+    return this.prismaService.productVariant.findMany({ where: { productId } })
+  }
+
+  async findAssets(productId: ID): Promise<Asset[]> {
+    const result = await this.prismaService.assetOnProduct.findMany({
+      where: { productId },
+      include: { asset: true }
+    })
+
+    return result.map(asset => asset.asset)
+  }
+
+  async findCollections(productId: ID): Promise<Collection[]> {
+    const result = await this.prismaService.productOnCollection.findMany({
+      where: { productId },
+      include: { collection: true }
+    })
+
+    return result.map(c => c.collection)
   }
 }
