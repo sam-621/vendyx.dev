@@ -14,6 +14,7 @@ import {
 import { PlusCircleIcon } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
 
+import { cn } from '../..';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
@@ -68,7 +69,7 @@ export const DataTable = <TData, TValue>({ columns, data, search }: Props<TData,
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header, i) => {
                   return (
-                    <TableHead className={`${i === 0 ? 'pl-3' : ''}`} key={header.id}>
+                    <TableHead className={cn('', { 'pl-3': i === 0 })} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
@@ -83,7 +84,7 @@ export const DataTable = <TData, TValue>({ columns, data, search }: Props<TData,
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell, i) => (
-                    <TableCell className={i === 0 ? 'pl-3' : ''} key={cell.id}>
+                    <TableCell className={cn('', { 'pl-3': i === 0 })} key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

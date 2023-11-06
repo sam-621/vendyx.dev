@@ -74,7 +74,10 @@ const columns: ColumnDef<TableProduct>[] = [
       return <DataTableColumnHeader column={column} title="Product" />;
     },
     cell: ({ row }) => (
-      <Link href={`/inventory/${row.original.slug ?? ''}`} className="flex items-center gap-2">
+      <Link
+        href={`/inventory/${row.original.slug ?? ''}`}
+        className="flex items-center gap-2 w-full"
+      >
         {row.original.assets.items.length > 0 && (
           <img
             src={row.original.assets.items[0]?.source ?? ''}
@@ -118,7 +121,8 @@ const columns: ColumnDef<TableProduct>[] = [
           {row.original.enabled ? 'Enabled' : 'Disabled'}
         </Badge>
       );
-    }
+    },
+    enableSorting: false
   },
   {
     id: 'actions',

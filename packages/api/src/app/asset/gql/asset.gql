@@ -10,7 +10,7 @@ type Asset implements Node {
   name: String!
   source: String!
   type: AssetType!
-  enable: Boolean!
+  enabled: Boolean!
 
   products: [ProductList]!
   collections: [CollectionList]!

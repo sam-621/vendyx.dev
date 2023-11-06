@@ -36,7 +36,7 @@ export class Asset implements Node {
     name: string;
     source: string;
     type: AssetType;
-    enable: boolean;
+    enabled: boolean;
     products: Nullable<ProductList>[];
     collections: Nullable<CollectionList>[];
 }
@@ -53,7 +53,7 @@ export class Collection implements Node {
     name: string;
     slug: string;
     description?: Nullable<string>;
-    enable: boolean;
+    enabled: boolean;
     products: Nullable<ProductList>[];
     assets: Nullable<AssetList>[];
 }
@@ -109,7 +109,7 @@ export class ProductVariant implements Node {
     costPerUnit: number;
     weight?: Nullable<number>;
     stock: number;
-    enable: boolean;
+    enabled: boolean;
     options?: Nullable<OptionList>;
 }
 
@@ -125,7 +125,7 @@ export class Product implements Node {
     name: string;
     slug: string;
     description?: Nullable<string>;
-    enable: boolean;
+    enabled: boolean;
     variants: ProductVariantList;
     collections: CollectionList;
     assets: AssetList;

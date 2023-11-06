@@ -20,7 +20,7 @@ type ProductVariant implements Node {
   costPerUnit: Float!
   weight: Float
   stock: Int!
-  enable: Boolean!
+  enabled: Boolean!
 
   options: OptionList
 }

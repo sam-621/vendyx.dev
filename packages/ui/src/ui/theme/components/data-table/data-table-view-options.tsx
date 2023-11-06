@@ -23,7 +23,7 @@ export function DataTableViewOptions<TData>({ table }: Props<TData>) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Alternar columnas</DropdownMenuLabel>
+        <DropdownMenuLabel>Alternate rows</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()

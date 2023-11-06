@@ -5,7 +5,7 @@ type Product implements Node {
   name: String!
   slug: String!
   description: String
-  enable: Boolean!
+  enabled: Boolean!
 
   variants: ProductVariantList!
   collections: CollectionList!
