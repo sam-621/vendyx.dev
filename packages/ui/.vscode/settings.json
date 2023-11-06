@@ -11,5 +11,5 @@
   "[scss]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
-  "cSpell.words": ["clsx", "Lucide"]
+  "cSpell.words": ["clsx", "Lucide", "tanstack"]
 }

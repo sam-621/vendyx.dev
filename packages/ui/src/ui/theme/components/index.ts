@@ -2,6 +2,8 @@ export * from './avatar';
 export * from './breadcrumbs';
 export * from './button';
 export * from './button-link';
+export * from './data-table/data-table';
 export * from './dropdown-menu';
+export * from './input';
 export * from './select';
 export * from './table';
