@@ -16,9 +16,10 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/theme/components';
+import { useTheme } from '@/ui/theme';
 
 export const UserMenu = () => {
-  // const { setTheme } = useTheme();
+  const { setDark, setLight, setSystem } = useTheme();
 
   return (
     <DropdownMenu>
@@ -47,15 +48,15 @@ export const UserMenu = () => {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <DropdownMenuItem onClick={() => alert('light')}>
+                <DropdownMenuItem onClick={setLight}>
                   <Sun className="mr-2 h-4 w-4  scale-100 transition-all" />
                   <span>Claro</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => alert('system')}>
+                <DropdownMenuItem onClick={setSystem}>
                   <Laptop className="mr-2 h-4 w-4 transition-all " />
                   <span>Sistema</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => alert('dark')}>
+                <DropdownMenuItem onClick={setDark}>
                   <Moon className="mr-2 h-4 w-4 transition-all " />
                   <span>Obscuro</span>
                 </DropdownMenuItem>
