@@ -12,7 +12,7 @@ export const AppLayout: FC<Props> = ({ children }) => {
       >
         <div className="flex gap-2 items-center">
           <CommandIcon className="text-foreground" />
-          <h1 className="text-foreground text-2xl font-medium">Vendyx</h1>
+          <h1 className="text-foreground text-2xl font-normal">Vendyx</h1>
         </div>
         <div className="">
           <UserMenu />

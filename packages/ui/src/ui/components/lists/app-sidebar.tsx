@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { BarChart2Icon, BoxesIcon, PackageIcon, ShoppingCartIcon, UserIcon } from 'lucide-react';
-import Link from 'next/link';
 import { type FC } from 'react';
+
+import { AppSidebarItem } from '../items';
 
 export const AppSidebar: FC<Props> = async ({ className }) => {
   return (
@@ -10,46 +11,39 @@ export const AppSidebar: FC<Props> = async ({ className }) => {
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold tracking-tight pl-4">Catalgo</h2>
           <div className="flex flex-col gap-1">
-            <Link
-              href={'/admin'}
-              className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
-            >
-              <BarChart2Icon className="flex-shrink-0" size={16} />
-              Dashboard
-            </Link>
-            <Link
-              href={'/admin/inventory'}
-              className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
-            >
-              <PackageIcon className="flex-shrink-0" size={16} />
-              Inventory
-            </Link>
-            <Link
-              href={'/admin/collections'}
-              className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
-            >
-              <BoxesIcon className="flex-shrink-0" size={16} />
-              Collections
-            </Link>
+            <AppSidebarItem
+              href="/admin"
+              icon={<BarChart2Icon className="flex-shrink-0" size={16} />}
+              text="Dashboard"
+            />
+
+            <AppSidebarItem
+              href="/admin/inventory"
+              icon={<PackageIcon className="flex-shrink-0" size={16} />}
+              text="Inventory"
+            />
+
+            <AppSidebarItem
+              href="/admin/collections"
+              icon={<BoxesIcon className="flex-shrink-0" size={16} />}
+              text="Collections"
+            />
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold tracking-tight pl-4">Ventas</h2>
           <div className="flex flex-col gap-1">
-            <Link
-              href={'/admin/orders'}
-              className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
-            >
-              <ShoppingCartIcon className="flex-shrink-0" size={16} />
-              Orders
-            </Link>
-            <Link
-              href={'/admin/customers'}
-              className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
-            >
-              <UserIcon className="flex-shrink-0" size={16} />
-              Customers
-            </Link>
+            <AppSidebarItem
+              href="/admin/orders"
+              icon={<ShoppingCartIcon className="flex-shrink-0" size={16} />}
+              text="Orders"
+            />
+
+            <AppSidebarItem
+              href="/admin/customers"
+              icon={<UserIcon className="flex-shrink-0" size={16} />}
+              text="Customers"
+            />
           </div>
         </div>
       </div>
