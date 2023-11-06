@@ -1,4 +1,6 @@
 import clsx from 'clsx';
+import { type FC } from 'react';
+
 import {
   BarChart2Icon,
   BoxesIcon,
@@ -6,8 +8,7 @@ import {
   SettingsIcon,
   ShoppingCartIcon,
   UserIcon
-} from 'lucide-react';
-import { type FC } from 'react';
+} from '@/theme/icons';
 
 import { AppSidebarItem } from '../items';
 

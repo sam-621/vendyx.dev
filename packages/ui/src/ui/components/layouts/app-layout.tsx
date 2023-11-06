@@ -1,5 +1,6 @@
-import { CommandIcon } from 'lucide-react';
 import type { FC, PropsWithChildren } from 'react';
+
+import { CommandIcon } from '@/theme/icons';
 
 import { AppSidebar } from '../lists/app-sidebar';
 import { UserMenu } from '../menus/user-menu';
