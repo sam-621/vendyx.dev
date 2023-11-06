@@ -1,12 +1,19 @@
 import clsx from 'clsx';
-import { BarChart2Icon, BoxesIcon, PackageIcon, ShoppingCartIcon, UserIcon } from 'lucide-react';
+import {
+  BarChart2Icon,
+  BoxesIcon,
+  PackageIcon,
+  SettingsIcon,
+  ShoppingCartIcon,
+  UserIcon
+} from 'lucide-react';
 import { type FC } from 'react';
 
 import { AppSidebarItem } from '../items';
 
 export const AppSidebar: FC<Props> = async ({ className }) => {
   return (
-    <aside className={clsx('border-r h-full py-8 px-4', className)}>
+    <aside className={clsx('border-r h-full py-8 px-4 flex flex-col justify-between', className)}>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold tracking-tight pl-4">Catalgo</h2>
@@ -47,6 +54,12 @@ export const AppSidebar: FC<Props> = async ({ className }) => {
           </div>
         </div>
       </div>
+
+      <AppSidebarItem
+        href="/admin/setting"
+        icon={<SettingsIcon className="flex-shrink-0" size={16} />}
+        text="Settings"
+      />
     </aside>
   );
 };
