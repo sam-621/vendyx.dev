@@ -14,18 +14,17 @@ export const Breadcrumb: FC<Props> = ({ items }) => {
       </Link>
       <ChevronRightIcon width={16} className="text-muted-foreground" />
       {items.map((item, i) => (
-        <>
+        <div key={i}>
           {item.href !== undefined ? (
-            <>
+            <div>
               <Link
-                key={item.href}
                 href={item.href}
                 className={`text-sm text-muted-foreground hover:text-foreground font-medium transition-colors`}
               >
                 {item.label}
               </Link>
               <ChevronRightIcon width={16} className={`text-muted-foreground `} />
-            </>
+            </div>
           ) : (
             <span
               className={`text-sm text-muted-foreground hover:text-foreground font-medium transition-colors`}
@@ -33,7 +32,7 @@ export const Breadcrumb: FC<Props> = ({ items }) => {
               {item.label}
             </span>
           )}
-        </>
+        </div>
       ))}
     </nav>
   );
