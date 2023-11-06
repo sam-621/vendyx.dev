@@ -1,3 +1,4 @@
+export * from './avatar';
+export * from './breadcrumbs';
 export * from './button';
-export * from './avatar'
-export * from './dropdown-menu'
+export * from './dropdown-menu';
