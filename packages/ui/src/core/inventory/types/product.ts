@@ -2,7 +2,8 @@ import type {
   CommonAsset,
   CommonCollection,
   CommonProduct,
-  CommonProductVariant
+  CommonProductVariant,
+  List
 } from '@/core/shared/types';
 
 export interface Product {
@@ -31,15 +32,15 @@ export interface ProductVariant {
 /* Abstractions */
 
 export type BasicProduct = CommonProduct & {
-  variants: (CommonProductVariant | null)[];
-  assets: (CommonAsset | null)[];
+  variants: List<CommonProductVariant | null>;
+  assets: List<CommonAsset | null>;
 };
 
 export type DetailedProduct = CommonProduct & {
   description: string;
-  variants: (DetailedProductVariant | null)[];
-  assets: (CommonAsset | null)[];
-  collections: (CommonCollection | null)[];
+  variants: List<DetailedProductVariant | null>;
+  assets: List<CommonAsset | null>;
+  collections: List<CommonCollection | null>;
 };
 
 export type DetailedProductVariant = CommonProductVariant & {

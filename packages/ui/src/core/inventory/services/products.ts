@@ -9,7 +9,7 @@ import type {
 
 type GetProductsResponse = { products: GetInventoryProductsQueryResult };
 
-export const getProducts = async (): Promise<GetInventoryProductsQueryResult> => {
+export const fetchProducts = async (): Promise<GetInventoryProductsQueryResult> => {
   const { products } = await gqlRequest<GetProductsResponse>({
     query: GetInventoryProductsQuery
   });
@@ -19,7 +19,7 @@ export const getProducts = async (): Promise<GetInventoryProductsQueryResult> =>
 
 type GetProductDetailsResponse = { product: GetProductDetailsQueryResult | null };
 
-export const getProductDetails = async (
+export const fetchProductDetails = async (
   args: GetProductDetailsArgs
 ): Promise<GetProductDetailsQueryResult | null> => {
   const { product } = await gqlRequest<GetProductDetailsResponse, GetProductDetailsArgs>({

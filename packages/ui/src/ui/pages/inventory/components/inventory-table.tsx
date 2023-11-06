@@ -15,9 +15,9 @@ export const InventoryTable: FC<Props> = ({ products }) => {
     name: p.name,
     slug: p.slug,
     assets: p.assets,
-    sku: p.variants[0]?.sku ?? '',
-    price: p.variants[0]?.price ?? 0,
-    stock: p.variants[0]?.stock ?? 0
+    sku: p.variants.items[0]?.sku ?? '',
+    price: p.variants.items[0]?.price ?? 0,
+    stock: p.variants.items[0]?.stock ?? 0
   }));
 
   return (
@@ -75,9 +75,9 @@ const columns: ColumnDef<TableProduct>[] = [
     },
     cell: ({ row }) => (
       <Link href={`/inventory/${row.original.slug ?? ''}`} className="flex items-center gap-2">
-        {row.original.assets.length > 0 && (
+        {row.original.assets.items.length > 0 && (
           <img
-            src={row.original.assets[0]?.source ?? ''}
+            src={row.original.assets.items[0]?.source ?? ''}
             alt={row.getValue('name')}
             className="h-12 w-12 object-cover rounded-md"
           />
