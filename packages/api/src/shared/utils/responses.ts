@@ -1,3 +1,3 @@
 export class List<T> {
-  constructor(readonly items: T[], readonly totalItems: number) {}
+  constructor(readonly items: T[], readonly count: number) {}
 }

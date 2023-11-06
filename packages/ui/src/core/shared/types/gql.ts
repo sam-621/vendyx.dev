@@ -4,7 +4,7 @@ import { type Product, type ProductVariant } from '@/core/inventory/types';
 
 export type List<T> = {
   items: T[];
-  totalItems: number;
+  count: number;
 };
 
 export type CommonAsset = Pick<Asset, 'id' | 'source'>;

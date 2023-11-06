@@ -13,5 +13,5 @@ type Collection implements Node {
 
 type CollectionList implements List {
   items: [Collection]!
-  totalItems: Int!
+  count: Int!
 }

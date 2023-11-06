@@ -27,5 +27,5 @@ type ProductVariant implements Node {
 
 type ProductVariantList implements List {
   items: [ProductVariant]!
-  totalItems: Int!
+  count: Int!
 }

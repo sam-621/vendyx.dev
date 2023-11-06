@@ -18,10 +18,10 @@ type Option implements Node {
 
 type OptionGroupList implements List {
   items: [OptionGroup]!
-  totalItems: Int!
+  count: Int!
 }
 
 type OptionList implements List {
   items: [Option]!
-  totalItems: Int!
+  count: Int!
 }

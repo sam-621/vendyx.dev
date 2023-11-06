@@ -14,5 +14,5 @@ type Product implements Node {
 
 type ProductList implements List {
   items: [Product]!
-  totalItems: Int!
+  count: Int!
 }

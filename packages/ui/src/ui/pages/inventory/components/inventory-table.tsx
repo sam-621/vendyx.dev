@@ -75,7 +75,7 @@ const columns: ColumnDef<TableProduct>[] = [
     },
     cell: ({ row }) => (
       <Link
-        href={`/inventory/${row.original.slug ?? ''}`}
+        href={`/admin/inventory/${row.original.slug ?? ''}`}
         className="flex items-center gap-2 w-full"
       >
         {row.original.assets.items.length > 0 && (

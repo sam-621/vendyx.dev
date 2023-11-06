@@ -26,7 +26,7 @@ export interface Node {
 
 export interface List {
     items: Nullable<Node>[];
-    totalItems: number;
+    count: number;
 }
 
 export class Asset implements Node {
@@ -43,7 +43,7 @@ export class Asset implements Node {
 
 export class AssetList implements List {
     items: Nullable<Asset>[];
-    totalItems: number;
+    count: number;
 }
 
 export class Collection implements Node {
@@ -60,7 +60,7 @@ export class Collection implements Node {
 
 export class CollectionList implements List {
     items: Nullable<Collection>[];
-    totalItems: number;
+    count: number;
 }
 
 export abstract class IQuery {
@@ -91,12 +91,12 @@ export class Option implements Node {
 
 export class OptionGroupList implements List {
     items: Nullable<OptionGroup>[];
-    totalItems: number;
+    count: number;
 }
 
 export class OptionList implements List {
     items: Nullable<Option>[];
-    totalItems: number;
+    count: number;
 }
 
 export class ProductVariant implements Node {
@@ -115,7 +115,7 @@ export class ProductVariant implements Node {
 
 export class ProductVariantList implements List {
     items: Nullable<ProductVariant>[];
-    totalItems: number;
+    count: number;
 }
 
 export class Product implements Node {
@@ -133,7 +133,7 @@ export class Product implements Node {
 
 export class ProductList implements List {
     items: Nullable<Product>[];
-    totalItems: number;
+    count: number;
 }
 
 type Nullable<T> = T | null;

@@ -9,7 +9,7 @@ interface Node {
 
 interface List {
   items: [Node]!
-  totalItems: Int!
+  count: Int!
 }
 
 input PaginatedListInput {
