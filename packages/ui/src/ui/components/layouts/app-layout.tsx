@@ -4,6 +4,7 @@ import type { FC, PropsWithChildren } from 'react';
 import { Button } from '@/ui/theme/components';
 
 import { AppSidebar } from '../lists/app-sidebar';
+import { UserMenu } from '../menus/user-menu';
 
 export const AppLayout: FC<Props> = ({ children }) => {
   return (
@@ -22,7 +23,7 @@ export const AppLayout: FC<Props> = ({ children }) => {
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
-          {/* <UserMenu /> */}
+          <UserMenu />
         </div>
       </header>
       <div className={`grid grid-cols-10 gap-8 mr-8 h-[calc(100vh-73px)]`}>
