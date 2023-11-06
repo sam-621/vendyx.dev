@@ -11,21 +11,21 @@ export const AppSidebar: FC<Props> = async ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Catalgo</h2>
           <div className="flex flex-col gap-1">
             <Link
-              href={'/'}
+              href={'/admin'}
               className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
             >
               <BarChart2Icon className="flex-shrink-0" size={16} />
               Dashboard
             </Link>
             <Link
-              href={'/inventory'}
+              href={'/admin/inventory'}
               className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
             >
               <PackageIcon className="flex-shrink-0" size={16} />
               Inventory
             </Link>
             <Link
-              href={'/collections'}
+              href={'/admin/collections'}
               className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
             >
               <BoxesIcon className="flex-shrink-0" size={16} />
@@ -37,14 +37,14 @@ export const AppSidebar: FC<Props> = async ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Ventas</h2>
           <div className="flex flex-col gap-1">
             <Link
-              href={'/orders'}
+              href={'/admin/orders'}
               className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
             >
               <ShoppingCartIcon className="flex-shrink-0" size={16} />
               Orders
             </Link>
             <Link
-              href={'/customers'}
+              href={'/admin/customers'}
               className="px-4 py-2 items-center flex gap-2 w-full justify-start hover:bg-secondary transition-colors rounded-md text-sm font-medium"
             >
               <UserIcon className="flex-shrink-0" size={16} />

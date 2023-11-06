@@ -24,7 +24,7 @@ export const UserMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size={'icon'} variant="ghost" className="relative h-10 w-10 rounded-full">
-          <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="@sam" fallBack="CN" />
+          <Avatar src="https://ui.shadcn.com/avatars/01.png" alt="@sam" fallBack="CN" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-2" align="end">
