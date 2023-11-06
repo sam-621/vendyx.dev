@@ -1,4 +1,3 @@
-import { getProducts } from '@/core/inventory/actions';
 import { PlusCircleIcon } from '@/theme/icons';
 import { AdminPageLayout } from '@/ui/components/layouts';
 import { ButtonLink } from '@/ui/theme/components';
@@ -6,8 +5,6 @@ import { ButtonLink } from '@/ui/theme/components';
 import { InventoryTable } from './components';
 
 export const InventoryPage = async () => {
-  const products = await getProducts();
-
   return (
     <AdminPageLayout
       title="Inventory"
@@ -18,7 +15,7 @@ export const InventoryPage = async () => {
         </ButtonLink>
       }
     >
-      <InventoryTable products={products} />
+      <InventoryTable />
     </AdminPageLayout>
   );
 };

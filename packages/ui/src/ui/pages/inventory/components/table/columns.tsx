@@ -1,44 +1,14 @@
 'use client';
-import type { ColumnDef } from '@tanstack/react-table';
+
+import { type ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
-import type { FC } from 'react';
 
-import type { BasicProduct } from '@/core/inventory/types';
-import { Badge, Checkbox, DataTable, DataTableColumnHeader } from '@/theme/components';
+import { Badge, Checkbox, DataTableColumnHeader } from '@/ui/theme/components';
 
-import { InventoryTableActions } from './inventory-table-actions';
+import { InventoryTableActions } from './actions';
+import { type TableProduct } from './inventory-table';
 
-export const InventoryTable: FC<Props> = ({ products }) => {
-  const input: TableProduct[] = products.map(p => ({
-    id: p.id,
-    enabled: p.enabled,
-    name: p.name,
-    slug: p.slug,
-    assets: p.assets,
-    sku: p.variants.items[0]?.sku ?? '',
-    price: p.variants.items[0]?.price ?? 0,
-    stock: p.variants.items[0]?.stock ?? 0
-  }));
-
-  return (
-    <DataTable
-      data={input}
-      columns={columns}
-      search={{
-        placeholder: 'Search products...',
-        filterKey: 'name'
-      }}
-    />
-  );
-};
-
-export type TableProduct = Pick<BasicProduct, 'id' | 'name' | 'slug' | 'enabled' | 'assets'> & {
-  price: number;
-  stock: number;
-  sku: string;
-};
-
-const columns: ColumnDef<TableProduct>[] = [
+export const InventoryTableColumns: ColumnDef<TableProduct>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -130,7 +100,3 @@ const columns: ColumnDef<TableProduct>[] = [
     cell: ({ row }) => <InventoryTableActions row={row} />
   }
 ];
-
-type Props = {
-  products: BasicProduct[];
-};

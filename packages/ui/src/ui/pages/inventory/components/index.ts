@@ -1,1 +1,1 @@
-export * from './inventory-table';
+export * from './table/inventory-table';
