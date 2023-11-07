@@ -13,6 +13,13 @@ export enum AssetType {
     FILE = "FILE"
 }
 
+export class CreateProductInput {
+    name: string;
+    slug: string;
+    description?: Nullable<string>;
+    enabled?: Nullable<boolean>;
+}
+
 export class PaginatedListInput {
     skip?: Nullable<number>;
     take?: Nullable<number>;
@@ -134,6 +141,10 @@ export class Product implements Node {
 export class ProductList implements List {
     items: Nullable<Product>[];
     count: number;
+}
+
+export abstract class IMutation {
+    abstract createProduct(input: CreateProductInput): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
 type Nullable<T> = T | null;

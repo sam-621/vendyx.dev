@@ -9,6 +9,17 @@ import { Collection } from '@/app/collection'
 export class ProductRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async create(product: Product): Promise<Product | null> {
+    return this.prismaService.product.create({
+      data: {
+        name: product.name,
+        slug: product.slug,
+        description: product.slug,
+        enabled: product.enabled
+      }
+    })
+  }
+
   async findById(id: ID): Promise<Product | null> {
     return this.prismaService.product.findUnique({ where: { id } })
   }

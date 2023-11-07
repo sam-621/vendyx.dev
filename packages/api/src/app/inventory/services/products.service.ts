@@ -5,10 +5,17 @@ import { UserInputError } from '@/shared/errors'
 import { ID } from '@/shared/types/models'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
+import { CreateProductInput } from '@/shared/types/graphql'
 
 @Injectable()
 export class ProductService {
   constructor(private readonly productRepository: ProductRepository) {}
+
+  async create(input: CreateProductInput) {
+    const product = Product.create(input)
+
+    return this.productRepository.create(product)
+  }
 
   async findUnique(id: ID, slug: string): Promise<Product | null> {
     if (id) {

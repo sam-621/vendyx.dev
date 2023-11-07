@@ -1,9 +1,9 @@
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ProductService } from '../services/products.service'
 import { List } from '@/shared/utils/responses'
 import { Product, ProductVariant } from '../inventory'
 import { ID } from '@/shared/types/models'
-import { Product as ApiProduct } from '@/shared/types/graphql'
+import { Product as ApiProduct, CreateProductInput } from '@/shared/types/graphql'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
 
@@ -21,6 +21,11 @@ export class ProductResolver {
   @Query('product')
   async product(@Args('id') id: ID, @Args('slug') slug: string) {
     return this.productService.findUnique(id, slug)
+  }
+
+  @Mutation('createProduct')
+  async createProduct(@Args('input') input: CreateProductInput) {
+    return this.productService.create(input)
   }
 
   @ResolveField('variants')

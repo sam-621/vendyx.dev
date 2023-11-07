@@ -16,3 +16,10 @@ type ProductList implements List {
   items: [Product]!
   count: Int!
 }
+
+input CreateProductInput {
+  name: String!
+  slug: String!
+  description: String
+  enabled: Boolean
+}

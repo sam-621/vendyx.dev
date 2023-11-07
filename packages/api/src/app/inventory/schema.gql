@@ -2,3 +2,7 @@ type Query {
   products: ProductList!
   product(id: ID, slug: String): Product
 }
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product
+}
