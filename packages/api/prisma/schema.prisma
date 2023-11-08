@@ -54,7 +54,7 @@ model ProductVariant {
   /// Unit price of the product, used to determinate what the profit margin is
   costPerUnit     Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
   weight          Decimal? @db.Decimal(8, 2)
-  stock           Int
+  stock           Int      @db.SmallInt
   enabled         Boolean  @default(true)
 
   /// reltations

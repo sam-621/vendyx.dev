@@ -1,23 +1,25 @@
 import { UserInputError } from '@/shared/errors'
 import { ID } from '@/shared/types/models'
+import { MakeAny } from '@/shared/types/utils'
+import { Product as DBProduct } from '@prisma/client'
 import { randomUUID } from 'crypto'
 import { z } from 'zod'
 
 const productSchema = z.object({
-  id: z.string().uuid(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  id: z.string().uuid().default(randomUUID()),
+  createdAt: z.date().default(new Date()),
+  updatedAt: z.date().default(new Date()),
   name: z
     .string({ required_error: 'Please add a name' })
     .min(3, 'Name should be greater than 3 chars'),
   slug: z
     .string({ required_error: 'Please add a slug' })
     .min(3, 'Slug should be greater than 3 chars'),
-  description: z.string().nullable(),
-  enabled: z.boolean()
-})
+  description: z.string().optional(),
+  enabled: z.boolean().default(true)
+} satisfies MakeAny<Product>)
 
-export class Product {
+export class Product implements DBProduct {
   private constructor(
     readonly id: ID,
     readonly createdAt: Date,
@@ -29,15 +31,7 @@ export class Product {
   ) {}
 
   public static create(input: CreateProduct): Product {
-    const product: Product = {
-      ...input,
-      id: randomUUID(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      description: input.description ?? null,
-      enabled: input.enabled ?? true
-    }
-    const validation = productSchema.safeParse(product)
+    const validation = productSchema.safeParse(input)
 
     if (!validation.success) {
       throw new UserInputError(validation.error.errors[0].message)
@@ -45,11 +39,11 @@ export class Product {
 
     const { id, createdAt, updatedAt, name, slug, description, enabled } = validation.data
 
-    return new Product(id, createdAt, updatedAt, name, slug, description, enabled)
+    return new Product(id, createdAt, updatedAt, name, slug, description ?? null, enabled)
   }
 }
 
 type CreateProduct = Pick<Product, 'name' | 'slug'> & {
-  description?: string | null
-  enabled?: boolean | null
+  description?: Product['description']
+  enabled?: Product['enabled'] | null
 }
