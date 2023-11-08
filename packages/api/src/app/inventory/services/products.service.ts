@@ -13,7 +13,7 @@ export class ProductService {
   constructor(private readonly productRepository: ProductRepository) {}
 
   async create(input: CreateProductInput) {
-    const product = Product.create(input)
+    const product = Product.fullyValidate(input)
 
     return this.productRepository.create(product)
   }
