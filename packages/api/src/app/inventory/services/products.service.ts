@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { ProductRepository } from '../repositories'
-import { Product, ProductVariant } from '../inventory'
+import { ProductVariant } from '../inventory'
 import { UserInputError } from '@/shared/errors'
 import { ID } from '@/shared/types/models'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
 import { CreateProductInput } from '@/shared/types/graphql'
+import { Product } from '../entities'
 
 @Injectable()
 export class ProductService {

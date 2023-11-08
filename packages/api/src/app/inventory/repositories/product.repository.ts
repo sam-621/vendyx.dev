@@ -1,9 +1,9 @@
 import { PrismaService } from '@/shared/persistance'
 import { ID } from '@/shared/types/models'
 import { Injectable } from '@nestjs/common'
-import { Product } from '../inventory'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
+import { Product } from '../entities'
 
 @Injectable()
 export class ProductRepository {
