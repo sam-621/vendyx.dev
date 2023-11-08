@@ -22,4 +22,6 @@ input CreateProductInput {
   slug: String!
   description: String
   enabled: Boolean
+
+  variants: [CreateProductVariantInput!]
 }

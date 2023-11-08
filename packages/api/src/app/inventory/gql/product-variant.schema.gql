@@ -2,7 +2,7 @@ type ProductVariant implements Node {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
-  sku: String
+  sku: String!
 
   """
   The actual price of the product
@@ -28,4 +28,14 @@ type ProductVariant implements Node {
 type ProductVariantList implements List {
   items: [ProductVariant]!
   count: Int!
+}
+
+input CreateProductVariantInput {
+  sku: String!
+  price: Float!
+  stock: Int!
+  comparisonPrice: Float
+  costPerUnit: Float
+  weight: Float
+  enabled: Boolean
 }
