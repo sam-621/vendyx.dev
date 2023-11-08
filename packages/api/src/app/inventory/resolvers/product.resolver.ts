@@ -2,11 +2,11 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import { ProductService } from '../services/products.service'
 import { List } from '@/shared/utils/responses'
 import { ProductVariant } from '../inventory'
-import { ID } from '@/shared/types/models'
 import { Product as ApiProduct, CreateProductInput } from '@/shared/types/graphql'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
 import { Product } from '../entities'
+import { ID } from '@/shared/entities/entity'
 
 @Resolver('Product')
 export class ProductResolver {

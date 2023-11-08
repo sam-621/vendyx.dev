@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { AssetRepository } from '../repositories'
-import { ID } from '@/shared/types/models'
 import { Asset } from '../asset'
+import { ID } from '@/shared/entities/entity'
 
 @Injectable()
 export class AssetService {

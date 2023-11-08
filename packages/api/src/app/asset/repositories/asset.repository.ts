@@ -1,7 +1,7 @@
 import { PrismaService } from '@/shared/persistance'
-import { ID } from '@/shared/types/models'
 import { Injectable } from '@nestjs/common'
 import { Asset } from '../asset'
+import { ID } from '@/shared/entities/entity'
 
 @Injectable()
 export class AssetRepository {
