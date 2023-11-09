@@ -11,7 +11,12 @@ export class ProductRepository {
 
   async create(product: Product): Promise<Product | null> {
     return this.prismaService.product.create({
-      data: product
+      data: {
+        name: product.name,
+        slug: product.slug,
+        description: product.slug,
+        enabled: product.enabled
+      }
     })
   }
 

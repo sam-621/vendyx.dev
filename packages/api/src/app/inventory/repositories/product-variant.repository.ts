@@ -7,6 +7,15 @@ import { ProductVariant } from '../entities'
 export class ProductVariantRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async create(productId: ID, variant: ProductVariant) {
+    return this.prismaService.productVariant.create({
+      data: {
+        ...variant,
+        productId
+      }
+    })
+  }
+
   async findById(id: ID): Promise<ProductVariant | null> {
     return this.prismaService.productVariant.findUnique({ where: { id } })
   }
