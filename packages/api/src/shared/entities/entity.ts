@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { MakeAny } from '../types/utils'
 import { randomUUID } from 'crypto'
+import { Decimal } from '@prisma/client/runtime/library'
 
 export class Entity {
   constructor(readonly id: ID, readonly createdAt: Date, readonly updatedAt: Date) {}
@@ -12,6 +13,10 @@ export class Entity {
   public static createDate(): Date {
     return new Date()
   }
+
+  public static createPrice(price: number): Price {
+    return new Decimal(price)
+  }
 }
 
 export const fullyValidateEntity = z.object({
@@ -21,3 +26,4 @@ export const fullyValidateEntity = z.object({
 } satisfies MakeAny<Entity>)
 
 export type ID = string
+export type Price = Decimal

@@ -53,7 +53,7 @@ model ProductVariant {
   comparisonPrice Decimal? @map("comparison_price") @db.Decimal(10, 2)
   /// Unit price of the product, used to determinate what the profit margin is
   costPerUnit     Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
-  weight          Decimal? @db.Decimal(8, 2)
+  weight          Float?   @db.Real
   stock           Int      @db.SmallInt
   enabled         Boolean  @default(true)
 

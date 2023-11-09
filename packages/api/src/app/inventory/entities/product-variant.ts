@@ -1,21 +1,24 @@
-import { Entity, ID, fullyValidateEntity } from '@/shared/entities/entity'
+import { Entity, ID, Price, fullyValidateEntity } from '@/shared/entities/entity'
 import { UserInputError } from '@/shared/errors'
-import { ProductVariant as DBProductVariant } from '@/shared/types/graphql'
+import { ProductVariant as DBProductVariant } from '@prisma/client'
 import { MakeAny } from '@/shared/types/utils'
 import { z } from 'zod'
 
-export class ProductVariant extends Entity implements Omit<DBProductVariant, 'options'> {
+export class ProductVariant
+  extends Entity
+  implements Omit<DBProductVariant, 'options' | 'productId'>
+{
   private constructor(
     id: ID,
     createdAt: Date,
     updatedAt: Date,
-    readonly price: number,
-    readonly costPerUnit: number,
+    readonly sku: string,
+    readonly price: Price,
+    readonly costPerUnit: Price,
+    readonly comparisonPrice: Price | null,
     readonly stock: number,
-    readonly enabled: boolean,
-    readonly comparisonPrice?: (number | null) | undefined,
-    readonly sku?: (string | null) | undefined,
-    readonly weight?: (number | null) | undefined
+    readonly weight: number | null,
+    readonly enabled: boolean
   ) {
     super(id, createdAt, updatedAt)
   }
@@ -44,13 +47,13 @@ export class ProductVariant extends Entity implements Omit<DBProductVariant, 'op
       id,
       createdAt,
       updatedAt,
+      sku,
       price,
       costPerUnit,
-      stock,
-      enabled,
       comparisonPrice,
-      sku,
-      weight
+      stock,
+      weight,
+      enabled
     )
   }
 
@@ -62,11 +65,23 @@ export class ProductVariant extends Entity implements Omit<DBProductVariant, 'op
 const fullyValidateSchema = z
   .object({
     sku: z.string().min(3).default(ProductVariant.generateSku()),
-    price: z.number().min(0),
-    costPerUnit: z.number().default(0),
-    comparisonPrice: z.number().optional(),
+    price: z
+      .number()
+      .min(0)
+      .transform(arg => Entity.createPrice(arg)),
+    costPerUnit: z
+      .number()
+      .default(0)
+      .transform(arg => Entity.createPrice(arg)),
+    comparisonPrice: z
+      .number()
+      .optional()
+      .transform(arg => (arg === undefined ? null : Entity.createPrice(arg))),
     stock: z.number().int().min(0),
-    weight: z.number().optional(),
+    weight: z
+      .number()
+      .optional()
+      .transform(arg => arg ?? null),
     enabled: z.boolean().default(true)
   } satisfies MakeAny<Omit<ProductVariant, 'id' | 'createdAt' | 'updatedAt'>>)
   .merge(fullyValidateEntity)

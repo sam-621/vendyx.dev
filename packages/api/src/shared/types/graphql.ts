@@ -13,11 +13,22 @@ export enum AssetType {
     FILE = "FILE"
 }
 
+export class CreateProductVariantInput {
+    sku: string;
+    price: number;
+    stock: number;
+    comparisonPrice?: Nullable<number>;
+    costPerUnit?: Nullable<number>;
+    weight?: Nullable<number>;
+    enabled?: Nullable<boolean>;
+}
+
 export class CreateProductInput {
     name: string;
     slug: string;
     description?: Nullable<string>;
     enabled?: Nullable<boolean>;
+    variants?: Nullable<CreateProductVariantInput[]>;
 }
 
 export class PaginatedListInput {
@@ -110,7 +121,7 @@ export class ProductVariant implements Node {
     id: string;
     createdAt: Date;
     updatedAt: Date;
-    sku?: Nullable<string>;
+    sku: string;
     price: number;
     comparisonPrice?: Nullable<number>;
     costPerUnit: number;

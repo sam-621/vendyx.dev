@@ -26,7 +26,7 @@ export class Product extends Entity implements DBProduct {
 
     const { id, createdAt, updatedAt, name, slug, description, enabled } = validation.data
 
-    return new Product(id, createdAt, updatedAt, name, slug, description ?? null, enabled)
+    return new Product(id, createdAt, updatedAt, name, slug, description, enabled)
   }
 
   public static partialValidate(input: PartialValidateInput): MakeOptional<Product> {
@@ -48,7 +48,10 @@ const fullyValidateSchema = z
     slug: z
       .string({ required_error: 'Please add a slug' })
       .min(3, 'Slug should be greater than 3 chars'),
-    description: z.string().optional(),
+    description: z
+      .string()
+      .optional()
+      .transform(arg => arg ?? null),
     enabled: z.boolean().default(true)
   } satisfies MakeAny<Omit<Product, 'id' | 'createdAt' | 'updatedAt'>>)
   .merge(fullyValidateEntity)
