@@ -3,6 +3,7 @@ import { UserInputError } from '@/shared/errors'
 import { ProductVariant as DBProductVariant } from '@prisma/client'
 import { MakeAny } from '@/shared/types/utils'
 import { z } from 'zod'
+import { CreateProductVariantInput } from '@/shared/types/graphql'
 
 export class ProductVariant
   extends Entity
@@ -64,10 +65,13 @@ export class ProductVariant
 
 const fullyValidateSchema = z
   .object({
-    sku: z.string().min(3).default(ProductVariant.generateSku()),
+    sku: z
+      .string()
+      .min(3, 'SKU should be greater than 3 characters')
+      .default(ProductVariant.generateSku()),
     price: z
       .number()
-      .min(0)
+      .min(0, 'Price should be grater than 0')
       .transform(arg => Entity.createPrice(arg)),
     costPerUnit: z
       .number()
@@ -77,7 +81,7 @@ const fullyValidateSchema = z
       .number()
       .optional()
       .transform(arg => (arg === undefined ? null : Entity.createPrice(arg))),
-    stock: z.number().int().min(0),
+    stock: z.number().int().min(0, 'Stock should be grater than 0'),
     weight: z
       .number()
       .optional()
@@ -86,10 +90,4 @@ const fullyValidateSchema = z
   } satisfies MakeAny<Omit<ProductVariant, 'id' | 'createdAt' | 'updatedAt'>>)
   .merge(fullyValidateEntity)
 
-type FullyValidateInput = Pick<
-  ProductVariant,
-  'sku' | 'price' | 'costPerUnit' | 'comparisonPrice' | 'stock' | 'weight'
-> & {
-  enabled?: ProductVariant['enabled'] | null
-  costPerUnit?: ProductVariant['costPerUnit'] | null
-}
+type FullyValidateInput = CreateProductVariantInput

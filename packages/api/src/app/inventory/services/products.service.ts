@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { ProductRepository } from '../repositories'
-import { ProductVariant } from '../inventory'
 import { UserInputError } from '@/shared/errors'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
 import { CreateProductInput } from '@/shared/types/graphql'
-import { Product } from '../entities'
+import { Product, ProductVariant } from '../entities'
 import { ID } from '@/shared/entities/entity'
+import { isFilledArray } from '@/shared/utils/arrays.util'
 
 @Injectable()
 export class ProductService {
@@ -15,7 +15,13 @@ export class ProductService {
   async create(input: CreateProductInput) {
     const product = Product.fullyValidate(input)
 
-    return this.productRepository.create(product)
+    if (!isFilledArray(input.variants)) {
+      return this.productRepository.create(product)
+    }
+
+    const variant = ProductVariant.fullyValidate(input.variants[0])
+
+    return this.productRepository.create(product, [variant])
   }
 
   async findUnique(id: ID, slug: string): Promise<Product | null> {

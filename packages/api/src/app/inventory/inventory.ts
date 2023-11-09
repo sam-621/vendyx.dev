@@ -1,10 +1,4 @@
-import {
-  Option as DBOption,
-  OptionGroup as DBOptionGroup,
-  ProductVariant as DBProductVariant
-} from '@prisma/client'
-
-export type ProductVariant = Omit<DBProductVariant, 'productId'>
+import { Option as DBOption, OptionGroup as DBOptionGroup } from '@prisma/client'
 
 export type OptionGroup = DBOptionGroup
 

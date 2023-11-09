@@ -1,5 +1,6 @@
 import { Entity, ID, fullyValidateEntity } from '@/shared/entities/entity'
 import { UserInputError } from '@/shared/errors'
+import { CreateProductInput } from '@/shared/types/graphql'
 import { MakeAny, MakeOptional } from '@/shared/types/utils'
 import { Product as DBProduct } from '@prisma/client'
 import { z } from 'zod'
@@ -71,10 +72,7 @@ const partialValidateSchema = z
   } satisfies MakeAny<Omit<Product, 'id' | 'createdAt' | 'updatedAt'>>)
   .merge(fullyValidateEntity)
 
-type FullyValidateInput = Pick<Product, 'name' | 'slug'> & {
-  description?: Product['description']
-  enabled?: Product['enabled'] | null
-}
+type FullyValidateInput = CreateProductInput
 
 type PartialValidateInput = MakeOptional<
   Pick<Product, 'id' | 'name' | 'slug' | 'description' | 'enabled'>
