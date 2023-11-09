@@ -38,4 +38,11 @@ input CreateProductVariantInput {
   costPerUnit: Float
   weight: Float
   enabled: Boolean
+
+  optionIds: [String!]
+}
+
+input CreateProductVariantOptionInput {
+  name: String!
+  value: String!
 }

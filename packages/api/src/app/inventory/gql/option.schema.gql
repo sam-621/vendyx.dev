@@ -25,3 +25,8 @@ type OptionList implements List {
   items: [Option]!
   count: Int!
 }
+
+input CreateOptionGroup {
+  name: String!
+  values: [String!]
+}

@@ -6,7 +6,6 @@ import { Collection } from '@/app/collection'
 import { CreateProductInput } from '@/shared/types/graphql'
 import { Product, ProductVariant } from '../entities'
 import { ID } from '@/shared/entities/entity'
-import { isFilledArray } from '@/shared/utils/arrays.util'
 
 @Injectable()
 export class ProductService {
@@ -15,13 +14,7 @@ export class ProductService {
   async create(input: CreateProductInput) {
     const product = Product.fullyValidate(input)
 
-    if (!isFilledArray(input.variants)) {
-      return this.productRepository.create(product)
-    }
-
-    const variant = ProductVariant.fullyValidate(input.variants[0])
-
-    return this.productRepository.create(product, [variant])
+    return this.productRepository.create(product)
   }
 
   async findUnique(id: ID, slug: string): Promise<Product | null> {

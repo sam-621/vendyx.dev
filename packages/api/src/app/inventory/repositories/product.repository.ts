@@ -2,24 +2,16 @@ import { PrismaService } from '@/shared/persistance'
 import { Injectable } from '@nestjs/common'
 import { Asset } from '@/app/asset'
 import { Collection } from '@/app/collection'
-import { Product, ProductVariant } from '../entities'
+import { Product } from '../entities'
 import { ID } from '@/shared/entities/entity'
 
 @Injectable()
 export class ProductRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(product: Product, variants?: ProductVariant[]): Promise<Product | null> {
+  async create(product: Product): Promise<Product | null> {
     return this.prismaService.product.create({
-      data: {
-        name: product.name,
-        slug: product.slug,
-        description: product.slug,
-        enabled: product.enabled,
-        productVariants: {
-          create: variants
-        }
-      }
+      data: product
     })
   }
 

@@ -13,6 +13,11 @@ export enum AssetType {
     FILE = "FILE"
 }
 
+export class CreateOptionGroup {
+    name: string;
+    values?: Nullable<string[]>;
+}
+
 export class CreateProductVariantInput {
     sku: string;
     price: number;
@@ -21,6 +26,12 @@ export class CreateProductVariantInput {
     costPerUnit?: Nullable<number>;
     weight?: Nullable<number>;
     enabled?: Nullable<boolean>;
+    optionIds?: Nullable<string[]>;
+}
+
+export class CreateProductVariantOptionInput {
+    name: string;
+    value: string;
 }
 
 export class CreateProductInput {
@@ -28,7 +39,6 @@ export class CreateProductInput {
     slug: string;
     description?: Nullable<string>;
     enabled?: Nullable<boolean>;
-    variants?: Nullable<CreateProductVariantInput[]>;
 }
 
 export class PaginatedListInput {

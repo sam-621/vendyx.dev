@@ -48,7 +48,7 @@ model ProductVariant {
   updatedAt       DateTime @updatedAt @map("updated_at")
   sku             String   @db.VarChar(255)
   /// The actual price of the product
-  price           Decimal  @default(0) @db.Decimal(10, 2)
+  price           Decimal  @db.Decimal(10, 2)
   /// Price for illustrative purposes, usually shown crossed out
   comparisonPrice Decimal? @map("comparison_price") @db.Decimal(10, 2)
   /// Unit price of the product, used to determinate what the profit margin is
