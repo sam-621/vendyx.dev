@@ -57,9 +57,6 @@ model ProductVariant {
   stock           Int      @db.SmallInt
   enabled         Boolean  @default(true)
 
-  /// reltations
-  option OptionOnProductVariant[]
-
   // relations
   product   Product @relation(fields: [productId], references: [id])
   productId String  @map("product_id")
@@ -67,42 +64,22 @@ model ProductVariant {
   @@map("product_variant")
 }
 
-model OptionOnProductVariant {
-  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
-  productVariantId String
-  option           Option         @relation(fields: [optionId], references: [id])
-  optionId         String
-
-  @@id([productVariantId, optionId])
-  @@map("option_on_product_variant")
-}
-
 model Option {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  value     String   @db.VarChar(255)
-
-  // relations
-  productVariants OptionOnProductVariant[]
-
-  // relations
-  optionGroup   OptionGroup @relation(fields: [optionGroupId], references: [id])
-  optionGroupId String
-
-  @@map("option")
-}
-
-model OptionGroup {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   name      String   @db.VarChar(255)
 
-  // relations
-  options Option[]
+  @@map("option")
+}
 
-  @@map("option_group")
+model OptionValue {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  value     String   @db.VarChar(255)
+
+  @@map("option_value")
 }
 
 model ProductOnCollection {
