@@ -7,9 +7,9 @@ const cleanupDb = async () => {
     console.log('Cleaning up DB... 🟡')
 
     await prismaClient.$transaction([
-      prismaClient.optionOnProductVariant.deleteMany(),
+      prismaClient.optionValueOnProductVariant.deleteMany(),
+      prismaClient.optionValue.deleteMany(),
       prismaClient.option.deleteMany(),
-      prismaClient.optionGroup.deleteMany(),
       prismaClient.assetOnProduct.deleteMany(),
       prismaClient.assetOnCollection.deleteMany(),
       prismaClient.asset.deleteMany(),

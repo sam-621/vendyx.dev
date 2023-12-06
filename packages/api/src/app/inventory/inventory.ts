@@ -1,4 +1,4 @@
-import { Option as DBOption, OptionGroup as DBOptionGroup } from '@prisma/client'
+import { OptionValue as DBOption, Option as DBOptionGroup } from '@prisma/client'
 
 export type OptionGroup = DBOptionGroup
 

@@ -1,24 +1,19 @@
-type OptionGroup implements Node {
+type Option implements Node {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
   name: String!
 
-  options: OptionList
+  values: OptionValueList
 }
 
-type Option implements Node {
+type OptionValue implements Node {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
   value: String!
 
-  optionGroups: OptionGroupList
-}
-
-type OptionGroupList implements List {
-  items: [OptionGroup]!
-  count: Int!
+  option: Option
 }
 
 type OptionList implements List {
@@ -26,7 +21,12 @@ type OptionList implements List {
   count: Int!
 }
 
-input CreateOptionGroup {
+type OptionValueList implements List {
+  items: [OptionValue]!
+  count: Int!
+}
+
+input CreateOption {
   name: String!
   values: [String!]
 }

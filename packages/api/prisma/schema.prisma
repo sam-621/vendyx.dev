@@ -58,10 +58,23 @@ model ProductVariant {
   enabled         Boolean  @default(true)
 
   // relations
+  optionValues OptionValueOnProductVariant[]
+
+  // relations
   product   Product @relation(fields: [productId], references: [id])
   productId String  @map("product_id")
 
   @@map("product_variant")
+}
+
+model OptionValueOnProductVariant {
+  option           Option         @relation(fields: [optionId], references: [id])
+  optionId         String
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariantId String
+
+  @@id([optionId, productVariantId])
+  @@map("option_value_on_product_variant")
 }
 
 model Option {
@@ -69,6 +82,9 @@ model Option {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   name      String   @db.VarChar(255)
+
+  // relations
+  variants OptionValueOnProductVariant[]
 
   @@map("option")
 }

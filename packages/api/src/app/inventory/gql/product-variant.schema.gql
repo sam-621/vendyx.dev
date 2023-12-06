@@ -41,8 +41,3 @@ input CreateProductVariantInput {
 
   optionIds: [String!]
 }
-
-input CreateProductVariantOptionInput {
-  name: String!
-  value: String!
-}
