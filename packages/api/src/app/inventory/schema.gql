@@ -1,4 +1,0 @@
-type Query {
-  products: ProductList!
-  product(id: ID, slug: String): Product
-}

@@ -1,4 +1,0 @@
-type Query {
-  collections: CollectionList!
-  collection(id: ID, slug: String): Collection
-}
