@@ -4,6 +4,11 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "prepare": "husky install",
+    "build": "lerna run build",
+    "graph": "nx graph"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
@@ -25,8 +30,5 @@
   },
   "gacp": {
     "push": false
-  },
-  "scripts": {
-    "prepare": "husky install"
   }
 }
