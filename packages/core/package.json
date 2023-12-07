@@ -12,12 +12,18 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/serve-static": "^4.0.0",
+    "@nestjs/typeorm": "^10.0.1",
+    "@vendyx/common": "*",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "mysql2": "^3.6.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "@vendyx/common": "*"
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
