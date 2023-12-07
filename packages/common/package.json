@@ -1,0 +1,11 @@
+{
+  "name": "@vendyx/common",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Rogelio Samuel Moreno Corrales",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  }
+}

@@ -8,10 +8,10 @@ import { join } from 'path';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../', 'admin-ui/dist'),
-      renderPath: '/admin',
-    }),
+      renderPath: '/admin'
+    })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
