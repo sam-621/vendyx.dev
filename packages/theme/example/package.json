@@ -1,8 +1,7 @@
 {
-  "name": "@vendyx/admin-ui",
+  "name": "example",
   "private": true,
-  "version": "0.0.1",
-  "type": "module",
+  "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,8 +10,7 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@vendyx/theme": "*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
