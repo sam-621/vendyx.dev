@@ -24,7 +24,6 @@
     "typescript": "^5.3.3"
   },
   "gacp": {
-    "push": true
-    
+    "push": false
   }
 }
