@@ -5,7 +5,6 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^8.0.0",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
@@ -19,11 +18,15 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "husky": "^8.0.3",
+    "lerna": "^8.0.0",
     "prettier": "^3.1.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "husky": "^8.0.0"
   },
   "gacp": {
     "push": false
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
