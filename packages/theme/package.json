@@ -7,10 +7,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite",
+    "build": "tsc && vite build"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -28,10 +26,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.4"
-  },
-  "peerDependencies": {
-    "react": "16.8.0 || >=17.x",
-    "react-dom": "16.8.0 || >=17.x"
   },
   "files": [
     "dist"
