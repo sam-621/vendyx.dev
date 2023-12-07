@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "vendyx",
   "private": true,
   "workspaces": [
     "packages/*"
