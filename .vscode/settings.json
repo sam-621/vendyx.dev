@@ -5,5 +5,9 @@
     "source.fixAll.eslint": true,
     "source.fixAll.format": true
   },
-  "cSpell.words": ["vendyx"]
+  "cSpell.words": [
+    "nvarchar",
+    "typeorm",
+    "vendyx"
+  ]
 }
