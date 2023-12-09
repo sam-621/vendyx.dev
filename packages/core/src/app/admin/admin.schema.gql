@@ -1,0 +1,16 @@
+type Admin {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  username: String!
+  password: String!
+}
+
+input AuthenticateInput {
+  username: String!
+  password: String!
+}
+
+type Mutation {
+  authenticate(input: AuthenticateInput!): String!
+}

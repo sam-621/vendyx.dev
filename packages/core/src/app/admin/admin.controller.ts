@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AdminEntity } from './entities';
 import { Repository } from 'typeorm';
+import { AdminEntity } from './admin.entity';
 
 @Controller('api')
 export class AdminController {

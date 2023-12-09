@@ -1,0 +1,28 @@
+# Scalars
+scalar Date
+scalar ID
+
+# Common interfaces
+interface Node {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+interface List {
+  items: [Node]!
+  count: Int!
+}
+
+# Common inputs
+input PaginatedListInput {
+  """
+  Skip the first n results
+  """
+  skip: Int
+
+  """
+  takes n result from where the cursor is (skip position)
+  """
+  take: Int
+}
