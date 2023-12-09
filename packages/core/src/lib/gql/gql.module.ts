@@ -20,7 +20,7 @@ import { DateScalar, IDScalar } from './scalars';
       ],
       // schema
       definitions: {
-        path: join(process.cwd(), 'src/lib/types/graphql.ts'),
+        path: join(process.cwd(), 'src/lib/gql/gql.types.ts'),
         outputAs: 'class'
       }
     })

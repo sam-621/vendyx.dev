@@ -26,3 +26,7 @@ input PaginatedListInput {
   """
   take: Int
 }
+
+type Query {
+  hello: String
+}

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdminController } from './admin.controller';
 import { AdminEntity } from './admin.entity';
+import { AdminMutationResolver } from './resolvers';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AdminEntity])],
-  controllers: [AdminController]
+  providers: [AdminMutationResolver]
 })
 export class AdminModule {}
