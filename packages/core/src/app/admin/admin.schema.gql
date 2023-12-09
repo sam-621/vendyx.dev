@@ -12,5 +12,5 @@ input AuthenticateInput {
 }
 
 type Mutation {
-  authenticate(input: AuthenticateInput!): String!
+  authenticate(input: AuthenticateInput!): String
 }

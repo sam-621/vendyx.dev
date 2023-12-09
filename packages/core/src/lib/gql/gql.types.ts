@@ -9,7 +9,6 @@
 /* eslint-disable */
 
 export class AuthenticateInput {
-    idSSame: string;
     username: string;
     password: string;
 }
@@ -39,7 +38,7 @@ export class Admin {
 }
 
 export abstract class IMutation {
-    abstract authenticate(input: AuthenticateInput): string | Promise<string>;
+    abstract authenticate(input: AuthenticateInput): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export abstract class IQuery {
