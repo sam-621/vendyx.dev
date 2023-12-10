@@ -4,7 +4,7 @@ import { ConfigModule } from '../lib/config';
 import { PersistanceModule } from '../lib/persistance';
 import { AdminModule } from './admin/admin.module';
 import { GraphQLModule } from '@/lib/gql';
-import { SecurityModule } from '@/lib/security';
+import { SecurityModule } from './security';
 
 @Module({
   imports: [

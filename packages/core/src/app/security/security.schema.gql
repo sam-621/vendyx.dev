@@ -1,0 +1,8 @@
+input AuthenticateInput {
+  username: String!
+  password: String!
+}
+
+type Mutation {
+  authenticate(input: AuthenticateInput!): String
+}
