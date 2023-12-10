@@ -3,6 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { SecurityService } from './services';
 import { AdminModule } from '../admin';
 import { SecurityResolver } from './resolvers';
+import { JwtStrategy } from './strategies';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { SecurityResolver } from './resolvers';
     }),
     AdminModule
   ],
-  providers: [SecurityResolver, SecurityService],
+  providers: [SecurityResolver, SecurityService, JwtStrategy],
   exports: [SecurityService]
 })
 export class SecurityModule {}

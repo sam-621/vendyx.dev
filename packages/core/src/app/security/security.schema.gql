@@ -5,4 +5,5 @@ input AuthenticateInput {
 
 type Mutation {
   authenticate(input: AuthenticateInput!): String
+  hello: String
 }

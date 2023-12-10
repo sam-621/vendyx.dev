@@ -39,6 +39,8 @@ export class Admin {
 
 export abstract class IMutation {
     abstract authenticate(input: AuthenticateInput): Nullable<string> | Promise<Nullable<string>>;
+
+    abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export abstract class IQuery {
