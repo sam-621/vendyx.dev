@@ -17,12 +17,20 @@ export class AdminService {
       return null;
     }
 
-    if (admin.password !== password) {
+    const passwordsMatch = await this.securityService.compare(password, admin.password);
+
+    if (!passwordsMatch) {
       return null;
     }
 
     const { access_token } = await this.securityService.generateToken(admin);
 
     return access_token;
+  }
+
+  async create(username: string, password: string) {
+    const hashedPassword = await this.securityService.hash(password);
+
+    return this.repository.create(username, hashedPassword);
   }
 }

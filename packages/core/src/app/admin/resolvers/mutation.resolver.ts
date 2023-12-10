@@ -12,4 +12,11 @@ export class AdminMutationResolver {
 
     return token;
   }
+
+  @Mutation('createAdmin')
+  async createAdmin(@Args('input') input: AuthenticateInput) {
+    const admin = await this.service.create(input.username, input.password);
+
+    return admin;
+  }
 }

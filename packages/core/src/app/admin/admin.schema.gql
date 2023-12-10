@@ -6,11 +6,17 @@ type Admin {
   password: String!
 }
 
+input CreateAdminInput {
+  username: String!
+  password: String!
+}
+
 input AuthenticateInput {
   username: String!
   password: String!
 }
 
 type Mutation {
+  createAdmin(input: CreateAdminInput!): Admin
   authenticate(input: AuthenticateInput!): String
 }
