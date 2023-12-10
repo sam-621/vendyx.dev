@@ -9,7 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         type: 'postgres',
         url: configService.get<string>('DB.URL'),
         // auto load entities added to forFeature property in modules @see https://docs.nestjs.com/techniques/database#auto-load-entities
-        autoLoadEntities: true
+        autoLoadEntities: true,
+        synchronize: process.env.NODE_ENV !== 'production'
       }),
       inject: [ConfigService]
     })

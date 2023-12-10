@@ -4,8 +4,16 @@ import { ConfigModule } from '../lib/config';
 import { PersistanceModule } from '../lib/persistance';
 import { AdminModule } from './admin/admin.module';
 import { GraphQLModule } from '@/lib/gql';
+import { SecurityModule } from '@/lib/security';
 
 @Module({
-  imports: [ConfigModule, PersistanceModule, GraphQLModule, AdminUiModule, AdminModule]
+  imports: [
+    ConfigModule,
+    PersistanceModule,
+    GraphQLModule,
+    SecurityModule,
+    AdminUiModule,
+    AdminModule
+  ]
 })
 export class AppModule {}

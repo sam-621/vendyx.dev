@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { AdminRepository } from '../repositories';
 
+import { SecurityService } from '@/lib/security';
+
 @Injectable()
 export class AdminService {
-  constructor(private readonly repository: AdminRepository) {}
+  constructor(
+    private readonly repository: AdminRepository,
+    private readonly securityService: SecurityService
+  ) {}
 
   async authenticate(username: string, password: string) {
     const admin = await this.repository.getByUsername(username);
@@ -16,6 +21,8 @@ export class AdminService {
       return null;
     }
 
-    return 'token';
+    const { access_token } = await this.securityService.generateToken(admin);
+
+    return access_token;
   }
 }
