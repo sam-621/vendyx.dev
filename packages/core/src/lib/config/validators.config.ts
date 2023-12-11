@@ -9,6 +9,14 @@ class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   DB_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_SECRET: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_EXPIRES_IN: string;
 }
 
 export const configValidator = (config: Record<string, unknown>) => {
