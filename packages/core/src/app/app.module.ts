@@ -3,17 +3,9 @@ import { AdminUiModule } from './admin-ui';
 import { ConfigModule } from '../lib/config';
 import { PersistanceModule } from '../lib/persistance';
 import { AdminModule } from './admin/admin.module';
-import { GraphQLModule } from '@/lib/gql';
-import { SecurityModule } from './security';
+import { ApiModule } from '@/lib/gql';
 
 @Module({
-  imports: [
-    ConfigModule,
-    PersistanceModule,
-    GraphQLModule,
-    SecurityModule,
-    AdminUiModule,
-    AdminModule
-  ]
+  imports: [ConfigModule, PersistanceModule, ApiModule, AdminUiModule, AdminModule]
 })
 export class AppModule {}

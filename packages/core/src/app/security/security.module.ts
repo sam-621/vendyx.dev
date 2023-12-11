@@ -20,4 +20,4 @@ import { ConfigService } from '@nestjs/config';
   providers: [SecurityResolver, SecurityService, JwtStrategy],
   exports: [SecurityService]
 })
-export class SecurityModule {}
+export class SecurityAdminApiModule {}
