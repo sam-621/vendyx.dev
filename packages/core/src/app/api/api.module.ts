@@ -6,6 +6,7 @@ import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { DateScalar, IDScalar } from './common/scalars';
+import { ServiceModule } from '../service';
 
 const COMMON_GQL_OPTIONS: ApolloDriverConfig = {
   driver: ApolloDriver,
@@ -17,6 +18,7 @@ const COMMON_GQL_OPTIONS: ApolloDriverConfig = {
 const ADMIN_RESOLVERS = [AdminResolver];
 
 @Module({
+  imports: [ServiceModule],
   providers: [...ADMIN_RESOLVERS]
 })
 class AdminApiModule {}

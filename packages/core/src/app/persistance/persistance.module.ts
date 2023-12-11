@@ -1,6 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AdminRepository } from './repositories';
+import { AdminEntity } from './entities';
+
+const ENTITIES = [AdminEntity];
+const REPOSITORIES = [AdminRepository];
 
 @Module({
   imports: [
@@ -13,7 +18,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         synchronize: process.env.NODE_ENV !== 'production'
       }),
       inject: [ConfigService]
-    })
-  ]
+    }),
+    TypeOrmModule.forFeature([...ENTITIES])
+  ],
+  providers: [...REPOSITORIES],
+  exports: [...REPOSITORIES]
 })
 export class PersistanceModule {}
