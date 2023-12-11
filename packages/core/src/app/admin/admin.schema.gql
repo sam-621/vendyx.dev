@@ -1,7 +1,0 @@
-type Admin {
-  id: String!
-  createdAt: String!
-  updatedAt: String!
-  username: String!
-  password: String!
-}
