@@ -8,7 +8,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class AuthenticateInput {
+export class AuthenticateAdminInput {
     username: string;
     password: string;
 }
@@ -38,7 +38,7 @@ export class Admin {
 }
 
 export abstract class IMutation {
-    abstract authenticate(input: AuthenticateInput): Nullable<string> | Promise<Nullable<string>>;
+    abstract authenticateAdmin(input: AuthenticateAdminInput): Nullable<string> | Promise<Nullable<string>>;
 
     abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }

@@ -29,7 +29,7 @@ class AdminApiModule {}
     NGraphQLModule.forRoot<ApolloDriverConfig>({
       ...COMMON_GQL_OPTIONS,
       path: '/api/admin',
-      typePaths: [join(process.cwd(), 'src/app/**/*.schema.gql')],
+      typePaths: [join(process.cwd(), 'src/app/api/**/*.schema.gql')],
       definitions: {
         path: join(process.cwd(), 'src/app/api/common/types/gql.types.ts'),
         outputAs: 'class'

@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nest start --watch",
     "build": "nest build",
-    "start": "node dist/main"
+    "start": "node dist/main",
+    "script:types": "ts-node ./scripts/generate-typings.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
