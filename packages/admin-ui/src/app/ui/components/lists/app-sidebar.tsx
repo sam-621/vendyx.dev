@@ -13,25 +13,30 @@ import {
 
 export const AppSidebar: FC<Props> = ({ className }) => {
   return (
-    <aside className={cn('border-r h-full py-8 px-4 flex flex-col justify-between', className)}>
+    <aside
+      className={cn(
+        'border-r border-border h-full py-8 px-4 flex flex-col justify-between',
+        className
+      )}
+    >
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold tracking-tight pl-4">Catalog</h2>
           <div className="flex flex-col gap-1">
             <AppSidebarItem
-              href="/admin"
+              href="/"
               icon={<BarChart2Icon className="flex-shrink-0" size={16} />}
               text="Dashboard"
             />
 
             <AppSidebarItem
-              href="/admin/inventory"
+              href="/inventory"
               icon={<PackageIcon className="flex-shrink-0" size={16} />}
               text="Inventory"
             />
 
             <AppSidebarItem
-              href="/admin/collections"
+              href="/collections"
               icon={<BoxesIcon className="flex-shrink-0" size={16} />}
               text="Collections"
             />
@@ -41,13 +46,13 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Sales</h2>
           <div className="flex flex-col gap-1">
             <AppSidebarItem
-              href="/admin/orders"
+              href="/orders"
               icon={<ShoppingCartIcon className="flex-shrink-0" size={16} />}
               text="Orders"
             />
 
             <AppSidebarItem
-              href="/admin/customers"
+              href="/customers"
               icon={<UserIcon className="flex-shrink-0" size={16} />}
               text="Customers"
             />
@@ -56,7 +61,7 @@ export const AppSidebar: FC<Props> = ({ className }) => {
       </div>
 
       <AppSidebarItem
-        href="/admin/setting"
+        href="/setting"
         icon={<SettingsIcon className="flex-shrink-0" size={16} />}
         text="Settings"
       />

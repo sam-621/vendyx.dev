@@ -3,8 +3,9 @@ import type { FC, PropsWithChildren } from 'react';
 import { AppSidebar } from '../lists/app-sidebar';
 import { UserMenu } from '../menus/user-menu';
 import { CommandIcon } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
 
-export const AppLayout: FC<Props> = ({ children }) => {
+export const AppLayout: FC<Props> = () => {
   return (
     <div className="h-full">
       <header
@@ -20,7 +21,9 @@ export const AppLayout: FC<Props> = ({ children }) => {
       </header>
       <div className={`grid grid-cols-10 mr-8 h-[calc(100vh-73px)]`}>
         <AppSidebar className="col-span-2" />
-        <main className="col-span-8 py-8 px-8">{children}</main>
+        <main className="col-span-8 py-8 px-8">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

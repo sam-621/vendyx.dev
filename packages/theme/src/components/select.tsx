@@ -108,14 +108,14 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export { SelectItem };
 
-export const Select = React.forwardRef<HTMLSelectElement, Props>(function Select({
+export const Select: React.FC<Props> = ({
   placeholder,
   label,
   contentSide,
   itemClasses,
   children,
   ...rest
-}) {
+}) => {
   return (
     <div className="flex flex-col gap-2">
       {label !== undefined && <label htmlFor={rest.name}>{label}</label>}
@@ -129,7 +129,7 @@ export const Select = React.forwardRef<HTMLSelectElement, Props>(function Select
       </SelectRoot>
     </div>
   );
-});
+};
 
 type Props = SelectPrimitive.SelectProps & {
   placeholder: string;
