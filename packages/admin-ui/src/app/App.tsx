@@ -1,11 +1,13 @@
-import { Helloworld } from '@vendyx/theme';
-
+import { Button, ThemeProvider } from '@vendyx/theme';
 import '@vendyx/theme/dist/style.css';
 
 function App() {
   return (
     <>
-      <Helloworld text="Hiiii" />
+      <ThemeProvider>
+        <h1>Hola</h1>
+        <Button>Holaa</Button>
+      </ThemeProvider>
     </>
   );
 }

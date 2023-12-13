@@ -1,8 +1,13 @@
 import { Button } from './components';
-import './style.css';
+import './styles/index.css';
+import { ThemeProvider } from './utils';
 
 function App() {
-  return <Button>Holaa</Button>;
+  return (
+    <ThemeProvider>
+      <Button>Holaa</Button>
+    </ThemeProvider>
+  );
 }
 
 export default App;

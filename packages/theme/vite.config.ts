@@ -17,6 +17,9 @@ export default defineConfig(() => ({
       name: 'lib',
       formats: ['es', 'umd'],
       fileName: format => `index.${format}.js`
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom']
     }
   },
   resolve: {
