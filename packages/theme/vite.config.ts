@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import path, { resolve } from 'node:path';
 import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -17,6 +17,11 @@ export default defineConfig(() => ({
       name: 'lib',
       formats: ['es', 'umd'],
       fileName: format => `index.${format}.js`
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
     }
   }
 }));

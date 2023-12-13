@@ -1,8 +1,8 @@
-import { Helloworld } from './components';
-import './styles/globals.css';
+import { Button } from './components';
+import './style.css';
 
 function App() {
-  return <Helloworld text="Hello World" />;
+  return <Button>Holaa</Button>;
 }
 
 export default App;

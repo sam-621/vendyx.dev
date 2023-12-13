@@ -18,6 +18,9 @@
     "esModuleInterop": true,
     "declarationMap": true,
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "typeRoots": ["node_modules/@types", "src/component/index.d.ts"]
   },
   "include": ["src"],

@@ -1,1 +1,1 @@
-export { type IHelloWorld, Helloworld } from './thing';
+export * from './button'
