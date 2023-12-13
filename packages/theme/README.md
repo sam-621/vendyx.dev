@@ -1,30 +1,44 @@
-# React + TypeScript + Vite
+# @vendyx/theme
+Components, utils, hooks and contexts related to admin ui.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
+[TailwindCSS](https://tailwindcss.com) installed and configured four your framework
 
-Currently, two official plugins are available:
+## Setup
+`@vendyx/theme` exposes the tailwind object configuration and the css styles (fonts, variables, classes). These are going to be used to make our ui extensions looks like vendyx ui.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Import CSS file
+Import css file into your entry point. This is going to load all our css styles, with this the @vendyx/theme components will have their appropriate styles and our styles will be ready to use by tailwind
+```ts
+import '@vendyx/theme/dist/style.css';
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Use our tailwind config object
+In your tailwind config file, import `vendyxStylesForTw` function and spread it in tailwind config object. With this you will be able to use our custom tailwind classes in your ui extensions
+```ts
+import { vendyxStylesForTw } from '@vendyx/theme';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  ...vendyxStylesForTw(),
+};
+```
+
+## Usage
+
+```jsx
+import { Button, ThemeProvider } from '@vendyx/theme';
+
+function App() {
+  return (
+    <>
+      <ThemeProvider>
+        <Button>Hello World</Button>
+      </ThemeProvider>
+    </>
+  );
+}
+
+export default App;
+```
+
