@@ -1,4 +1,5 @@
 import { Config } from 'tailwindcss';
+import * as twAnimate from 'tailwindcss-animate';
 
 export const vendyxStylesForTw = (): Config => {
   return {
@@ -74,6 +75,6 @@ export const vendyxStylesForTw = (): Config => {
         }
       }
     },
-    plugins: [require('tailwindcss-animate')]
+    plugins: [twAnimate]
   };
 };

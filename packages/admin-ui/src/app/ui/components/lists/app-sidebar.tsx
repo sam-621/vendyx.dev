@@ -1,24 +1,15 @@
 import { type FC } from 'react';
 
-// import {
-//   BarChart2Icon,
-//   BoxesIcon,
-//   PackageIcon,
-//   SettingsIcon,
-//   ShoppingCartIcon,
-//   UserIcon
-// } from '@/theme/icons';
-
 import { AppSidebarItem } from '../items';
+import { cn } from '@vendyx/theme';
 import {
   BarChart2Icon,
   BoxesIcon,
   PackageIcon,
   SettingsIcon,
   ShoppingCartIcon,
-  UserIcon,
-  cn
-} from '@vendyx/theme';
+  UserIcon
+} from 'lucide-react';
 
 export const AppSidebar: FC<Props> = ({ className }) => {
   return (

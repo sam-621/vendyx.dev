@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { CheckIcon, ChevronRightIcon, DotFilledIcon } from '@radix-ui/react-icons';
 
 import { cn } from '@/utils';
+import { DotFilledIcon } from '@radix-ui/react-icons';
+import { CheckIcon, ChevronRightIcon } from 'lucide-react';
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
