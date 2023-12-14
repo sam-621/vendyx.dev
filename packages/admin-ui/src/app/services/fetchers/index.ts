@@ -1,1 +1,1 @@
-export * from './gql-fetch';
+export * from './admin.fetcher';

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { ThemeProvider } from '@vendyx/theme';
 
-import { gqlFetch } from './services/fetchers';
+import { gqlFetch } from './services/fetchers/gql-fetch';
 import { AppRouter } from './ui/routes/router';
 
 import '@vendyx/theme/dist/style.css';
