@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@vendyx/theme';
 import { type FC, type ReactElement } from 'react';
 import { Link } from 'react-router-dom';

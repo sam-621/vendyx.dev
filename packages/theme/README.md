@@ -42,3 +42,7 @@ function App() {
 export default App;
 ```
 
+## Icons
+```shell
+yarn add lucide-react
+```
