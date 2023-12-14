@@ -40,7 +40,7 @@ class AdminApiModule {}
     }),
     ServeStaticModule.forRoot({
       rootPath: join(process.cwd(), '../admin-ui/dist'),
-      renderPath: '/admin'
+      renderPath: '/admin/*'
     })
   ],
   providers: [IDScalar, DateScalar]

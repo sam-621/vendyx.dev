@@ -10,6 +10,8 @@ import {
   UserIcon
 } from 'lucide-react';
 
+import { BASE_URL } from '@/lib/config';
+
 import { AppSidebarItem } from '../items';
 
 export const AppSidebar: FC<Props> = ({ className }) => {
@@ -25,19 +27,19 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Catalog</h2>
           <div className="flex flex-col gap-1">
             <AppSidebarItem
-              href="/"
+              href={BASE_URL}
               icon={<BarChart2Icon className="flex-shrink-0" size={16} />}
               text="Dashboard"
             />
 
             <AppSidebarItem
-              href="/inventory"
+              href={`${BASE_URL}/inventory`}
               icon={<PackageIcon className="flex-shrink-0" size={16} />}
               text="Inventory"
             />
 
             <AppSidebarItem
-              href="/collections"
+              href={`${BASE_URL}/collections`}
               icon={<BoxesIcon className="flex-shrink-0" size={16} />}
               text="Collections"
             />
@@ -47,13 +49,13 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Sales</h2>
           <div className="flex flex-col gap-1">
             <AppSidebarItem
-              href="/orders"
+              href={`${BASE_URL}/orders`}
               icon={<ShoppingCartIcon className="flex-shrink-0" size={16} />}
               text="Orders"
             />
 
             <AppSidebarItem
-              href="/customers"
+              href={`${BASE_URL}/customers`}
               icon={<UserIcon className="flex-shrink-0" size={16} />}
               text="Customers"
             />
@@ -62,7 +64,7 @@ export const AppSidebar: FC<Props> = ({ className }) => {
       </div>
 
       <AppSidebarItem
-        href="/setting"
+        href={`${BASE_URL}/settings`}
         icon={<SettingsIcon className="flex-shrink-0" size={16} />}
         text="Settings"
       />
