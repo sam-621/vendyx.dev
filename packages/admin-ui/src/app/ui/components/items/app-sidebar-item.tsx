@@ -1,6 +1,7 @@
-import { cn } from '@vendyx/theme';
 import { type FC, type ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+
+import { cn } from '@vendyx/theme';
 
 export const AppSidebarItem: FC<Props> = ({ text, href, icon }) => {
   // const pathname = usePathname();
@@ -21,8 +22,8 @@ export const AppSidebarItem: FC<Props> = ({ text, href, icon }) => {
   );
 };
 
-type Props = {
+interface Props {
   text: string;
   href: string;
   icon: ReactElement;
-};
+}

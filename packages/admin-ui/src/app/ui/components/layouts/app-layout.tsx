@@ -1,9 +1,10 @@
 import type { FC, PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import { CommandIcon } from 'lucide-react';
 
 import { AppSidebar } from '../lists/app-sidebar';
 import { UserMenu } from '../menus/user-menu';
-import { CommandIcon } from 'lucide-react';
-import { Outlet } from 'react-router-dom';
 
 export const AppLayout: FC<Props> = () => {
   return (

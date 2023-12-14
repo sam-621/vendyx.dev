@@ -1,6 +1,5 @@
 import { type FC } from 'react';
 
-import { AppSidebarItem } from '../items';
 import { cn } from '@vendyx/theme';
 import {
   BarChart2Icon,
@@ -10,6 +9,8 @@ import {
   ShoppingCartIcon,
   UserIcon
 } from 'lucide-react';
+
+import { AppSidebarItem } from '../items';
 
 export const AppSidebar: FC<Props> = ({ className }) => {
   return (
@@ -69,6 +70,6 @@ export const AppSidebar: FC<Props> = ({ className }) => {
   );
 };
 
-type Props = {
+interface Props {
   className?: string;
-};
+}

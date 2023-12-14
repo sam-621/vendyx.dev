@@ -24,7 +24,7 @@ export async function gqlFetch<T>({ query, variables }: { query: string; variabl
   }
 
   return {
-    data: body.data as T
+    data: body.data
   };
 }
 
