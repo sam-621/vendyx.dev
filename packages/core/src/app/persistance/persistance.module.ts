@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdminRepository } from './repositories';
+
 import { AdminEntity } from './entities';
+import { AdminRepository } from './repositories';
 
 const ENTITIES = [AdminEntity];
 const REPOSITORIES = [AdminRepository];

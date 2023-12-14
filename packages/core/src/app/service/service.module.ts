@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PersistanceModule } from '../persistance';
+
 import { SecurityModule } from '@/lib/security';
+
 import { AdminService } from './services';
+import { PersistanceModule } from '../persistance';
 
 @Module({
   imports: [PersistanceModule, SecurityModule],

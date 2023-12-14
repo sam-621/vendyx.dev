@@ -1,6 +1,7 @@
+import { Injectable } from '@nestjs/common';
+
 import { AdminRepository } from '@/app/persistance';
 import { SecurityService } from '@/lib/security';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AdminService {

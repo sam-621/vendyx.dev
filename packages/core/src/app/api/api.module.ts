@@ -1,11 +1,13 @@
-import { AdminResolver } from './resolvers';
-import { GraphQLModule as NGraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { Module } from '@nestjs/common';
 import { join } from 'path';
+
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
+import { GraphQLModule as NGraphQLModule } from '@nestjs/graphql';
 import { ServeStaticModule } from '@nestjs/serve-static';
+
 import { DateScalar, IDScalar } from './common/scalars';
+import { AdminResolver } from './resolvers';
 import { ServiceModule } from '../service';
 
 const COMMON_GQL_OPTIONS: ApolloDriverConfig = {

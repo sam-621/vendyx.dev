@@ -1,5 +1,6 @@
 import { Admin } from '@vendyx/common';
-import { Entity as TypeOrmEntity, Column } from 'typeorm';
+import { Column, Entity as TypeOrmEntity } from 'typeorm';
+
 import { Entity } from './common.entity';
 
 @TypeOrmEntity('administrator')

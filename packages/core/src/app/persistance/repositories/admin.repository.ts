@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Admin } from '@vendyx/common';
+import { Repository } from 'typeorm';
+
 import { AdminEntity } from '../entities';
 
 @Injectable()

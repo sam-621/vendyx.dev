@@ -1,8 +1,9 @@
-import { AdminService } from '@/app/service';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { AdminJwtAuthGuard, AuthenticateAdminInput } from '../common';
 import { UseGuards } from '@nestjs/common';
-import { GraphQLError } from 'graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+
+import { AdminJwtAuthGuard, AuthenticateAdminInput } from '../common';
+
+import { AdminService } from '@/app/service';
 
 @Resolver()
 export class AdminResolver {
