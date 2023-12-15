@@ -23,10 +23,8 @@ export async function gqlFetch<T, U>({
   if (body.errors) {
     // eslint-disable-next-line @typescript-eslint/no-throw-literal
     throw {
-      error: {
-        message: body.errors[0].message,
-        code: body.errors[0].extensions.code
-      }
+      message: body.errors[0].message,
+      code: body.errors[0].extensions.code
     };
   }
 

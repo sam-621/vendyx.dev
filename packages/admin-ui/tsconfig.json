@@ -21,7 +21,8 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/lib/*": ["src/lib/*"],
+      "@/services/*": ["src/app/services/*"]
     }
   },
   "include": ["src/**/*", "scripts/**/*"],
