@@ -13,7 +13,7 @@
   "plugins": ["react", "prettier", "simple-import-sort", "import", "@tanstack/query"],
   "rules": {
     "prettier/prettier": ["error"],
-    // "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
     "react/prop-types": "off",
     // "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
