@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { AdminRepository } from '@/app/persistance';
+import { ValidationError } from '@/lib/errors';
 import { SecurityService } from '@/lib/security';
 
 @Injectable()
@@ -14,13 +15,13 @@ export class AdminService {
     const admin = await this.adminRepository.getByUsername(username);
 
     if (!admin) {
-      return null;
+      throw new Error('Invalid username or password');
     }
 
     const passwordsMatch = await this.securityService.compare(password, admin.password);
 
     if (!passwordsMatch) {
-      return null;
+      throw new ValidationError('Invalid username or password');
     }
 
     const { access_token } = await this.securityService.generateToken(admin);

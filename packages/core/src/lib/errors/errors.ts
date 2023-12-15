@@ -1,7 +1,10 @@
 import { ErrorCode } from '@vendyx/common';
+import { GraphQLError } from 'graphql';
 
-abstract class BaseError {
-  constructor(readonly code: ErrorCode, readonly message: string) {}
+abstract class BaseError extends GraphQLError {
+  constructor(readonly code: ErrorCode, readonly message: string) {
+    super(message, { extensions: { code } });
+  }
 }
 
 /**
@@ -31,5 +34,15 @@ export class UnauthorizedError extends BaseError {
 export class UserInputError extends BaseError {
   constructor(message: string) {
     super(ErrorCode.USER_INPUT, message);
+  }
+}
+
+/**
+ * @description
+ * This error is thrown when a validation error occurs.
+ */
+export class ValidationError extends BaseError {
+  constructor(message: string) {
+    super(ErrorCode.VALIDATION, message);
   }
 }
