@@ -1,4 +1,4 @@
-export const AuthenticateAdmin = /* GraphQL */ `
+export const AuthenticateAdminMutation = /* GraphQL */ `
   mutation AuthenticateAdmin($input: AuthenticateAdminInput!) {
     authenticateAdmin(input: $input)
   }
