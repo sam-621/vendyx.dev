@@ -10,7 +10,7 @@
     "standard-with-typescript",
     "prettier"
   ],
-  "plugins": ["react", "prettier", "simple-import-sort", "import"],
+  "plugins": ["react", "prettier", "simple-import-sort", "import", "@tanstack/query"],
   "rules": {
     "prettier/prettier": ["error"],
     // "@typescript-eslint/no-misused-promises": "off",

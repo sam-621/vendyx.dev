@@ -9,14 +9,18 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.13.4",
     "@vendyx/common": "*",
     "@vendyx/theme": "*",
+    "add": "^2.0.6",
     "lucide-react": "^0.295.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.20.1",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.12.1",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",

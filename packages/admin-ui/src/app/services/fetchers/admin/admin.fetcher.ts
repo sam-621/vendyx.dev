@@ -1,6 +1,6 @@
 import { AuthenticateAdmin, gqlFetch } from '@/lib/gql';
 
-import { type AuthenticateAdminInput, type AuthenticateAdminResponse } from '../types';
+import { type AuthenticateAdminInput, type AuthenticateAdminResponse } from '../../types';
 
 export const authenticateAdmin = async (input: AuthenticateAdminInput) => {
   const {
