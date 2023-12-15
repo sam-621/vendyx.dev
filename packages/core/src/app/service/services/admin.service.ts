@@ -15,7 +15,7 @@ export class AdminService {
     const admin = await this.adminRepository.getByUsername(username);
 
     if (!admin) {
-      throw new Error('Invalid username or password');
+      throw new ValidationError('Invalid username or password');
     }
 
     const passwordsMatch = await this.securityService.compare(password, admin.password);

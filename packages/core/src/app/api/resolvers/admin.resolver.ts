@@ -11,8 +11,6 @@ export class AdminResolver {
 
   @Mutation('authenticateAdmin')
   async authenticate(@Args('input') input: AuthenticateAdminInput) {
-    // throw new GraphQLError('Invalid credentials', { extensions: { code: 'INVALID_CREDENTIALS' } });
-
     return this.adminService.authenticate(input.username, input.password);
   }
 
