@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
+import { type ErrorResult } from '@vendyx/common';
 
-import { type ErrorResult } from '@/lib/errors';
 import {
   authenticateAdmin,
   type AuthenticateAdminInput,
