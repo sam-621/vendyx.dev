@@ -8,17 +8,20 @@ import { DashboardPage, InventoryPage } from './admin';
 import { LoginPage } from './login';
 import RootErrorPage from './root-error-page';
 
-const router = createBrowserRouter([
-  {
-    path: BASE_URL,
-    element: <AppLayout />,
-    errorElement: <RootErrorPage />,
-    children: [
-      { path: BASE_URL, element: <DashboardPage /> },
-      { path: `${BASE_URL}/inventory`, element: <InventoryPage /> }
-    ]
-  },
-  { path: `${BASE_URL}/login`, element: <LoginPage /> }
-]);
+const router = createBrowserRouter(
+  [
+    { path: `/login`, element: <LoginPage /> },
+    {
+      path: '/',
+      element: <AppLayout />,
+      errorElement: <RootErrorPage />,
+      children: [
+        { path: '/', element: <DashboardPage /> },
+        { path: `/inventory`, element: <InventoryPage /> }
+      ]
+    }
+  ],
+  { basename: BASE_URL }
+);
 
 export const AppRouter = () => <RouterProvider router={router} />;

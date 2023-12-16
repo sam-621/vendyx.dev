@@ -25,6 +25,6 @@
       "@/services/*": ["src/app/services/*"]
     }
   },
-  "include": ["src/**/*", "scripts/**/*"],
+  "include": ["src/**/*", "scripts/**/*", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

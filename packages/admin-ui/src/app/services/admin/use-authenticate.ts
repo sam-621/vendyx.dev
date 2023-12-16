@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { type ErrorResult } from '@vendyx/common';
 
-import { BASE_URL, COOKIE_TOKEN_NAME } from '@/lib/config';
+import { COOKIE_TOKEN_NAME } from '@/lib/config';
 import { cookies } from '@/lib/cookies';
 import { ApiError } from '@/lib/errors';
 import {
@@ -30,7 +30,7 @@ export const useAuthenticate = () => {
       // TODO: Add expiry date
       cookies.set(COOKIE_TOKEN_NAME, token);
 
-      navigate(`${BASE_URL}`);
+      navigate('/');
     } catch (error) {
       if (error instanceof ApiError) {
         notification.error(error.message);

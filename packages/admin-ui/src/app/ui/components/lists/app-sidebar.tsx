@@ -10,8 +10,6 @@ import {
   UserIcon
 } from 'lucide-react';
 
-import { BASE_URL } from '@/lib/config';
-
 import { AppSidebarItem } from '../items';
 
 export const AppSidebar: FC<Props> = ({ className }) => {
@@ -27,19 +25,19 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Catalog</h2>
           <div className="flex flex-col gap-1">
             <AppSidebarItem
-              href={BASE_URL}
+              href={'/'}
               icon={<BarChart2Icon className="flex-shrink-0" size={16} />}
               text="Dashboard"
             />
 
             <AppSidebarItem
-              href={`${BASE_URL}/inventory`}
+              href={`/inventory`}
               icon={<PackageIcon className="flex-shrink-0" size={16} />}
               text="Inventory"
             />
 
             <AppSidebarItem
-              href={`${BASE_URL}/collections`}
+              href={`/collections`}
               icon={<BoxesIcon className="flex-shrink-0" size={16} />}
               text="Collections"
             />
@@ -49,13 +47,13 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           <h2 className="text-lg font-semibold tracking-tight pl-4">Sales</h2>
           <div className="flex flex-col gap-1">
             <AppSidebarItem
-              href={`${BASE_URL}/orders`}
+              href={`/orders`}
               icon={<ShoppingCartIcon className="flex-shrink-0" size={16} />}
               text="Orders"
             />
 
             <AppSidebarItem
-              href={`${BASE_URL}/customers`}
+              href={`/customers`}
               icon={<UserIcon className="flex-shrink-0" size={16} />}
               text="Customers"
             />
@@ -64,7 +62,7 @@ export const AppSidebar: FC<Props> = ({ className }) => {
       </div>
 
       <AppSidebarItem
-        href={`${BASE_URL}/settings`}
+        href={`/settings`}
         icon={<SettingsIcon className="flex-shrink-0" size={16} />}
         text="Settings"
       />
@@ -72,6 +70,6 @@ export const AppSidebar: FC<Props> = ({ className }) => {
   );
 };
 
-interface Props {
+type Props = {
   className?: string;
-}
+};
