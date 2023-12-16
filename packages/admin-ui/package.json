@@ -9,6 +9,7 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@tanstack/react-query": "^5.13.4",
     "@vendyx/common": "*",
     "@vendyx/theme": "*",
@@ -16,8 +17,10 @@
     "lucide-react": "^0.295.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
     "react-router-dom": "^6.20.1",
-    "yarn": "^1.22.21"
+    "yarn": "^1.22.21",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.12.1",

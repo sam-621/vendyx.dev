@@ -22,8 +22,17 @@ export const useAuthenticate = () => {
     }
   });
 
+  const authenticate = async (input: TVariables) => {
+    try {
+      const data = await mutateAsync(input);
+      console.log({ data });
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
   return {
-    authenticate: mutateAsync,
+    authenticate,
     isLoading: isPending
   };
 };
