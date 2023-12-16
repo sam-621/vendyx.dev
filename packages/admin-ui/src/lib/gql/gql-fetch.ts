@@ -1,4 +1,8 @@
+import { type ErrorCode } from '@vendyx/common';
+
 import { ADMIN_API_ENDPOINT } from '@/lib/config';
+
+import { ApiError } from '../errors';
 
 export async function gqlFetch<T, U>({
   query,
@@ -21,11 +25,7 @@ export async function gqlFetch<T, U>({
   const body = (await result.json()) as GraphQLResponse<T>;
 
   if (body.errors) {
-    // eslint-disable-next-line @typescript-eslint/no-throw-literal
-    throw {
-      message: body.errors[0].message,
-      code: body.errors[0].extensions.code
-    };
+    throw new ApiError(body.errors[0].message, body.errors[0].extensions.code as ErrorCode);
   }
 
   return {
