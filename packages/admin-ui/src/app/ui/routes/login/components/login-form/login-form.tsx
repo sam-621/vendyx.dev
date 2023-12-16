@@ -3,7 +3,7 @@ import { Button, cn, Input } from '@vendyx/theme';
 import { useLoginForm } from './use-login-form';
 
 export const LoginForm = () => {
-  const { onSubmit, register, errors } = useLoginForm();
+  const { onSubmit, register, errors, isSubmitting } = useLoginForm();
 
   return (
     <div className={cn('grid gap-6')}>
@@ -31,7 +31,7 @@ export const LoginForm = () => {
               errorMessage={errors.password?.message}
             />
           </div>
-          <Button>Login</Button>
+          <Button isLoading={isSubmitting}>Login</Button>
           {/* <div className="flex h-5 items-center gap-2">
             <AlertCircleIcon className="h-5 w-5 text-red-500" />
             <p aria-live="polite" className="text-sm text-red-500">
