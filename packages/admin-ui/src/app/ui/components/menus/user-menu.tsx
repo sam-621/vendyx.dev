@@ -1,3 +1,5 @@
+import { type FC } from 'react';
+
 import {
   Avatar,
   Button,
@@ -16,12 +18,12 @@ import {
 } from '@vendyx/theme';
 import { Laptop, Moon, Sun, SunMoon, User } from 'lucide-react';
 
-export const UserMenu = () => {
+export const UserMenu: FC<Props> = ({ className }) => {
   const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className={className}>
         <Button size={'icon'} variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar src="https://ui.shadcn.com/avatars/01.png" alt="@sam" fallBack="CN" />
         </Button>
@@ -65,4 +67,8 @@ export const UserMenu = () => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
+};
+
+type Props = {
+  className?: string;
 };
