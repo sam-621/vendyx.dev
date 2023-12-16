@@ -1,9 +1,13 @@
-import { ErrorCode } from '@vendyx/common';
-import { GraphQLError } from 'graphql';
+import { ErrorCode, ErrorMetadata, ErrorResult } from '@vendyx/common';
 
-abstract class BaseError extends GraphQLError {
-  constructor(readonly code: ErrorCode, readonly message: string) {
-    super(message, { extensions: { code } });
+export abstract class BusinessError extends Error implements ErrorResult {
+  constructor(
+    readonly code: ErrorCode,
+    readonly message: string,
+    readonly metadata?: ErrorMetadata
+  ) {
+    super(message);
+    this.name = this.code;
   }
 }
 
@@ -11,9 +15,9 @@ abstract class BaseError extends GraphQLError {
  * @description
  * This error is thrown when an unexpected error occurs.
  */
-export class InternalServerError extends BaseError {
-  constructor(message: string) {
-    super(ErrorCode.INTERNAL_SERVER_ERROR, message);
+export class InternalServerError extends BusinessError {
+  constructor(message: string, metadata?: ErrorMetadata) {
+    super(ErrorCode.INTERNAL_SERVER_ERROR, message, metadata);
   }
 }
 
@@ -21,9 +25,9 @@ export class InternalServerError extends BaseError {
  * @description
  * This error is thrown when a user is not authorized to perform an action.
  */
-export class UnauthorizedError extends BaseError {
-  constructor(message: string) {
-    super(ErrorCode.UNAUTHORIZED, message);
+export class UnauthorizedError extends BusinessError {
+  constructor(message: string, metadata?: ErrorMetadata) {
+    super(ErrorCode.UNAUTHORIZED, message, metadata);
   }
 }
 
@@ -31,9 +35,9 @@ export class UnauthorizedError extends BaseError {
  * @description
  * This error is thrown when a user input is invalid.
  */
-export class UserInputError extends BaseError {
-  constructor(message: string) {
-    super(ErrorCode.USER_INPUT, message);
+export class UserInputError extends BusinessError {
+  constructor(message: string, metadata?: ErrorMetadata) {
+    super(ErrorCode.USER_INPUT, message, metadata);
   }
 }
 
@@ -41,8 +45,8 @@ export class UserInputError extends BaseError {
  * @description
  * This error is thrown when a validation error occurs.
  */
-export class ValidationError extends BaseError {
-  constructor(message: string) {
-    super(ErrorCode.VALIDATION, message);
+export class ValidationError extends BusinessError {
+  constructor(message: string, metadata?: ErrorMetadata) {
+    super(ErrorCode.VALIDATION, message, metadata);
   }
 }

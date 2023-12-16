@@ -14,7 +14,13 @@ const COMMON_GQL_OPTIONS: ApolloDriverConfig = {
   driver: ApolloDriver,
   playground: false,
   includeStacktraceInErrorResponses: false,
-  plugins: [ApolloServerPluginLandingPageLocalDefault()]
+  plugins: [ApolloServerPluginLandingPageLocalDefault()],
+  formatError: error => {
+    return {
+      message: error.message,
+      code: error.extensions?.code
+    };
+  }
 };
 
 const ADMIN_RESOLVERS = [AdminResolver];

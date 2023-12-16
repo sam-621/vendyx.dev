@@ -9,3 +9,5 @@ export enum ErrorCode {
   USER_INPUT = 'USER_INPUT',
   VALIDATION = 'VALIDATION'
 }
+
+export type ErrorMetadata = Record<string, unknown>;

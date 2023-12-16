@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 
 import { ApiModule } from './api/api.module';
 import { PersistanceModule } from './persistance';
-import { ConfigModule } from '../lib/config';
+
+import { ConfigModule } from '@/lib/config';
+import { LoggerModule } from '@/lib/logger';
 
 @Module({
-  imports: [ConfigModule, PersistanceModule, ApiModule]
+  imports: [ConfigModule, LoggerModule, PersistanceModule, ApiModule]
 })
 export class AppModule {}
