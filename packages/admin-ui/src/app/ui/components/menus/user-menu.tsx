@@ -3,6 +3,7 @@ import { type FC } from 'react';
 import {
   Avatar,
   Button,
+  cn,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -16,10 +17,13 @@ import {
   DropdownMenuTrigger,
   useTheme
 } from '@vendyx/theme';
-import { Laptop, Moon, Sun, SunMoon, User } from 'lucide-react';
+import { Laptop, LogOutIcon, Moon, Sun, SunMoon, User } from 'lucide-react';
+
+import { useLogout } from '@/services/admin';
 
 export const UserMenu: FC<Props> = ({ className }) => {
   const { setTheme } = useTheme();
+  const { logout, isLoading } = useLogout();
 
   return (
     <DropdownMenu>
@@ -64,6 +68,28 @@ export const UserMenu: FC<Props> = ({ className }) => {
             </DropdownMenuPortal>
           </DropdownMenuSub>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="p-0">
+          <Button
+            type="submit"
+            variant={'ghost'}
+            className="h-full w-full flex justify-start px-2 py-[6px]"
+            onClick={logout}
+            isLoading={isLoading}
+          >
+            {!isLoading && (
+              <LogOutIcon className="mr-2 h-4 w-4 transition-all text-red-500 hover:text-red-500" />
+            )}
+            <span
+              className={cn({
+                'text-red-500 hover:text-red-500': !isLoading,
+                'text-muted-foreground': isLoading
+              })}
+            >
+              Logout
+            </span>
+          </Button>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

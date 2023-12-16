@@ -1,13 +1,8 @@
-import { useTheme } from '@vendyx/theme';
-
 import { Logo } from '../../components/items';
 
 import { LoginForm } from './components';
 
 export const LoginPage = () => {
-  const { theme } = useTheme();
-  console.log({ theme });
-
   return (
     <div className="h-screen grid grid-cols-2 items-center">
       <div className="border-border h-full p-10 dark:border-r flex flex-col justify-between">

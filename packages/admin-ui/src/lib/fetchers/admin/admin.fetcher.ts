@@ -18,6 +18,7 @@ export const validateToken = async () => {
   const {
     data: { validateAdminToken }
   } = await gqlFetch<GqlQuery<boolean>>({ query: validateAdminTokenQuery });
+  console.log({ validateAdminToken });
 
   return validateAdminToken;
 };

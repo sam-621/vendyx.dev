@@ -5,17 +5,17 @@ import { useValidateToken } from './services/admin';
 
 export const AuthWrapper: FC<Props> = ({ children }) => {
   const { pathname } = useLocation();
-  const { data, isLoading } = useValidateToken();
+  const { isAuthenticated, isLoading } = useValidateToken();
 
   if (isLoading) return null;
 
   // is in admin with invalid token, have to redirect to login
-  if (!data && pathname !== '/login') return <Navigate to="/login" replace />;
+  if (!isAuthenticated && pathname !== '/login') return <Navigate to="/login" replace />;
 
   // is in login with valid token, have to redirect to admin
-  if (data && pathname === '/login') return <Navigate to="/" replace />;
+  if (isAuthenticated && pathname === '/login') return <Navigate to="/" replace />;
 
-  // !data && pathname === '/login' || data && pathname !== '/login'
+  // Everything is ok, render the children
   return children ?? <Outlet />;
 };
 

@@ -7,7 +7,13 @@ type QueryFnData = boolean | undefined;
 type TError = ErrorResult;
 
 export const useValidateToken = () => {
+  const { data, error, isLoading } = useQuery<QueryFnData, TError>({
+    queryKey: AdminKeys.validate,
+    queryFn: validateToken
+  });
+
   return {
-    ...useQuery<QueryFnData, TError>({ queryKey: AdminKeys.validate, queryFn: validateToken })
+    isAuthenticated: !error && data,
+    isLoading
   };
 };
