@@ -16,7 +16,6 @@ export const AuthWrapper: FC<Props> = ({ children }) => {
   if (data && pathname === '/login') return <Navigate to="/" replace />;
 
   // !data && pathname === '/login' || data && pathname !== '/login'
-  // has a valid token and is in admin, render the children
   return children ?? <Outlet />;
 };
 
