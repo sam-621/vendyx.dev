@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
+
 import { Payload } from '../types/jwt.type';
+
 import { AdminRepository } from '@/app/persistance';
+import { UnauthorizedError } from '@/lib/errors';
 
 @Injectable()
 export class AdminJwtStrategy extends PassportStrategy(Strategy, 'admin-jwt') {
@@ -24,7 +27,7 @@ export class AdminJwtStrategy extends PassportStrategy(Strategy, 'admin-jwt') {
     const user = this.adminRepository.getByUsername(username);
 
     if (!user) {
-      return null;
+      throw new UnauthorizedError('Invalid token');
     }
 
     return user;

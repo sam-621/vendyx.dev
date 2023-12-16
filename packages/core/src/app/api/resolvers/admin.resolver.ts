@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { AdminJwtAuthGuard, AuthenticateAdminInput } from '../common';
 
@@ -15,8 +15,8 @@ export class AdminResolver {
   }
 
   @UseGuards(AdminJwtAuthGuard)
-  @Mutation('hello')
-  async hello() {
-    return 'Hello World!';
+  @Query('validateAdminToken')
+  async validateAdmin() {
+    return true;
   }
 }

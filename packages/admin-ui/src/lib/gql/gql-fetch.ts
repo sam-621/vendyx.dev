@@ -1,20 +1,24 @@
 import { type ErrorCode } from '@vendyx/common';
 
-import { ADMIN_API_ENDPOINT } from '@/lib/config';
+import { ADMIN_API_ENDPOINT, COOKIE_TOKEN_NAME } from '@/lib/config';
 
+import { cookies } from '../cookies';
 import { ApiError } from '../errors';
 
-export async function gqlFetch<T, U>({
+export async function gqlFetch<T, U = unknown>({
   query,
   variables
 }: {
   query: string;
   variables?: Variables<U>;
 }) {
+  const token = cookies.get(COOKIE_TOKEN_NAME);
+
   const result = await fetch(ADMIN_API_ENDPOINT, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({
       ...(query && { query }),

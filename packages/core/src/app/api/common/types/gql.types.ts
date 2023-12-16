@@ -39,11 +39,11 @@ export class Admin {
 
 export abstract class IMutation {
     abstract authenticateAdmin(input: AuthenticateAdminInput): Nullable<string> | Promise<Nullable<string>>;
-
-    abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export abstract class IQuery {
+    abstract validateAdminToken(): Nullable<boolean> | Promise<Nullable<boolean>>;
+
     abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
 

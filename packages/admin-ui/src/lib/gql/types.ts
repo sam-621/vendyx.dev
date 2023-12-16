@@ -1,6 +1,6 @@
 export type GqlQuery<R> = {
   __typename?: 'Query';
-  s: R;
+  validateAdminToken: R;
 };
 
 export type GqlMutation<R> = {

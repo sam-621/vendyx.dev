@@ -1,19 +1,23 @@
 import { type FC, type PropsWithChildren } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import { COOKIE_TOKEN_NAME } from '@/lib/config';
-import { cookies } from '@/lib/cookies';
+import { useValidateToken } from './services/admin';
 
 export const AuthWrapper: FC<Props> = ({ children }) => {
-  const navigate = useNavigate();
-  const token = cookies.get(COOKIE_TOKEN_NAME);
+  const { pathname } = useLocation();
+  const { data, isLoading } = useValidateToken();
 
-  if (!token) {
-    navigate('/login');
-    return;
-  }
+  if (isLoading) return null;
 
-  return children;
+  // is in admin with invalid token, have to redirect to login
+  if (!data && pathname !== '/login') return <Navigate to="/login" replace />;
+
+  // is in login with valid token, have to redirect to admin
+  if (data && pathname === '/login') return <Navigate to="/" replace />;
+
+  // !data && pathname === '/login' || data && pathname !== '/login'
+  // has a valid token and is in admin, render the children
+  return children ?? <Outlet />;
 };
 
 type Props = PropsWithChildren;

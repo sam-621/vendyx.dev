@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import { useMutation } from '@tanstack/react-query';
 import { type ErrorResult } from '@vendyx/common';
 
@@ -7,20 +5,21 @@ import { COOKIE_TOKEN_NAME } from '@/lib/config';
 import { cookies } from '@/lib/cookies';
 import { ApiError } from '@/lib/errors';
 import {
-  authenticateAdmin,
+  AdminKeys,
+  authenticate as authenticateFetcher,
   type AuthenticateAdminInput,
   type AuthenticateAdminResponse
 } from '@/lib/fetchers';
 import { notification } from '@/lib/notifications';
+import { queryClient } from '@/lib/query-client';
 
 type TData = AuthenticateAdminResponse;
 type TError = ErrorResult;
 type TVariables = AuthenticateAdminInput;
 
 export const useAuthenticate = () => {
-  const navigate = useNavigate();
   const { mutateAsync, isPending } = useMutation<TData, TError, TVariables>({
-    mutationFn: authenticateAdmin
+    mutationFn: authenticateFetcher
   });
 
   const authenticate = async (input: TVariables) => {
@@ -30,7 +29,8 @@ export const useAuthenticate = () => {
       // TODO: Add expiry date
       cookies.set(COOKIE_TOKEN_NAME, token);
 
-      navigate('/');
+      // this will re-render auth wrapper and now that are a valid token, it will redirect to /
+      await queryClient.invalidateQueries({ queryKey: AdminKeys.validate });
     } catch (error) {
       if (error instanceof ApiError) {
         notification.error(error.message);

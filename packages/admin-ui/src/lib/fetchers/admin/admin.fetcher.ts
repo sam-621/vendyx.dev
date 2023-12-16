@@ -1,10 +1,9 @@
-import { AuthenticateAdminMutation, gqlFetch, type GqlMutation } from '@/lib/gql';
+import { AuthenticateAdminMutation, gqlFetch, type GqlMutation, type GqlQuery } from '@/lib/gql';
+import { validateAdminTokenQuery } from '@/lib/gql/queries';
 
 import { type AuthenticateAdminInput, type AuthenticateAdminResponse } from './admin.type';
 
-export const authenticateAdmin = async (
-  input: AuthenticateAdminInput
-): Promise<AuthenticateAdminResponse> => {
+export const authenticate = async (input: AuthenticateAdminInput) => {
   const {
     data: { authenticateAdmin }
   } = await gqlFetch<GqlMutation<AuthenticateAdminResponse>, AuthenticateAdminInput>({
@@ -13,4 +12,16 @@ export const authenticateAdmin = async (
   });
 
   return authenticateAdmin;
+};
+
+export const validateToken = async () => {
+  const {
+    data: { validateAdminToken }
+  } = await gqlFetch<GqlQuery<boolean>>({ query: validateAdminTokenQuery });
+
+  return validateAdminToken;
+};
+
+export const AdminKeys = {
+  validate: ['validate']
 };

@@ -13,5 +13,8 @@ input AuthenticateAdminInput {
 
 type Mutation {
   authenticateAdmin(input: AuthenticateAdminInput!): String
-  hello: String
+}
+
+type Query {
+  validateAdminToken: Boolean
 }
