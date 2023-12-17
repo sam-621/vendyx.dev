@@ -1,11 +1,13 @@
-import { log } from 'console';
-
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ErrorCode, GraphQLApiResponse } from '@vendyx/common';
 import request from 'supertest';
 import { beforeEach, describe, it } from 'vitest';
 
 import { AppModule } from '../src/app/app.module';
+
+import { GlobalExceptionsFilter } from '@/app/api/common';
+import { LoggerService } from '@/lib/logger';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -16,6 +18,8 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    const loggerService = await app.resolve(LoggerService);
+    app.useGlobalFilters(new GlobalExceptionsFilter(loggerService));
     await app.init();
   });
 
@@ -30,6 +34,12 @@ describe('AppController (e2e)', () => {
         `
       });
 
-    log(r.body);
+    const body = r.body as GraphQLApiResponse<string>;
+    console.log({
+      body: body.errors[0]
+    });
+
+    expect(body.errors.length).toBe(1);
+    expect(body.errors[0].code).toBe(ErrorCode.VALIDATION);
   });
 });

@@ -9,11 +9,8 @@
     "dev": "nest start --watch",
     "build": "nest build",
     "start": "node dist/main",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:cov": "vitest run --coverage",
-    "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
-    "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
+    "test": "vitest",
+    "test:e2e": "./scripts/run-e2e.sh",
     "script:types": "ts-node ./scripts/generate-typings.ts"
   },
   "dependencies": {
