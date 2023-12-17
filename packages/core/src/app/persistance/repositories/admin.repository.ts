@@ -13,10 +13,7 @@ export class AdminRepository {
   ) {}
 
   async getByUsername(username: string): Promise<Admin | null> {
-    const r = await this.adminTypeormRepository.findOneBy({ username });
-    console.log({ r });
-
-    return r;
+    return this.adminTypeormRepository.findOneBy({ username });
   }
 
   create(username: string, password: string): Promise<Admin> {
