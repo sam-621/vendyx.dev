@@ -12,8 +12,11 @@ export class AdminRepository {
     private adminTypeormRepository: Repository<AdminEntity>
   ) {}
 
-  getByUsername(username: string): Promise<Admin | null> {
-    return this.adminTypeormRepository.findOneBy({ username });
+  async getByUsername(username: string): Promise<Admin | null> {
+    const r = await this.adminTypeormRepository.findOneBy({ username });
+    console.log({ r });
+
+    return r;
   }
 
   create(username: string, password: string): Promise<Admin> {
