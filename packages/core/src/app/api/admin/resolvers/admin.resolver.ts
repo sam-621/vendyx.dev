@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { AdminJwtAuthGuard, AuthenticateAdminInput } from '../common';
+import { AdminJwtAuthGuard, AuthenticateAdminInput } from '../../common';
 
 import { AdminService } from '@/app/service';
 
