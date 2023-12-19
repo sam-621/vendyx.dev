@@ -6,14 +6,7 @@ export default defineConfig({
   test: {
     include: ['**/*.e2e-spec.ts'],
     globals: true,
-    // alias: {
-    //   '@/app': './src/app',
-    //   '@/lib': './src/lib'
-    // },
-    root: './',
-    deps: {
-      interopDefault: true
-    }
+    setupFiles: ['./tests/utils/setup-e2e.ts']
   },
   plugins: [swc.vite(), tsconfigPaths()]
 });
