@@ -2,10 +2,23 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AdminEntity } from './entities';
+import {
+  AdminEntity,
+  OptionEntity,
+  OptionValueEntity,
+  ProductEntity,
+  ProductVariantEntity
+} from './entities';
 import { AdminRepository } from './repositories';
 
-const ENTITIES = [AdminEntity];
+const ENTITIES = [
+  AdminEntity,
+  ProductEntity,
+  ProductVariantEntity,
+  OptionEntity,
+  OptionValueEntity
+];
+
 const REPOSITORIES = [AdminRepository];
 
 @Module({
