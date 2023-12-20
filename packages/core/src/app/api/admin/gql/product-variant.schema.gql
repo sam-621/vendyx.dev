@@ -1,0 +1,9 @@
+type ProductVariant implements Node {
+  sku: String;
+  price: Int;
+  comparisonPrice: Int;
+  costPerUnit: Int;
+  weight: Int;
+  stock: Int;
+  enabled: Boolean;
+}

@@ -1,0 +1,6 @@
+type Product implements Node {
+  name: String!;
+  slug: String!;
+  description: String!;
+  enabled: boolean!;
+}
