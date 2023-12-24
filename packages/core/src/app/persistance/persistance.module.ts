@@ -10,7 +10,13 @@ import {
   ProductEntity,
   ProductVariantEntity
 } from './entities';
-import { AdminRepository } from './repositories';
+import {
+  AdminRepository,
+  OptionRepository,
+  OptionValueRepository,
+  ProductRepository,
+  ProductVariantRepository
+} from './repositories';
 
 const ENTITIES = [
   AdminEntity,
@@ -21,7 +27,13 @@ const ENTITIES = [
   MarketEntity
 ];
 
-const REPOSITORIES = [AdminRepository];
+const REPOSITORIES = [
+  AdminRepository,
+  ProductRepository,
+  ProductVariantRepository,
+  OptionRepository,
+  OptionValueRepository
+];
 
 @Module({
   imports: [

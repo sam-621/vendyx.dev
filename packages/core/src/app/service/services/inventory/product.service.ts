@@ -3,6 +3,7 @@ import { ID } from '@vendyx/common';
 
 import { ListInput } from '@/app/api/common';
 import { ProductRepository } from '@/app/persistance';
+import { UserInputError } from '@/lib/errors';
 
 @Injectable()
 export class ProductService {
@@ -12,11 +13,23 @@ export class ProductService {
     return this.repository.find({ ...input });
   }
 
-  async findById(id: ID) {
+  async findUnique({ id, slug }: { id: ID; slug: string }) {
+    if (id) {
+      return this.findById(id);
+    }
+
+    if (slug) {
+      return this.findBySlug(slug);
+    }
+
+    throw new UserInputError('No ID or SLUG provided');
+  }
+
+  private async findById(id: ID) {
     return this.repository.findOne({ where: { id } });
   }
 
-  async findBySlug(slug: ID) {
+  private async findBySlug(slug: ID) {
     return this.repository.findOne({ where: { slug } });
   }
 }

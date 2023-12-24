@@ -7,3 +7,8 @@ type Product implements Node {
   description: String
   enabled: Boolean!
 }
+
+type ProductList implements List {
+  items: [Product]!
+  count: Int!
+}

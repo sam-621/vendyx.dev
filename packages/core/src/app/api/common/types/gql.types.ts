@@ -44,7 +44,7 @@ export abstract class IMutation {
 export abstract class IQuery {
     abstract validateAdminToken(): Nullable<boolean> | Promise<Nullable<boolean>>;
 
-    abstract products(input?: Nullable<ListInput>): List | Promise<List>;
+    abstract products(input?: Nullable<ListInput>): ProductList | Promise<ProductList>;
 
     abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 
@@ -86,6 +86,11 @@ export class Product implements Node {
     slug: string;
     description?: Nullable<string>;
     enabled: boolean;
+}
+
+export class ProductList implements List {
+    items: Nullable<Product>[];
+    count: number;
 }
 
 type Nullable<T> = T | null;

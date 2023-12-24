@@ -1,4 +1,4 @@
 type Query {
-  products(input: ListInput): List!
+  products(input: ListInput): ProductList!
   product(id: ID, slug: String): Product
 }
