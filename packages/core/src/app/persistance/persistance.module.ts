@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import {
   AdminEntity,
+  MarketEntity,
   OptionEntity,
   OptionValueEntity,
   ProductEntity,
@@ -16,7 +17,8 @@ const ENTITIES = [
   ProductEntity,
   ProductVariantEntity,
   OptionEntity,
-  OptionValueEntity
+  OptionValueEntity,
+  MarketEntity
 ];
 
 const REPOSITORIES = [AdminRepository];
