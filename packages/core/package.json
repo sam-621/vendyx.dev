@@ -11,7 +11,8 @@
     "start": "node dist/main",
     "test": "vitest",
     "test:e2e": "./scripts/run-e2e.sh",
-    "script:types": "ts-node ./scripts/generate-typings.ts"
+    "script:types": "ts-node ./scripts/generate-typings.ts",
+    "script:admin": "ts-node ./scripts/generate-admin.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
@@ -52,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@vitest/coverage-v8": "^1.0.4",
+    "dotenv": "^16.3.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^3.6.1",

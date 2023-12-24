@@ -1,5 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule as NConfigModule } from '@nestjs/config';
+
 import envsConfig from './envs.config';
 import { configValidator } from './validators.config';
 
