@@ -27,4 +27,4 @@ input UpdateProductInput {
   weight: Int
   stock: Int
   enabled: Boolean
-}s
+}

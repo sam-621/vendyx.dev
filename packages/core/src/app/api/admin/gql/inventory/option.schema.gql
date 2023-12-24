@@ -10,7 +10,7 @@ type Mutation {
 
 input CreateOptionInput {
   name: String!
-  values [string]!
+  values: [String]!
 }
 
 input UpdateOptionInput {

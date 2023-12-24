@@ -7,5 +7,5 @@ type Option implements Node {
 
 type OptionList implements List {
   items: [Option]!
-  totalItems: Int!
+  count: Int!
 }

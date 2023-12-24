@@ -13,6 +13,51 @@ export class AuthenticateAdminInput {
     password: string;
 }
 
+export class CreateOptionInput {
+    name: string;
+    values: Nullable<string>[];
+}
+
+export class UpdateOptionInput {
+    name?: Nullable<string>;
+    values?: Nullable<Nullable<UpdateOptionValueInput>[]>;
+}
+
+export class UpdateOptionValueInput {
+    value?: Nullable<string>;
+    optionValueId: string;
+}
+
+export class CreateProductVariantInput {
+    sku: string;
+    price: number;
+    comparisonPrice?: Nullable<number>;
+    costPerUnit: number;
+    weight?: Nullable<number>;
+    stock: number;
+    enabled: boolean;
+}
+
+export class UpdateProductInput {
+    sku?: Nullable<string>;
+    price?: Nullable<number>;
+    comparisonPrice?: Nullable<number>;
+    costPerUnit?: Nullable<number>;
+    weight?: Nullable<number>;
+    stock?: Nullable<number>;
+    enabled?: Nullable<boolean>;
+    name?: Nullable<string>;
+    slug?: Nullable<string>;
+    description?: Nullable<string>;
+}
+
+export class CreateProductInput {
+    name: string;
+    slug: string;
+    description?: Nullable<string>;
+    enabled: boolean;
+}
+
 export class ListInput {
     skip?: Nullable<number>;
     take?: Nullable<number>;
@@ -39,10 +84,34 @@ export class Admin {
 
 export abstract class IMutation {
     abstract authenticateAdmin(input: AuthenticateAdminInput): Nullable<string> | Promise<Nullable<string>>;
+
+    abstract createOption(input: CreateOptionInput): Option | Promise<Option>;
+
+    abstract updateOption(id: string, input: UpdateOptionInput): Option | Promise<Option>;
+
+    abstract deleteOption(id: string): boolean | Promise<boolean>;
+
+    abstract createVariant(input: CreateProductVariantInput): ProductVariant | Promise<ProductVariant>;
+
+    abstract updateVariant(id: string, input: UpdateProductInput): ProductVariant | Promise<ProductVariant>;
+
+    abstract deleteVariant(id: string): boolean | Promise<boolean>;
+
+    abstract createProduct(input: CreateProductInput): Product | Promise<Product>;
+
+    abstract updateProduct(id: string, input: UpdateProductInput): Product | Promise<Product>;
+
+    abstract deleteProduct(id: string): boolean | Promise<boolean>;
 }
 
 export abstract class IQuery {
     abstract validateAdminToken(): Nullable<boolean> | Promise<Nullable<boolean>>;
+
+    abstract options(input?: Nullable<ListInput>): OptionList | Promise<OptionList>;
+
+    abstract variants(input?: Nullable<ListInput>): ProductVariantList | Promise<ProductVariantList>;
+
+    abstract variant(id?: Nullable<string>, slug?: Nullable<string>): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 
     abstract products(input?: Nullable<ListInput>): ProductList | Promise<ProductList>;
 
@@ -65,6 +134,11 @@ export class Option implements Node {
     name: string;
 }
 
+export class OptionList implements List {
+    items: Nullable<Option>[];
+    count: number;
+}
+
 export class ProductVariant implements Node {
     id: string;
     createdAt: Date;
@@ -76,6 +150,11 @@ export class ProductVariant implements Node {
     weight?: Nullable<number>;
     stock: number;
     enabled: boolean;
+}
+
+export class ProductVariantList implements List {
+    items: Nullable<ProductVariant>[];
+    count: number;
 }
 
 export class Product implements Node {
