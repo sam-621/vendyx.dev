@@ -1,27 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Admin } from '@vendyx/common';
-import { Repository } from 'typeorm';
+import { Repository as TypeOrmRepository } from 'typeorm';
 
+import { Repository } from './repository';
 import { AdminEntity } from '../entities';
 
 @Injectable()
-export class AdminRepository {
+export class AdminRepository extends Repository<AdminEntity> {
   constructor(
     @InjectRepository(AdminEntity)
-    private adminTypeormRepository: Repository<AdminEntity>
-  ) {}
-
-  async getByUsername(username: string): Promise<Admin | null> {
-    return this.adminTypeormRepository.findOneBy({ username });
+    private typeorm: TypeOrmRepository<AdminEntity>
+  ) {
+    super(typeorm);
   }
 
-  create(username: string, password: string): Promise<Admin> {
-    const admin = new AdminEntity();
-
-    admin.username = username;
-    admin.password = password;
-
-    return this.adminTypeormRepository.save(admin);
+  async getByUsername(username: string): Promise<Admin | null> {
+    return this.typeorm.findOneBy({ username });
   }
 }
