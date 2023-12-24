@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '../model';
 
 export interface ProductVariant extends Model {
   sku: string;
@@ -9,12 +9,12 @@ export interface ProductVariant extends Model {
   /**
    * Price for illustrative purposes, usually shown crossed out
    */
-  comparisonPrice: number;
+  comparisonPrice?: number;
   /**
    * Unit price of the product, used to determinate what the profit margin is
    */
   costPerUnit: number;
-  weight: number;
+  weight?: number;
   stock: number;
   enabled: boolean;
 }
