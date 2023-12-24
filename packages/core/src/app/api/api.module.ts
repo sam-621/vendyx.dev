@@ -13,7 +13,18 @@ import { DateScalar, IDScalar } from './common/scalars';
 const COMMON_SCHEMA_PATH = join(process.cwd(), 'src/app/api/common/**/*.schema.gql');
 const ADMIN_API_SCHEMA_PATH = join(process.cwd(), 'src/app/api/admin/**/*.schema.gql');
 
-const COMMON_GQL_CONFIG = (configService: ConfigService): ApolloDriverConfig => ({});
+const COMMON_GQL_CONFIG = (configService: ConfigService): ApolloDriverConfig => ({
+  playground: false,
+  includeStacktraceInErrorResponses: false,
+  plugins:
+    configService.get('APP.MODE') !== 'dev' ? [ApolloServerPluginLandingPageLocalDefault()] : [],
+  formatError: error => {
+    return {
+      message: error.message,
+      code: error.extensions?.code
+    };
+  }
+});
 
 @Module({
   imports: [
@@ -21,18 +32,7 @@ const COMMON_GQL_CONFIG = (configService: ConfigService): ApolloDriverConfig => 
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
       useFactory: (configService: ConfigService) => ({
-        playground: false,
-        includeStacktraceInErrorResponses: false,
-        plugins:
-          configService.get('APP.MODE') !== 'dev'
-            ? [ApolloServerPluginLandingPageLocalDefault()]
-            : [],
-        formatError: error => {
-          return {
-            message: error.message,
-            code: error.extensions?.code
-          };
-        },
+        ...COMMON_GQL_CONFIG(configService),
         path: '/admin-api',
         typePaths: [COMMON_SCHEMA_PATH, ADMIN_API_SCHEMA_PATH],
         definitions: {
