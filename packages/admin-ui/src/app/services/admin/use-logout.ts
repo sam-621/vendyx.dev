@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import { COOKIE_TOKEN_NAME } from '@/lib/config';
 import { cookies } from '@/lib/cookies';
-import { AdminKeys } from '@/lib/fetchers';
-import { queryClient } from '@/lib/query-client';
+import { invalidateQueries } from '@/lib/query-client';
+
+import { AdminKeys } from './fetchers';
 
 export const useLogout = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +13,7 @@ export const useLogout = () => {
     setIsLoading(true);
 
     cookies.remove(COOKIE_TOKEN_NAME);
-    await queryClient.invalidateQueries({ queryKey: AdminKeys.validate });
+    await invalidateQueries(AdminKeys.validate);
 
     setIsLoading(false);
   };

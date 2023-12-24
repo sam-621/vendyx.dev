@@ -22,8 +22,8 @@ export const AppSidebarItem: FC<Props> = ({ text, href, icon }) => {
   );
 };
 
-interface Props {
+type Props = {
   text: string;
   href: string;
   icon: ReactElement;
-}
+};

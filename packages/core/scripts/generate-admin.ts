@@ -9,7 +9,6 @@ require('dotenv').config({ path: '.env.local' });
 (async () => {
   const username = 'admin';
   const password = 'admin';
-  console.log(process.env.DB_URL);
 
   const dataSource = await new DataSource({
     type: 'postgres',

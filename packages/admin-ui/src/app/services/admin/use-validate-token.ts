@@ -1,16 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
 import { type ErrorResult } from '@vendyx/common';
 
-import { AdminKeys, validateToken } from '@/lib/fetchers';
+import { useQuery } from '@/lib/query-client';
+
+import { AdminKeys, validateToken } from './fetchers';
 
 type QueryFnData = boolean | undefined;
 type TError = ErrorResult;
 
 export const useValidateToken = () => {
-  const { data, error, isLoading } = useQuery<QueryFnData, TError>({
-    queryKey: AdminKeys.validate,
-    queryFn: validateToken
-  });
+  const { data, error, isLoading } = useQuery<QueryFnData, TError>(
+    AdminKeys.validate,
+    validateToken
+  );
 
   return {
     isAuthenticated: !error && data,

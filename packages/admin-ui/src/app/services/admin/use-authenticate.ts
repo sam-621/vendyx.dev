@@ -4,14 +4,11 @@ import { type ErrorResult } from '@vendyx/common';
 import { COOKIE_TOKEN_NAME } from '@/lib/config';
 import { cookies } from '@/lib/cookies';
 import { ApiError } from '@/lib/errors';
-import {
-  AdminKeys,
-  authenticate as authenticateFetcher,
-  type AuthenticateAdminInput,
-  type AuthenticateAdminResponse
-} from '@/lib/fetchers';
 import { notification } from '@/lib/notifications';
-import { queryClient } from '@/lib/query-client';
+import { invalidateQueries } from '@/lib/query-client';
+import { type AuthenticateAdminInput, type AuthenticateAdminResponse } from '@/lib/vendyx/types';
+
+import { AdminKeys, authenticate as authenticateFetcher } from './fetchers';
 
 type TData = AuthenticateAdminResponse;
 type TError = ErrorResult;
@@ -29,8 +26,8 @@ export const useAuthenticate = () => {
       // TODO: Add expiry date
       cookies.set(COOKIE_TOKEN_NAME, token);
 
-      // this will re-render auth wrapper and now that are a valid token, it will redirect to /
-      await queryClient.invalidateQueries({ queryKey: AdminKeys.validate });
+      // this will re-render auth wrapper and now that are a valid token, it will redirect to dashboard
+      await invalidateQueries(AdminKeys.validate);
     } catch (error) {
       if (error instanceof ApiError) {
         notification.error(error.message);

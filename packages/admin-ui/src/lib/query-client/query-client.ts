@@ -8,3 +8,7 @@ export const queryClient = new QueryClient({
     }
   }
 });
+
+export const invalidateQueries = async (queryKey: string[]) => {
+  await queryClient.invalidateQueries({ queryKey });
+};

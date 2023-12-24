@@ -1,2 +1,2 @@
 export * from './admin.fetcher';
-export * from './admin.type';
+export * from './admin.keys';

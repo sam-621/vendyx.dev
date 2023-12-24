@@ -5,7 +5,7 @@ import { ADMIN_API_ENDPOINT, COOKIE_TOKEN_NAME } from '@/lib/config';
 import { cookies } from '../cookies';
 import { ApiError } from '../errors';
 
-export async function gqlFetch<T, U = unknown>({
+export async function vendyxFetch<T, U = unknown>({
   query,
   variables
 }: {
@@ -13,7 +13,6 @@ export async function gqlFetch<T, U = unknown>({
   variables?: Variables<U>;
 }) {
   const token = cookies.get(COOKIE_TOKEN_NAME);
-  console.log({ token });
 
   const result = await fetch(ADMIN_API_ENDPOINT ?? '/admin-api', {
     method: 'POST',
@@ -28,8 +27,6 @@ export async function gqlFetch<T, U = unknown>({
   });
 
   const body = (await result.json()) as GraphQLResponse<T>;
-
-  console.log({ body });
 
   if (body.errors) {
     throw new ApiError(body.errors[0].message, body.errors[0].code as ErrorCode);
