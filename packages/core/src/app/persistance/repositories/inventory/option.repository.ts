@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository as TypeOrmRepository } from 'typeorm';
 
-import { Repository } from './repository';
-import { OptionEntity } from '../entities';
+import { OptionEntity } from '../../entities';
+import { Repository } from '../repository';
 
 @Injectable()
 export class OptionRepository extends Repository<OptionEntity> {

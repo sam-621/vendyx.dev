@@ -1,9 +1,9 @@
 import { ProductVariant } from '@vendyx/common';
 import { Column, JoinTable, ManyToMany, ManyToOne, Entity as TypeOrmEntity } from 'typeorm';
 
-import { Entity } from './common.entity';
 import { OptionValueEntity } from './option-value.entity';
 import { ProductEntity } from './product.entity';
+import { Entity } from '../common.entity';
 
 @TypeOrmEntity('product_variant')
 export class ProductVariantEntity extends Entity implements ProductVariant {

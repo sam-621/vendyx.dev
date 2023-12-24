@@ -1,8 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository as TypeOrmRepository } from 'typeorm';
 
-import { Repository } from './repository';
-import { ProductVariantEntity } from '../entities';
+import { ProductVariantEntity } from '../../entities';
+import { Repository } from '../repository';
 
 export class ProductVariantRepository extends Repository<ProductVariantEntity> {
   constructor(
