@@ -1,6 +1,7 @@
 export default () => ({
   APP: {
-    PORT: Number(process.env.PORT)
+    PORT: Number(process.env.PORT),
+    MODE: String(process.env.MODE)
   },
   AUTH: {
     JWT_SECRET: String(process.env.JWT_SECRET),
