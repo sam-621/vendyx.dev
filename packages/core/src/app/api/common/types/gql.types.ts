@@ -67,9 +67,9 @@ export class ProductVariant implements Node {
     updatedAt: Date;
     sku: string;
     price: number;
-    comparisonPrice: number;
+    comparisonPrice?: Nullable<number>;
     costPerUnit: number;
-    weight: number;
+    weight?: Nullable<number>;
     stock: number;
     enabled: boolean;
 }
@@ -80,7 +80,7 @@ export class Product implements Node {
     updatedAt: Date;
     name: string;
     slug: string;
-    description: string;
+    description?: Nullable<string>;
     enabled: boolean;
 }
 

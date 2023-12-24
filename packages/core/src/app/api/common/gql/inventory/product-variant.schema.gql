@@ -4,9 +4,9 @@ type ProductVariant implements Node {
   updatedAt: Date!
   sku: String!
   price: Int!
-  comparisonPrice: Int!
+  comparisonPrice: Int
   costPerUnit: Int!
-  weight: Int!
+  weight: Int
   stock: Int!
   enabled: Boolean!
 }

@@ -4,6 +4,6 @@ type Product implements Node {
   updatedAt: Date!
   name: String!
   slug: String!
-  description: String!
+  description: String
   enabled: Boolean!
 }
