@@ -5,6 +5,6 @@ import { ApiModule } from './api/api.module';
 import { ConfigModule } from '@/lib/config';
 
 @Module({
-  imports: [ConfigModule, ApiModule]
+  imports: []
 })
 export class AppModule {}
