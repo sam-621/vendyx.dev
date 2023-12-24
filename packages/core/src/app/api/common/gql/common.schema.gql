@@ -15,7 +15,7 @@ interface List {
 }
 
 # Common inputs
-input PaginatedListInput {
+input ListInput {
   """
   Skip the first n results
   """

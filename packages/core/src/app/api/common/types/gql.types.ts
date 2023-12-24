@@ -13,7 +13,7 @@ export class AuthenticateAdminInput {
     password: string;
 }
 
-export class PaginatedListInput {
+export class ListInput {
     skip?: Nullable<number>;
     take?: Nullable<number>;
 }
@@ -43,6 +43,10 @@ export abstract class IMutation {
 
 export abstract class IQuery {
     abstract validateAdminToken(): Nullable<boolean> | Promise<Nullable<boolean>>;
+
+    abstract products(input?: Nullable<ListInput>): List | Promise<List>;
+
+    abstract product(id?: Nullable<string>, slug?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 
     abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
