@@ -2,3 +2,23 @@ type Query {
   products(input: ListInput): ProductList!
   product(id: ID, slug: String): Product
 }
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product!
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
+  deleteProduct(id: ID!): Boolean!
+}
+
+input CreateProductInput {
+  name: String!
+  slug: String!
+  description: String
+  enabled: Boolean!
+}
+
+input UpdateProductInput {
+  name: String
+  slug: String
+  description: String
+  enabled: Boolean
+}

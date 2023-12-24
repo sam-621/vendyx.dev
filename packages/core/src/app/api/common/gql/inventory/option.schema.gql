@@ -4,3 +4,8 @@ type Option implements Node {
   updatedAt: Date!
   name: String!
 }
+
+type OptionList implements List {
+  items: [Option]!
+  totalItems: Int!
+}

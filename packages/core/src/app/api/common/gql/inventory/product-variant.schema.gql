@@ -10,3 +10,8 @@ type ProductVariant implements Node {
   stock: Int!
   enabled: Boolean!
 }
+
+type ProductVariantList implements List {
+  items: [ProductVariant]!
+  totalItems: Int!
+}

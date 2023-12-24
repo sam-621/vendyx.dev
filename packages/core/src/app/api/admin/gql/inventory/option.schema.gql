@@ -1,0 +1,24 @@
+type Query {
+  options(input: ListInput): OptionList!
+}
+
+type Mutation {
+  createOption(input: CreateOptionInput!): Option!
+  updateOption(id: ID!, input: UpdateOptionInput!): Option!
+  deleteOption(id: ID!): Boolean!
+}
+
+input CreateOptionInput {
+  name: String!
+  values [string]!
+}
+
+input UpdateOptionInput {
+  name: String
+  values: [UpdateOptionValueInput]
+
+}
+input UpdateOptionValueInput {
+  value: String
+  optionValueId: ID!
+}
