@@ -15,7 +15,7 @@ export async function gqlFetch<T, U = unknown>({
   const token = cookies.get(COOKIE_TOKEN_NAME);
   console.log({ token });
 
-  const result = await fetch(ADMIN_API_ENDPOINT, {
+  const result = await fetch(ADMIN_API_ENDPOINT ?? '/admin-api', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
