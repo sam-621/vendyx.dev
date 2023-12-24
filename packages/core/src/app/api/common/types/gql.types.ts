@@ -47,4 +47,41 @@ export abstract class IQuery {
     abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
 
+export class OptionValue implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    value: string;
+}
+
+export class Option implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+}
+
+export class ProductVariant implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    sku: string;
+    price: number;
+    comparisonPrice: number;
+    costPerUnit: number;
+    weight: number;
+    stock: number;
+    enabled: boolean;
+}
+
+export class Product implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    slug: string;
+    description: string;
+    enabled: boolean;
+}
+
 type Nullable<T> = T | null;

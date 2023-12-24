@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import { AdminEntity } from '@/app/persistance/entities';
+import { AdminEntity } from '@/app/persistance/entities/admin.entity';
 
 let dataSource: DataSource;
 

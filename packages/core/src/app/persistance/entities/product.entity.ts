@@ -4,7 +4,7 @@ import { Column, OneToMany, Entity as TypeOrmEntity } from 'typeorm';
 import { Entity } from './common.entity';
 import { ProductVariantEntity } from './product-variant.entity';
 
-@TypeOrmEntity()
+@TypeOrmEntity('product')
 export class ProductEntity extends Entity implements Product {
   @Column('varchar')
   name: string;

@@ -1,3 +1,6 @@
 type Option implements Node {
-  name: String;
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
 }
