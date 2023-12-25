@@ -8,5 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
   }
 }
