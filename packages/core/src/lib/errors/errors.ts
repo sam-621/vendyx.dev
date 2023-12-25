@@ -1,15 +1,22 @@
 import { ErrorCode, ErrorMetadata, ErrorResult } from '@vendyx/common';
-import { GraphQLError } from 'graphql';
 
-export abstract class BusinessError extends GraphQLError implements ErrorResult {
+// export abstract class BusinessError extends GraphQLError implements ErrorResult {
+//   constructor(
+//     readonly code: ErrorCode,
+//     readonly message: string,
+//     readonly metadata?: ErrorMetadata
+//   ) {
+//     super(message, { extensions: { code } });
+//     this.name = this.code;
+//   }
+// }
+
+export abstract class BusinessError implements ErrorResult {
   constructor(
     readonly code: ErrorCode,
     readonly message: string,
     readonly metadata?: ErrorMetadata
-  ) {
-    super(message, { extensions: { code } });
-    this.name = this.code;
-  }
+  ) {}
 }
 
 /**
