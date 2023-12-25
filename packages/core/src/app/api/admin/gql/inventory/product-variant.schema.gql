@@ -5,7 +5,7 @@ type Query {
 
 type Mutation {
   createVariant(input: CreateProductVariantInput!): ProductVariant!
-  updateVariant(id: ID!, input: UpdateProductInput!): ProductVariant!
+  updateVariant(id: ID!, input: UpdateProductVariantInput!): ProductVariant!
   removeVariant(id: ID!): Boolean!
 }
 
@@ -19,7 +19,7 @@ input CreateProductVariantInput {
   enabled: Boolean!
 }
 
-input UpdateProductInput {
+input UpdateProductVariantInput {
   sku: String
   price: Int
   comparisonPrice: Int

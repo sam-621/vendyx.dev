@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ID, validateProduct } from '@vendyx/common';
+import { ID, partialValidateProduct, validateProduct } from '@vendyx/common';
 import { Not } from 'typeorm';
 
 import { CreateProductInput, ListInput, UpdateProductInput } from '@/app/api/common';
@@ -62,7 +62,7 @@ export class ProductService {
       throw new UserInputError('No product found');
     }
 
-    const { data, errors } = validateProduct({ ...productToUpdate, ...input });
+    const { data, errors } = partialValidateProduct(input);
 
     if (errors) {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
@@ -78,7 +78,12 @@ export class ProductService {
       }
     }
 
-    return this.repository.update(id, data);
+    return this.repository.update(id, {
+      name: data.name,
+      slug: data.slug,
+      description: data.description,
+      enabled: data.enabled
+    });
   }
 
   async remove(id: ID) {

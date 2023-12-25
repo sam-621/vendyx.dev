@@ -25,7 +25,7 @@ export class ProductVariantEntity extends Entity implements ProductVariant {
   @Column('int')
   stock: number;
 
-  @Column()
+  @Column('boolean', { default: true })
   enabled: boolean;
 
   @ManyToOne(() => ProductEntity, p => p.variants)

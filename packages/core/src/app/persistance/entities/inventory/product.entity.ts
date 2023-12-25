@@ -15,7 +15,7 @@ export class ProductEntity extends Entity implements Product {
   @Column('text')
   description: string;
 
-  @Column('varchar')
+  @Column('boolean', { default: true })
   enabled: boolean;
 
   @OneToMany(() => ProductVariantEntity, v => v.product)

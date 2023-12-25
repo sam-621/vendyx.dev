@@ -41,7 +41,7 @@ export class Repository<T extends Entity> {
   async update(id: ID, entity: Partial<T>) {
     await this.repository.update(id, entity as any);
 
-    return this.findOne({ where: { id } as unknown as FindOneOptions<T>['where'] });
+    return this.repository.findOne({ where: { id } as unknown as FindOneOptions<T>['where'] });
   }
 
   async remove(id: ID) {

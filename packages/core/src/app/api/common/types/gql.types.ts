@@ -38,7 +38,7 @@ export class CreateProductVariantInput {
     enabled: boolean;
 }
 
-export class UpdateProductInput {
+export class UpdateProductVariantInput {
     sku?: Nullable<string>;
     price?: Nullable<number>;
     comparisonPrice?: Nullable<number>;
@@ -46,9 +46,6 @@ export class UpdateProductInput {
     weight?: Nullable<number>;
     stock?: Nullable<number>;
     enabled?: Nullable<boolean>;
-    name?: Nullable<string>;
-    slug?: Nullable<string>;
-    description?: Nullable<string>;
 }
 
 export class CreateProductInput {
@@ -56,6 +53,13 @@ export class CreateProductInput {
     slug: string;
     description?: Nullable<string>;
     enabled: boolean;
+}
+
+export class UpdateProductInput {
+    name?: Nullable<string>;
+    slug?: Nullable<string>;
+    description?: Nullable<string>;
+    enabled?: Nullable<boolean>;
 }
 
 export class ListInput {
@@ -93,7 +97,7 @@ export abstract class IMutation {
 
     abstract createVariant(input: CreateProductVariantInput): ProductVariant | Promise<ProductVariant>;
 
-    abstract updateVariant(id: string, input: UpdateProductInput): ProductVariant | Promise<ProductVariant>;
+    abstract updateVariant(id: string, input: UpdateProductVariantInput): ProductVariant | Promise<ProductVariant>;
 
     abstract removeVariant(id: string): boolean | Promise<boolean>;
 
