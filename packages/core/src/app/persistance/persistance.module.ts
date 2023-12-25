@@ -45,7 +45,8 @@ export const REPOSITORIES = [
         url: configService.get<string>('DB.URL'),
         // auto load entities added to forFeature property in modules @see https://docs.nestjs.com/techniques/database#auto-load-entities
         autoLoadEntities: true,
-        synchronize: process.env.NODE_ENV !== 'production'
+        //synchronize: process.env.NODE_ENV !== 'production' (when project is ready)
+        synchronize: true
       }),
       inject: [ConfigService]
     }),
