@@ -1,12 +1,13 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ID } from '@vendyx/common';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { ID, Product } from '@vendyx/common';
 
 import {
   AdminJwtAuthGuard,
   CreateProductInput,
   ListInput,
   ListResponse,
+  ProductVariant,
   UpdateProductInput
 } from '@/app/api/common';
 import { ProductService } from '@/app/service';
@@ -49,5 +50,12 @@ export class ProductResolver {
     const product = await this.service.remove(id);
 
     return product;
+  }
+
+  @ResolveField('variants')
+  async variants(@Parent() product: Product) {
+    const variants = await this.service.findVariants(product.id);
+
+    return new ListResponse<ProductVariant>(variants, variants.length);
   }
 }

@@ -29,6 +29,12 @@ export class ProductService {
     throw new UserInputError('No ID or SLUG provided');
   }
 
+  async findVariants(id: ID) {
+    const product = await this.repository.findOne({ where: { id }, relations: { variants: true } });
+
+    return product.variants;
+  }
+
   async create(input: CreateProductInput) {
     const { data, errors } = validateProduct(input);
 
