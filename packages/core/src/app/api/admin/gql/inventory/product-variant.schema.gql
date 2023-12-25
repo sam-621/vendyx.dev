@@ -6,7 +6,7 @@ type Query {
 type Mutation {
   createVariant(input: CreateProductVariantInput!): ProductVariant!
   updateVariant(id: ID!, input: UpdateProductInput!): ProductVariant!
-  deleteVariant(id: ID!): Boolean!
+  removeVariant(id: ID!): Boolean!
 }
 
 input CreateProductVariantInput {

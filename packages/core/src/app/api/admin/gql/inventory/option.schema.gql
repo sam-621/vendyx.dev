@@ -5,7 +5,7 @@ type Query {
 type Mutation {
   createOption(input: CreateOptionInput!): Option!
   updateOption(id: ID!, input: UpdateOptionInput!): Option!
-  deleteOption(id: ID!): Boolean!
+  removeOption(id: ID!): Boolean!
 }
 
 input CreateOptionInput {

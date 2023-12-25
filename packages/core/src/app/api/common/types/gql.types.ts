@@ -89,19 +89,19 @@ export abstract class IMutation {
 
     abstract updateOption(id: string, input: UpdateOptionInput): Option | Promise<Option>;
 
-    abstract deleteOption(id: string): boolean | Promise<boolean>;
+    abstract removeOption(id: string): boolean | Promise<boolean>;
 
     abstract createVariant(input: CreateProductVariantInput): ProductVariant | Promise<ProductVariant>;
 
     abstract updateVariant(id: string, input: UpdateProductInput): ProductVariant | Promise<ProductVariant>;
 
-    abstract deleteVariant(id: string): boolean | Promise<boolean>;
+    abstract removeVariant(id: string): boolean | Promise<boolean>;
 
     abstract createProduct(input: CreateProductInput): Product | Promise<Product>;
 
     abstract updateProduct(id: string, input: UpdateProductInput): Product | Promise<Product>;
 
-    abstract deleteProduct(id: string): boolean | Promise<boolean>;
+    abstract removeProduct(id: string): boolean | Promise<boolean>;
 }
 
 export abstract class IQuery {
