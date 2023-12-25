@@ -10,6 +10,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { AdminApiModule } from './admin/admin.module';
 import { DateScalar, IDScalar } from './common/scalars';
 
+import { Mode } from '@/lib/config';
+
 const COMMON_SCHEMA_PATH = join(process.cwd(), 'src/app/api/common/**/*.schema.gql');
 const ADMIN_API_SCHEMA_PATH = join(process.cwd(), 'src/app/api/admin/**/*.schema.gql');
 
@@ -17,7 +19,7 @@ const COMMON_GQL_CONFIG = (configService: ConfigService): ApolloDriverConfig => 
   playground: false,
   includeStacktraceInErrorResponses: false,
   plugins:
-    configService.get('APP.MODE') === 'dev' ? [ApolloServerPluginLandingPageLocalDefault()] : [],
+    configService.get('APP.MODE') === Mode.DEV ? [ApolloServerPluginLandingPageLocalDefault()] : [],
   formatError: error => {
     return {
       message: error.message,

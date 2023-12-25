@@ -11,3 +11,8 @@ export default () => ({
     URL: String(process.env.DB_URL)
   }
 });
+
+export enum Mode {
+  DEV = 'dev',
+  PROD = 'prod'
+}

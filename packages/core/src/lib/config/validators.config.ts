@@ -1,10 +1,14 @@
 import { plainToClass } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 
 class EnvironmentVariables {
   @IsNumber()
   @IsNotEmpty()
   PORT: number;
+
+  @IsEnum(['dev', 'prod'])
+  @IsNotEmpty()
+  MODE: 'dev' | 'prod';
 
   @IsString()
   @IsNotEmpty()
