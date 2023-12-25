@@ -12,7 +12,7 @@ import {
 import { ProductService } from '@/app/service';
 
 @UseGuards(AdminJwtAuthGuard)
-@Resolver('product')
+@Resolver('Product')
 export class ProductResolver {
   constructor(private readonly service: ProductService) {}
 
@@ -45,7 +45,7 @@ export class ProductResolver {
   }
 
   @Mutation('removeProduct')
-  async deleteProduct(@Args('id') id: ID) {
+  async removeProduct(@Args('id') id: ID) {
     const product = await this.service.remove(id);
 
     return product;

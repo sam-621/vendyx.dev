@@ -1,10 +1,10 @@
 type Query {
   variants(input: ListInput): ProductVariantList!
-  variant(id: ID, slug: String): ProductVariant
+  variant(id: ID!): ProductVariant
 }
 
 type Mutation {
-  createVariant(input: CreateProductVariantInput!): ProductVariant!
+  createVariant(id: ID! input: CreateProductVariantInput!): ProductVariant!
   updateVariant(id: ID!, input: UpdateProductVariantInput!): ProductVariant!
   removeVariant(id: ID!): Boolean!
 }
@@ -17,6 +17,7 @@ input CreateProductVariantInput {
   weight: Int
   stock: Int!
   enabled: Boolean!
+  options: [ID!]
 }
 
 input UpdateProductVariantInput {

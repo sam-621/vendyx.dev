@@ -36,6 +36,7 @@ export class CreateProductVariantInput {
     weight?: Nullable<number>;
     stock: number;
     enabled: boolean;
+    options?: Nullable<string[]>;
 }
 
 export class UpdateProductVariantInput {
@@ -95,7 +96,7 @@ export abstract class IMutation {
 
     abstract removeOption(id: string): boolean | Promise<boolean>;
 
-    abstract createVariant(input: CreateProductVariantInput): ProductVariant | Promise<ProductVariant>;
+    abstract createVariant(id: string, input: CreateProductVariantInput): ProductVariant | Promise<ProductVariant>;
 
     abstract updateVariant(id: string, input: UpdateProductVariantInput): ProductVariant | Promise<ProductVariant>;
 
@@ -115,7 +116,7 @@ export abstract class IQuery {
 
     abstract variants(input?: Nullable<ListInput>): ProductVariantList | Promise<ProductVariantList>;
 
-    abstract variant(id?: Nullable<string>, slug?: Nullable<string>): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
+    abstract variant(id: string): Nullable<ProductVariant> | Promise<Nullable<ProductVariant>>;
 
     abstract products(input?: Nullable<ListInput>): ProductList | Promise<ProductList>;
 

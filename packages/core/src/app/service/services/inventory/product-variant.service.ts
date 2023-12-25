@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { ID, partialValidateProduct, validateProductVariant } from '@vendyx/common';
+import { ID, partialValidateProductVariant, validateProductVariant } from '@vendyx/common';
 
 import { CreateProductVariantInput, ListInput, UpdateProductVariantInput } from '@/app/api/common';
 import { ProductVariantRepository } from '@/app/persistance';
-import { UserInputError } from '@/lib/errors';
+import { UserInputError, ValidationError } from '@/lib/errors';
 
 @Injectable()
-export class ProductService {
+export class ProductVariantService {
   constructor(private readonly repository: ProductVariantRepository) {}
 
   async find(input: ListInput) {
@@ -17,14 +17,32 @@ export class ProductService {
     return this.repository.findOne({ where: { id } });
   }
 
-  async create(input: CreateProductVariantInput) {
+  async create(id: ID, input: CreateProductVariantInput) {
     const { data, errors } = validateProductVariant(input);
 
     if (errors) {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
     }
 
-    const productVariantCreated = await this.repository.save(data);
+    const productVariantAlreadyCreated = await this.repository.findOne({
+      where: { sku: data.sku }
+    });
+
+    if (productVariantAlreadyCreated) {
+      throw new ValidationError(`A variant with sku "${data.sku}" already exists`);
+    }
+
+    if (!input.options?.length) {
+      const defaultVariantAlreadyCreated = await this.repository.findOne({
+        where: { product: { id } }
+      });
+
+      if (defaultVariantAlreadyCreated) {
+        throw new ValidationError('Default variant already created, add options instead');
+      }
+    }
+
+    const productVariantCreated = await this.repository.save({ product: { id }, ...data });
 
     return productVariantCreated;
   }
@@ -36,13 +54,13 @@ export class ProductService {
       throw new UserInputError('No product variant found');
     }
 
-    const { data, errors } = partialValidateProduct(input);
+    const { data, errors } = partialValidateProductVariant(input);
 
     if (errors) {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
     }
 
-    const productVariantUpdated = await this.repository.save({
+    const productVariantUpdated = await this.repository.update(id, {
       ...productVariantToUpdate,
       ...data
     });

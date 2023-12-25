@@ -79,10 +79,8 @@ export class ProductService {
     }
 
     return this.repository.update(id, {
-      name: data.name,
-      slug: data.slug,
-      description: data.description,
-      enabled: data.enabled
+      ...productToUpdate,
+      ...data
     });
   }
 

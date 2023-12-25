@@ -13,13 +13,13 @@ export class ProductVariantEntity extends Entity implements ProductVariant {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2, nullable: true })
   comparisonPrice: number;
 
   @Column('decimal', { precision: 10, scale: 2 })
   costPerUnit: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2, nullable: true })
   weight: number;
 
   @Column('int')
