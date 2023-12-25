@@ -1,8 +1,9 @@
-import { AdminRepository } from '@/app/persistance';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Admin } from '@vendyx/common';
 import * as bcrypt from 'bcrypt';
+
+import { AdminRepository } from '@/app/persistance';
 
 @Injectable()
 export class SecurityService {

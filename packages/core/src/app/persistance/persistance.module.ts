@@ -19,7 +19,7 @@ import {
   ProductVariantRepository
 } from './repositories';
 
-const ENTITIES = [
+export const ENTITIES = [
   AdminEntity,
   ProductEntity,
   ProductVariantEntity,
@@ -28,7 +28,7 @@ const ENTITIES = [
   MarketEntity
 ];
 
-const REPOSITORIES = [
+export const REPOSITORIES = [
   AdminRepository,
   ProductRepository,
   ProductVariantRepository,
