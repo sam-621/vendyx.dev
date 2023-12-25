@@ -12,7 +12,7 @@ const Validator = z.object({
     .min(3)
     .max(255)
     .transform(slug => slug.toLowerCase().replaceAll(' ', '-')),
-  description: z.string().min(3).max(255),
+  description: z.string().min(3).max(255).optional(),
   enabled: z.boolean()
 } satisfies MakeAny<ValidateInput>);
 
