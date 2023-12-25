@@ -17,7 +17,7 @@ const COMMON_GQL_CONFIG = (configService: ConfigService): ApolloDriverConfig => 
   playground: false,
   includeStacktraceInErrorResponses: false,
   plugins:
-    configService.get('APP.MODE') !== 'dev' ? [ApolloServerPluginLandingPageLocalDefault()] : [],
+    configService.get('APP.MODE') === 'dev' ? [ApolloServerPluginLandingPageLocalDefault()] : [],
   formatError: error => {
     return {
       message: error.message,
