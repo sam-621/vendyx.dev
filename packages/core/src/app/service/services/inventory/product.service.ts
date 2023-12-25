@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ID, validateProduct } from '@vendyx/common';
+import { Not } from 'typeorm';
 
 import { CreateProductInput, ListInput, UpdateProductInput } from '@/app/api/common';
 import { MarketRepository, ProductRepository } from '@/app/persistance';
@@ -41,6 +42,12 @@ export class ProductService {
       throw new InternalServerError('No default market found');
     }
 
+    const duplicatedSlug = await this.findBySlug(data.slug);
+
+    if (duplicatedSlug) {
+      throw new UserInputError(`A product with slug "${data.slug}" already exists`);
+    }
+
     const productCreated = await this.repository.save(data);
 
     await this.marketRepository.addProduct(defaultMarket.id, productCreated.id);
@@ -59,6 +66,16 @@ export class ProductService {
 
     if (errors) {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
+    }
+
+    if (input.slug) {
+      const productExists = await this.repository.findOne({
+        where: { slug: data.slug, id: Not(id) }
+      });
+
+      if (productExists) {
+        throw new UserInputError(`A product with slug "${input.slug}" already exists`);
+      }
     }
 
     return this.repository.update(id, data);
