@@ -1,5 +1,11 @@
 import { ID } from '@vendyx/common';
-import { FindOptionsOrder, FindOptionsWhere, Repository as TypeormRepository } from 'typeorm';
+import {
+  DeepPartial,
+  FindOptionsOrder,
+  FindOptionsRelations,
+  FindOptionsWhere,
+  Repository as TypeormRepository
+} from 'typeorm';
 
 import { Entity } from '../entities';
 
@@ -10,6 +16,7 @@ export class Repository<T extends Entity> {
     return this.repository.find({
       order: options.order,
       where: options.where,
+      relations: options.relations,
       skip: options.skip,
       take: options.take
     });
@@ -18,11 +25,12 @@ export class Repository<T extends Entity> {
   findOne(options: FindOneOptions<T>) {
     return this.repository.findOne({
       order: options.order,
-      where: options.where
+      where: options.where,
+      relations: options.relations
     });
   }
 
-  async save(entity: T) {
+  async save(entity: DeepPartial<T>) {
     const newEntity = this.repository.create(entity);
 
     await this.repository.insert(newEntity as any);
@@ -39,16 +47,21 @@ export class Repository<T extends Entity> {
   async remove(id: ID) {
     await this.repository.delete(id);
   }
+
+  async softRemove(id: ID) {
+    await this.repository.softDelete(id);
+  }
 }
 
-type FindOptions<T> = {
+type CommonFinOptions<T> = {
   order?: FindOptionsOrder<T>;
   where?: FindOptionsWhere<T>;
+  relations?: FindOptionsRelations<T>;
+};
+
+type FindOptions<T> = CommonFinOptions<T> & {
   skip?: number;
   take?: number;
 };
 
-type FindOneOptions<T> = {
-  order?: FindOptionsOrder<T>;
-  where?: FindOptionsWhere<T>;
-};
+type FindOneOptions<T> = CommonFinOptions<T>;

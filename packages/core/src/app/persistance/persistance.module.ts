@@ -12,6 +12,7 @@ import {
 } from './entities';
 import {
   AdminRepository,
+  MarketRepository,
   OptionRepository,
   OptionValueRepository,
   ProductRepository,
@@ -32,7 +33,8 @@ const REPOSITORIES = [
   ProductRepository,
   ProductVariantRepository,
   OptionRepository,
-  OptionValueRepository
+  OptionValueRepository,
+  MarketRepository
 ];
 
 @Module({
