@@ -15,7 +15,7 @@ export class AuthenticateAdminInput {
 
 export class CreateOptionInput {
     name: string;
-    values: Nullable<string>[];
+    values?: Nullable<string[]>;
 }
 
 export class UpdateOptionInput {
