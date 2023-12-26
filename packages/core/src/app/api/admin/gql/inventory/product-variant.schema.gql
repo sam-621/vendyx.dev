@@ -17,7 +17,7 @@ input CreateProductVariantInput {
   weight: Int
   stock: Int!
   enabled: Boolean!
-  options: [ID!]
+  optionValues: [ID!]
 }
 
 input UpdateProductVariantInput {

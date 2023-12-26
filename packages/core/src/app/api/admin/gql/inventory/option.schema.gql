@@ -1,11 +1,11 @@
-type Query {
-  options(input: ListInput): OptionList!
-}
+# type Query {
+#   options(input: ListInput): OptionList!
+# }
 
 type Mutation {
   createOption(input: CreateOptionInput!): Option!
-  updateOption(id: ID!, input: UpdateOptionInput!): Option!
-  removeOption(id: ID!): Boolean!
+  # updateOption(id: ID!, input: UpdateOptionInput!): Option!
+  # removeOption(id: ID!): Boolean!
 }
 
 input CreateOptionInput {
@@ -13,12 +13,12 @@ input CreateOptionInput {
   values: [String!]
 }
 
-input UpdateOptionInput {
-  name: String
-  values: [UpdateOptionValueInput]
+# input UpdateOptionInput {
+#   name: String
+#   values: [UpdateOptionValueInput]
 
-}
-input UpdateOptionValueInput {
-  value: String
-  optionValueId: ID!
-}
+# }
+# input UpdateOptionValueInput {
+#   value: String
+#   optionValueId: ID!
+# }

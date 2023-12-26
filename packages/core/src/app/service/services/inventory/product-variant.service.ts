@@ -32,7 +32,7 @@ export class ProductVariantService {
       throw new ValidationError(`A variant with sku "${data.sku}" already exists`);
     }
 
-    if (!input.options?.length) {
+    if (!input.optionValues?.length) {
       const defaultVariantAlreadyCreated = await this.repository.findOne({
         where: { product: { id } }
       });

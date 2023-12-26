@@ -14,7 +14,7 @@ export async function vendyxFetch<T, U = unknown>({
 }) {
   const token = cookies.get(COOKIE_TOKEN_NAME);
 
-  const result = await fetch(ADMIN_API_ENDPOINT ?? '/admin-api', {
+  const result = await fetch(ADMIN_API_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

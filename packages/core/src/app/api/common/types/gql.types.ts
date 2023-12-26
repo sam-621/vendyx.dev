@@ -18,16 +18,6 @@ export class CreateOptionInput {
     values?: Nullable<string[]>;
 }
 
-export class UpdateOptionInput {
-    name?: Nullable<string>;
-    values?: Nullable<Nullable<UpdateOptionValueInput>[]>;
-}
-
-export class UpdateOptionValueInput {
-    value?: Nullable<string>;
-    optionValueId: string;
-}
-
 export class CreateProductVariantInput {
     sku: string;
     price: number;
@@ -36,7 +26,7 @@ export class CreateProductVariantInput {
     weight?: Nullable<number>;
     stock: number;
     enabled: boolean;
-    options?: Nullable<string[]>;
+    optionValues?: Nullable<string[]>;
 }
 
 export class UpdateProductVariantInput {
@@ -92,10 +82,6 @@ export abstract class IMutation {
 
     abstract createOption(input: CreateOptionInput): Option | Promise<Option>;
 
-    abstract updateOption(id: string, input: UpdateOptionInput): Option | Promise<Option>;
-
-    abstract removeOption(id: string): boolean | Promise<boolean>;
-
     abstract createVariant(id: string, input: CreateProductVariantInput): ProductVariant | Promise<ProductVariant>;
 
     abstract updateVariant(id: string, input: UpdateProductVariantInput): ProductVariant | Promise<ProductVariant>;
@@ -111,8 +97,6 @@ export abstract class IMutation {
 
 export abstract class IQuery {
     abstract validateAdminToken(): Nullable<boolean> | Promise<Nullable<boolean>>;
-
-    abstract options(input?: Nullable<ListInput>): OptionList | Promise<OptionList>;
 
     abstract variants(input?: Nullable<ListInput>): ProductVariantList | Promise<ProductVariantList>;
 
