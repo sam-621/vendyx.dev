@@ -8,3 +8,4 @@ export * from './select';
 export * from './table';
 export * from './data-table';
 export * from './textarea';
+export * from './button-link';
