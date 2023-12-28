@@ -34,8 +34,11 @@ const buttonLinkVariants = cva(
 type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   VariantProps<typeof buttonLinkVariants> & {
     asChild?: boolean;
-    href: string;
-    link: React.ForwardRefExoticComponent<React.RefAttributes<HTMLAnchorElement>>;
+    to: string;
+    link: React.ForwardRefExoticComponent<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      React.RefAttributes<HTMLAnchorElement> & any
+    >;
   };
 
 const ButtonLink = React.forwardRef<HTMLAnchorElement, Props>(

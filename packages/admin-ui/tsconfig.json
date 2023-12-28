@@ -22,7 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/lib/*": ["src/lib/*"],
-      "@/services/*": ["src/app/services/*"]
+      "@/services/*": ["src/app/services/*"],
+      "@/components/*": ["src/app/ui/components/*"]
     }
   },
   "include": ["src/**/*", "scripts/**/*", "vite.config.ts"],

@@ -10,10 +10,10 @@ export const LoginPage = () => {
         <div>
           <blockquote className="flex flex-col gap-2">
             <p className="text-lg">
-              &ldquo;This library has saved me countless hours of work and helped me deliver
-              stunning designs to my clients faster than ever before.&rdquo;
+              A functional and scalable minimal e-commerce admin that can be adjusted to any
+              user&apos;s requirement. Providing a full featured solution but focused on simplicity
+              at the same time
             </p>
-            <footer className="text-sm">Sofia Davis</footer>
           </blockquote>
         </div>
       </div>
