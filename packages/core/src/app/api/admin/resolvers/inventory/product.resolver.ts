@@ -53,8 +53,8 @@ export class ProductResolver {
   }
 
   @ResolveField('variants')
-  async variants(@Parent() product: Product) {
-    const variants = await this.service.findVariants(product.id);
+  async variants(@Parent() product: Product, @Args('input') listInput: ListInput) {
+    const variants = await this.service.findVariants(product.id, listInput);
 
     return new ListResponse<ProductVariant>(variants, variants.length);
   }

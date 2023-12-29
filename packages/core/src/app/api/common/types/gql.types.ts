@@ -154,7 +154,7 @@ export class Product implements Node {
     slug: string;
     description?: Nullable<string>;
     enabled: boolean;
-    variants: ProductVariantList;
+    variants?: ProductVariantList;
 }
 
 export class ProductList implements List {
