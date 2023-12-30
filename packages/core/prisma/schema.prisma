@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model Administrator {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+  password  String
+}
+
+model Market {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @unique
+  default   Boolean  @default(false)
+
+  // relations
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  name        String   @db.VarChar(255)
+  slug        String   @unique @db.VarChar(255)
+  description String?
+  enabled     Boolean  @default(true)
+
+  // relations
+  productVariants ProductVariant[]
+
+  // relations
+  Market   Market @relation(fields: [marketId], references: [id])
+  marketId String @map("market_id")
+
+  @@map("product")
+}
+
+model ProductVariant {
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  sku             String   @db.VarChar(255)
+  /// The actual price of the product
+  price           Decimal  @db.Decimal(10, 2)
+  /// Price for illustrative purposes, usually shown crossed out
+  comparisonPrice Decimal? @map("comparison_price") @db.Decimal(10, 2)
+  /// Unit price of the product, used to determinate what the profit margin is
+  costPerUnit     Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
+  weight          Float?   @db.Real
+  stock           Int      @db.SmallInt
+  enabled         Boolean  @default(true)
+
+  // Relations
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+
+  // Relations
+  optionValues OptionValueOnProductVariant[]
+
+  @@map("product_variant")
+}
+
+model Option {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  name      String   @db.VarChar(255)
+
+  // relations
+  values OptionValue[]
+
+  @@map("option")
+}
+
+model OptionValue {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  value     String   @db.VarChar(255)
+
+  // relations
+  Option   Option                        @relation(fields: [optionId], references: [id])
+  optionId String                        @map("option_id")
+  variants OptionValueOnProductVariant[]
+
+  @@map("option_value")
+}
+
+model OptionValueOnProductVariant {
+  // relations
+  optionValue      OptionValue    @relation(fields: [optionValueId], references: [id])
+  optionValueId    String         @map("option_value_id")
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariantId String         @map("product_variant_id")
+
+  @@id([optionValueId, productVariantId])
+  @@map("option_value_on_product_variant")
+}
