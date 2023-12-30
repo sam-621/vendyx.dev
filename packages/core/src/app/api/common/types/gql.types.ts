@@ -139,6 +139,7 @@ export class ProductVariant implements Node {
     weight?: Nullable<number>;
     stock: number;
     enabled: boolean;
+    optionValues: OptionValue[];
 }
 
 export class ProductVariantList implements List {

@@ -10,11 +10,20 @@ export class ProductVariantService {
   constructor(private readonly prisma: PrismaService) {}
 
   async find(input: ListInput) {
-    return this.prisma.productVariant.findMany({ ...input });
+    return this.prisma.productVariant.findMany({ ...input, where: { deletedAt: null } });
   }
 
   async findUnique(id: ID) {
     return this.prisma.productVariant.findUnique({ where: { id } });
+  }
+
+  async findOptionValues(id: ID) {
+    const result = await this.prisma.optionValueOnProductVariant.findMany({
+      where: { productVariantId: id },
+      select: { optionValue: true }
+    });
+
+    return result.map(r => r.optionValue);
   }
 
   async create(id: ID, input: CreateProductVariantInput) {
@@ -92,6 +101,10 @@ export class ProductVariantService {
       data: {
         deletedAt: new Date()
       }
+    });
+
+    await this.prisma.optionValueOnProductVariant.deleteMany({
+      where: { productVariantId: id }
     });
 
     return true;

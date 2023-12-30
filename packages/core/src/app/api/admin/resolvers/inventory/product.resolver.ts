@@ -1,13 +1,12 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { ID, Product } from '@vendyx/common';
+import { ID, Product, ProductVariant } from '@vendyx/common';
 
 import {
   AdminJwtAuthGuard,
   CreateProductInput,
   ListInput,
   ListResponse,
-  ProductVariant,
   UpdateProductInput
 } from '@/app/api/common';
 import { ProductService } from '@/app/service';

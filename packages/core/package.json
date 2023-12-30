@@ -11,6 +11,7 @@
     "start": "node dist/main",
     "test": "vitest",
     "test:e2e": "./scripts/run-e2e.sh",
+    "db:preview": "yarn prisma studio",
     "db:migrate": "yarn prisma migrate dev",
     "db:push": "yarn prisma db push",
     "db:types": "prisma generate",

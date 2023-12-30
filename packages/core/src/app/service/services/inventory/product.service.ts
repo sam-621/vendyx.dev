@@ -10,8 +10,6 @@ export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
   async find(input: ListInput) {
-    console.log('input', input);
-
     return this.prisma.product.findMany({ ...input, where: { deletedAt: null } });
   }
 

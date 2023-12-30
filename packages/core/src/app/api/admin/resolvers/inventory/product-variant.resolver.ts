@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ID } from '@vendyx/common';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { ID, ProductVariant } from '@vendyx/common';
 
 import {
   AdminJwtAuthGuard,
@@ -49,5 +49,12 @@ export class ProductVariantResolver {
     const variant = await this.service.remove(id);
 
     return variant;
+  }
+
+  @ResolveField('optionValues')
+  async optionValues(@Parent() variant: ProductVariant) {
+    const optionValues = await this.service.findOptionValues(variant.id);
+
+    return optionValues;
   }
 }

@@ -9,6 +9,8 @@ type ProductVariant implements Node {
   weight: Int
   stock: Int!
   enabled: Boolean!
+
+  optionValues: [OptionValue!]!
 }
 
 type ProductVariantList implements List {
