@@ -1,19 +1,26 @@
 import { Injectable } from '@nestjs/common';
 
 import { CreateOptionInput } from '@/app/api/common';
-import { OptionRepository, OptionValueRepository } from '@/app/persistance';
+import { PrismaService } from '@/app/persistance';
 
 @Injectable()
 export class OptionService {
-  constructor(
-    private readonly optionRepository: OptionRepository,
-    private readonly optionValuesRepository: OptionValueRepository
-  ) {}
+  repository: PrismaService['option'];
+
+  constructor(private readonly prisma: PrismaService) {
+    this.repository = this.prisma.option;
+  }
 
   async create(input: CreateOptionInput) {
-    this.optionRepository.save({
-      name: input.name,
-      values: input.values?.map(v => ({ value: v })) ?? []
+    return this.repository.create({
+      data: {
+        name: input.name,
+        values: {
+          createMany: {
+            data: input.values?.map(v => ({ value: v })) ?? []
+          }
+        }
+      }
     });
   }
 }

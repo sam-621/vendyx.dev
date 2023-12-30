@@ -2,19 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { ID, partialValidateProductVariant, validateProductVariant } from '@vendyx/common';
 
 import { CreateProductVariantInput, ListInput, UpdateProductVariantInput } from '@/app/api/common';
-import { ProductVariantRepository } from '@/app/persistance';
+import { PrismaService } from '@/app/persistance';
 import { UserInputError, ValidationError } from '@/lib/errors';
 
 @Injectable()
 export class ProductVariantService {
-  constructor(private readonly repository: ProductVariantRepository) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async find(input: ListInput) {
-    return this.repository.find({ ...input });
+    return this.prisma.productVariant.findMany({ ...input });
   }
 
   async findUnique(id: ID) {
-    return this.repository.findOne({ where: { id } });
+    return this.prisma.productVariant.findUnique({ where: { id } });
   }
 
   async create(id: ID, input: CreateProductVariantInput) {
@@ -24,25 +24,34 @@ export class ProductVariantService {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
     }
 
-    const productVariantAlreadyCreated = await this.repository.findOne({
-      where: { sku: data.sku }
+    const isDefaultVariant = !input.optionValues?.length;
+    const defaultVariantAlreadyCreated = isDefaultVariant
+      ? await this.prisma.productVariant.findFirst({
+          where: { product: { id } }
+        })
+      : null;
+
+    if (isDefaultVariant && defaultVariantAlreadyCreated) {
+      throw new ValidationError('Default variant already created, add options instead');
+    }
+
+    const productVariantCreated = await this.prisma.productVariant.create({
+      data: {
+        ...data,
+        product: { connect: { id } }
+      }
     });
 
-    if (productVariantAlreadyCreated) {
-      throw new ValidationError(`A variant with sku "${data.sku}" already exists`);
+    if (isDefaultVariant) {
+      return productVariantCreated;
     }
 
-    if (!input.optionValues?.length) {
-      const defaultVariantAlreadyCreated = await this.repository.findOne({
-        where: { product: { id } }
-      });
-
-      if (defaultVariantAlreadyCreated) {
-        throw new ValidationError('Default variant already created, add options instead');
-      }
-    }
-
-    const productVariantCreated = await this.repository.save({ product: { id }, ...data });
+    await this.prisma.optionValueOnProductVariant.createMany({
+      data: input.optionValues.map(v => ({
+        optionValueId: v,
+        productVariantId: productVariantCreated.id
+      }))
+    });
 
     return productVariantCreated;
   }
@@ -60,9 +69,12 @@ export class ProductVariantService {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
     }
 
-    const productVariantUpdated = await this.repository.update(id, {
-      ...productVariantToUpdate,
-      ...data
+    const productVariantUpdated = await this.prisma.productVariant.update({
+      where: { id },
+      data: {
+        ...productVariantToUpdate,
+        ...data
+      }
     });
 
     return productVariantUpdated;
@@ -75,12 +87,17 @@ export class ProductVariantService {
       throw new UserInputError('No product variant found');
     }
 
-    await this.repository.softRemove(productVariantToRemove.id);
+    await this.prisma.productVariant.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
 
     return true;
   }
 
   private async findById(id: ID) {
-    return this.repository.findOne({ where: { id } });
+    return this.prisma.productVariant.findFirst({ where: { id } });
   }
 }

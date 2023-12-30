@@ -11,57 +11,75 @@ datasource db {
 }
 
 model Administrator {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  username  String    @unique
   password  String
+
+  @@map("administrator")
 }
 
 model Market {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @unique
-  default   Boolean  @default(false)
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  name      String    @unique
+  default   Boolean   @default(false)
 
   // relations
-  products Product[]
+  products ProductOnMarket[]
+
+  @@map("market")
+}
+
+model ProductOnMarket {
+  // relations
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+  market    Market  @relation(fields: [marketId], references: [id])
+  marketId  String  @map("market_id")
+
+  @@id([productId, marketId])
+  @@map("product_on_market")
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  name        String   @db.VarChar(255)
-  slug        String   @unique @db.VarChar(255)
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+  name        String    @db.VarChar(255)
+  slug        String    @unique @db.VarChar(255)
   description String?
-  enabled     Boolean  @default(true)
+  enabled     Boolean   @default(true)
 
   // relations
-  productVariants ProductVariant[]
+  variants ProductVariant[]
 
   // relations
-  Market   Market @relation(fields: [marketId], references: [id])
-  marketId String @map("market_id")
+  markets ProductOnMarket[]
 
   @@map("product")
 }
 
 model ProductVariant {
-  id              String   @id @default(uuid())
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
-  sku             String   @db.VarChar(255)
+  id              String    @id @default(uuid())
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  deletedAt       DateTime? @map("deleted_at")
+  sku             String    @db.VarChar(255)
   /// The actual price of the product
-  price           Decimal  @db.Decimal(10, 2)
+  price           Int
   /// Price for illustrative purposes, usually shown crossed out
-  comparisonPrice Decimal? @map("comparison_price") @db.Decimal(10, 2)
+  comparisonPrice Int?      @map("comparison_price")
   /// Unit price of the product, used to determinate what the profit margin is
-  costPerUnit     Decimal  @map("cost_per_unit") @db.Decimal(10, 2)
-  weight          Float?   @db.Real
-  stock           Int      @db.SmallInt
-  enabled         Boolean  @default(true)
+  costPerUnit     Int       @map("cost_per_unit")
+  weight          Int?
+  stock           Int       @db.SmallInt
+  enabled         Boolean   @default(true)
 
   // Relations
   product   Product @relation(fields: [productId], references: [id])
@@ -74,10 +92,11 @@ model ProductVariant {
 }
 
 model Option {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  name      String   @db.VarChar(255)
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  name      String    @db.VarChar(255)
 
   // relations
   values OptionValue[]
@@ -86,14 +105,17 @@ model Option {
 }
 
 model OptionValue {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  value     String   @db.VarChar(255)
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  value     String    @db.VarChar(255)
 
   // relations
-  Option   Option                        @relation(fields: [optionId], references: [id])
-  optionId String                        @map("option_id")
+  Option   Option @relation(fields: [optionId], references: [id])
+  optionId String @map("option_id")
+
+  // relations
   variants OptionValueOnProductVariant[]
 
   @@map("option_value")

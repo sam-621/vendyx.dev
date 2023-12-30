@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { PersistanceModule } from '@/app/persistance';
-import { AdminJwtStrategy } from './strategies';
+import { JwtModule } from '@nestjs/jwt';
+
 import { SecurityService } from './services';
+import { AdminJwtStrategy } from './strategies';
+
+import { PersistanceModule } from '@/app/persistance';
 
 @Module({
   imports: [

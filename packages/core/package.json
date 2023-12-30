@@ -15,10 +15,8 @@
     "db:push": "yarn prisma db push",
     "db:types": "prisma generate",
     "db:cleanup": "ts-node ./scripts/cleanup-db.ts",
-    "db:seed": "yarn db:cleanup && ts-node ./prisma/seed/seed.ts",
-    "script:types": "ts-node ./scripts/generate-typings.ts",
-    "script:admin": "ts-node ./scripts/generate-admin.ts",
-    "script:market": "ts-node ./scripts/generate-default-market.ts"
+    "db:seed": "ts-node ./prisma/seed/seed.ts",
+    "script:types": "ts-node ./scripts/generate-typings.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
@@ -37,6 +35,7 @@
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "dotenv-cli": "^7.3.0",
     "graphql": "^16.8.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

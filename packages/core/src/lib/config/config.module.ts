@@ -11,7 +11,7 @@ import { configValidator } from './validators.config';
       isGlobal: true,
       load: [envsConfig],
       validate: configValidator,
-      envFilePath: ['.env.local']
+      envFilePath: ['.env']
     })
   ],
   exports: [NConfigModule]

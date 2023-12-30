@@ -3,14 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import { Admin } from '@vendyx/common';
 import * as bcrypt from 'bcrypt';
 
-import { AdminRepository } from '@/app/persistance';
-
 @Injectable()
 export class SecurityService {
-  constructor(
-    private readonly adminRepository: AdminRepository,
-    private readonly jwtService: JwtService
-  ) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   async generateToken(admin: Admin) {
     const payload = { username: admin.username, sub: admin.id };

@@ -1,20 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { ID, partialValidateProduct, validateProduct } from '@vendyx/common';
-import { Not } from 'typeorm';
 
 import { CreateProductInput, ListInput, UpdateProductInput } from '@/app/api/common';
-import { MarketRepository, ProductRepository } from '@/app/persistance';
+import { PrismaService } from '@/app/persistance';
 import { InternalServerError, UserInputError } from '@/lib/errors';
 
 @Injectable()
 export class ProductService {
-  constructor(
-    private readonly repository: ProductRepository,
-    private readonly marketRepository: MarketRepository
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async find(input: ListInput) {
-    return this.repository.find({ ...input });
+    console.log('input', input);
+
+    return this.prisma.product.findMany({ ...input, where: { deletedAt: null } });
   }
 
   async findUnique({ id, slug }: { id: ID; slug: string }) {
@@ -30,10 +28,9 @@ export class ProductService {
   }
 
   async findVariants(id: ID, listInput?: ListInput) {
-    const product = await this.repository.findOne({
+    const product = await this.prisma.product.findFirst({
       where: { id },
-      relations: { variants: true },
-      ...listInput
+      include: { variants: { ...listInput } }
     });
 
     return product.variants;
@@ -46,7 +43,9 @@ export class ProductService {
       throw new UserInputError(`Invalid input: ${Object.keys(errors).join(', ')}`, errors);
     }
 
-    const defaultMarket = await this.marketRepository.findDefault();
+    const defaultMarket = await this.prisma.market.findFirst({
+      where: { default: true }
+    });
 
     if (!defaultMarket) {
       throw new InternalServerError('No default market found');
@@ -58,9 +57,18 @@ export class ProductService {
       throw new UserInputError(`A product with slug "${data.slug}" already exists`);
     }
 
-    const productCreated = await this.repository.save(data);
+    const productCreated = await this.prisma.product.create({
+      data: {
+        ...data
+      }
+    });
 
-    await this.marketRepository.addProduct(defaultMarket.id, productCreated.id);
+    await this.prisma.productOnMarket.create({
+      data: {
+        marketId: defaultMarket.id,
+        productId: productCreated.id
+      }
+    });
 
     return productCreated;
   }
@@ -79,8 +87,8 @@ export class ProductService {
     }
 
     if (input.slug) {
-      const productExists = await this.repository.findOne({
-        where: { slug: data.slug, id: Not(id) }
+      const productExists = await this.prisma.product.findFirst({
+        where: { slug: data.slug, id: { not: id } }
       });
 
       if (productExists) {
@@ -88,9 +96,12 @@ export class ProductService {
       }
     }
 
-    return this.repository.update(id, {
-      ...productToUpdate,
-      ...data
+    return this.prisma.product.update({
+      where: { id },
+      data: {
+        ...productToUpdate,
+        ...data
+      }
     });
   }
 
@@ -101,23 +112,36 @@ export class ProductService {
       throw new UserInputError('No product found');
     }
 
-    const defaultMarket = await this.marketRepository.findDefault();
+    const defaultMarket = await this.prisma.market.findFirst({ where: { default: true } });
 
     if (!defaultMarket) {
       throw new InternalServerError('No default market found');
     }
 
-    await this.marketRepository.removeProduct(defaultMarket.id, productToRemove.id);
-    await this.repository.softRemove(productToRemove.id);
+    await this.prisma.productOnMarket.delete({
+      where: {
+        productId_marketId: {
+          productId: id,
+          marketId: defaultMarket.id
+        }
+      }
+    });
+
+    await this.prisma.product.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
 
     return true;
   }
 
   private async findById(id: ID) {
-    return this.repository.findOne({ where: { id } });
+    return this.prisma.product.findUnique({ where: { id } });
   }
 
   private async findBySlug(slug: ID) {
-    return this.repository.findOne({ where: { slug } });
+    return this.prisma.product.findUnique({ where: { slug } });
   }
 }

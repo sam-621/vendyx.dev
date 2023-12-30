@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 
-import { AdminRepository } from '@/app/persistance';
+import { PrismaService } from '@/app/persistance';
 import { ValidationError } from '@/lib/errors';
 import { SecurityService } from '@/lib/security';
 
 @Injectable()
 export class AdminService {
   constructor(
-    private readonly adminRepository: AdminRepository,
+    private readonly prisma: PrismaService,
     private readonly securityService: SecurityService
   ) {}
 
   async authenticate(username: string, password: string) {
-    const admin = await this.adminRepository.getByUsername(username);
+    const admin = await this.prisma.administrator.findUnique({ where: { username } });
 
     if (!admin) {
       throw new ValidationError('Invalid username or password');
