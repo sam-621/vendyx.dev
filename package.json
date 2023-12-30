@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "yarn husky install && chmod ug+x .husky/*",
     "dev": "lerna run dev --scope=@vendyx/admin-ui --scope=@vendyx/core",
     "build": "lerna run build",
     "start": "lerna run start --scope=@vendyx/core",

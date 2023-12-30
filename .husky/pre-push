@@ -1,0 +1,14 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo 'Fixing before push'
+
+# Build
+yarn build || (
+    echo 'Build error: Fix your build issues before push';
+    false;
+)
+
+
+echo '✅✅✅✅ Success ✅✅✅✅'
+echo ''
