@@ -10,6 +10,7 @@ import {
   ProductEntity,
   ProductVariantEntity
 } from './entities';
+import { PrismaService } from './prisma.service';
 import {
   AdminRepository,
   MarketRepository,
@@ -52,7 +53,7 @@ export const REPOSITORIES = [
     }),
     TypeOrmModule.forFeature([...ENTITIES])
   ],
-  providers: [...REPOSITORIES],
+  providers: [...REPOSITORIES, PrismaService],
   exports: [...REPOSITORIES]
 })
 export class PersistanceModule {}
