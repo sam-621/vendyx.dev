@@ -1,32 +1,32 @@
-import { createConnection } from 'net';
-
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { DataSource } from 'typeorm';
+import { PrismaClient } from '@prisma/client';
 import { afterAll, beforeEach } from 'vitest';
 
-import { getDataSource } from './db/data-source';
-import { resetDb } from './db/db-helpers';
+import { resetDb } from './db';
 
 import { AppModule } from '@/app/app.module';
 
 beforeEach(async () => {
+  await resetDb(testPrismaClient);
+
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [AppModule]
   }).compile();
 
-  testNestApp = moduleFixture.createNestApplication({
-    logger: false
-  });
+  testNestApp = moduleFixture.createNestApplication();
+
+  /**
+   * Server config
+   */
+  testNestApp.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   await testNestApp.init();
-  dataSource = await getDataSource();
 });
 
-afterEach(async () => {
+afterAll(async () => {
   await testNestApp.close();
-  await resetDb();
 });
 
 export let testNestApp: INestApplication;
-export let dataSource: DataSource;
+export const testPrismaClient = new PrismaClient();
