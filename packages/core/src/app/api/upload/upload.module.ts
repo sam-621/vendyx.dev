@@ -7,7 +7,7 @@ import { diskStorage } from 'multer';
 
 import { uploadController } from './upload.controller';
 
-import { StorageModule } from '@/app/storage';
+import { StorageModule } from '@/lib/storage';
 
 @Module({
   imports: [
