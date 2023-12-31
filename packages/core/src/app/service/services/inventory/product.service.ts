@@ -3,7 +3,7 @@ import { ID, partialValidateProduct, validateProduct } from '@vendyx/common';
 
 import { CreateProductInput, ListInput, UpdateProductInput } from '@/app/api/common';
 import { PrismaService } from '@/app/persistance';
-import { InternalServerError, UserInputError } from '@/lib/errors';
+import { InternalServerError, UserInputError, ValidationError } from '@/lib/errors';
 
 @Injectable()
 export class ProductService {
@@ -52,7 +52,7 @@ export class ProductService {
     const duplicatedSlug = await this.findBySlug(data.slug);
 
     if (duplicatedSlug) {
-      throw new UserInputError(`A product with slug "${data.slug}" already exists`);
+      throw new ValidationError(`A product with slug "${data.slug}" already exists`);
     }
 
     const productCreated = await this.prisma.product.create({
@@ -90,7 +90,7 @@ export class ProductService {
       });
 
       if (productExists) {
-        throw new UserInputError(`A product with slug "${input.slug}" already exists`);
+        throw new ValidationError(`A product with slug "${input.slug}" already exists`);
       }
     }
 

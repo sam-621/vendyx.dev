@@ -63,6 +63,31 @@ describe('Product resolver', () => {
 
       expect(errors[0].code).toBe(ErrorCode.USER_INPUT);
     });
+
+    test('Should not create a product when duplicated slug is provided', async () => {
+      const DUPLICATED_SLUG = 'slug_test';
+      await prismaTest.product.create({ data: { name: 'test', slug: DUPLICATED_SLUG } });
+
+      const { errors } = await testRequest<{ createProduct: Product }>(
+        /* GraphQL */ `
+          mutation {
+            createProduct(
+              input: {
+                name: "Sillón"
+                slug: "${DUPLICATED_SLUG}"
+                description: "Descripción de la sillón"
+                enabled: true
+              }
+            ) {
+              id
+            }
+          }
+        `,
+        true
+      );
+
+      expect(errors[0].code).toBe(ErrorCode.VALIDATION);
+    });
   });
 
   describe('updateProduct', () => {
@@ -116,6 +141,71 @@ describe('Product resolver', () => {
 
       expect(errors[0].code).toBe(ErrorCode.USER_INPUT);
       expect(productUpdated.name).toBe(product.name);
+    });
+
+    test('Should not update a product when duplicated slug is provided', async () => {
+      const DUPLICATED_SLUG = 'slug_test';
+
+      const product = await prismaTest.product.create({ data: { name: 'test', slug: 'test' } });
+      await prismaTest.product.create({ data: { name: 'test', slug: DUPLICATED_SLUG } });
+
+      const { errors } = await testRequest<{ updateProduct: Product }>(
+        /* GraphQL */ `
+          mutation {
+            updateProduct(
+              id: "${product.id}",
+              input: {
+                slug: "${DUPLICATED_SLUG}"
+              }
+            ) {
+              id
+              enabled
+            }
+          }
+        `,
+        true
+      );
+
+      expect(errors[0].code).toBe(ErrorCode.VALIDATION);
+    });
+  });
+
+  describe('deleteProduct', () => {
+    test('Should delete a product', async () => {
+      const {
+        data: {
+          createProduct: { id }
+        }
+      } = await testRequest<{ createProduct: Product }>(
+        /* GraphQL */ `
+          mutation {
+            createProduct(
+              input: {
+                name: "Sillón"
+                slug: "Sillón"
+                description: "Descripción de la sillón"
+                enabled: true
+              }
+            ) {
+              id
+            }
+          }
+        `,
+        true
+      );
+
+      const { data, errors } = await testRequest<{ removeProduct: Product }>(
+        /* GraphQL */ `
+          mutation {
+            removeProduct(id: "${id}") 
+          }
+        `,
+        true
+      );
+
+      console.log({ data, errors });
+
+      expect(data.removeProduct).toBeTruthy();
     });
   });
 });
