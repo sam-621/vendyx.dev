@@ -6,9 +6,9 @@ class EnvironmentVariables {
   @IsNotEmpty()
   PORT: number;
 
-  @IsEnum(['dev', 'prod'])
+  @IsEnum(['dev', 'prod', 'test'])
   @IsNotEmpty()
-  MODE: 'dev' | 'prod';
+  MODE: 'dev' | 'prod' | 'test';
 
   @IsString()
   @IsNotEmpty()

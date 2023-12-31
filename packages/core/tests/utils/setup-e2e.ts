@@ -1,10 +1,11 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
 import { afterAll, beforeEach } from 'vitest';
 
 import { resetDb } from './db';
 
+import { BusinessExceptionFilter } from '@/app/api/common';
 import { AppModule } from '@/app/app.module';
 
 beforeEach(async () => {
@@ -19,7 +20,7 @@ beforeEach(async () => {
   /**
    * Server config
    */
-  testNestApp.useGlobalPipes(new ValidationPipe({ transform: true }));
+  testNestApp.useGlobalFilters(new BusinessExceptionFilter());
 
   await testNestApp.init();
 });
