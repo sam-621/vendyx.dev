@@ -1,9 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { CloudinaryProvider, StorageProvider } from './providers';
-
-import { InternalServerError } from '@/lib/errors';
 
 type Provider = 'cloudinary';
 
@@ -19,7 +17,8 @@ export class StorageService {
     const storageProvider = this.providers.find(p => p.code === provider);
 
     if (!storageProvider) {
-      throw new InternalServerError('Storage provider not found');
+      Logger.error(`Storage provider ${provider} not found`);
+      return null;
     }
 
     return storageProvider.upload(file);

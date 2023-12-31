@@ -2,11 +2,11 @@ import { Controller, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/co
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 
-import { StorageService } from '@/lib/storage';
+import { AssetService } from '@/app/service';
 
 @Controller('upload')
 export class uploadController {
-  constructor(private readonly storageService: StorageService) {}
+  constructor(private readonly assetService: AssetService) {}
 
   @Post('')
   @UseInterceptors(FileInterceptor('file'))
@@ -15,16 +15,8 @@ export class uploadController {
     file: Express.Multer.File,
     @Res() res: Response
   ) {
-    const fileId = await this.storageService.upload(file.path, 'cloudinary');
+    const asset = await this.assetService.create(file);
 
-    if (!fileId) {
-      res.status(500).json({
-        message: 'File could not be uploaded'
-      });
-    }
-
-    return res.status(200).json({
-      fileId
-    });
+    return res.status(200).json(asset);
   }
 }
