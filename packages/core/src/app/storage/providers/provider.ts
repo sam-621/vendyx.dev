@@ -25,5 +25,5 @@ export interface StorageProvider {
    */
   code: string;
 
-  upload(file: string): Promise<string>;
+  upload(file: string): Promise<string | null>;
 }

@@ -1,4 +1,5 @@
 // cloudinary.service.ts
+import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 } from 'cloudinary';
 
@@ -16,10 +17,19 @@ export class CloudinaryProvider implements StorageProvider {
     });
   }
 
-  async upload(file: string): Promise<string> {
-    const fileUploaded = await v2.uploader.upload(file, {
-      folder: 'vendyx'
-    });
-    return fileUploaded.public_id;
+  async upload(file: string): Promise<string | null> {
+    try {
+      const fileUploaded = await v2.uploader.upload(file, {
+        folder: 'vendyx'
+      });
+
+      return fileUploaded.public_id;
+    } catch (error) {
+      Logger.error({
+        provider: this.code,
+        error
+      });
+      return null;
+    }
   }
 }

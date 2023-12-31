@@ -15,7 +15,7 @@ export class StorageService {
     this.providers = [new CloudinaryProvider(configService)];
   }
 
-  async upload(file: string, provider: Provider) {
+  async upload(file: string, provider: Provider): Promise<string | null> {
     const storageProvider = this.providers.find(p => p.code === provider);
 
     if (!storageProvider) {

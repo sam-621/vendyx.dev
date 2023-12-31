@@ -9,6 +9,11 @@ export default () => ({
   },
   DB: {
     URL: String(process.env.DB_URL)
+  },
+  CLOUDINARY: {
+    NAME: String(process.env.CLOUDINARY_CLOUD_NAME),
+    KEY: String(process.env.CLOUDINARY_API_KEY),
+    SECRET: String(process.env.CLOUDINARY_API_SECRET)
   }
 });
 

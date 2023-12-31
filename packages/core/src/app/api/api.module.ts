@@ -9,6 +9,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { AdminApiModule } from './admin/admin.module';
 import { DateScalar, IDScalar } from './common/scalars';
+import { UploadModule } from './upload';
 
 import { Mode } from '@/lib/config';
 
@@ -30,6 +31,7 @@ const COMMON_GQL_CONFIG = (configService: ConfigService): ApolloDriverConfig => 
 
 @Module({
   imports: [
+    UploadModule,
     AdminApiModule,
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,

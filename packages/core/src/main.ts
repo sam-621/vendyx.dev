@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
@@ -14,6 +15,7 @@ async function bootstrap() {
   const configService = app.get<ConfigService>(ConfigService);
 
   app.useGlobalFilters(new BusinessExceptionFilter());
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(configService.get('APP.PORT'));
 }
