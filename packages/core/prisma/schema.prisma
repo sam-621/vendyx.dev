@@ -10,6 +10,11 @@ datasource db {
   url      = env("DB_URL")
 }
 
+enum AssetType {
+  IMAGE
+  FILE
+}
+
 model Administrator {
   id        String    @id @default(uuid())
   createdAt DateTime  @default(now()) @map("created_at")
@@ -61,6 +66,7 @@ model Product {
 
   // relations
   markets ProductOnMarket[]
+  assets  AssetOnProduct[]
 
   @@map("product")
 }
@@ -130,4 +136,30 @@ model OptionValueOnProductVariant {
 
   @@id([optionValueId, productVariantId])
   @@map("option_value_on_product_variant")
+}
+
+model AssetOnProduct {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+  asset     Asset   @relation(fields: [assetId], references: [id])
+  assetId   String  @map("asset_id")
+
+  @@id([productId, assetId])
+  @@map("asset_on_product")
+}
+
+model Asset {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  name      String    @db.VarChar(255)
+  source    String    @unique @db.VarChar(255)
+  type      AssetType @default(IMAGE)
+  enabled   Boolean   @default(true)
+
+  // relations
+  products AssetOnProduct[]
+
+  @@map("asset")
 }
