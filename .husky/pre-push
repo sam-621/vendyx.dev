@@ -12,6 +12,7 @@ yarn build || (
 )
 echo ''
 echo 'Build succeed... 🟢'
+echo ''
 
 # Test
 echo 'Runing tests... 🟡'
@@ -21,6 +22,7 @@ yarn test || (
 )
 echo ''
 echo 'Tests succeed... 🟢'
+echo ''
 
 echo '✅✅✅✅ Success ✅✅✅✅'
 echo ''
