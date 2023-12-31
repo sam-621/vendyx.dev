@@ -1,4 +1,4 @@
-import { ErrorCode, Product } from '@vendyx/common';
+import { ErrorCode, Product, ProductVariant } from '@vendyx/common';
 import { testRequest } from 'tests/utils/graphql';
 import { prismaTest } from 'tests/utils/libs';
 import { describe, test } from 'vitest';
@@ -194,7 +194,7 @@ describe('Product resolver', () => {
         true
       );
 
-      const { data, errors } = await testRequest<{ removeProduct: Product }>(
+      const { data } = await testRequest<{ removeProduct: Product }>(
         /* GraphQL */ `
           mutation {
             removeProduct(id: "${id}") 
@@ -203,9 +203,121 @@ describe('Product resolver', () => {
         true
       );
 
-      console.log({ data, errors });
-
       expect(data.removeProduct).toBeTruthy();
+    });
+  });
+
+  describe('createVariant', async () => {
+    test('Should create a variant when valid input is provided', async () => {
+      const product = await prismaTest.product.create({ data: { name: 'test', slug: 'test' } });
+
+      const { data } = await testRequest<{ createVariant: Product }>(
+        /* GraphQL */ `
+          mutation {
+            createVariant(
+              id: "${product.id}",
+              input: {
+                sku: "sku 123",
+                price: 100,
+                costPerUnit: 70,
+                stock: 12,
+                enabled: true
+              }
+            ) {
+              id
+            }
+          }
+        `,
+        true
+      );
+
+      expect(data.createVariant.id).toBeTruthy();
+    });
+
+    test('Should not create more than one default variant', async () => {
+      const product = await prismaTest.product.create({ data: { name: 'test', slug: 'test' } });
+
+      await testRequest<{ createVariant: Product }>(
+        /* GraphQL */ `
+          mutation {
+            createVariant(
+              id: "${product.id}",
+              input: {
+                sku: "sku 123",
+                price: 100,
+                costPerUnit: 70,
+                stock: 12,
+                enabled: true
+              }
+            ) {
+              id
+            }
+          }
+        `,
+        true
+      );
+
+      const { errors } = await testRequest<{ createVariant: Product }>(
+        /* GraphQL */ `
+          mutation {
+            createVariant(
+              id: "${product.id}",
+              input: {
+                sku: "sku 123",
+                price: 100,
+                costPerUnit: 70,
+                stock: 12,
+                enabled: true
+              }
+            ) {
+              id
+            }
+          }
+        `,
+        true
+      );
+
+      expect(errors[0].code).toBe(ErrorCode.VALIDATION);
+    });
+
+    test('Should create a variant with options', async () => {
+      const product = await prismaTest.product.create({ data: { name: 'test', slug: 'test' } });
+      const option = await prismaTest.option.create({
+        data: {
+          name: 'size',
+          values: { createMany: { data: [{ value: 'S' }, { value: 'L' }, { value: 'M' }] } }
+        },
+        include: { values: true }
+      });
+
+      const optionValues = option.values.map(v => v.id);
+
+      const { data } = await testRequest<{ createVariant: ProductVariant }>(
+        /* GraphQL */ `
+          mutation {
+            createVariant(
+              id: "${product.id}",
+              input: {
+                sku: "sku 123",
+                price: 100,
+                costPerUnit: 70,
+                stock: 12,
+                enabled: true
+                optionValues: ["${optionValues[0]}", "${optionValues[1]}", "${optionValues[2]}"]
+              }
+            ) {
+              id
+            }
+          }
+        `,
+        true
+      );
+
+      expect(data.createVariant.id).toBeTruthy();
+
+      const results = await prismaTest.optionValueOnProductVariant.findMany();
+
+      expect(results.length).toBe(3);
     });
   });
 });
