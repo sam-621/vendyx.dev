@@ -31,7 +31,9 @@ beforeEach(async () => {
     imports: [AppModule]
   }).compile();
 
-  testNestApp = moduleFixture.createNestApplication();
+  testNestApp = moduleFixture.createNestApplication({
+    logger: false
+  });
 
   testNestApp.useGlobalFilters(new BusinessExceptionFilter());
 

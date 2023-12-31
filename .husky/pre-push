@@ -2,13 +2,25 @@
 . "$(dirname "$0")/_/husky.sh"
 
 echo 'Fixing before push'
+echo ''
 
 # Build
+echo 'Building... 🟡'
 yarn build || (
     echo 'Build error: Fix your build issues before push';
     false;
 )
+echo ''
+echo 'Build succeed... 🟢'
 
+# Test
+echo 'Runing tests... 🟡'
+yarn test || (
+    echo 'Test error: Fix your test issues before push';
+    false;
+)
+echo ''
+echo 'Tests succeed... 🟢'
 
 echo '✅✅✅✅ Success ✅✅✅✅'
 echo ''

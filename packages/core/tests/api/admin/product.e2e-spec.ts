@@ -21,7 +21,7 @@ describe('Product resolver', () => {
 
   describe('createProduct', () => {
     test('Should create a product when valid input is provided', async () => {
-      const { data, errors } = await testRequest<{ createProduct: Product }>(
+      const { data } = await testRequest<{ createProduct: Product }>(
         /* GraphQL */ `
           mutation {
             createProduct(
@@ -38,13 +38,12 @@ describe('Product resolver', () => {
         `,
         true
       );
-      console.log({ data, errors });
 
       expect(data.createProduct.id).toBeTruthy();
     });
 
     test('Should not create a product when invalid input is provided', async () => {
-      const { data, errors } = await testRequest<{ createProduct: Product }>(
+      const { errors } = await testRequest<{ createProduct: Product }>(
         /* GraphQL */ `
           mutation {
             createProduct(
@@ -61,7 +60,6 @@ describe('Product resolver', () => {
         `,
         true
       );
-      console.log({ data, errors });
 
       expect(errors[0].code).toBe(ErrorCode.USER_INPUT);
     });
@@ -71,7 +69,7 @@ describe('Product resolver', () => {
     test('Should update a product when valid input is provided', async () => {
       const product = await prismaTest.product.create({ data: { name: 'test', slug: 'test' } });
 
-      const { data, errors } = await testRequest<{ updateProduct: Product }>(
+      const { data } = await testRequest<{ updateProduct: Product }>(
         /* GraphQL */ `
           mutation {
             updateProduct(
@@ -87,7 +85,6 @@ describe('Product resolver', () => {
         `,
         true
       );
-      console.log({ data, errors });
 
       expect(data.updateProduct.id).toBeTruthy();
       expect(product.enabled).toBe(true);
