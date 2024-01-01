@@ -8,6 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum AssetType {
+    IMAGE = "IMAGE",
+    FILE = "FILE"
+}
+
 export class AuthenticateAdminInput {
     username: string;
     password: string;
@@ -44,6 +49,7 @@ export class CreateProductInput {
     slug: string;
     description?: Nullable<string>;
     enabled: boolean;
+    assets?: Nullable<string[]>;
 }
 
 export class UpdateProductInput {
@@ -109,6 +115,21 @@ export abstract class IQuery {
     abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
 
+export class Asset implements Node {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    source: string;
+    type: AssetType;
+    enabled: boolean;
+}
+
+export class AssetList implements List {
+    items: Nullable<Asset>[];
+    count: number;
+}
+
 export class OptionValue implements Node {
     id: string;
     createdAt: Date;
@@ -156,6 +177,7 @@ export class Product implements Node {
     description?: Nullable<string>;
     enabled: boolean;
     variants?: ProductVariantList;
+    assets?: AssetList;
 }
 
 export class ProductList implements List {

@@ -57,4 +57,11 @@ export class ProductResolver {
 
     return new ListResponse<ProductVariant>(variants, variants.length);
   }
+
+  @ResolveField('assets')
+  async assets(@Parent() product: Product, @Args('input') listInput: ListInput) {
+    const assets = await this.service.findAssets(product.id, listInput);
+
+    return new ListResponse(assets, assets.length);
+  }
 }

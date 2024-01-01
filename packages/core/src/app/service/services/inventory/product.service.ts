@@ -34,6 +34,16 @@ export class ProductService {
     return product.variants;
   }
 
+  async findAssets(id: ID, listInput?: ListInput) {
+    const product = await this.prisma.assetOnProduct.findMany({
+      include: { asset: true },
+      where: { productId: id },
+      ...listInput
+    });
+
+    return product.map(({ asset }) => asset);
+  }
+
   async create(input: CreateProductInput) {
     const { data, errors } = validateProduct(input);
 
@@ -67,6 +77,15 @@ export class ProductService {
         productId: productCreated.id
       }
     });
+
+    if (input.assets) {
+      await this.prisma.assetOnProduct.createMany({
+        data: input.assets.map(asset => ({
+          assetId: asset,
+          productId: productCreated.id
+        }))
+      });
+    }
 
     return productCreated;
   }

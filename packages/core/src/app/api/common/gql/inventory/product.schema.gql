@@ -6,7 +6,9 @@ type Product implements Node {
   slug: String!
   description: String
   enabled: Boolean!
+
   variants(input: ListInput): ProductVariantList!
+  assets(input: ListInput): AssetList!
 }
 
 type ProductList implements List {

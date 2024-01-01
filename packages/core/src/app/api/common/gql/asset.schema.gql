@@ -1,0 +1,19 @@
+enum AssetType {
+  IMAGE
+  FILE
+}
+
+type Asset implements Node {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  name: String!
+  source: String!
+  type: AssetType!
+  enabled: Boolean!
+}
+
+type AssetList implements List {
+  items: [Asset]!
+  count: Int!
+}
