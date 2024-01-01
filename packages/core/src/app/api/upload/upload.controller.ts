@@ -1,3 +1,5 @@
+import { unlink } from 'fs/promises';
+
 import { Controller, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
@@ -16,6 +18,8 @@ export class uploadController {
     @Res() res: Response
   ) {
     const asset = await this.assetService.create(file);
+
+    await unlink(file.path);
 
     return res.status(200).json(asset);
   }
