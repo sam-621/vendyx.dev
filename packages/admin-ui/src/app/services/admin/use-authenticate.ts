@@ -6,11 +6,14 @@ import { cookies } from '@/lib/cookies';
 import { ApiError } from '@/lib/errors';
 import { notification } from '@/lib/notifications';
 import { invalidateQueries } from '@/lib/query-client';
-import { type AuthenticateAdminInput, type AuthenticateAdminResponse } from '@/lib/vendyx/types';
+import {
+  type AuthenticateAdminInput,
+  type AuthenticateAdminMutationResult
+} from '@/lib/vendyx/types';
 
 import { AdminKeys, authenticate as authenticateFetcher } from './fetchers';
 
-type TData = AuthenticateAdminResponse;
+type TData = AuthenticateAdminMutationResult;
 type TError = ErrorResult;
 type TVariables = AuthenticateAdminInput;
 
