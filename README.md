@@ -1,5 +1,24 @@
 # Vendyx.dev
-A functional and scalable minimal e-commerce admin that can be adjusted to any user's requirement. Focusing on that small and mid business that want to introduce to the e-commerce world, providing a full featured solution but focused on simplicity at the same time, ensuring that the adoption of this new sales channel is as natural and pleasant as possible.
+A functional and scalable minimal e-commerce admin that can be adjusted to any user's requirement. Providing a full featured solution but focused on simplicity at the same time.
+
+## Why Choose Vendyx?
+We know there are so many other options for e-commerce, so why choose us?
+
+**Admin ui focused on simplicity:** Vendyx offers a unique and simple administration interface, inspired by the elegance and functionality of Shopify.
+
+**Production ready:** Vendyx offers production ready integrations for payments, storage and shipments to you just pick up the ones you want and start selling.
+
+**Your product:** Self host, fork, built on top of it, vendyx is a open source solution for your next e-commerce platform
+
+## Features
+Vendyx is currently in development phase, here are some of the features will have
+
+- Inventory management
+- Mass aggregation and editing
+- Export and import products
+- Order management
+- Production ready integrations
+- Permissions, taxes, stock locations, markets and more...
 
 ## Setup
 1. Update theme package (for css variables)
