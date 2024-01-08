@@ -87,7 +87,7 @@ export const DataTable = <TData, TValue>({ columns, data, search }: Props<TData,
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No hay resultados.
+                  No results
                 </TableCell>
               </TableRow>
             )}
