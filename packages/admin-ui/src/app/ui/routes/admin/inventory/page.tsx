@@ -4,6 +4,8 @@ import { ButtonLink } from '@vendyx/theme';
 
 import { AdminPageLayout } from '@/components/layouts';
 
+import { InventoryTable } from './table/inventory-table';
+
 export const InventoryPage = () => {
   return (
     <AdminPageLayout
@@ -15,7 +17,7 @@ export const InventoryPage = () => {
         </ButtonLink>
       }
     >
-      Inventory
+      <InventoryTable />
     </AdminPageLayout>
   );
 };

@@ -5,7 +5,7 @@ import { useProducts } from '@/services/inventory';
 
 import { InventoryTableColumns } from './inventory-table-columns';
 
-export const InventoryTable = async () => {
+export const InventoryTable = () => {
   const { products } = useProducts();
 
   if (!products) return null;

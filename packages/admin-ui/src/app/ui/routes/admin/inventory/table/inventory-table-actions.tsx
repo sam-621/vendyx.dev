@@ -46,7 +46,6 @@ export const InventoryTableActions: FC<Props> = ({ row }) => {
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        zq
         <DropdownMenuItem>
           <span className="text-destructive font-medium">Delete</span>
         </DropdownMenuItem>
