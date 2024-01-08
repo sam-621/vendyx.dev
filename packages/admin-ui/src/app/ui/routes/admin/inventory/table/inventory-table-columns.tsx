@@ -5,6 +5,7 @@ import { Badge, Checkbox, DataTableColumnHeader } from '@vendyx/theme';
 
 import { type TableProduct } from './inventory-table';
 import { InventoryTableActions } from './inventory-table-actions';
+import { getFormattedPrice } from '@vendyx/common';
 
 export const InventoryTableColumns: ColumnDef<TableProduct>[] = [
   {
@@ -61,10 +62,7 @@ export const InventoryTableColumns: ColumnDef<TableProduct>[] = [
     },
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('price'));
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-      }).format(amount);
+      const formatted = getFormattedPrice(amount);
 
       return <div className="font-medium">{formatted}</div>;
     }

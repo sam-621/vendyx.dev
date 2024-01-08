@@ -15,5 +15,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     port: 3000
   },
-  base: mode === 'production' ? '/admin/' : '/'
+  base: mode === 'production' ? '/admin/' : '/',
+  optimizeDeps: {
+    include: ['@vendyx/common']
+  },
+  build: {
+    commonjsOptions: {
+      include: ['@vendyx/common', /node_modules/]
+    }
+  }
 }));
