@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     commonjsOptions: {
-      include: ['@vendyx/common', /node_modules/]
+      include: [/common/, /node_modules/]
     }
   }
 }));
